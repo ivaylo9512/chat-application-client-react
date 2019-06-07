@@ -6,7 +6,7 @@ class ChatItem extends Component{
             <div>
                 <img/>
                 <div>
-                    <br></br>
+                    <b></b>
                     <span></span>    
                 </div>
             </div>

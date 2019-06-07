@@ -5,8 +5,7 @@ class Header extends Component{
         return (
             <header>
                 <nav>
-                    <input type="text">
-                    </input>
+                    <input type="text" />
                     <a></a>
                     <a></a>
                 </nav>
