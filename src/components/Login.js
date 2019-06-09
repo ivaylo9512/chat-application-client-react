@@ -6,20 +6,21 @@ class Login extends Component{
         super()
         this.login = this.login.bind(this)
         this.changeInput = this.changeInput.bind(this)
-        this.form = {
+        this.state = {
             username: '',
             password: ''
         }
     }
-
     changeInput(e){
-        this.form[e.target.name] = e.target.value
+        this.setState({
+            [e.target.name]: e.target.value
+        })
     }
     login(e){
         e.preventDefault()
         fetch('http://localhost:8080/login', {
             method: 'post',
-            body: JSON.stringify(this.form)
+            body: JSON.stringify(this.state)
           })
             .then(data =>  data.json())
             .then(data => {
@@ -38,7 +39,6 @@ class Login extends Component{
                 </form>
             </section>
         )
-
     }
 }
 
