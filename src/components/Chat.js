@@ -8,12 +8,6 @@ class Chat extends Component {
             chats : []
         }
     }
-    componentDidMount(){
-        fetch('http://localhost:8080/api/chat/auth/getChats')
-                .then(data => data.json())
-                .then(data => this.setState({ chats: data})
-        )
-    }
     getNextSessions(){
 
     }

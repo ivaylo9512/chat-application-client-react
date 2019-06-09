@@ -8,14 +8,18 @@ class App extends Component {
         super()
         this.user = null
         this.setUser = this.setUser.bind(this)
-
+        this.chat = null``
     }
     setUser(user){
         this.user = user
     }
+    setChat(chat){
+        this.chat = chat
+    }
     render() {
         return (
             <div className="App">
+                <Header setChat={this.setChat} />
                 <Login setUser={this.setUser} />
             </div>
         )
