@@ -6,8 +6,8 @@ class Header extends Component{
             <header>
                 <nav>
                     <input type="text" />
-                    <a></a>
-                    <a></a>
+                    <a href=""></a>
+                    <a href=""></a>
                 </nav>
                 <div className="bar">
                 </div>

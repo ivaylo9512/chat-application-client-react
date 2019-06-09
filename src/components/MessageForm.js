@@ -2,6 +2,7 @@ import React,{ component } from 'react'
 
 class MessageForm extends Comment {
     constructor() {
+        super()
         this.submitForm = this.submitForm.bind(this)
     }
     
@@ -11,7 +12,7 @@ class MessageForm extends Comment {
 
     render() {
         return (
-            <form onSubmit="this.submitForm">
+            <form onSubmit={this.submitForm}>
                 <input placeholder="Send message"/>
                 <button>send</button>
             </form>
