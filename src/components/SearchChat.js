@@ -9,7 +9,7 @@ class SearchChat extends Component {
             name : ''
         }
         this.changeInput = this.changeInput.bind(this)
-        this.getChat = this.getChat.bind(this)
+        this.findChats = this.findChats.bind(this)
     }
 
     changeInput(e){
@@ -17,17 +17,14 @@ class SearchChat extends Component {
             name : e.target.value
         })
     }
-    getChat(){
+    findChats(){
         fetch(`http://localhost:8080/api/chat/auth/getChats/${this.state.name}`)
                 .then(data => data.json())
-                .then(data => this.props.setChat(data))
-    }
-    getNextSessions(){
-
+                .then(data => this.props.setChats(data))
     }
     render() {
         return (
-            <form onSubmit={this.getChat}>
+            <form onSubmit={this.findChat}>
                 <input onChange={this.changeInput}/>
             </form>
         )
