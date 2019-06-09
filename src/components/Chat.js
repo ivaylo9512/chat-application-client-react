@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
+import { Session } from 'inspector';
 
 class Chat extends Component {  
 
 
     constructor(){
-        this.state = {
-            chats : []
-        }
     }
     getNextSessions(){
 
     }
     render() {
         return (
-            <div className="messages">
-                {this.state.chats.map(chat =>{
-                    return <Message key={chat.id}/>
+            <div className="sessions">
+                {this.props.chat.sessions.map(session =>{
+                    return <Session session={session} key={session.id}/>
                 })}
             </div>
         )
