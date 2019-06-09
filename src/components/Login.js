@@ -22,10 +22,8 @@ class Login extends Component{
             method: 'post',
             body: JSON.stringify(this.state)
           })
-            .then(data =>  data.json())
-            .then(data => {
-                this.props.setUser(data)
-            }
+            .then(data => data.json())
+            .then(data => this.props.setUser(data)
         )
     }
     render(){

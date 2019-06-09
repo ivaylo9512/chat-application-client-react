@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ChatItem extends Component{
+class ChatUser extends Component{
     render(){
         return (
             <div>
@@ -15,4 +15,4 @@ class ChatItem extends Component{
     }
 }
 
-export default ChatItem
+export default ChatUser
