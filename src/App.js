@@ -7,10 +7,14 @@ class App extends Component {
     constructor () {
         super()
         this.user = null
+        this.chat = null
         this.setUser = this.setUser.bind(this)
     }
     setUser(user){
         this.user = user
+    }
+    setCurrentChat(chat){
+        this.chat = chat
     }
     render() {
         return (
