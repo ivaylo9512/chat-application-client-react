@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Session } from 'inspector';
+import Session from './Session';
 
 class Chat extends Component {  
 
 
     constructor(){
+        super()
     }
     getNextSessions(){
 

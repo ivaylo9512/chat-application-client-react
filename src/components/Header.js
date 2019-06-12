@@ -5,13 +5,22 @@ import ChatUser from './ChatUser';
 class Header extends Component{
     constructor(){
         super()
-        this.chats = []
+        this.state = {
+            chats : []
+        }
     }
     setChats(chats){
-        this.chats = chats
+        this.state.chats = chats
     }
     getChat(chat){
         this.props.setCurrentChat(chat)
+    }
+    componentDidMount(){
+        fetch('http://localhost:8080/chat/getChats')
+            .then(data => data.json())
+            .then(data => this.setState({
+                chats: data
+            }))
     }
     render(){
         return (
