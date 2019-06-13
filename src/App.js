@@ -15,14 +15,13 @@ class App extends Component {
         this.user = user
     }
     setCurrentChat(chat){
-        this.chat = chat
+        console.log(chat)
     }
     render() {
         return (
             <div className="App">
-                <Header />
+                <Header setCurrentChat={this.setCurrentChat} />
                 <Login setUser={this.setUser} />
-                <Chat chat={this.chat} />
             </div>
         )
     }

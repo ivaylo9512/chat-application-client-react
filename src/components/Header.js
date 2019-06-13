@@ -16,11 +16,17 @@ class Header extends Component{
         this.props.setCurrentChat(chat)
     }
     componentDidMount(){
-        fetch('http://localhost:8080/chat/getChats')
+        console.log(localStorage.getItem('Authorization'))
+        fetch('http://localhost:8080/api/auth/chat/getChats?pageSize=3',{
+            headers: {
+                'Authorization': localStorage.getItem('Authorization')
+            }
+        })
             .then(data => data.json())
-            .then(data => this.setState({
+            .then(data => {this.setState({
                 chats: data
-            }))
+            })
+                console.log(data)})
     }
     render(){
         return (
@@ -29,11 +35,11 @@ class Header extends Component{
                     <SearchChat setChats={this.setChats}/>
                     {this.state.chats.map(chat =>{
                         return (
-                            <a onClick={this.getChat(chat)}>
-                                <ChatUser key={chat.id}/>
+                            <a key={chat.id} onClick={() => this.getChat(chat)}>
+                                <ChatUser />
                             </a>
                         )
-                    })}                   
+                    })}                     
                     <a href=""></a>
                     <a href=""></a>
                 </nav>

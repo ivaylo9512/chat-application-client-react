@@ -22,7 +22,9 @@ class Login extends Component{
             method: 'post',
             body: JSON.stringify(this.state)
           })
-            .then(data => data.json())
+            .then(response => {
+                localStorage.setItem('Authorization', response.headers.get('Authorization'))
+                return response.json()})
             .then(data => this.props.setUser(data)
         )
     }
