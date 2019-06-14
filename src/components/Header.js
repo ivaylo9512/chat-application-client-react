@@ -32,20 +32,18 @@ class Header extends Component{
         return (
             <header>
                 <nav>
-                    <SearchChat setChats={this.setChats}/>
-                    {this.state.chats.map(chat =>{
-                        return (
-                            <a key={chat.id} onClick={() => this.getChat(chat)}>
-                                <ChatUser />
-                            </a>
-                        )
-                    })}                     
+                    <SearchChat setChats={this.setChats}/>                   
                     <a href=""></a>
                     <a href=""></a>
                 </nav>
-                <div className="bar">
-                </div>
-                <div className="chats-container">
+                <div className="chats">
+                    {this.state.chats.map(chat =>{
+                        return (
+                            <a className="chat" key={chat.id} onClick={() => this.getChat(chat)}>
+                                <ChatUser chat={chat}/>
+                            </a>
+                        )
+                    })}  
                 </div>
             </header>
         )

@@ -4,9 +4,11 @@ class ChatUser extends Component{
     render(){
         return (
             <div>
-                <img/>
-                <div>
-                    <b></b>
+                <div className="image">
+                    <img alt="profile" src={this.props.chat.firstUser.profilePicture}/>
+                </div>
+                <div className="info">
+                    <b>{this.props.chat.firstUser.username}</b>
                     <span></span>    
                 </div>
             </div>
