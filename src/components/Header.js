@@ -16,17 +16,16 @@ class Header extends Component{
         this.props.setCurrentChat(chat)
     }
     componentDidMount(){
-        console.log(localStorage.getItem('Authorization'))
         fetch('http://localhost:8080/api/auth/chat/getChats?pageSize=3',{
             headers: {
                 'Authorization': localStorage.getItem('Authorization')
             }
         })
             .then(data => data.json())
-            .then(data => {this.setState({
-                chats: data
-            })
-                console.log(data)})
+            .then(data => 
+                    this.setState({
+                        chats: data
+                    }))
     }
     render(){
         return (

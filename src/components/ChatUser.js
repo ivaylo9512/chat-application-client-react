@@ -5,10 +5,10 @@ class ChatUser extends Component{
         return (
             <div>
                 <div className="image">
-                    <img alt="profile" src={this.props.chat.firstUser.profilePicture}/>
+                    <img alt="profile" src={this.props.chat.user.profilePicture}/>
                 </div>
                 <div className="info">
-                    <b>{this.props.chat.firstUser.username}</b>
+                    <b>{this.props.chat.user.username}</b>
                     <span></span>    
                 </div>
             </div>
