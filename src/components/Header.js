@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import SearchChat from './SearchChat';
 import ChatUser from './ChatUser';
+import SearchUsers from './SearchUsers';
 
 class Header extends Component{
     constructor(){
