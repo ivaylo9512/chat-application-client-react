@@ -9,23 +9,18 @@ class SearchChat extends Component {
             name : ''
         }
         this.changeInput = this.changeInput.bind(this)
-        this.findChats = this.findChats.bind(this)
     }
 
     changeInput(e){
         this.setState({
             name : e.target.value
         })
-    }
-    findChats(){
-        fetch(`http://localhost:8080/api/chat/auth/getChats/${this.state.name}`)
-                .then(data => data.json())
-                .then(data => this.props.setChats(data))
+        this.props.searchChats(e.target.value)
     }
     render() {
         return (
-            <form onSubmit={this.findChat}>
-                <input onChange={this.changeInput}/>
+            <form onSubmit={this.searchChats}>
+                <input value={this.state.name} onChange={this.changeInput}/>
             </form>
         )
     }

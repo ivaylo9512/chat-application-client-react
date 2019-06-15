@@ -8,9 +8,21 @@ class Header extends Component{
         this.state = {
             chats : []
         }
+        this.chats = []
+        this.searchChats = this.searchChats.bind(this)
     }
-    setChats(chats){
-        this.state.chats = chats
+    searchChats(name){
+        name = name.toUpperCase()
+        const filteredChats = this.chats.filter(chat=>{ 
+            const firstName = chat.user.firstName.toUpperCase()
+            const lastName = chat.user.lastName.toUpperCase()
+            if(firstName.startsWith(name) || lastName.startsWith(name) ||(`${firstName} ${lastName}`).startsWith(name)){
+                return chat
+            }
+        })
+        this.setState({
+            chats: filteredChats 
+        }) 
     }
     getChat(chat){
         this.props.setCurrentChat(chat)
@@ -22,16 +34,18 @@ class Header extends Component{
             }
         })
             .then(data => data.json())
-            .then(data => 
+            .then(data => {
                     this.setState({
                         chats: data
-                    }))
+                    })
+                    this.chats = data
+                })
     }
     render(){
         return (
             <header>
                 <nav>
-                    <SearchChat setChats={this.setChats}/>                   
+                    <SearchChat searchChats={this.searchChats}/>                   
                     <a href=""></a>
                     <a href=""></a>
                 </nav>
