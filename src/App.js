@@ -21,6 +21,7 @@ class App extends Component {
         return (
             <div className="App">
                 <Header setCurrentChat={this.setCurrentChat} />
+                <div></div>
                 <Login setUser={this.setUser} />
             </div>
         )

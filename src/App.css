@@ -1,14 +1,19 @@
 .App{
     height: 100vh;
 }
-header{
-    height: 8%;
+.App > div{
+    height: 96%;
+    box-shadow: 0 0 7px #000;
+    background: rgba(241,241, 241);
+}
+header {
+    height: 11%;
     width: 100%;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background: rgba(24,27, 33);
+    background: rgba(241,241, 241);
+    border-bottom: 1px solid rgb(24,27, 33);
 }
 nav{
-  position: fixed;
+    position: fixed;
 }
 .chats {
     height: 100%;
@@ -17,26 +22,34 @@ nav{
     align-items: center;
 }
 .chat {
-    height: 66%;
-    border-radius: 15px;
+    height: 56%;
+    border-radius: 5px;
     float: left;
     margin-right: 25px;
     width: 20%;
+    position: relative;
     border: 1px solid white;
-    box-shadow: 0px 0px 33px 0px rgba(0, 0, 0, 0.2), 20px 0px 30px 10px rgba(0, 0, 0, 1);
-    background: rgb(32, 32, 32);
+    border-width: 1px 0px;
+    background: rgba(24,27, 33);
+    box-shadow: 0px 3px rgba(128,128,128,1), 0px 4px rgba(118,118,118,1), 0px 4px rgba(108,108,108,1), 0px 4px rgba(98,98,98,1), 0px 5px rgba(88,88,88,1), 0px 5px rgba(78,78,78,1), 0px 5px 6px -1px rgba(128,128,128,1);
 }
-.chat > div{
+.chat > div {
     height: 100%;
     width: 100%;
     display: flex;
     align-items: center;
 }
+.image{
+    height: 78%;
+    display: flex;
+    align-items: center;
+    width: 29%;
+    justify-content: center;
+    border-right: 1px solid rgba(255, 109, 0, 1);
+}
 .image img {
+    padding: 1px;
+    border-radius: 5px;
     width: 4vh;
-    float: left;
     height: 4vh;
-    position: relative;
-    margin-left: 5px;
-    border-radius: 50%;
 }
