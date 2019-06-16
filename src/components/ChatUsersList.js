@@ -14,18 +14,26 @@ class ChatUsersList extends Component{
             }
         }).then(data => data.json())
           .then(data => this.props.setUserChats(data))
-
     }
     componentDidUpdate(){
         this.hideScrollBar()
     }
+    
     hideScrollBar(){
-        const clientHeight = parseFloat(window.getComputedStyle(this.chats.current).height)
-        const offsetHeight = parseFloat(window.getComputedStyle(this.chatsContainer.current).height)
+        const clientHeight = this.chats.current.clientHeight
+        const offsetHeight = this.chats.current.offsetHeight
 
-        const barHeight = offsetHeight - clientHeight 
-        const newHeight = Math.max(offsetHeight, offsetHeight + barHeight)
-        this.chats.current.style.height = `calc(${newHeight}px)` 
+        const height = parseFloat(window.getComputedStyle(this.chats.current).height)
+        const containerHeight = parseFloat(window.getComputedStyle(this.chatsContainer.current).height)
+        const paddingBottom = window.getComputedStyle(this.chatsContainer.current).paddingBottom
+
+
+        const barHeight = containerHeight - height 
+        const newHeight = offsetHeight > clientHeight && height >= containerHeight ? height + paddingBottom : Math.max(containerHeight, containerHeight + barHeight)
+        
+
+        this.chats.current.style.height = `${newHeight}px` 
+        this.chats.current.style.paddingBottom = `${barHeight}px`
     }
     render(){
         return (
