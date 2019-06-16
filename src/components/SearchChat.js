@@ -7,8 +7,9 @@ class SearchChat extends Component {
     }
 
     changeInput = (e) => {
+        const{name, value} = e.target
         this.setState({
-            name : e.target.value
+            name : value
         })
         this.props.searchChats(e.target.value)
     }
