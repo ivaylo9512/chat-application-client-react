@@ -15,6 +15,7 @@ class App extends Component {
         this.setUser = this.setUser.bind(this)  
         this.setFoundUsers = this.setFoundUsers.bind(this)
         this.searchChats = this.searchChats.bind(this)
+        this.setUserChats = this.setUserChats.bind(this)
 
         this.state = {
             chat: undefined,
@@ -23,8 +24,6 @@ class App extends Component {
             chats: [],
             filteredChats : []
         }
-        this.findUserChats()
-
     }
     setUser(user){
         this.setState({
@@ -32,23 +31,15 @@ class App extends Component {
         })
         this.findUserChats()
     }
-    findUserChats(){
-        fetch('http://localhost:8080/api/auth/chat/getChats?pageSize=3',{
-            headers: {
-                'Authorization': localStorage.getItem('Authorization')
-            }
+    setUserChats(chats){
+        this.setState({
+            filteredChats: chats,
+            chats: chats
         })
-            .then(data => data.json())
-            .then(data => {
-                    this.setState({
-                        filteredChats: data,
-                        chats: data
-                    })
-                })
     }
     searchChats(name){
         name = name.toUpperCase()
-        const filteredChats = this.state.chats.filter(chat=>{ 
+        const filteredChats = this.state.chats.filter(chat=> { 
             const firstName = chat.user.firstName.toUpperCase()
             const lastName = chat.user.lastName.toUpperCase()
             if(firstName.startsWith(name) || lastName.startsWith(name) ||(`${firstName} ${lastName}`).startsWith(name)){
@@ -69,7 +60,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <ChatUsersList chats={this.state.filteredChats} />
+                <ChatUsersList setUserChats={this.setUserChats} chats={this.state.filteredChats} />
                 <div></div>
                 <Router>
                     <Header />
