@@ -1,21 +1,25 @@
 import React, {Component} from 'react';
-
+import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
 
 class Header extends Component{
     constructor(){
         super()
-        this.searchChats = this.searchChats.bind(this)
-    }
-    getChat(chat){
-        this.props.setCurrentChat(chat)
     }
     render(){
         return (
             <header>
-                <nav>                   
-                    <a href=""></a>
-                    <a href=""></a>
-                </nav>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to="/login">login</Link>
+                            </li>
+                            <li>
+                                <Link to="/searchUsers">add</Link>
+                            </li>
+                        </ul>                   
+                        <a href=""></a>
+                        <a href=""></a>
+                    </nav>
             </header>
         )
 

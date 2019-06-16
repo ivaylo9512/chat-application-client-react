@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-
+import Users from './User'
 class UsersList extends Component{
     render(){
         return (
         <div>
-           {this.props.users.map(user =>{
+           {this.props.foundUsers.map(user =>{
                 return(
                     <Users />
                 )

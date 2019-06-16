@@ -5,20 +5,20 @@ import Login from './components/Login'
 import SearchUsers from './components/SearchUsers';
 import ChatUsersList from './components/ChatUsersList';
 import SearchChat from './components/SearchChat';
-
-
+import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
+import UsersList from './components/UsersList';
 
 class App extends Component {
     constructor () {
         super()
         this.user = null
-        this.setUser = this.setUser.bind(this)
+        this.setUser = this.setUser.bind(this)  
         this.setFoundUsers = this.setFoundUsers.bind(this)
         this.searchChats = this.searchChats.bind(this)
 
         this.state = {
             chat: undefined,
-            foundUsers: undefined,
+            foundUsers: [],
             user: undefined,
             chats: [],
             filteredChats : []
@@ -65,15 +65,18 @@ class App extends Component {
         this.setState({
             foundUsers: users
         })
-        console.log(users)
     }
     render() {
         return (
             <div className="App">
                 <ChatUsersList chats={this.state.filteredChats} />
                 <div></div>
-                <Login setUser={this.setUser} />
-                <SearchUsers setFoundUsers={this.setFoundUsers} />
+                <Router>
+                    <Header />
+                    <Route path="/login" render={() => <Login setUser={this.setUser} />} />
+                    <Route path="/searchUsers" render={() => <SearchUsers setFoundUsers={this.setFoundUsers} />} />
+                    <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
+                </Router>
                 <SearchChat searchChats={this.searchChats}/>
             </div>
         )
