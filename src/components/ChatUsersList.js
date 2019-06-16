@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ChatUser from './ChatUser';
+import smoothscroll from 'smoothscroll-polyfill';
 
 class ChatUsersList extends Component{
     constructor(){
@@ -14,6 +15,7 @@ class ChatUsersList extends Component{
             }
         }).then(data => data.json())
           .then(data => this.props.setUserChats(data))
+          smoothscroll.polyfill()
     }
     componentDidUpdate(){
         this.hideScrollBar()
@@ -35,9 +37,12 @@ class ChatUsersList extends Component{
         this.chats.current.style.height = `${newHeight}px` 
         this.chats.current.style.paddingBottom = `${barHeight}px`
     }
+    scroll = (e) => {
+        this.chats.current.scroll(window.scrollX + e.deltaY * 5, window.scrollY);
+    }
     render(){
         return (
-            <div className="chats-container" ref={this.chatsContainer}>
+            <div className="chats-container" ref={this.chatsContainer} onWheel = {this.scroll}>
                 <div className="chats" ref={this.chats}>
                     {this.props.chats.map(chat =>{
                         return (
