@@ -5,6 +5,7 @@ class ChatUsersList extends Component{
     constructor(){
         super()
         this.chats = React.createRef()
+        this.chatsContainer = React.createRef()
     }
     componentDidMount() {
         fetch('http://localhost:8080/api/auth/chat/getChats?pageSize=3',{
@@ -19,13 +20,16 @@ class ChatUsersList extends Component{
         this.hideScrollBar()
     }
     hideScrollBar(){
-        const clientHeight = this.chats.current.clientHeight 
-        const offsetHeight = this.chats.current.offsetHeight
-        this.chats.current.style.paddingBottom = offsetHeight - clientHeight + 'px' 
+        const clientHeight = parseFloat(window.getComputedStyle(this.chats.current).height)
+        const offsetHeight = parseFloat(window.getComputedStyle(this.chatsContainer.current).height)
+
+        const barHeight = offsetHeight - clientHeight 
+        const newHeight = Math.max(offsetHeight, offsetHeight + barHeight)
+        this.chats.current.style.height = `calc(${newHeight}px)` 
     }
     render(){
         return (
-            <div className="chats-container">
+            <div className="chats-container" ref={this.chatsContainer}>
                 <div className="chats" ref={this.chats}>
                     {this.props.chats.map(chat =>{
                         return (
