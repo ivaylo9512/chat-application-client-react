@@ -1,22 +1,17 @@
 import React, {Component} from 'react';
 
 class Login extends Component{
-
-    constructor(){
-        super()
-        this.login = this.login.bind(this)
-        this.changeInput = this.changeInput.bind(this)
-        this.state = {
-            username: '',
-            password: ''
-        }
+    state = {
+        username: '',
+        password: ''
     }
-    changeInput(e){
+
+    changeInput = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-    login(e){
+    login = (e) => {
         e.preventDefault()
         fetch('http://localhost:8080/login', {
             method: 'post',
@@ -28,7 +23,7 @@ class Login extends Component{
             .then(data => this.props.setUser(data)
         )
     }
-    render(){
+    render() {
         return (
             <section>
                 <form onSubmit={this.login} onChange={this.changeInput}>

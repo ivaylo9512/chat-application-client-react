@@ -9,35 +9,25 @@ import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
 import UsersList from './components/UsersList';
 
 class App extends Component {
-    constructor () {
-        super()
-        this.user = null
-        this.setUser = this.setUser.bind(this)  
-        this.setFoundUsers = this.setFoundUsers.bind(this)
-        this.searchChats = this.searchChats.bind(this)
-        this.setUserChats = this.setUserChats.bind(this)
-
-        this.state = {
-            chat: undefined,
-            foundUsers: [],
-            user: undefined,
-            chats: [],
-            filteredChats : []
-        }
+    state = {
+        chat: undefined,
+        foundUsers: [],
+        user: undefined,
+        chats: [],
+        filteredChats : []
     }
-    setUser(user){
+    setUser = (user) => {
         this.setState({
             user: user
         })
-        this.findUserChats()
     }
-    setUserChats(chats){
+    setUserChats = (chats) => {
         this.setState({
             filteredChats: chats,
             chats: chats
         })
     }
-    searchChats(name){
+    searchChats = (name) => {
         name = name.toUpperCase()
         const filteredChats = this.state.chats.filter(chat=> { 
             const firstName = chat.user.firstName.toUpperCase()
@@ -52,7 +42,7 @@ class App extends Component {
     }
     setCurrentChat(chat){
     }
-    setFoundUsers(users){
+    setFoundUsers = (users) => {
         this.setState({
             foundUsers: users
         })

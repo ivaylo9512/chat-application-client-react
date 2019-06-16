@@ -3,15 +3,12 @@ import Session from './Session';
 
 class Chat extends Component {  
 
-
-    constructor(){
-        super()
-    }
-    getNextSessions(){
+    getNextSessions() {
         fetch(`http://localhost:8080/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.chat.id}page${this.props.chat.session})`)
             .then(data => data.json())
             .then(data => this.props.chat.sessions = data)
     }
+    
     render() {
         return (
             <div className="sessions">

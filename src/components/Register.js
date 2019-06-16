@@ -1,23 +1,18 @@
 import React, {Component} from 'react';
 
 class Register extends Component{
-    constructor(){
-        super()
-        this.register = this.register.bind(this)
-        this.changeInput = this.changeInput.bind(this)
-        this.state = {
-            username: '',
-            password: '',
-            repeat: ''
-        }
+    state = {
+        username: '',
+        password: '',
+        repeat: ''
     }
 
-    changeInput(e){
+    changeInput = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-    register(e){
+    register = (e) => {
         e.preventDefault()
         fetch('http://localhost:8080/api/users/register', {
             method: 'post',

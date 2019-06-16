@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ChatUser from './ChatUser';
 
 class ChatUsersList extends Component{
-    componentDidMount(){
+    componentDidMount() {
         fetch('http://localhost:8080/api/auth/chat/getChats?pageSize=3',{
             headers: {
                 'Authorization': localStorage.getItem('Authorization')

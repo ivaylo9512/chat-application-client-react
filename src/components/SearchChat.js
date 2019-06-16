@@ -2,16 +2,11 @@ import React, { Component } from 'react'
 
 class SearchChat extends Component {  
 
-
-    constructor(){
-        super()
-        this.state = {
-            name : ''
-        }
-        this.changeInput = this.changeInput.bind(this)
+    state = {
+        name : ''
     }
 
-    changeInput(e){
+    changeInput = (e) => {
         this.setState({
             name : e.target.value
         })
