@@ -13,6 +13,9 @@ class Header extends Component{
                             <li>
                                 <Link to="/searchUsers">add</Link>
                             </li>
+                            <li>
+                                <a onClick={this.props.logout}>logout</a>
+                            </li>
                         </ul>                   
                         <a href=""></a>
                         <a href=""></a>

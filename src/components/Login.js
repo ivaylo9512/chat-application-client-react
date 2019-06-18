@@ -19,18 +19,24 @@ class Login extends Component{
             method: 'post',
             body: JSON.stringify(this.state)
           })
-            .then(response => {
+            .then(response =>{ 
                 localStorage.setItem('Authorization', response.headers.get('Authorization'))
-                return response.json()})
-            .then(data => this.props.setUser(data)
-        )
+                return response.json()
+            })
+            .then(data => {
+                this.props.setUser(data)
+                this.setState({
+                    username: '',
+                    password: ''
+                })
+            })
     }
     render() {
         return (
             <section>
                 <form onSubmit={this.login} onChange={this.changeInput}>
-                    <input placeholder="username" name="username" type="text"/>
-                    <input placeholder="password" name="password" type="text"/>
+                    <input value={this.state.username} placeholder="username" name="username" type="text"/>
+                    <input value={this.state.password} placeholder="password" name="password" type="text"/>
                     <button>login</button>
                     <button>register</button>
                 </form>

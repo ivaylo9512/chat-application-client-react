@@ -23,6 +23,13 @@ class App extends Component {
             isAuth: true
         })
     }
+    logout = () => {
+        localStorage.removeItem('Authorization')
+        this.setState({
+            user: undefined,
+            isAuth: false
+        })
+    }
     setUserChats = (chats) => {
         this.setState({
             filteredChats: chats,
@@ -59,7 +66,7 @@ class App extends Component {
             <div className="App">
                 {this.state.isAuth && <ChatUsersList setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                 <Router>
-                    <Header />
+                    <Header logout={this.logout} />
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />
                     <Route path="/searchUsers" render={() => <SearchUsers setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
