@@ -7,6 +7,7 @@ import ChatUsersList from './components/ChatUsersList';
 import SearchChat from './components/SearchChat';
 import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
 import UsersList from './components/UsersList';
+import Chat from './components/Chat'
 
 class App extends Component {
     state = {
@@ -50,6 +51,9 @@ class App extends Component {
         }) 
     }
     setCurrentChat(chat){
+        this.setState({
+            chat
+        })
     }
     setFoundUsers = (users) => {
         this.setState({
@@ -71,6 +75,7 @@ class App extends Component {
                     <Route path="/searchUsers" render={() => <SearchUsers setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
                 </Router>
+                {this.state.chat != undefined && <Chat chat={this.state.chat} />}
                 <SearchChat searchChats={this.searchChats}/>
             </div>
         )

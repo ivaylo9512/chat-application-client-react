@@ -11,7 +11,7 @@ class User extends Component{
                 <b>{this.props.user.username}</b>
                 <span></span>    
             </div>
-            <button onClick={()=> this.props.user.hasChatWithLoggedUser ? : this.props.createChat} ></button>
+            <button onClick={()=> this.props.user.hasChatWithLoggedUser ? this.props.setCurrentChat : this.props.createChat} ></button>
         </div>
         )
 

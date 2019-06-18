@@ -34,9 +34,9 @@ class Login extends Component{
     render() {
         return (
             <section>
-                <form onSubmit={this.login} onChange={this.changeInput}>
-                    <input value={this.state.username} placeholder="username" name="username" type="text"/>
-                    <input value={this.state.password} placeholder="password" name="password" type="text"/>
+                <form onSubmit={this.login}>
+                    <input value={this.state.username} onChange={this.changeInput} placeholder="username" name="username" type="text"/>
+                    <input value={this.state.password} onChange={this.changeInput} placeholder="password" name="password" type="text"/>
                     <button>login</button>
                     <button>register</button>
                 </form>
