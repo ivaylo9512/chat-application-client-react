@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import Users from './User'
 class UsersList extends Component{
+
+    createChat(userId){
+        fetch(`http://localhost:8080/api/chat/auth/create?userId=${userId}`)        
+    }
+
     render(){
         return (
         <div>
            {this.props.foundUsers.map(user =>{
                 return(
-                    <Users />
+                    <Users createChat={this.createChat} key={user.id} />
                 )
             })}
         </div>

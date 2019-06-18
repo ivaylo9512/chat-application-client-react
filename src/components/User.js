@@ -5,13 +5,13 @@ class User extends Component{
         return (
         <div>
             <div className="image">
-                <img alt="profile" src={this.props.chat.user.profilePicture}/>
+                <img alt="profile" src={this.props.user.profilePicture}/>
             </div>
             <div className="info">
-                <b>{this.props.chat.user.username}</b>
+                <b>{this.props.user.username}</b>
                 <span></span>    
             </div>
-            <button></button>
+            <button onClick={()=> this.props.user.hasChatWithLoggedUser ? : this.props.createChat} ></button>
         </div>
         )
 
