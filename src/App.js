@@ -14,11 +14,13 @@ class App extends Component {
         foundUsers: [],
         user: undefined,
         chats: [],
-        filteredChats : []
+        filteredChats: [],
+        isAuth: false
     }
     setUser = (user) => {
         this.setState({
-            user: user
+            user: user,
+            isAuth: true
         })
     }
     setUserChats = (chats) => {
@@ -47,11 +49,15 @@ class App extends Component {
             foundUsers: users
         })
     }
+    componentDidMount(){
+        this.setState({ 
+            isAuth: localStorage.getItem('Authorization') != undefined
+        }) 
+    }
     render() {
         return (
             <div className="App">
-                <ChatUsersList setUserChats={this.setUserChats} chats={this.state.filteredChats} />
-                <div></div>
+                {this.state.isAuth && <ChatUsersList setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                 <Router>
                     <Header />
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />
