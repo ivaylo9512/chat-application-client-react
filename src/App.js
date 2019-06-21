@@ -8,6 +8,7 @@ import SearchChat from './components/SearchChat';
 import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
 import UsersList from './components/UsersList';
 import Chat from './components/Chat'
+import WebSocket from './components/WebSocket'
 
 class App extends Component {
     state = {
@@ -68,6 +69,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <WebSocket />
                 {this.state.isAuth && <ChatUsersList setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                 <Router>
                     <Header logout={this.logout} />

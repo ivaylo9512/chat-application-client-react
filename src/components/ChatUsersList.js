@@ -9,7 +9,7 @@ class ChatUsersList extends Component{
         this.chatsContainer = React.createRef()
     }
     componentDidMount() {
-        fetch('http://localhost:8080/api/auth/chat/getChats?pageSize=3',{
+        fetch('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
             headers: {
                 'Authorization': localStorage.getItem('Authorization')
             }
@@ -44,7 +44,7 @@ class ChatUsersList extends Component{
         return (
             <div className="chats-container" ref={this.chatsContainer} onWheel = {this.scroll}>
                 <div className="chats" ref={this.chats}>
-                    {this.props.chats.map(chat =>{
+                    {this.props.chats.map(chat => {
                         return (
                             <a className="chat" key={chat.id} onClick={() => this.getChat(chat)}>
                                 <ChatUser chat={chat}/>

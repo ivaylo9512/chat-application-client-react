@@ -15,7 +15,7 @@ class Login extends Component{
     }
     login = (e) => {
         e.preventDefault()
-        fetch('http://localhost:8080/login', {
+        fetch('http://localhost:8080/api/users/login', {
             method: 'post',
             body: JSON.stringify(this.state)
           })
