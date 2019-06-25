@@ -1,24 +1,30 @@
 import React, {Component} from 'react';
-import SockJS from 'sockjs-client'
-import Stomp from 'stompjs'
+import {Client, Message} from '@stomp/stompjs'
 
 class WebSocket extends Component{
 
-    componentWillMount(){
-        const socket = new WebSocket('ws://localhost:8080/api/chat/message');
-        const ws = Stomp.over(socket);
-
-        ws.connect({'Authorization': localStorage.getItem('Authorization') }, function(frame) {
-            ws.subscribe("/user/queue/errors", function(message) {
-                alert("Error " + message.body);
-            });
-     
-            ws.subscribe("/user/queue/reply", function(message) {
-                alert("Message " + message.body);
-            });
-        }, function(error) {
-            alert("STOMP error " + error);
+    componentDidMount(){
+        const client = new Client({
+            brokerURL: "ws://localhost:8080/api/chat/message",
+            connectHeaders: {
+              'Authorization': 'user',
+            },
+            debug: function (str) {
+              console.log(str)
+            },
+            reconnectDelay: 5000,
+            heartbeatIncoming: 4000,
+            heartbeatOutgoing: 4000
         });
+          client.onConnect = (frame) => {
+              console.log(frame)
+          };
+       
+          client.onStompError = (frame) => {
+            console.log('Broker reported error: ' + frame.headers['message']);
+            console.log('Additional details: ' + frame.body);
+          };
+          client.activate();
     }
     render(){
         return (
