@@ -17,14 +17,16 @@ class App extends Component {
         user: undefined,
         chats: [],
         filteredChats: [],
-        isAuth: false
+        isAuth: false,
     }
+
     setUser = (user) => {
         this.setState({
             user: user,
             isAuth: true
         })
     }
+
     logout = () => {
         localStorage.removeItem('Authorization')
         this.setState({
@@ -32,12 +34,14 @@ class App extends Component {
             isAuth: false
         })
     }
+
     setUserChats = (chats) => {
         this.setState({
             filteredChats: chats,
             chats: chats
         })
     }
+
     searchChats = (name) => {
         name = name.toUpperCase()
         const filteredChats = this.state.chats.filter(chat=> { 
@@ -51,25 +55,51 @@ class App extends Component {
             filteredChats 
         }) 
     }
+
+    setWebSocketClient = (client) => {
+        const createSubscription = client.subscribe("/user/message", this.recievedMessage)
+        const messageSubscription = client.subscribe("/user/createChat", this.newChat)
+        
+        this.client = client
+    }
+
+    sendNewMessage = (message) => { 
+        this.client.publish({destination: '/api/message', body: JSON.stringify({chatId: 28,receiverId: 6, message, username: "admin"}), headers: {'Authorization': localStorage.getItem('Authorization')}});
+    }
+
+    createNewChat = (userId) => {
+        this.client.publish({destination: '/api/createChat', body: userId, headers: {'Authorization': localStorage.getItem('Authorization')}});
+    }
+    recievedMessage = (message) => {
+        console.log(message.body)
+    }
+
+    newChat = function(message) {
+        console.log(message.body)
+    }
+
     setCurrentChat(chat){
         this.setState({
             chat
         })
     }
+
     setFoundUsers = (users) => {
         this.setState({
             foundUsers: users
         })
     }
+
     componentDidMount(){
         this.setState({ 
             isAuth: localStorage.getItem('Authorization') != undefined
         }) 
     }
+
     render() {
         return (
             <div className="App">
-                <WebSocket />
+                <WebSocket setWebSocketClient={this.setWebSocketClient} />
                 {this.state.isAuth && <ChatUsersList setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                 <Router>
                     <Header logout={this.logout} />
@@ -83,4 +113,5 @@ class App extends Component {
         )
     }
 }
+
 export default App;
