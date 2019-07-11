@@ -74,11 +74,11 @@ class App extends Component {
         console.log(message.body)
     }
 
-    newChat = function(message) {
+    newChat = (message) => {
         console.log(message.body)
     }
 
-    setCurrentChat(chat){
+    setCurrentChat = (chat) => {
         this.setState({
             chat
         })
@@ -100,7 +100,7 @@ class App extends Component {
         return (
             <div className="App">
                 <WebSocket setWebSocketClient={this.setWebSocketClient} />
-                {this.state.isAuth && <ChatUsersList setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
+                {this.state.isAuth && <ChatUsersList setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                 <Router>
                     <Header logout={this.logout} />
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />

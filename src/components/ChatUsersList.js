@@ -46,7 +46,7 @@ class ChatUsersList extends Component{
                 <div className="chats" ref={this.chats}>
                     {this.props.chats.map(chat => {
                         return (
-                            <a className="chat" key={chat.id} onClick={() => this.getChat(chat)}>
+                            <a className="chat" key={chat.id} onClick={() => this.props.setCurrentChat(chat)}>
                                 <ChatUser chat={chat}/>
                             </a>
                         )
