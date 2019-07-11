@@ -14,6 +14,7 @@ import MessageForm from './components/MessageForm'
 class App extends Component {
     state = {
         currentChat: undefined,
+        isUserPane: false,
         foundUsers: [],
         user: undefined,
         chats: [],
@@ -103,18 +104,15 @@ class App extends Component {
         return (
             <div className="App">
                 <WebSocket setWebSocketClient={this.setWebSocketClient} />
-                {this.state.isAuth && <ChatUsersList setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                 <Router>
+                    {this.state.isAuth && <ChatUsersList setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                     <Header logout={this.logout} />
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />
-                    <Route path="/searchUsers" render={() => <SearchUsers setFoundUsers={this.setFoundUsers} />} />
+                    <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
+                    <Route path="/chat" render={() => <Chat chat={this.state.currentChat} />} />
+                    <Route path="/chat" render={() => <MessageForm sendNewMessage={this.sendNewMessage} />} />
                 </Router>
-                {this.state.currentChat != undefined && 
-                    <div>
-                        <Chat chat={this.state.currentChat} />
-                        <MessageForm sendNewMessage={this.sendNewMessage} />
-                    </div>}
                 <SearchChat searchChats={this.searchChats}/>
             </div>
         )

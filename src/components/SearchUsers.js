@@ -5,6 +5,7 @@ class SearchUsers extends Component {
     state = {
         name: ''
     }
+
     changeInput = (e) => {
         const{name, value} = e.target
         this.setState({

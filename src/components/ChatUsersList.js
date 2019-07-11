@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ChatUser from './ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
+import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
 
 class ChatUsersList extends Component{
     constructor(){
@@ -46,9 +47,9 @@ class ChatUsersList extends Component{
                 <div className="chats" ref={this.chats}>
                     {this.props.chats.map(chat => {
                         return (
-                            <a className="chat" key={chat.id} onClick={() => this.props.setCurrentChat(chat)}>
+                            <Link to="/chat" className="chat" key={chat.id} onClick={() => this.props.setCurrentChat(chat)}>
                                 <ChatUser chat={chat}/>
-                            </a>
+                            </Link>
                         )
                     })}  
                 </div>

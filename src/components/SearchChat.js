@@ -13,6 +13,7 @@ class SearchChat extends Component {
         })
         this.props.searchChats(e.target.value)
     }
+    
     render() {
         return (
             <form onSubmit={this.searchChats}>
