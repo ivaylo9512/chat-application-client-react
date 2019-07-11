@@ -13,7 +13,7 @@ import MessageForm from './components/MessageForm'
 
 class App extends Component {
     state = {
-        chat: undefined,
+        currentChat: undefined,
         foundUsers: [],
         user: undefined,
         chats: [],
@@ -65,7 +65,9 @@ class App extends Component {
     }
 
     sendNewMessage = (message) => { 
-        console.log(message)
+        const chatId = this.state.currentChat.id
+        const receiverId = this.state.currentChat.user.id
+        this.client.publish({destination: '/api/message', body: JSON.stringify({chatId, receiverId, message}), headers: {'Authorization': localStorage.getItem('Authorization')}});
     }
 
     createNewChat = (userId) => {
@@ -79,9 +81,9 @@ class App extends Component {
         console.log(message.body)
     }
 
-    setCurrentChat = (chat) => {
+    setCurrentChat = (currentChat) => {
         this.setState({
-            chat
+            currentChat
         })
     }
 
@@ -108,9 +110,9 @@ class App extends Component {
                     <Route path="/searchUsers" render={() => <SearchUsers setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
                 </Router>
-                {this.state.chat != undefined && 
+                {this.state.currentChat != undefined && 
                     <div>
-                        <Chat chat={this.state.chat} />
+                        <Chat chat={this.state.currentChat} />
                         <MessageForm sendNewMessage={this.sendNewMessage} />
                     </div>}
                 <SearchChat searchChats={this.searchChats}/>
