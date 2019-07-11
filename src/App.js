@@ -95,6 +95,7 @@ class App extends Component {
     }
 
     setFoundUsers = (users) => {
+        console.log(users)
         this.setState({
             foundUsers: users
         })

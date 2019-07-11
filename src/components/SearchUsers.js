@@ -12,19 +12,24 @@ class SearchUsers extends Component {
             name: value
         })
     }
+
     searchUsers = (e) => {
         e.preventDefault()
         const name = this.state.name
-        fetch(`http://localhost:8080/api/users/searchForUsers/${name}`)
+        
+        fetch(`http://localhost:8080/api/users/auth/searchForUsers/${name}`, {
+            headers: {
+                'Authorization': localStorage.getItem('Authorization')
+            }
+        })
             .then(response => response.json())
-            .then(data => this.props.setFoundUsers(data)
-        )
+            .then(data => this.props.setFoundUsers(data))
     }
     
     render() {
         return (
             <form onSubmit={this.searchUsers}>
-                <input value={this.state.name} onChange={this.changeInput}/>
+                <input placeholder="search user" value={this.state.name} onChange={this.changeInput}/>
             </form>
         )
     }
