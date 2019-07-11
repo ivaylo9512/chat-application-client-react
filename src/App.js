@@ -88,6 +88,12 @@ class App extends Component {
         })
     }
 
+    removeCurrentChat = () => {
+        this.setState({
+            currentChat: undefined
+        })
+    }
+
     setFoundUsers = (users) => {
         this.setState({
             foundUsers: users
@@ -110,8 +116,13 @@ class App extends Component {
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />
                     <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
-                    <Route path="/chat" render={() => <Chat chat={this.state.currentChat} />} />
-                    <Route path="/chat" render={() => <MessageForm sendNewMessage={this.sendNewMessage} />} />
+              
+                    {this.state.currentChat != undefined && 
+                    <div>
+                        <Route path="/chat" render={() => <Chat removeCurrentChat={this.removeCurrentChat} chat={this.state.currentChat} />} />
+                        <Route path="/chat" render={() => <MessageForm sendNewMessage={this.sendNewMessage} />} />
+                    </div>}
+
                 </Router>
                 <SearchChat searchChats={this.searchChats}/>
             </div>

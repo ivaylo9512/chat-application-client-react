@@ -8,7 +8,9 @@ class Chat extends Component {
             .then(data => data.json())
             .then(data => this.props.chat.sessions = data)
     }
-    
+    componentWillUnmount(){
+        this.props.removeCurrentChat()
+    }
     render() {
         return (
             <div className="sessions">
