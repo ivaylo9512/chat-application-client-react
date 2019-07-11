@@ -59,8 +59,8 @@ class App extends Component {
     }
 
     setWebSocketClient = (client) => {
-        const createSubscription = client.subscribe("/user/message", this.recievedMessage)
-        const messageSubscription = client.subscribe("/user/createChat", this.newChat)
+        client.subscribe("/user/message", this.recievedMessage)
+        client.subscribe("/user/createChat", this.recievedNewChat)
         
         this.client = client
     }
@@ -72,13 +72,13 @@ class App extends Component {
     }
 
     createNewChat = (userId) => {
-        this.client.publish({destination: '/api/createChat', body: userId, headers: {'Authorization': localStorage.getItem('Authorization')}});
+        console.log("hey")
     }
     recievedMessage = (message) => {
         console.log(message.body)
     }
 
-    newChat = (message) => {
+    recievedNewChat = (message) => {
         console.log(message.body)
     }
 
@@ -95,7 +95,6 @@ class App extends Component {
     }
 
     setFoundUsers = (users) => {
-        console.log(users)
         this.setState({
             foundUsers: users
         })
@@ -116,7 +115,7 @@ class App extends Component {
                     <Header logout={this.logout} />
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />
                     <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
-                    <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
+                    <Route path="/searchUsers" render={({history}) => <UsersList  history={history} createNewChat={this.createNewChat} foundUsers={this.state.foundUsers} />} />
               
                     {this.state.currentChat != undefined && 
                     <div>
