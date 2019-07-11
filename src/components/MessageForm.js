@@ -1,20 +1,26 @@
-import React,{ component } from 'react'
+import React, { Component } from 'react';
 
-class MessageForm extends Comment {
+class MessageForm extends Component {
     state = {
         message : ''
     }
     submitForm = (e) => {
+        e.preventDefault()
+
+        this.props.sendNewMessage(this.state.message)
+    }
+
+    changeMessage = (e) => {
         const{name, value} = e.target
+
         this.setState({
             message: value
         })
     }
-
     render() {
         return (
             <form onSubmit={this.submitForm}>
-                <input placeholder="Send message"/>
+                <input name='message' value={this.state.message} onChange={this.changeMessage} placeholder='Send message'/>
                 <button>send</button>
             </form>
         )

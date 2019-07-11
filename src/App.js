@@ -9,6 +9,7 @@ import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
 import UsersList from './components/UsersList';
 import Chat from './components/Chat'
 import WebSocket from './components/WebSocket'
+import MessageForm from './components/MessageForm'
 
 class App extends Component {
     state = {
@@ -64,7 +65,7 @@ class App extends Component {
     }
 
     sendNewMessage = (message) => { 
-        this.client.publish({destination: '/api/message', body: JSON.stringify({chatId: 28,receiverId: 6, message, username: "admin"}), headers: {'Authorization': localStorage.getItem('Authorization')}});
+        console.log(message)
     }
 
     createNewChat = (userId) => {
@@ -107,7 +108,11 @@ class App extends Component {
                     <Route path="/searchUsers" render={() => <SearchUsers setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={() => <UsersList foundUsers={this.state.foundUsers} />} />
                 </Router>
-                {this.state.chat != undefined && <Chat chat={this.state.chat} />}
+                {this.state.chat != undefined && 
+                    <div>
+                        <Chat chat={this.state.chat} />
+                        <MessageForm sendNewMessage={this.sendNewMessage} />
+                    </div>}
                 <SearchChat searchChats={this.searchChats}/>
             </div>
         )
