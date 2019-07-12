@@ -109,7 +109,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <WebSocket setWebSocketClient={this.setWebSocketClient} />
+                {this.state.isAuth && <WebSocket setWebSocketClient={this.setWebSocketClient} />}
                 <Router>
                     {this.state.isAuth && <ChatUsersList setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                     <Header logout={this.logout} />

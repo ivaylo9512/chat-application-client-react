@@ -39,12 +39,13 @@ class ChatUsersList extends Component{
         this.chats.current.style.paddingBottom = `${barHeight}px`
     }
     scroll = (e) => {
-        this.chats.current.scroll(window.scrollX + e.deltaY * 5, window.scrollY);
+        e.currentTarget.scroll({left: e.currentTarget.scrollLeft + e.deltaY * 4 , top: e.currentTarget.scrollTop, behavior: 'smooth'})
+        
     }
     render(){
         return (
-            <div className="chats-container" ref={this.chatsContainer} onWheel = {this.scroll}>
-                <div className="chats" ref={this.chats}>
+            <div className="chats-container" ref={this.chatsContainer}>
+                <div className="chats" ref={this.chats} onWheel = {this.scroll}>
                     {this.props.chats.map(chat => {
                         return (
                             <Link to="/chat" className="chat" key={chat.id} onClick={() => this.props.setCurrentChat(chat)}>
