@@ -46,13 +46,14 @@ class App extends Component {
 
     searchChats = (name) => {
         name = name.toUpperCase()
-        const filteredChats = this.state.chats.filter(chat=> { 
+        const filteredChats = this.state.chats.filter(chat => { 
             const firstName = chat.user.firstName.toUpperCase()
             const lastName = chat.user.lastName.toUpperCase()
             if(firstName.startsWith(name) || lastName.startsWith(name) ||(`${firstName} ${lastName}`).startsWith(name)){
                 return chat
             }
         })
+
         this.setState({
             filteredChats 
         }) 
@@ -125,6 +126,22 @@ class App extends Component {
 
                 </Router>
                 <SearchChat searchChats={this.searchChats}/>
+                <div className="content">
+                    <div className="menu">
+                        <button className="circle-btn">-</button>
+                        <div className="circle-nav" id="cn-wrapper">
+                            <ul>
+                            <li><a href="#"><i className="fas fa-user"></i></a></li>
+                            <li><a href="#"><i className="fas fa-comments"></i></a></li>
+                            <li><a href="#"><span className="icon-home"></span></a></li>
+                            <li><a href="#"><span className="icon-facetime-video"></span></a></li>
+                            <li><a href="#"><span className="icon-envelope-alt"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="messages-container">
+                    </div>
+                </div>
             </div>
         )
     }
