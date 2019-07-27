@@ -1,5 +1,7 @@
 .App{
     height: 100vh;
+    overflow: hidden;
+    position: relative;
 }
 header {
     height: 11%;
@@ -80,12 +82,45 @@ nav{
     color: white;
     margin-left: -8%;
 }
-.circle{
-    height: 9em;
-    width: 9em;
-    background: #4e2626;
+.content{
+    height: 69%;
+}
+.menu{
+    height: 100%;
+    width: 33%;
+    transform: translate(0, 0);
+    transition: all 4s;
+}
+.show-menu{
     border-radius: 50%;
-
+    border: 0px;
+    height: 2.7em;
+    width: 2.7em;
+    background: rgb(24,27, 33);
+    color: white;
+    font-size: 1.2em;
+    position: absolute;
+    top: 100%;
+    left: -2em;
+    transition: all 2s;
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+.show-menu.show{
+    transition: all 2s 1.75s;
+    -webkit-transform: translate(4em, -5em);
+    -ms-transform: translate(4em, -5em);
+    -moz-transform:  translate(4em, -5em);
+    transform: translate(4em, -5em);
+}
+.menu.hide{
+    -webkit-transform: translate(-22.5em, 18em);
+    -ms-transform: translate(-22.5em, 18em);
+    -moz-transform: translate(-22.5em, 18em);
+    transform: translate(-22.5em, 18em);
+    width: 0;
 }
 .circle-nav {
     width: 26em;
@@ -193,3 +228,33 @@ nav{
     -moz-transform: rotate(160deg) skew(50deg);
     transform: rotate(160deg) skew(50deg);
   }
+
+  @keyframes translate {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(4em, -5em);
+    }
+}
+
+@-webkit-keyframes translate {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(4em, -5em);
+    }
+}
+
+@-moz-keyframes translate {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(4em, -5em);
+    }
+}

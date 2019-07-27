@@ -22,6 +22,11 @@ class App extends Component {
         isAuth: false,
     }
 
+    constructor(){
+        super()
+        this.menu = React.createRef()
+        this.showCircle = React.createRef()
+    }
     setUser = (user) => {
         this.setState({
             user: user,
@@ -101,6 +106,16 @@ class App extends Component {
         })
     }
 
+    hideMenu = () => {
+        this.menu.current.classList.add('hide')
+        this.showCircle.current.classList.add('show')
+    }
+
+    showMenu = () => {
+        this.menu.current.classList.remove('hide')
+        this.showCircle.current.classList.remove('show')
+        
+    }
     componentDidMount(){
         this.setState({ 
             isAuth: localStorage.getItem('Authorization') != undefined
@@ -126,16 +141,17 @@ class App extends Component {
 
                 </Router>
                 <SearchChat searchChats={this.searchChats}/>
+                <button className="show-menu" onClick={this.showMenu} ref={this.showCircle}><i class="fas fa-bars"></i></button>
                 <div className="content">
-                    <div className="menu">
+                    <div className="menu" onClick={this.hideMenu} ref={this.menu}>
                         <button className="circle-btn">-</button>
                         <div className="circle-nav" id="cn-wrapper">
                             <ul>
                             <li><a href="#"><i className="fas fa-user"></i></a></li>
                             <li><a href="#"><i className="fas fa-comments"></i></a></li>
-                            <li><a href="#"><span className="icon-home"></span></a></li>
-                            <li><a href="#"><span className="icon-facetime-video"></span></a></li>
-                            <li><a href="#"><span className="icon-envelope-alt"></span></a></li>
+                            <li><a href="#"><i className="fas fa-search"></i></a></li>
+                            <li><a href="#"><i className="fas fa-user-plus"></i></a></li>
+                            <li><a onClick={this.hideMenu}><i className="fas fa-sign-out-alt"></i></a></li>
                             </ul>
                         </div>
                     </div>
