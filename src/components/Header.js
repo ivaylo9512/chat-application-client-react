@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class Header extends Component{
     render(){
@@ -14,11 +14,9 @@ class Header extends Component{
                                 <Link to="/searchUsers">add</Link>
                             </li>
                             <li>
-                                <a onClick={this.props.logout}>logout</a>
+                                <Link to="/login" onClick={this.props.logout}>logout</Link>
                             </li>
                         </ul>                   
-                        <a href=""></a>
-                        <a href=""></a>
                     </nav>
             </header>
         )

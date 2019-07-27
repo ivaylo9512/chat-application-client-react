@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Client, Message} from '@stomp/stompjs'
+import {Client} from '@stomp/stompjs'
 
 class WebSocket extends Component{
 

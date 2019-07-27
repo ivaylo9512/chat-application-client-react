@@ -9,7 +9,7 @@ class SearchChat extends Component {
     changeInput = (e) => {
         const{name, value} = e.target
         this.setState({
-            name : value
+            [name] : value
         })
         this.props.searchChats(e.target.value)
     }
@@ -17,7 +17,7 @@ class SearchChat extends Component {
     render() {
         return (
             <form onSubmit={this.searchChats}>
-                <input value={this.state.name} onChange={this.changeInput}/>
+                <input name='name' value={this.state.name} onChange={this.changeInput}/>
             </form>
         )
     }

@@ -99,6 +99,11 @@ nav{
     -webkit-flex: 1;
     -ms-flex: 1;
     flex: 1;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
 }
 .menu{
     height: 100%;
@@ -190,7 +195,7 @@ nav{
     margin-top: -1.3em;
     margin-left: -10em;
 }
-.circle-nav li a {
+.circle-nav li span {
     display: block;
     font-size: 1em;
     height: 15.5em;
@@ -209,45 +214,62 @@ nav{
     box-sizing: border-box;
 }
   
-  .circle-nav li a span {
+.circle-nav li a span {
     font-size: 1.1em;
     opacity: 0.7;
-  }
-  
-  .circle-nav li:first-child {
+}
+
+.circle-nav li:first-child {
     -webkit-transform: rotate(60deg) skew(50deg);
     -ms-transform: rotate(60deg) skew(50deg);
     -moz-transform: rotate(60deg) skew(50deg);
     transform: rotate(60deg) skew(50deg);
-  }
-  
-  .circle-nav li:nth-child(2) {
+}
+
+.circle-nav li:nth-child(2) {
     -webkit-transform: rotate(85deg) skew(50deg);
     -ms-transform: rotate(85deg) skew(50deg);
     -moz-transform: rotate(85deg) skew(50deg);
     transform: rotate(85deg) skew(50deg);
-  }
-  
-  .circle-nav li:nth-child(3) {
+}
+
+.circle-nav li:nth-child(3) {
     -webkit-transform: rotate(110deg) skew(50deg);
     -ms-transform: rotate(110deg) skew(50deg);
     -moz-transform: rotate(110deg) skew(50deg);
     transform: rotate(110deg) skew(50deg)
-  }
-  
-  .circle-nav li:nth-child(4) {
+}
+
+.circle-nav li:nth-child(4) {
     -webkit-transform: rotate(135deg) skew(50deg);
     -ms-transform: rotate(135deg) skew(50deg);
     -moz-transform: rotate(135deg) skew(50deg);
     transform: rotate(135deg) skew(50deg);
-  }
-  
-  .circle-nav li:nth-child(5) {
+}
+
+.circle-nav li:nth-child(5) {
     -webkit-transform: rotate(160deg) skew(50deg);
     -ms-transform: rotate(160deg) skew(50deg);
     -moz-transform: rotate(160deg) skew(50deg);
     transform: rotate(160deg) skew(50deg);
-  }
+}
+
+.messages-container{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+.messages-container span{
+    margin: auto;
+    font-weight: bold;
+}
 
   @keyframes translate {
     from {

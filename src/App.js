@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
+import './reset.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import SearchUsers from './components/SearchUsers';
 import ChatUsersList from './components/ChatUsersList';
 import SearchChat from './components/SearchChat';
-import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import UsersList from './components/UsersList';
 import Chat from './components/Chat'
 import WebSocket from './components/WebSocket'
@@ -58,6 +59,7 @@ class App extends Component {
             if(firstName.startsWith(name) || lastName.startsWith(name) ||(`${firstName} ${lastName}`).startsWith(name)){
                 return chat
             }
+            return null;
         })
 
         this.setState({
@@ -124,7 +126,7 @@ class App extends Component {
 
     componentDidMount(){
         this.setState({ 
-            isAuth: localStorage.getItem('Authorization') != undefined
+            isAuth: localStorage.getItem('Authorization') !== undefined
         }) 
     }
 
@@ -139,7 +141,7 @@ class App extends Component {
                     <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={({history}) => <UsersList  history={history} createNewChat={this.createNewChat} foundUsers={this.state.foundUsers} />} />
               
-                    {this.state.currentChat != undefined && 
+                    {this.state.currentChat !== undefined && 
                     <div>
                         <Route path="/chat" render={() => <Chat removeCurrentChat={this.removeCurrentChat} chat={this.state.currentChat} />} />
                         <Route path="/chat" render={() => <MessageForm sendNewMessage={this.sendNewMessage} />} />
@@ -153,16 +155,16 @@ class App extends Component {
                         <button className="circle-btn">-</button>
                         <div className="circle-nav" id="cn-wrapper">
                             <ul>
-                            <li><a href="#"><i className="fas fa-user"></i></a></li>
-                            <li><a onClick={this.toggleChats}><i className="fas fa-comments"></i></a></li>
-                            <li><a href="#"><i className="fas fa-search"></i></a></li>
-                            <li><a href="#"><i className="fas fa-user-plus"></i></a></li>
-                            <li><a onClick={this.hideMenu}><i className="fas fa-sign-out-alt"></i></a></li>
+                            <li><span href="#"><i className="fas fa-user"></i></span></li>
+                            <li><span onClick={this.toggleChats}><i className="fas fa-comments"></i></span></li>
+                            <li><span href="#"><i className="fas fa-search"></i></span></li>
+                            <li><span href="#"><i className="fas fa-user-plus"></i></span></li>
+                            <li><span onClick={this.hideMenu}><i className="fas fa-sign-out-alt"></i></span></li>
                             </ul>
                         </div>
                     </div>
                     <div className="messages-container">
-                    <span>No chat is selected!</span>
+                        <span>No chat is selected!</span>
                     </div>
                 </div>
             </div>

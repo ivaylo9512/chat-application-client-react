@@ -9,7 +9,7 @@ class SearchUsers extends Component {
     changeInput = (e) => {
         const{name, value} = e.target
         this.setState({
-            name: value
+            [name]: value
         })
     }
 
