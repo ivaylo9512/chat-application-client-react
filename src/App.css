@@ -2,6 +2,11 @@
     height: 100vh;
     overflow: hidden;
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
 }
 header {
     height: 11%;
@@ -21,8 +26,10 @@ nav{
     height: 100%;
     width: 100%;
     align-items: center;
-    display: flex;
+    display: -webkit-box;
     display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
     overflow-y: hidden;
 }
 .chat {
@@ -83,11 +90,17 @@ nav{
     margin-left: -8%;
 }
 .content{
-    height: 69%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }
 .menu{
     height: 100%;
     width: 33%;
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
     transform: translate(0, 0);
     transition: all 4s;
 }
