@@ -17,6 +17,8 @@ class ChatUsersList extends Component{
         }).then(data => data.json())
           .then(data => this.props.setUserChats(data))
           smoothscroll.polyfill()
+
+          this.props.setChatList(this.chatsContainer)
     }
     componentDidUpdate(){
         this.hideScrollBar()

@@ -21,6 +21,11 @@ nav{
     height: 11%;
     border-top: 3px solid rgb(24,27, 33);
     overflow: hidden;
+    transition: all 3s;
+
+}
+.chats-container.hide{
+    height: 0;
 }
 .chats {
     height: 100%;
@@ -113,13 +118,15 @@ nav{
     color: white;
     font-size: 1.2em;
     position: absolute;
-    top: 100%;
-    left: -2em;
     transition: all 2s;
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -moz-transform: translate(0, 0);
     transform: translate(0, 0);
+}
+.show-menu{
+    top: 100%;
+    left: -2em;
 }
 .show-menu.show{
     transition: all 2s 1.75s;

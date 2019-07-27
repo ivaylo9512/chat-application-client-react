@@ -25,7 +25,8 @@ class App extends Component {
     constructor(){
         super()
         this.menu = React.createRef()
-        this.showCircle = React.createRef()
+        this.menuCircle = React.createRef()
+        this.chatsCircle = React.createRef()
     }
     setUser = (user) => {
         this.setState({
@@ -108,14 +109,19 @@ class App extends Component {
 
     hideMenu = () => {
         this.menu.current.classList.add('hide')
-        this.showCircle.current.classList.add('show')
+        this.menuCircle.current.classList.add('show')
     }
 
     showMenu = () => {
         this.menu.current.classList.remove('hide')
-        this.showCircle.current.classList.remove('show')
+        this.menuCircle.current.classList.remove('show')
         
     }
+
+    toggleChats = () => {
+        this.chatList.current.classList.toggle('hide')
+    }
+
     componentDidMount(){
         this.setState({ 
             isAuth: localStorage.getItem('Authorization') != undefined
@@ -127,7 +133,7 @@ class App extends Component {
             <div className="App">
                 {this.state.isAuth && <WebSocket setWebSocketClient={this.setWebSocketClient} />}
                 <Router>
-                    {this.state.isAuth && <ChatUsersList setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
+                    {this.state.isAuth && <ChatUsersList setChatList={chatList => (this.chatList = chatList)} setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                     <Header logout={this.logout} />
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />
                     <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
@@ -141,14 +147,14 @@ class App extends Component {
 
                 </Router>
                 <SearchChat searchChats={this.searchChats}/>
-                <button className="show-menu" onClick={this.showMenu} ref={this.showCircle}><i class="fas fa-bars"></i></button>
+                <button className="show-menu" onClick={this.showMenu} ref={this.menuCircle}><i className="fas fa-bars"></i></button>
                 <div className="content">
-                    <div className="menu" onClick={this.hideMenu} ref={this.menu}>
+                    <div className="menu" ref={this.menu}>
                         <button className="circle-btn">-</button>
                         <div className="circle-nav" id="cn-wrapper">
                             <ul>
                             <li><a href="#"><i className="fas fa-user"></i></a></li>
-                            <li><a href="#"><i className="fas fa-comments"></i></a></li>
+                            <li><a onClick={this.toggleChats}><i className="fas fa-comments"></i></a></li>
                             <li><a href="#"><i className="fas fa-search"></i></a></li>
                             <li><a href="#"><i className="fas fa-user-plus"></i></a></li>
                             <li><a onClick={this.hideMenu}><i className="fas fa-sign-out-alt"></i></a></li>
@@ -156,6 +162,7 @@ class App extends Component {
                         </div>
                     </div>
                     <div className="messages-container">
+                    <span>No chat is selected!</span>
                     </div>
                 </div>
             </div>
