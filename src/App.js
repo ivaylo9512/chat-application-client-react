@@ -10,6 +10,7 @@ import UsersList from './components/UsersList';
 import Chat from './components/Chat'
 import WebSocket from './components/WebSocket'
 import MessageForm from './components/MessageForm'
+import Main from './components/Main';
 
 class App extends Component {
     state = {
@@ -126,9 +127,7 @@ class App extends Component {
                  
                     <div className="content">
                         <Header chatList={this.chatList} logout={this.logout} />
-                        <div className="messages-container">
-                            <span>No chat is selected!</span>
-                        </div>
+                        <Main />
                     </div>
                 </Router>
             </div>
