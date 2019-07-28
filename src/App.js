@@ -51,14 +51,6 @@ class App extends Component {
         }) 
     }
 
-    recievedMessage = (message) => {
-        console.log(message.body)
-    }
-
-    recievedNewChat = (message) => {
-        console.log(message.body)
-    }
-
     setCurrentChat = (currentChat) => {
         this.setState({
             currentChat
@@ -68,8 +60,9 @@ class App extends Component {
 
     componentDidMount(){
         this.setState({ 
-            isAuth: localStorage.getItem('Authorization') !== undefined
+            isAuth: localStorage.getItem('Authorization') !== null
         }) 
+
     }
 
     render() {
@@ -78,10 +71,12 @@ class App extends Component {
                 <Router>
                     {this.state.isAuth && <ChatUsersList setChatList={chatList => (this.chatList = chatList)} setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />                               
-                    <div className="content">
-                        <Header chatList={this.chatList} logout={this.logout} />
-                        <Main isAuth={this.state.isAuth} searchChats={this.searchChats} currentChat={this.state.currentChat}/>
-                    </div>
+                    {this.state.isAuth && 
+                        <div className="content">
+                            <Header chatList={this.chatList} logout={this.logout} />
+                            <Main searchChats={this.searchChats} currentChat={this.state.currentChat}/>
+                        </div>
+                    }
                 </Router>
             </div>
         )

@@ -19,10 +19,12 @@ class MessageForm extends Component {
     }
     render() {
         return (
-            <form onSubmit={this.submitForm}>
-                <input name='message' value={this.state.message} onChange={this.changeMessage} placeholder='Send message'/>
-                <button>send</button>
-            </form>
+            <div class="form-container">
+                <form onSubmit={this.submitForm}>
+                    <input name='message' value={this.state.message} onChange={this.changeMessage} placeholder='Send message'/>
+                    <button><i class="fas fa-sign-in-alt"></i></button>
+                </form>
+            </div>
         )
     }
 }

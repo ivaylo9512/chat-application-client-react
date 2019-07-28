@@ -23,6 +23,13 @@ class Main extends Component{
         this.client = client
     }
 
+    recievedMessage = (message) => {
+        console.log(message.body)
+    }
+
+    recievedNewChat = (message) => {
+        console.log(message.body)
+    }
     
     removeCurrentChat = () => {
         this.setState({
@@ -49,7 +56,7 @@ class Main extends Component{
     render(){
         return(
             <div className="messages-container">
-                {this.props.isAuth && <WebSocket setWebSocketClient={this.setWebSocketClient} />}
+                <WebSocket setWebSocketClient={this.setWebSocketClient} />
          
                 <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
                 <Route path="/searchUsers" render={({history}) => <UsersList  history={history} createNewChat={this.createNewChat} foundUsers={this.state.foundUsers} />} />

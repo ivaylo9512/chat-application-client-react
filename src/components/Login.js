@@ -24,7 +24,6 @@ class Login extends Component{
                 return response.json()
             })
             .then(data => {
-                console.log(data)
                 this.props.setUser(data)
                 this.setState({
                     username: '',
