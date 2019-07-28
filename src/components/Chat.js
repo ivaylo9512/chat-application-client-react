@@ -13,7 +13,7 @@ class Chat extends Component {
     }
     render() {
         return (
-            <div className="sessions">
+            <div className="chat">
                 {this.props.chat.sessions.map(session =>{
                     return <Session session={session} key={session.date}/>
                 })}

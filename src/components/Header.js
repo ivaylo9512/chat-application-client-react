@@ -32,9 +32,9 @@ class Header extends Component{
                     <button className="circle-btn">-</button>
                     <div className="circle-nav" id="cn-wrapper">
                         <ul>
-                            <li><span href="#"><i className="fas fa-user"></i></span></li>
+                            <li><span><i className="fas fa-user"></i></span></li>
                             <li><span onClick={this.toggleChats}><i className="fas fa-comments"></i></span></li>
-                            <li><span href="#"><i className="fas fa-search"></i></span></li>
+                            <li><Link to="/searchChat"><i className="fas fa-search"></i></Link></li>
                             <li><Link to="/searchUsers"><i className="fas fa-user-plus"></i></Link></li>
                             <li><span onClick={this.hideMenu}><i className="fas fa-sign-out-alt"></i></span></li>
                         </ul>

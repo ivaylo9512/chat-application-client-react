@@ -11,7 +11,7 @@ class SearchChat extends Component {
         this.setState({
             [name] : value
         })
-        this.props.searchChats(e.target.value)
+        this.props.searchChats(value)
     }
     
     render() {

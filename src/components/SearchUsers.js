@@ -29,7 +29,7 @@ class SearchUsers extends Component {
     render() {
         return (
             <form onSubmit={this.searchUsers}>
-                <input placeholder="search user" value={this.state.name} onChange={this.changeInput}/>
+                <input name="name" placeholder="search user" value={this.state.name} onChange={this.changeInput}/>
             </form>
         )
     }

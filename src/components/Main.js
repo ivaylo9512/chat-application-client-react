@@ -45,7 +45,7 @@ class Main extends Component{
         const receiverId = this.state.currentChat.user.id
         this.client.publish({destination: '/api/message', body: JSON.stringify({chatId, receiverId, message}), headers: {'Authorization': localStorage.getItem('Authorization')}});
     }
-    
+
     render(){
         return(
             <div className="messages-container">
@@ -57,7 +57,7 @@ class Main extends Component{
 
                 {
                     this.props.currentChat !== undefined ? 
-                        <div>
+                        <div className="chat-container">
                             <Route path="/chat" render={() => <Chat removeCurrentChat={this.removeCurrentChat} chat={this.props.currentChat} />} />
                             <Route path="/chat" render={() => <MessageForm sendNewMessage={this.sendNewMessage} />} />
                         </div> :

@@ -45,11 +45,11 @@ class ChatUsersList extends Component{
     }
     render(){
         return (
-            <div className="chats-container" ref={this.chatsContainer}>
-                <div className="chats" ref={this.chats} onWheel = {this.scroll}>
+            <div className="chat-users" ref={this.chatsContainer}>
+                <div ref={this.chats} onWheel = {this.scroll}>
                     {this.props.chats.map(chat => {
                         return (
-                            <div className="chat-container" key={chat.id} onClick={() => this.props.setCurrentChat(chat)}> 
+                            <div className="chat-user" key={chat.id} onClick={() => this.props.setCurrentChat(chat)}> 
                                 <ChatUser chat={chat}/>
                             </div>
                         )
