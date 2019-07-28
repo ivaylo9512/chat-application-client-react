@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './App.css';
-import './reset.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import SearchUsers from './components/SearchUsers';
@@ -21,13 +20,6 @@ class App extends Component {
         chats: [],
         filteredChats: [],
         isAuth: false,
-    }
-
-    constructor(){
-        super()
-        this.menu = React.createRef()
-        this.menuCircle = React.createRef()
-        this.chatsCircle = React.createRef()
     }
     setUser = (user) => {
         this.setState({
@@ -109,21 +101,6 @@ class App extends Component {
         })
     }
 
-    hideMenu = () => {
-        this.menu.current.classList.add('hide')
-        this.menuCircle.current.classList.add('show')
-    }
-
-    showMenu = () => {
-        this.menu.current.classList.remove('hide')
-        this.menuCircle.current.classList.remove('show')
-        
-    }
-
-    toggleChats = () => {
-        this.chatList.current.classList.toggle('hide')
-    }
-
     componentDidMount(){
         this.setState({ 
             isAuth: localStorage.getItem('Authorization') !== undefined
@@ -136,7 +113,6 @@ class App extends Component {
                 {this.state.isAuth && <WebSocket setWebSocketClient={this.setWebSocketClient} />}
                 <Router>
                     {this.state.isAuth && <ChatUsersList setChatList={chatList => (this.chatList = chatList)} setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
-                    <Header logout={this.logout} />
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />
                     <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
                     <Route path="/searchUsers" render={({history}) => <UsersList  history={history} createNewChat={this.createNewChat} foundUsers={this.state.foundUsers} />} />
@@ -146,27 +122,15 @@ class App extends Component {
                         <Route path="/chat" render={() => <Chat removeCurrentChat={this.removeCurrentChat} chat={this.state.currentChat} />} />
                         <Route path="/chat" render={() => <MessageForm sendNewMessage={this.sendNewMessage} />} />
                     </div>}
-
-                </Router>
-                <SearchChat searchChats={this.searchChats}/>
-                <button className="show-menu" onClick={this.showMenu} ref={this.menuCircle}><i className="fas fa-bars"></i></button>
-                <div className="content">
-                    <div className="menu" ref={this.menu}>
-                        <button className="circle-btn">-</button>
-                        <div className="circle-nav" id="cn-wrapper">
-                            <ul>
-                            <li><span href="#"><i className="fas fa-user"></i></span></li>
-                            <li><span onClick={this.toggleChats}><i className="fas fa-comments"></i></span></li>
-                            <li><span href="#"><i className="fas fa-search"></i></span></li>
-                            <li><span href="#"><i className="fas fa-user-plus"></i></span></li>
-                            <li><span onClick={this.hideMenu}><i className="fas fa-sign-out-alt"></i></span></li>
-                            </ul>
+                    <Route path="/chat" render={() => <SearchChat searchChats={this.searchChats}/>} />
+                 
+                    <div className="content">
+                        <Header chatList={this.chatList} logout={this.logout} />
+                        <div className="messages-container">
+                            <span>No chat is selected!</span>
                         </div>
                     </div>
-                    <div className="messages-container">
-                        <span>No chat is selected!</span>
-                    </div>
-                </div>
+                </Router>
             </div>
         )
     }
