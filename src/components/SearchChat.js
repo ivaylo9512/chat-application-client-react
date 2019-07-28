@@ -16,9 +16,12 @@ class SearchChat extends Component {
     
     render() {
         return (
-            <form onSubmit={this.searchChats}>
-                <input name='name' value={this.state.name} onChange={this.changeInput}/>
-            </form>
+            <div className="form-container">
+                <form onSubmit={this.searchChats}>
+                    <input name='name' placeholder="search chat" value={this.state.name} onChange={this.changeInput}/>
+                    <button><i className="fas fa-search"></i></button>
+                </form>
+            </div>
         )
     }
 }

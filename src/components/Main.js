@@ -55,21 +55,22 @@ class Main extends Component{
 
     render(){
         return(
-            <div className="messages-container">
+            <div className="main-container">
                 <WebSocket setWebSocketClient={this.setWebSocketClient} />
          
-                <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
                 <Route path="/searchUsers" render={({history}) => <UsersList  history={history} createNewChat={this.createNewChat} foundUsers={this.state.foundUsers} />} />
+                <Route path="/searchUsers" render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
+                <Route path="/searchChat" render={() => <div className="chats"></div>} />
                 <Route path="/searchChat" render={() => <SearchChat searchChats={this.props.searchChats}/>} />
+                <Route exact path="/" render={() => <p>No chat is selected!</p>} />
 
-                {
-                    this.props.currentChat !== undefined ? 
-                        <div className="chat-container">
-                            <Route path="/chat" render={() => <Chat removeCurrentChat={this.removeCurrentChat} chat={this.props.currentChat} />} />
-                            <Route path="/chat" render={() => <MessageForm sendNewMessage={this.sendNewMessage} />} />
-                        </div> :
-                        <p>No chat is selected!</p>
-                }
+                <Route path="/chat" render={() => this.props.currentChat !== undefined ? 
+                    <div className="chat-container">
+                        <Chat removeCurrentChat={this.removeCurrentChat} chat={this.props.currentChat} />
+                        <MessageForm sendNewMessage={this.sendNewMessage} />
+                    </div> :
+                    <p>No chat is selected!</p>
+                }/>
             </div>
         )
     }
