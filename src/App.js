@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import ChatUsersList from './components/ChatUsersList';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route, useHistory, BrowserRouter as Router } from 'react-router-dom'
 import Main from './components/Main';
 
 class App extends Component {
@@ -13,6 +13,8 @@ class App extends Component {
         filteredChats: [],
         isAuth: false,
     }
+    history = useHistory()
+
     setUser = (user) => {
         this.setState({
             user: user,
@@ -26,6 +28,7 @@ class App extends Component {
             user: undefined,
             isAuth: false
         })
+        this.history.push("/login")
     }
 
     setUserChats = (chats) => {
@@ -71,6 +74,7 @@ class App extends Component {
                 <Router>
                     {this.state.isAuth && <ChatUsersList setChatList={chatList => (this.chatList = chatList)} setCurrentChat={this.setCurrentChat} setUserChats={this.setUserChats} chats={this.state.filteredChats} />}
                     <Route path="/login" render={() => <Login setUser={this.setUser} />} />                               
+                    <Route path="/logout" render={this.logout} />                    
                     {this.state.isAuth && 
                         <div className="content">
                             <Header chatList={this.chatList} logout={this.logout} />
