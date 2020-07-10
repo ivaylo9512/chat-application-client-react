@@ -11,7 +11,7 @@ class UsersList extends Component{
         <div className="users">
            {this.props.foundUsers.map(user =>{
                 return(
-                    <Users user={user} history={this.props.history} setCurrentChat={this.props.setCurrentChat} createNewChat={this.props.createNewChat} key={user.id} />
+                    <Users user={user} history={this.props.history} setChat={this.props.setChat} createNewChat={this.props.createNewChat} key={user.id} />
                 )
             })}
         </div>

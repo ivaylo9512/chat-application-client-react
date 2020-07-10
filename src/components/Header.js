@@ -21,7 +21,7 @@ class Header extends Component{
     }
 
     toggleChats = () => {
-        this.props.chatList.current.classList.toggle('hide')
+        this.props.chats.current.classList.toggle('hide')
     }
 
     render(){

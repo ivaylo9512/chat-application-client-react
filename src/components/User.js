@@ -15,7 +15,7 @@ class User extends Component{
             <button onClick={()=> this.props.user.hasChatWithLoggedUser 
                 ? 
                     this.props.history.push('/chat') &&
-                    this.props.setCurrentChat(this.props.user.id)  
+                    this.props.setChat(this.props.user.id)  
                     : this.props.createNewChat} ></button>
         </div>
         )
