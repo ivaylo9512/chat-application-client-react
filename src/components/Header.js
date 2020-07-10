@@ -1,9 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {Link} from 'react-router-dom'
+import React from 'react';
+import {Route, Redirect, Link, useHistory} from 'react-router-dom'
 
-const Header = ({chats, logout}) => {
+const Header = ({chats, removeAuthenticated}) => {
     const header = React.useRef()
     const menuCircle = React.useRef()
+    const history = useHistory()
+
 
     const hideMenu = () => {
         header.current.classList.add('hide')
@@ -20,6 +22,11 @@ const Header = ({chats, logout}) => {
         chats.current.classList.toggle('hide')
     }
 
+    const logout = () => {
+        removeAuthenticated()
+        history.push("/login")
+    }
+
     return (
         <div ref={header} className="header-container">
             <button className="menu-circle" onClick={showHeader} ref={menuCircle}><i className="fas fa-bars"></i></button>
@@ -32,6 +39,10 @@ const Header = ({chats, logout}) => {
                         <li><Link to="/searchChat"><i className="fas fa-search"></i></Link></li>
                         <li><Link to="/searchUsers"><i className="fas fa-user-plus"></i></Link></li>
                         <li><span onClick={logout}><i className="fas fa-sign-out-alt"></i></span></li>
+                        <Route path="/logout" render={() =>{
+                            removeAuthenticated();
+                            return <Redirect to="/login"/>
+                        }}/>
                     </ul>
                 </div>
             </header>

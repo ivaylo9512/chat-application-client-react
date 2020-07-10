@@ -3,7 +3,7 @@ import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import ChatUsersList from './components/ChatUsersList';
-import { Route, useHistory, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import Main from './components/Main';
 
 const App = () => {
@@ -12,19 +12,16 @@ const App = () => {
     const [filteredChats, setFilteredChats] = useState([])
     const [isAuth, setIsAuth] = useState(false)
     const [currentChat, setCurrentChat] = useState(undefined)
-    let history = useHistory()
 
     const setAuthenticated = (user) => {
         setUser(user)
         setIsAuth(true)
     }
 
-    const logout = () => {
+    const removeAuthenticated = () => {
         localStorage.removeItem('Authorization')
         setUser(undefined)
         setIsAuth(false)
-
-        history.push("/login")
     }
 
     const setUserChats = (chats) => {
@@ -64,10 +61,9 @@ const App = () => {
             <Router>
                 {isAuth && <ChatUsersList setChatList={setChatList} setChat={setChat} setUserChats={setUserChats} chats={filteredChats} />}
                 <Route path="/login" render={() => <Login setAuthenticated={setAuthenticated} />} />                               
-                <Route path="/logout" render={logout} />                    
                 {isAuth && 
                     <div className="content">
-                        <Header chats={chats} logout={logout} />
+                        <Header chats={chats} removeAuthenticated={removeAuthenticated} />
                         <Main searchChats={searchChats} currentChat={currentChat}/>
                     </div>
                 }
