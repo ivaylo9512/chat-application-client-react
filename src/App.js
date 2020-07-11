@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {useLocalStorage} from './hooks/useLocalStorage'
 import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
@@ -11,25 +12,16 @@ const App = () => {
     const [user, setUser] = useState(undefined)
     const [chats, setChats] = useState([])
     const [filteredChats, setFilteredChats] = useState([])
-    const [isAuth, setIsAuth] = useState(false)
-    const [currentChat, setCurrentChat] = useState(undefined)
-
-    const setAuthenticated = (user) => {
-        setUser(user)
-        setIsAuth(true)
-    }
+    const [auth, setAuth] = useLocalStorage('Authorization', undefined);
+    const [currentChat, setCurrentChat] = useState(null)
 
     const removeAuthenticated = () => {
-        localStorage.removeItem('Authorization')
-        setUser(undefined)
+        setUser(user)
+        setAuth(null)
     }
 
     const setUserChats = (chats) => {
         setFilteredChats(chats)
-        setChats(chats)
-    }
-
-    const setChatList= (chats) => {
         setChats(chats)
     }
 
@@ -47,26 +39,18 @@ const App = () => {
         setFilteredChats(filteredChats)
     }
 
-    const setChat = (currentChat) => {
-        setCurrentChat(currentChat)
-    }
-
-    useEffect(() => {
-        setIsAuth(localStorage.getItem('Authorization') !== null)
-    },[localStorage.getItem('Authorization')])
-
     return (
         <div className="App">
             <Router>
-                {isAuth && <ChatUsersList setChatList={setChatList} setChat={setChat} setUserChats={setUserChats} chats={filteredChats} />}
-                <Route path="/login" render={() => <Login setAuthenticated={setAuthenticated} />} />                               
+                {auth && <ChatUsersList setChats={setChats} setCurrentChat={setCurrentChat} setUserChats={setUserChats} chats={filteredChats} />}
+                <Route path="/login" render={() => <Login setUser={setUser} setAuth={setAuth} />} />                               
                 <Route path="/logout" render={() =>{
-                    removeAuthenticated();
+                    removeAuthenticated()
                     return <Redirect to="/login"/>
                 }}/>
-                {isAuth && 
+                {auth && 
                     <div className="content">
-                        <Header chats={chats} removeAuthenticated={removeAuthenticated} />
+                        <Header chats={chats}/>
                         <Main searchChats={searchChats} currentChat={currentChat}/>
                     </div>
                 }

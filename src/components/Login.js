@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useInput} from '../hooks/useInput'
 
-const Login = ({setAuthenticated}) => {
+const Login = ({setUser, setAuth}) => {
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder:'username'})
     const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder:'password'})
 
@@ -12,11 +12,11 @@ const Login = ({setAuthenticated}) => {
             body: JSON.stringify({username, password})
           })
             .then(response =>{ 
-                localStorage.setItem('Authorization', response.headers.get('Authorization'))
+                setAuth(response.headers.get('Authorization'))
                 return response.json()
             })
             .then(data => {
-                setAuthenticated(data)
+                setUser(data)
                 setUsername('')
                 setPassword('')
             })

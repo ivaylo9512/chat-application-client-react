@@ -17,7 +17,7 @@ class ChatUsersList extends Component{
           .then(data => this.props.setUserChats(data))
           smoothscroll.polyfill()
 
-          this.props.setChatList(this.chatsContainer)
+          this.props.setChats(this.chatsContainer)
     }
     componentDidUpdate(){
         this.hideScrollBar()
@@ -49,7 +49,7 @@ class ChatUsersList extends Component{
                 <div ref={this.chats} onWheel = {this.scroll}>
                     {this.props.chats.map(chat => {
                         return (
-                            <div className="chat-user" key={chat.id} onClick={() => this.props.setChat(chat)}> 
+                            <div className="chat-user" key={chat.id} onClick={() => this.props.setCurrentChat(chat)}> 
                                 <ChatUser chat={chat}/>
                             </div>
                         )
