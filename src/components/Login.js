@@ -1,22 +1,17 @@
 import React, {useState} from 'react';
+import {useInput} from '../hooks/useInput'
 
 const Login = ({setAuthenticated}) => {
-    const [inputValues, setInputValues] = useState({
-        username:'', password:''
-    })
+    const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder:'username'})
+    const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder:'password'})
 
-    const changeInput = (e) => {
-        const {name, value} = e.target
-        setInputValues({
-            ...inputValues,
-            [name]: value
-        })
-    }
     const login = (e) => {
         e.preventDefault()
+        console.log(username)
+        console.log(password)
         fetch('http://localhost:8080/api/users/login', {
             method: 'post',
-            body: JSON.stringify(inputValues)
+            body: JSON.stringify({username, password})
           })
             .then(response =>{ 
                 localStorage.setItem('Authorization', response.headers.get('Authorization'))
@@ -24,15 +19,16 @@ const Login = ({setAuthenticated}) => {
             })
             .then(data => {
                 setAuthenticated(data)
-                setInputValues({username:'', password:''})
+                setUsername('')
+                setPassword('')
             })
     }
     return (
         <section>
             <form onSubmit={login}>
-                <input value={inputValues.username} onChange={changeInput} placeholder="username" name="username" type="text"/>
-                <input value={inputValues.password} onChange={changeInput} placeholder="password" name="password" type="text"/>
-                <button>login</button>
+                {usernameInput}
+                {passwordInput}
+                <button type='submit'>login</button>
                 <button>register</button>
             </form>
         </section>
