@@ -1,48 +1,42 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 
-class Login extends Component{
-    state = {
-        username: '',
-        password: ''
-    }
+const Login = ({setAuthenticated}) => {
+    const [inputValues, setInputValues] = useState({
+        username:'', password:''
+    })
 
-    changeInput = (e) => {
+    const changeInput = (e) => {
         const {name, value} = e.target
-
-        this.setState({
+        setInputValues({
+            ...inputValues,
             [name]: value
         })
     }
-    login = (e) => {
+    const login = (e) => {
         e.preventDefault()
         fetch('http://localhost:8080/api/users/login', {
             method: 'post',
-            body: JSON.stringify(this.state)
+            body: JSON.stringify(inputValues)
           })
             .then(response =>{ 
                 localStorage.setItem('Authorization', response.headers.get('Authorization'))
                 return response.json()
             })
             .then(data => {
-                this.props.setAuthenticated(data)
-                this.setState({
-                    username: '',
-                    password: ''
-                })
+                setAuthenticated(data)
+                setInputValues({username:'', password:''})
             })
     }
-    render() {
-        return (
-            <section>
-                <form onSubmit={this.login}>
-                    <input value={this.state.username} onChange={this.changeInput} placeholder="username" name="username" type="text"/>
-                    <input value={this.state.password} onChange={this.changeInput} placeholder="password" name="password" type="text"/>
-                    <button>login</button>
-                    <button>register</button>
-                </form>
-            </section>
-        )
-    }
+    return (
+        <section>
+            <form onSubmit={login}>
+                <input value={inputValues.username} onChange={changeInput} placeholder="username" name="username" type="text"/>
+                <input value={inputValues.password} onChange={changeInput} placeholder="password" name="password" type="text"/>
+                <button>login</button>
+                <button>register</button>
+            </form>
+        </section>
+    )
 }
 
 export default Login
