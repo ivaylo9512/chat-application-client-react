@@ -39,10 +39,6 @@ const Header = ({chats, removeAuthenticated}) => {
                         <li><Link to="/searchChat"><i className="fas fa-search"></i></Link></li>
                         <li><Link to="/searchUsers"><i className="fas fa-user-plus"></i></Link></li>
                         <li><span onClick={logout}><i className="fas fa-sign-out-alt"></i></span></li>
-                        <Route path="/logout" render={() =>{
-                            removeAuthenticated();
-                            return <Redirect to="/login"/>
-                        }}/>
                     </ul>
                 </div>
             </header>

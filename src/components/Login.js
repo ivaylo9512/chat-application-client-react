@@ -7,8 +7,6 @@ const Login = ({setAuthenticated}) => {
 
     const login = (e) => {
         e.preventDefault()
-        console.log(username)
-        console.log(password)
         fetch('http://localhost:8080/api/users/login', {
             method: 'post',
             body: JSON.stringify({username, password})

@@ -3,8 +3,9 @@ import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import ChatUsersList from './components/ChatUsersList';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route, Redirect, BrowserRouter as Router } from 'react-router-dom'
 import Main from './components/Main';
+import { isatty } from 'tty';
 
 const App = () => {
     const [user, setUser] = useState(undefined)
@@ -21,7 +22,6 @@ const App = () => {
     const removeAuthenticated = () => {
         localStorage.removeItem('Authorization')
         setUser(undefined)
-        setIsAuth(false)
     }
 
     const setUserChats = (chats) => {
@@ -53,14 +53,17 @@ const App = () => {
 
     useEffect(() => {
         setIsAuth(localStorage.getItem('Authorization') !== null)
-
-    }, localStorage.getItem('Authorization'))
+    },[localStorage.getItem('Authorization')])
 
     return (
         <div className="App">
             <Router>
                 {isAuth && <ChatUsersList setChatList={setChatList} setChat={setChat} setUserChats={setUserChats} chats={filteredChats} />}
                 <Route path="/login" render={() => <Login setAuthenticated={setAuthenticated} />} />                               
+                <Route path="/logout" render={() =>{
+                    removeAuthenticated();
+                    return <Redirect to="/login"/>
+                }}/>
                 {isAuth && 
                     <div className="content">
                         <Header chats={chats} removeAuthenticated={removeAuthenticated} />
