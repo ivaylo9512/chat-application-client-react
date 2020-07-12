@@ -1,4 +1,14 @@
-.App{
+.root{
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+}
+.root > div{
     height: 100vh;
     overflow: hidden;
     position: relative;

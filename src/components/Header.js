@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Redirect, Link, useHistory} from 'react-router-dom'
 
-const Header = ({chats, removeAuthenticated}) => {
+const Header = ({chatsContainer, removeAuthenticated}) => {
     const header = React.useRef()
     const menuCircle = React.useRef()
     const history = useHistory()
@@ -19,7 +19,7 @@ const Header = ({chats, removeAuthenticated}) => {
     }
 
     const toggleChats = () => {
-        chats.current.classList.toggle('hide')
+        chatsContainer.current.classList.toggle('hide')
     }
 
     const logout = () => {

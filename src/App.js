@@ -4,16 +4,16 @@ import './App.css';
 import Header from './components/Header'
 import Login from './components/Login'
 import ChatUsersList from './components/ChatUsersList';
-import { Route, Redirect, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
 import Main from './components/Main';
-import { isatty } from 'tty';
 
 const App = () => {
     const [user, setUser] = useState(undefined)
     const [chats, setChats] = useState([])
     const [filteredChats, setFilteredChats] = useState([])
     const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null);
-    const [currentChat, setCurrentChat] = useState(null)
+    const [currentChat, setCurrentChat] = useState(undefined)
+    const [chatsContainer, setChatsContainer] = useState(undefined)
 
     const removeAuthenticated = () => {
         setUser(null)
@@ -40,15 +40,17 @@ const App = () => {
     }
 
     return (
-        <div className="App">
+        <div className="root">
             <Router>
-                {auth && <ChatUsersList setChats={setChats} setCurrentChat={setCurrentChat} setUserChats={setUserChats} chats={filteredChats} />}
-                <Route path="/login" render={() => <Login setUser={setUser} setAuth={setAuth} />} />                               
-                {auth && 
-                    <div className="content">
-                        <Header chats={chats} removeAuthenticated={removeAuthenticated}/>
-                        <Main searchChats={searchChats} currentChat={currentChat}/>
-                    </div>
+                {auth ? 
+                    <div>
+                        <ChatUsersList setUserChats={setUserChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} chats={filteredChats} />
+                        <div className="content">
+                            <Header chatsContainer={chatsContainer} removeAuthenticated={removeAuthenticated}/>
+                            <Main searchChats={searchChats} currentChat={currentChat}/>
+                        </div>
+                    </div> :
+                    <Route path="/login" render={() => <Login setUser={setUser} setAuth={setAuth} />} />                               
                 }
             </Router>
         </div>
