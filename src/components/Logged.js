@@ -32,7 +32,7 @@ const Logged = ({removeAuthenticated, user}) => {
 
     return(
         <div>
-            <ChatUsersList setUserChats={setUserChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} chats={filteredChats} />
+            <ChatUsersList setUserChats={setUserChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
             <div className="content">
                 <Header chatsContainer={chatsContainer} removeAuthenticated={removeAuthenticated}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>

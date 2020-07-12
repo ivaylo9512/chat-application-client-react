@@ -16,9 +16,11 @@ const Login = ({setUser, setAuth}) => {
                 if (response.ok) {
                     setAuth(response.headers.get('Authorization'))
                     return response.json();
-                  } else {
-                      console.log(response.status)
-                  }
+                } else {
+                    Promise.resolve(response.text()).then(text => {
+                        setError(text)
+                    })
+                }
             })
             .then(data => {
                 setUser(data)
@@ -33,7 +35,7 @@ const Login = ({setUser, setAuth}) => {
                 {passwordInput}
                 <button type='submit'>login</button>
                 <button>register</button>
-                <p>{error}</p>
+                <br>{error}</br>
             </form>
         </section>
     )
