@@ -1,23 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 
-class ChatUser extends Component{
-    render(){
-        return (
-            <Link to="/chat" className="chat">
-                <div>
-                    <div className="image">
-                        <img alt="profile" src={this.props.chat.user.profilePicture}/>
-                    </div>
-                    <div className="info">
-                        <b>{this.props.chat.user.username}</b>
-                        <span></span>    
-                    </div>
+export const ChatUser = ({chat}) => {
+    return (
+        <Link to="/chat" className="chat">
+            <div>
+                <div className="image">
+                    <img alt="profile" src={chat.user.profilePicture}/>
                 </div>
-            </Link>
-        )
-
-    }
+                <div className="info">
+                    <b>{chat.user.username}</b>
+                    <span></span>    
+                </div>
+            </div>
+        </Link>
+    )
 }
 
 export default ChatUser
