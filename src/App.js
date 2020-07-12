@@ -12,12 +12,12 @@ const App = () => {
     const [user, setUser] = useState(undefined)
     const [chats, setChats] = useState([])
     const [filteredChats, setFilteredChats] = useState([])
-    const [auth, setAuth] = useLocalStorage('Authorization', undefined);
+    const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null);
     const [currentChat, setCurrentChat] = useState(null)
 
     const removeAuthenticated = () => {
-        setUser(user)
-        setAuth(null)
+        setUser(null)
+        removeAuth()
     }
 
     const setUserChats = (chats) => {
@@ -44,13 +44,9 @@ const App = () => {
             <Router>
                 {auth && <ChatUsersList setChats={setChats} setCurrentChat={setCurrentChat} setUserChats={setUserChats} chats={filteredChats} />}
                 <Route path="/login" render={() => <Login setUser={setUser} setAuth={setAuth} />} />                               
-                <Route path="/logout" render={() =>{
-                    removeAuthenticated()
-                    return <Redirect to="/login"/>
-                }}/>
                 {auth && 
                     <div className="content">
-                        <Header chats={chats}/>
+                        <Header chats={chats} removeAuthenticated={removeAuthenticated}/>
                         <Main searchChats={searchChats} currentChat={currentChat}/>
                     </div>
                 }
