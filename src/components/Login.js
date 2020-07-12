@@ -4,6 +4,7 @@ import {useInput} from '../hooks/useInput'
 const Login = ({setUser, setAuth}) => {
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder:'username'})
     const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder:'password'})
+    const [error, setError] = useState()
 
     const login = (e) => {
         e.preventDefault()
@@ -11,9 +12,13 @@ const Login = ({setUser, setAuth}) => {
             method: 'post',
             body: JSON.stringify({username, password})
           })
-            .then(response =>{ 
-                setAuth(response.headers.get('Authorization'))
-                return response.json()
+            .then(response => { 
+                if (response.ok) {
+                    setAuth(response.headers.get('Authorization'))
+                    return response.json();
+                  } else {
+                      console.log(response.status)
+                  }
             })
             .then(data => {
                 setUser(data)
@@ -28,6 +33,7 @@ const Login = ({setUser, setAuth}) => {
                 {passwordInput}
                 <button type='submit'>login</button>
                 <button>register</button>
+                <p>{error}</p>
             </form>
         </section>
     )
