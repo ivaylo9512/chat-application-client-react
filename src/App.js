@@ -9,7 +9,7 @@ const App = () => {
     const [user, setUser] = useState(undefined)
     const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null);
 
-    const removeAuthenticated = () => {
+    const logout = () => {
         setUser(null)
         removeAuth()
     }
@@ -18,7 +18,7 @@ const App = () => {
         <div className="root">
             <Router>
                 {auth ? 
-                    <Logged removeAuth={removeAuthenticated} user={user}/> :
+                    <Logged logout={logout} user={user}/> :
                     <Route path="/login" render={() => 
                         <Login setUser={setUser} setAuth={setAuth} />} />                               
                 }

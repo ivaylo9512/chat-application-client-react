@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback} from 'react'
 import Main from './Main';
 import Header from './Header'
 import ChatUsersList from './ChatUsersList';
 
-const Logged = ({removeAuthenticated, user}) => {
+const Logged = ({logout, user}) => {
 
     const [chats, setChats] = useState([])
     const [filteredChats, setFilteredChats] = useState([])
@@ -15,7 +15,6 @@ const Logged = ({removeAuthenticated, user}) => {
         setChats(chats)
     }
 
-    
     const searchChats = (name) => {
         name = name.toUpperCase()
         const filteredChats = chats.filter(chat => { 
@@ -30,11 +29,19 @@ const Logged = ({removeAuthenticated, user}) => {
         setFilteredChats(filteredChats)
     }
 
+    const setChatsCallback = useCallback(chats => {
+        setChats(chats)
+      }, [])
+
+    const setChatsContainerCallback = useCallback(container => {
+        setChatsContainer(container)
+      }, [])
+
     return(
         <div>
-            <ChatUsersList setUserChats={setUserChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
+            <ChatUsersList setChats={setChatsCallback} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainerCallback} userChats={filteredChats} />
             <div className="content">
-                <Header chatsContainer={chatsContainer} removeAuthenticated={removeAuthenticated}/>
+                <Header chatsContainer={chatsContainer} logout={logout}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>
             </div>
         </div>

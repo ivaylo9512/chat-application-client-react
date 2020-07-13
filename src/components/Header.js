@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Redirect, Link, useHistory} from 'react-router-dom'
 
-const Header = ({chatsContainer, removeAuthenticated}) => {
+const Header = ({chatsContainer, logout}) => {
     const header = React.useRef()
     const menuCircle = React.useRef()
     const history = useHistory()
@@ -22,8 +22,8 @@ const Header = ({chatsContainer, removeAuthenticated}) => {
         chatsContainer.current.classList.toggle('hide')
     }
 
-    const logout = () => {
-        removeAuthenticated()
+    const logoutAndRedirect = () => {
+        logout()
         history.push("/login")
     }
 
@@ -38,7 +38,7 @@ const Header = ({chatsContainer, removeAuthenticated}) => {
                         <li><span onClick={toggleChats}><i className="fas fa-comments"></i></span></li>
                         <li><Link to="/searchChat"><i className="fas fa-search"></i></Link></li>
                         <li><Link to="/searchUsers"><i className="fas fa-user-plus"></i></Link></li>
-                        <li><span onClick={logout}><i className="fas fa-sign-out-alt"></i></span></li>
+                        <li><span onClick={logoutAndRedirect}><i className="fas fa-sign-out-alt"></i></span></li>
                     </ul>
                 </div>
             </header>

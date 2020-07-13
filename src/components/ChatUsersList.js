@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import ChatUser from './ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
 
-const ChatUsersList = ({setUserChats, setCurrentChat, setChatsContainer, userChats }) => {
+const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }) => {
     const chats = React.useRef()
     const chatsContainer = React.useRef()
 
@@ -12,11 +12,11 @@ const ChatUsersList = ({setUserChats, setCurrentChat, setChatsContainer, userCha
                 'Authorization': localStorage.getItem('Authorization')
             }
         }).then(data => data.json())
-          .then(data => setUserChats(data))
+            .then(data => setChats(data))
 
-          smoothscroll.polyfill()
-          setChatsContainer(chatsContainer)
-    }, [])
+            smoothscroll.polyfill()
+            setChatsContainer(chatsContainer)                
+    }, [setChats, setChatsContainer])
 
     useEffect(() => {
         hideScrollBar()
