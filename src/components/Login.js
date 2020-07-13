@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useInput} from '../hooks/useInput'
 
 const Login = ({setUser, setAuth}) => {
@@ -6,29 +6,31 @@ const Login = ({setUser, setAuth}) => {
     const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [userInfo, setUserInfo] = useState(undefined)
     const [error, setError] = useState()
-    const abortController = new AbortController();
 
     const login = (e) => {
         e.preventDefault();
         setUserInfo({username, password})
     }
 
+    const onSuccessfulLogin  = useCallback((data, token) => {
+        setUsername('')
+        setPassword('')
+        setUser(data)
+        setAuth(token)
+    },[])
+
     useEffect(() => {
         let isCurrent = true;
         if(userInfo){
             async function fetchLogin() {
                 const response = await fetch('http://localhost:8080/api/users/login', {
-                    signal: abortController.signal,
                     method: 'post',
                     body: JSON.stringify(userInfo)
                 })
                 const data = await response.text()
                 if(isCurrent){
                     if(response.ok){
-                        setUsername('')
-                        setPassword('')
-                        setUser(JSON.parse(data))
-                        setAuth(response.headers.get('Authorization'))
+                        onSuccessfulLogin(JSON.parse(data), response.headers.get('Authorization'));                        
                     }else{
                         setError(data)
                     }
@@ -37,11 +39,10 @@ const Login = ({setUser, setAuth}) => {
             fetchLogin()
         }
         return () => {
-            abortController.abort();
             isCurrent = false
         }
 
-    },[userInfo])
+    },[userInfo, onSuccessfulLogin])
 
     return (
         <section>
