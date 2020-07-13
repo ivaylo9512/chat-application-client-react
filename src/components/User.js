@@ -1,26 +1,21 @@
-import React, {Component} from 'react';
-import { Route,Link, BrowserRouter as Router } from 'react-router-dom'
+import React from 'react';
 
-class User extends Component{
-    render(){
-        return (
+export const User = (history, setChat, user, createNewChat) => {
+    return (
         <div>
             <div className="image">
-                <img alt="profile" src={this.props.user.profilePicture}/>
+                <img alt="profile" src={user.profilePicture}/>
             </div>
             <div className="info">
-                <b>{this.props.user.username}</b>
+                <b>{user.username}</b>
                 <span></span>    
             </div>
-            <button onClick={()=> this.props.user.hasChatWithLoggedUser 
-                ? 
-                    this.props.history.push('/chat') &&
-                    this.props.setChat(this.props.user.id)  
-                    : this.props.createNewChat} ></button>
+            <button onClick={()=> user.hasChatWithLoggedUser 
+                ? history.push('/chat') &&setChat(user.id)  
+                : createNewChat} >
+            </button>
         </div>
-        )
-
-    }
+    )
 }
 
 export default User
