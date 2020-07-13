@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect, Link, useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 const Header = ({chatsContainer, logout}) => {
     const header = React.useRef()

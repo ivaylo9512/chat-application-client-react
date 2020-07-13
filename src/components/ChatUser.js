@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 
-export const ChatUser = ({chat}) => {
+const ChatUser = ({chat}) => {
     return (
         <Link to="/chat" className="chat">
             <div>

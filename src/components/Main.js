@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import WebSocket from './WebSocket'
 import UsersList from './UsersList';
 import SearchUsers from './SearchUsers';
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import SearchChat from './SearchChat';
 import Chat from './Chat'
 import MessageForm from './MessageForm'

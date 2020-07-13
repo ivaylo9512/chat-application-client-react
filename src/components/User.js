@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const User = (history, setChat, user, createNewChat) => {
+export const User = ({history, setChat, user, createNewChat}) => {
     return (
         <div>
             <div className="image">
