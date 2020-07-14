@@ -1,29 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { useInput } from '../hooks/useInput' 
+const SearchChat = searchChats => {  
 
-class SearchChat extends Component {  
-
-    state = {
-        name : ''
-    }
-
-    changeInput = (e) => {
-        const{name, value} = e.target
-        this.setState({
-            [name] : value
-        })
-        this.props.searchChats(value)
-    }
+    const [name, setName, nameInput] = useInput({type: 'text', placeholder:'search chat'})
     
-    render() {
-        return (
-            <div className='form-container'>
-                <form onSubmit={this.searchChats}>
-                    <input name='name' placeholder='search chat' value={this.state.name} onChange={this.changeInput}/>
-                    <button><i className='fas fa-search'></i></button>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div className='form-container'>
+            <form onSubmit={() => searchChats(name)}>
+                {nameInput}
+                <button><i className='fas fa-search'></i></button>
+            </form>
+        </div>
+    )
 }
 
 export default SearchChat
