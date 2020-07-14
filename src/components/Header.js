@@ -15,7 +15,6 @@ const Header = ({chatsContainer, logout}) => {
     const showHeader = () => {
         header.current.classList.remove('hide')
         menuCircle.current.classList.remove('show')
-        
     }
 
     const toggleChats = () => {

@@ -25,21 +25,12 @@ const Logged = ({logout, user}) => {
             }
             return null;
         })
-
         setFilteredChats(filteredChats)
     }
 
-    const setChatsCallback = useCallback(chats => {
-        setChats(chats)
-      }, [])
-
-    const setChatsContainerCallback = useCallback(container => {
-        setChatsContainer(container)
-      }, [])
-
     return(
         <div>
-            <ChatUsersList setChats={setChatsCallback} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainerCallback} userChats={filteredChats} />
+            <ChatUsersList setChats={setChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
             <div className="content">
                 <Header chatsContainer={chatsContainer} logout={logout}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>

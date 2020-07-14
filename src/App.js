@@ -15,21 +15,13 @@ const App = () => {
         removeAuth()
     }
 
-    const setUserCallBack = useCallback((newUser) => {
-        setUser(newUser)
-    }, [])
-
-    const setAuthCallBack = useCallback((token) => {
-        setAuth(token)
-    }, [])
-
     return (
         <div className="root">
             <Router>
                 {auth ? 
                     <Logged logout={logout} user={user}/> :
                     <Route path="/login" render={() => 
-                        <Login setUser={setUserCallBack} setAuth={setAuthCallBack} />} />                               
+                        <Login setUser={setUser} setAuth={setAuth} />} />                               
                 }
             </Router>
         </div>

@@ -17,7 +17,7 @@ const Login = ({setUser, setAuth}) => {
         setPassword('')
         setUser(data)
         setAuth(token)
-    },[])
+    },[setUsername, setPassword, setAuth, setUser])
 
     useEffect(() => {
         let isCurrent = true;
