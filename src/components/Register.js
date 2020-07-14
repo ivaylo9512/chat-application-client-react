@@ -29,9 +29,9 @@ class Register extends Component{
         return (
             <section>
                 <form onSubmit={this.login} onChange={this.changeInput}>
-                    <input placeholder="username" name="username" type="text"/>
-                    <input placeholder="password" name="password" type="password"/>
-                    <input placeholder="repeat" name="repeat" type="password"/>
+                    <input placeholder='username' name='username' type='text'/>
+                    <input placeholder='password' name='password' type='password'/>
+                    <input placeholder='repeat' name='repeat' type='password'/>
                     <button>login</button>
                     <button>register</button>
                 </form>

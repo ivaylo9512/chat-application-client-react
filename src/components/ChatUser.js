@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom'
 
 const ChatUser = ({chat}) => {
     return (
-        <Link to="/chat" className="chat">
+        <Link to='/chat' className='chat'>
             <div>
-                <div className="image">
-                    <img alt="profile" src={chat.user.profilePicture}/>
+                <div className='image'>
+                    <img alt='profile' src={chat.user.profilePicture}/>
                 </div>
-                <div className="info">
+                <div className='info'>
                     <b>{chat.user.username}</b>
                     <span></span>    
                 </div>

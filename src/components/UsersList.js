@@ -8,7 +8,7 @@ class UsersList extends Component{
 
     render(){
         return (
-        <div className="users">
+        <div className='users'>
            {this.props.foundUsers.map(user =>{
                 return(
                     <Users user={user} history={this.props.history} setChat={this.props.setChat} createNewChat={this.props.createNewChat} key={user.id} />

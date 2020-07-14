@@ -5,7 +5,7 @@ class Session extends Component {
 
     render() {
         return (
-            <div className="messages">
+            <div className='messages'>
                 {this.props.session.messages.map(message =>{
                     return <Message key={message.time}/>
                 })}

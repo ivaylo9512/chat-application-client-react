@@ -5,7 +5,7 @@ class WebSocket extends Component{
 
     componentDidMount(){
         const client = new Client({
-            brokerURL: "ws://localhost:8080/api/chat/message",
+            brokerURL: 'ws://localhost:8080/api/chat/message',
             connectHeaders: {
                 'Authorization': localStorage.getItem('Authorization'),
             },

@@ -43,11 +43,11 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
         
     }
     return (
-        <div className="chat-users" ref={chatsContainer}>
+        <div className='chat-users' ref={chatsContainer}>
             <div ref={chats} onWheel = {scroll}>
                 {userChats.map(chat => {
                     return (
-                        <div className="chat-user" key={chat.id} onClick={() => setCurrentChat(chat)}> 
+                        <div className='chat-user' key={chat.id} onClick={() => setCurrentChat(chat)}> 
                             <ChatUser chat={chat}/>
                         </div>
                     )

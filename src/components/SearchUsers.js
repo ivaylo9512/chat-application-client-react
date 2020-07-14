@@ -28,10 +28,10 @@ class SearchUsers extends Component {
     
     render() {
         return (
-            <div className="form-container">
+            <div className='form-container'>
                 <form onSubmit={this.searchUsers}>
-                    <input name="name" placeholder="search users" value={this.state.name} onChange={this.changeInput}/>
-                    <button><i className="fas fa-search"></i></button>
+                    <input name='name' placeholder='search users' value={this.state.name} onChange={this.changeInput}/>
+                    <button><i className='fas fa-search'></i></button>
                 </form>
             </div>
         )

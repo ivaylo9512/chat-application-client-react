@@ -16,19 +16,19 @@ const App = () => {
     }
 
     return (
-        <div className="root">
+        <div className='root'>
             <Router>
                 {auth ? 
                     <>
                         <Logged logout={logout} user={user} appType={appType} /> 
-                        <Redirect from="login" to="/" />
+                        <Redirect from='login' to='/' />
                     </> :
-                    <Route path="/login" render={() => 
+                    <Route path='/login' render={() => 
                         appType ? 
                             <Login setUser={setUser} setAuth={setAuth} /> :
-                            <div className="type-buttons">
+                            <div className='type-buttons'>
                                 <button onClick={() => setAppType('chatOnly')} />
-                                <button onClick={() => setAppType("restaurant")} />
+                                <button onClick={() => setAppType('restaurant')} />
                             </div> 
                     } 
                     />                               

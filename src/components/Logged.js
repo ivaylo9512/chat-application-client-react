@@ -31,7 +31,7 @@ const Logged = ({logout, user}) => {
     return(
         <div>
             <ChatUsersList setChats={setChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
-            <div className="content">
+            <div className='content'>
                 <Header chatsContainer={chatsContainer} logout={logout}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>
             </div>
