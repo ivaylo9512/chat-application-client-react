@@ -1,10 +1,9 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import {useLocalStorage} from './hooks/useLocalStorage'
 import './App.css';
 import Login from './components/Login'
 import Logged from './components/Logged'
-import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { SSL_OP_NETSCAPE_REUSE_CIPHER_CHANGE_BUG } from 'constants';
+import { Route, Redirect, BrowserRouter as Router } from 'react-router-dom'
 
 const App = () => {
     const [user, setUser] = useState(undefined)
@@ -19,7 +18,10 @@ const App = () => {
         <div className="root">
             <Router>
                 {auth ? 
-                    <Logged logout={logout} user={user}/> :
+                    <>
+                        <Logged logout={logout} user={user} /> 
+                        <Redirect from="login" to="/" />
+                    </>:
                     <Route path="/login" render={() => 
                         <Login setUser={setUser} setAuth={setAuth} />} />                               
                 }
