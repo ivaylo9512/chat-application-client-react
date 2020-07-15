@@ -1,21 +1,11 @@
 import React, { Component } from 'react'
+import {useInput} from '../hooks/useInput'
 
-class SearchUsers extends Component {  
+const SearchUsers = () => {  
+    const [name, setName, nameInput] = useInput({type: 'text', placeholder:'search users'})
 
-    state = {
-        name: ''
-    }
-
-    changeInput = (e) => {
-        const{name, value} = e.target
-        this.setState({
-            [name]: value
-        })
-    }
-
-    searchUsers = (e) => {
+    const searchUsers = (e) => {
         e.preventDefault()
-        const name = this.state.name
         
         fetch(`http://localhost:8080/api/users/auth/searchForUsers/${name}`, {
             headers: {
@@ -26,16 +16,14 @@ class SearchUsers extends Component {
             .then(data => this.props.setFoundUsers(data))
     }
     
-    render() {
-        return (
-            <div className='form-container'>
-                <form onSubmit={this.searchUsers}>
-                    <input name='name' placeholder='search users' value={this.state.name} onChange={this.changeInput}/>
-                    <button><i className='fas fa-search'></i></button>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div className='form-container'>
+            <form onSubmit={searchUsers}>
+                {nameInput}
+                <button type='submit'><i className='fas fa-search'></i></button>
+            </form>
+        </div>
+    )
 }
 
 export default SearchUsers
