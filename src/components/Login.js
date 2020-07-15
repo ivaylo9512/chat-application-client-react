@@ -13,11 +13,9 @@ const Login = ({setUser, setAuth}) => {
     }
 
     const onSuccessfulLogin  = useCallback((data, token) => {
-        setUsername('')
-        setPassword('')
         setUser(data)
         setAuth(token)
-    },[setUsername, setPassword, setAuth, setUser])
+    },[setAuth, setUser])
 
     useEffect(() => {
         let isCurrent = true;
