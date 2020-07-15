@@ -30,14 +30,14 @@ const Header = ({chatsContainer, logout}) => {
         <div ref={header} className='header-container'>
             <button className='menu-circle' onClick={showHeader} ref={menuCircle}><i className='fas fa-bars'></i></button>
             <header>
-                <button onClick={hideMenu} className='circle-btn'>-</button>
                 <div className='circle-nav' id='cn-wrapper'>
+                    <button onClick={hideMenu} className='circle-btn'>-</button>
                     <ul>
-                        <li><span><i className='fas fa-user'></i></span></li>
-                        <li><span onClick={toggleChats}><i className='fas fa-comments'></i></span></li>
-                        <li><Link to='/searchChat'><i className='fas fa-search'></i></Link></li>
-                        <li><Link to='/searchUsers'><i className='fas fa-user-plus'></i></Link></li>
-                        <li><span onClick={logoutAndRedirect}><i className='fas fa-sign-out-alt'></i></span></li>
+                        <li><button><i className='fas fa-user'></i></button></li>
+                        <li><button onClick={toggleChats}><i className='fas fa-comments'></i></button></li>
+                        <li><button><Link to='/searchChat'><i className='fas fa-search'></i></Link></button></li>
+                        <li><button><Link to='/searchUsers'><i className='fas fa-user-plus'></i></Link></button></li>
+                        <li><button onClick={logoutAndRedirect}><i className='fas fa-sign-out-alt'></i></button></li>
                     </ul>
                 </div>
             </header>
