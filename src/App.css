@@ -163,19 +163,14 @@ header{
     transform: translate(4em, -5em);
 }
 .circle-nav {
-    width: 32vw;
-    height: 32vw;
     overflow: hidden;
     position: fixed;
     bottom: -11.6vw;
-    border: 1px solid #c2001b;
+    border: 0.5px solid #c2001b;
     right: 100%;
     border-radius: 50%;
     margin-right: -26.8vw;
     background: rgb(24,27, 33);
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -185,21 +180,18 @@ header{
     margin: 0;
     padding: 0;
     position: relative;
-    height: 100%;
-    width: 100%;
+    height: 32vw;
+    width: 32vw;
 }
 .circle-nav li {
     position: absolute;
     font-size: 1.5em;
-    width: 18.70vw;
-    height: 18.70vw;
-    transform-origin: 100% 100%;
+    width: 4vw;
+    height: 100%;
     left: 50%;
-    top: 50%;
-    margin-top: -9.35vw;
-    background: red;
-    margin-left: -9.35vw;
+    margin-left: -2vw;
     transform-origin: center;
+    list-style: none;
 }
 .circle-nav li button,
 .circle-nav li a {
@@ -208,14 +200,10 @@ header{
 }
 .circle-nav li button {
     position: absolute;
-    top: 4vw;
+    top: 1vw;
     border-radius: 50%;
     text-align: center;
-    transform: skew(-50deg) rotate(-70deg) scale(1);
-    display: -webkit-inline-box;
-    display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
-    display: inline-flex;
+    transform: scale(1);
     height: 3vw;
     width: 3vw;
     align-items: center;
@@ -232,38 +220,38 @@ header{
 }
 
 .circle-nav li:first-child {
-    -webkit-transform: rotate(63deg) skew(50deg);
-    -ms-transform: rotate(63deg) skew(50deg);
-    -moz-transform: rotate(63deg) skew(50deg);
-    transform: rotate(63deg) skew(50deg);
+    -webkit-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    transform: rotate(-5deg);
 }
 
 .circle-nav li:nth-child(2) {
-    -webkit-transform: rotate(89deg) skew(50deg);
-    -ms-transform: rotate(89deg) skew(50deg);
-    -moz-transform: rotate(89deg) skew(50deg);
-    transform: rotate(89deg) skew(50deg);
+    -webkit-transform: rotate(20deg);
+    -ms-transform: rotate(20deg);
+    -moz-transform: rotate(20deg);
+    transform: rotate(20deg);
 }
 
 .circle-nav li:nth-child(3) {
-    -webkit-transform: rotate(110deg) skew(50deg);
-    -ms-transform: rotate(110deg) skew(50deg);
-    -moz-transform: rotate(110deg) skew(50deg);
-    transform: rotate(110deg) skew(50deg)
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
 .circle-nav li:nth-child(4) {
-    -webkit-transform: rotate(135deg) skew(50deg);
-    -ms-transform: rotate(135deg) skew(50deg);
-    -moz-transform: rotate(135deg) skew(50deg);
-    transform: rotate(135deg) skew(50deg);
+    -webkit-transform: rotate(70deg);
+    -ms-transform: rotate(70deg);
+    -moz-transform: rotate(70deg);
+    transform: rotate(70deg);
 }
 
 .circle-nav li:nth-child(5) {
-    -webkit-transform: rotate(160deg) skew(50deg);
-    -ms-transform: rotate(160deg) skew(50deg);
-    -moz-transform: rotate(160deg) skew(50deg);
-    transform: rotate(160deg) skew(50deg);
+    -webkit-transform: rotate(95deg);
+    -ms-transform: rotate(95deg);
+    -moz-transform: rotate(95deg);
+    transform: rotate(95deg);
 }
 .circle-btn {
     background: rgb(24,27, 33);

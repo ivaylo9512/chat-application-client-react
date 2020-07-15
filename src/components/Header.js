@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
-const Header = ({chatsContainer, logout}) => {
+const Header = ({chatsContainer, logout, appType}) => {
     const header = React.useRef()
     const menuCircle = React.useRef()
     const history = useHistory()
@@ -38,6 +38,14 @@ const Header = ({chatsContainer, logout}) => {
                         <li><button><Link to='/searchChat'><i className='fas fa-search'></i></Link></button></li>
                         <li><button><Link to='/searchUsers'><i className='fas fa-user-plus'></i></Link></button></li>
                         <li><button onClick={logoutAndRedirect}><i className='fas fa-sign-out-alt'></i></button></li>
+                        {appType == 'restaurant' && 
+                            <>
+                                <li><button>R</button></li>
+                                <li><button><i class="fas fa-salad"></i>></button></li>
+                                <li><button><i class="fas fa-plus-circle"></i>></button></li>
+                                <li><button><i class="fas fa-bell"></i>></button></li>
+                            </>
+                        }
                     </ul>
                 </div>
             </header>

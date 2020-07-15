@@ -3,7 +3,7 @@ import Main from './Main';
 import Header from './Header'
 import ChatUsersList from './ChatUsersList';
 
-const Logged = ({logout, user}) => {
+const Logged = ({logout, user, appType}) => {
 
     const [chats, setChats] = useState([])
     const [filteredChats, setFilteredChats] = useState([])
@@ -30,9 +30,9 @@ const Logged = ({logout, user}) => {
 
     return(
         <div>
-            <ChatUsersList setChats={setChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
+            <ChatUsersList setChats={setUserChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
             <div className='content'>
-                <Header chatsContainer={chatsContainer} logout={logout}/>
+                <Header chatsContainer={chatsContainer} logout={logout} appType={appType}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>
             </div>
         </div>
