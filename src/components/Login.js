@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useCallback} from 'react';
-import {useInput} from '../hooks/useInput'
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link } from 'react-router-dom'
+import { useInput } from '../hooks/useInput'
 
 const Login = ({setUser, setAuth}) => {
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder:'username'})
@@ -48,7 +49,7 @@ const Login = ({setUser, setAuth}) => {
                 {usernameInput}
                 {passwordInput}
                 <button type='submit'>login</button>
-                <button>register</button>
+                <span>Don't have an account?<Link to='/register'> Sign up.</Link></span>
                 <span>{error}</span>
             </form>
         </section>

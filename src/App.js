@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {useLocalStorage} from './hooks/useLocalStorage'
 import './App.css';
 import Login from './components/Login'
+import Register from './components/Register'
 import Logged from './components/Logged'
 import { Route, Redirect, BrowserRouter as Router } from 'react-router-dom'
 
@@ -23,15 +24,16 @@ const App = () => {
                         <Logged logout={logout} user={user} appType={appType} /> 
                         <Redirect from='login' to='/' />
                     </> :
-                    <Route path='/login' render={() => 
-                        appType ? 
-                            <Login setUser={setUser} setAuth={setAuth} /> :
+                        appType ?
+                            <> 
+                                <Route path='/login' render={() => <Login setUser={setUser} setAuth={setAuth} />}/>
+                                <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
+                                <Redirect to="/login" />
+                            </> :
                             <div className='type-buttons'>
                                 <button onClick={() => setAppType('chatOnly')} />
                                 <button onClick={() => setAppType('restaurant')} />
                             </div> 
-                    } 
-                    />                               
                 }
             </Router>
         </div>
