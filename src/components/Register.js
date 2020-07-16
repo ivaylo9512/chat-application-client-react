@@ -6,6 +6,7 @@ const Register = ({setUser}) => {
     const [isValid, setIsValid] = useState(undefined)
     const [userInfo, setUserInfo] = useState(undefined)
     const [error, setError] = useState(undefined)
+    const [page, setPage] = useState(undefined)
 
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
         min: 6,
@@ -18,7 +19,10 @@ const Register = ({setUser}) => {
     const [repeat, setRepeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', validationRules:{
         equals: password
     }, setIsValid}) 
-
+    const [firstName, setFirstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name'}) 
+    const [lastName, setLastName, lastNameInput] = useInput({type: 'text', placeholder: 'last name'}) 
+    const [country, setCountry, countryInput] = useInput({type: 'text', placeholder: 'country'}) 
+    const [age, setAge, ageInput] = useInput({type: 'text', placeholder: 'age'}) 
 
 
     const setInfo = (e) => {
@@ -57,8 +61,16 @@ const Register = ({setUser}) => {
                 {passwordInput}
                 {repeatInput}
                 <button>register</button>
+                <button onClick={() => page--} >back</button>
                 <span>Already have an account?<Link to='/login'> Log in.</Link></span>
                 <span>{error}</span>
+            </form>
+            <form onSubmit={() => page++}>
+                {firstName}
+                {lastName}
+                {country}
+                {age}
+                <button type='submit'>next</button>
             </form>
         </section>
     )
