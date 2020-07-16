@@ -2,11 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { useInput } from '../hooks/useInput';
 
 const Register = ({setUser}) => {
-    const [username, setUsername, usernameInput] = useInput('text', 'username') 
-    const [password, setPassword, passwordInput] = useInput('password', 'password') 
-    const [repeat, setRepeat, repeatInput] = useInput('password', 'repeat') 
+    const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
+        min: 6,
+        max: 15,
+    }, setIsValid}) 
+    const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder: 'password', validationRules:{
+        min: 7,
+        max: 25,
+    }}, setIsValid) 
+    const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder: 'repeat', validationRules:{
+        equals: password
+    }, setIsValid}) 
+
     const [userInfo, setUserInfo] = useState(undefined)
-    const [setError]
+    const [error, setError] = useState(undefined)
+    const [isValid, setIsValid] = useState(undefined)
+
     register = (e) => {
         e.preventDefault()
         fetch('http://localhost:8080/api/users/register', {
@@ -52,6 +63,7 @@ const Register = ({setUser}) => {
                 {repeatInput}
                 <button>login</button>
                 <button>register</button>
+                <span>{error}</span>
             </form>
         </section>
     )
