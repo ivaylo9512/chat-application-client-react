@@ -10,10 +10,10 @@ const Logged = ({logout, user, appType}) => {
     const [currentChat, setCurrentChat] = useState(undefined)
     const [chatsContainer, setChatsContainer] = useState(undefined)
     
-    const setUserChats = (chats) => {
+    const setUserChats = useCallback((chats) => {
         setFilteredChats(chats)
         setChats(chats)
-    }
+    }, [])
 
     const searchChats = (name) => {
         name = name.toUpperCase()

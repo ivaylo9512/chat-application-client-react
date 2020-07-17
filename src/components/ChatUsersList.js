@@ -7,21 +7,35 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
     const chatsContainer = React.useRef()
 
     useEffect(() =>  {
-        fetch('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
-            headers: {
-                'Authorization': localStorage.getItem('Authorization')
-            }
-        }).then(data => data.json())
-            .then(data => setChats(data))
+        let isCurrent =  true;
+        async function fetchChats(){
+            const response = await fetch('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
+                headers: {
+                    'Authorization': localStorage.getItem('Authorization')
+                }
+            })
+            const data = await response.text()
+            if(isCurrent){
+                if(response.ok){
+                    setChats(JSON.parse(data))
+                }else{
+                
+                }
+            }  
+        }   
+        fetchChats() 
 
-            smoothscroll.polyfill()
-            setChatsContainer(chatsContainer)                
-    }, [setChats, setChatsContainer])
+        return () => isCurrent = false
+    }, [setChats])
+
+    useEffect(() => {
+        smoothscroll.polyfill()
+        setChatsContainer(chatsContainer)   
+    }, [setChatsContainer])  
 
     useEffect(() => {
         hideScrollBar()
-    })  
-
+    })
     const hideScrollBar = () => {
         const clientHeight = chats.current.clientHeight
         const offsetHeight = chats.current.offsetHeight
@@ -40,7 +54,6 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
     }
     const scroll = (e) => {
         e.currentTarget.scroll({left: e.currentTarget.scrollLeft + e.deltaY * 4 , top: e.currentTarget.scrollTop, behavior: 'smooth'})
-        
     }
     return (
         <div className='chat-users' ref={chatsContainer}>
