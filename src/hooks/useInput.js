@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from 'react';
 
-export const useInput = ({type, placeholder, validationRules, isValid, equalsElement, equalsName }) => {
+export const useInput = ({type, placeholder, validationRules, equalsElement, equals}) => {
     const [value, setValue] = useState('');
-    const [error, setError] = useState(undefined)
+    const [equalsError, setEqualsError] = useState('') 
     const isMounted = React.useRef(false)
 
     const onChange = (e) => setValue(e.target.value)
-
-    const validate = () => {
-        let errorMessage = ''
-        if(equalsElement != undefined && equalsElement != value){
-            errorMessage = equalsName + ' must be equal.'
-        }
-        setError(errorMessage)
-    }
 
     useEffect(() => {
         let validateTimeOut;
         if(!isMounted.current){
             isMounted.current = true
-        }else if(isValid){
+        }else if(equalsElement != undefined){
             validateTimeOut = setTimeout(() => {
-                validate()
+                if(equalsElement != value){
+                    equals.setError(equals.name + ' must be equal.')
+                }else if(equals.error){
+                    equals.setError('')
+                }
             }, 500);
         }
         return () => clearTimeout(validateTimeOut)
@@ -30,12 +26,14 @@ export const useInput = ({type, placeholder, validationRules, isValid, equalsEle
     const input = 
         <div>
             <input value={value} onChange={onChange} {...validationRules} type={type} placeholder={placeholder} />
-            <span>{error}</span>
+            <span>{equalsElement ? equals.error : equalsError}</span>
         </div>
     
     return[
         value,
         setValue,
-        input 
+        input,
+        equalsError,
+        setEqualsError
     ]
 }

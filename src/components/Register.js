@@ -1,26 +1,27 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 import { useInput } from '../hooks/useInput';
 
 const Register = ({setUser}) => {
-    const isValid = useRef(new Set())
     const [userInfo, setUserInfo] = useState(undefined)
     const [error, setError] = useState(undefined)
     const [pageIndex, setPageIndex] = useState(0)
 
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
-        minlength: 6,
-        maxlength: 15,
+        minLength: 6,
+        maxLength: 15,
         required: true
-    }, isValid}) 
-    const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder: 'password', validationRules:{
-        minlength: 7,
-        maxlength: 25,
+    }}) 
+    const [password, setPassword, passwordInput, equalsError, setEqualsError] = useInput({type: 'password', placeholder: 'password', validationRules:{
+        minLength: 7,
+        maxLength: 25,
         required: true
-    }, isValid}) 
+    }}) 
     const [repeat, setRepeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', validationRules:{
         required: true
-    }, equalsElement: password, equalsName: 'Passwords', isValid}) 
+    }, equalsElement: password, equals: {
+        name: 'Passwords,', error: equalsError, setError: setEqualsError
+    }}) 
     const [firstName, setFirstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name', validationRules: {
         required: true
     }}) 
@@ -42,13 +43,12 @@ const Register = ({setUser}) => {
 
     const setPage = (e, page) => {
         e.preventDefault()
-        setPageIndex(page)
+            setPageIndex(page)
     }
-
 
     useEffect(() => {
         let isCurrent = true;
-        if(userInfo && isValid.size == 0){
+        if(userInfo){
             async function register(){
                 const response = await fetch('http://localhost:8080/api/users/register', {
                     method: 'post',
