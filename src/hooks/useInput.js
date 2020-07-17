@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const useInput = ({type, placeholder, validationRules, setIsValid, equalsElement, equalsName }) => {
+export const useInput = ({type, placeholder, validationRules, isValid, equalsElement, equalsName }) => {
     const [value, setValue] = useState('');
     const [error, setError] = useState(undefined)
     const isMounted = React.useRef(false)
@@ -8,36 +8,33 @@ export const useInput = ({type, placeholder, validationRules, setIsValid, equals
     const onChange = (e) => setValue(e.target.value)
 
     const validate = () => {
-        let errorMessage
-        const max = validationRules.max
-        const min = validationRules.min
-        if(value.length > max || value.length < min){
-            errorMessage = placeholder + ` must be between ${min} and ${max}.`
+        let errorMessage = ''
+        if(equalsElement != undefined && equalsElement != value){
+            errorMessage = equalsName + ' must be equal.'
+        }else if(validationRules){
+            const max = validationRules.max
+            const min = validationRules.min
+            if(value.length > max || value.length < min){
+                errorMessage = placeholder + ` must be between ${min} and ${max}.`
+            }
         }
-
         if(errorMessage){
-            setError(errorMessage)
-            setIsValid(false)
+            isValid.current.add(errorMessage)
         }else{
-            setError(undefined)
+            isValid.current.delete(error)
         }
+        setError(errorMessage)
     }
 
     useEffect(() => {
         let validateTimeOut;
         if(!isMounted.current){
             isMounted.current = true
-        }else{
+        }else if(isValid){
             validateTimeOut = setTimeout(() => {
-                if(equalsElement != undefined && equalsElement != value){
-                    setError(equalsName + ' must be equal.')
-                }else if(validationRules){
-                        validate()
-                }else{
-                    setError('')
-                }
+                validate()
             }, 500);
-    }
+        }
         return () => clearTimeout(validateTimeOut)
     }, [value, equalsElement])
 

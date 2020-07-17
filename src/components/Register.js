@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 import { useInput } from '../hooks/useInput';
 
 const Register = ({setUser}) => {
-    const [isValid, setIsValid] = useState(undefined)
+    const isValid = useRef(new Set())
     const [userInfo, setUserInfo] = useState(undefined)
     const [error, setError] = useState(undefined)
     const [pageIndex, setPageIndex] = useState(0)
@@ -11,12 +11,13 @@ const Register = ({setUser}) => {
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
         min: 6,
         max: 15,
-    }, setIsValid}) 
+    }, isValid}) 
     const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder: 'password', validationRules:{
         min: 7,
         max: 25,
-    }, setIsValid}) 
-    const [repeat, setRepeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', setIsValid, equalsElement: password, equalsName: 'Passwords'}) 
+    }, isValid}) 
+    const [repeat, setRepeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', equalsElement: password, 
+        equalsName: 'Passwords', isValid}) 
     const [firstName, setFirstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name'}) 
     const [lastName, setLastName, lastNameInput] = useInput({type: 'text', placeholder: 'last name'}) 
     const [country, setCountry, countryInput] = useInput({type: 'text', placeholder: 'country'}) 
@@ -33,9 +34,10 @@ const Register = ({setUser}) => {
         setPageIndex(page)
     }
 
+
     useEffect(() => {
         let isCurrent = true;
-        if(userInfo && isValid){
+        if(userInfo && isValid.size == 0){
             async function register(){
                 const response = await fetch('http://localhost:8080/api/users/register', {
                     method: 'post',
