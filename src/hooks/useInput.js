@@ -11,17 +11,6 @@ export const useInput = ({type, placeholder, validationRules, isValid, equalsEle
         let errorMessage = ''
         if(equalsElement != undefined && equalsElement != value){
             errorMessage = equalsName + ' must be equal.'
-        }else if(validationRules){
-            const max = validationRules.max
-            const min = validationRules.min
-            if(value.length > max || value.length < min){
-                errorMessage = placeholder + ` must be between ${min} and ${max}.`
-            }
-        }
-        if(errorMessage){
-            isValid.current.add(errorMessage)
-        }else{
-            isValid.current.delete(error)
         }
         setError(errorMessage)
     }
@@ -40,7 +29,7 @@ export const useInput = ({type, placeholder, validationRules, isValid, equalsEle
 
     const input = 
         <div>
-            <input value={value} onChange={onChange} type={type} placeholder={placeholder}/>
+            <input value={value} onChange={onChange} {...validationRules} type={type} placeholder={placeholder} />
             <span>{error}</span>
         </div>
     

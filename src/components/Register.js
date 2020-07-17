@@ -9,19 +9,30 @@ const Register = ({setUser}) => {
     const [pageIndex, setPageIndex] = useState(0)
 
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
-        min: 6,
-        max: 15,
+        minlength: 6,
+        maxlength: 15,
+        required: true
     }, isValid}) 
     const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder: 'password', validationRules:{
-        min: 7,
-        max: 25,
+        minlength: 7,
+        maxlength: 25,
+        required: true
     }, isValid}) 
-    const [repeat, setRepeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', equalsElement: password, 
-        equalsName: 'Passwords', isValid}) 
-    const [firstName, setFirstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name'}) 
-    const [lastName, setLastName, lastNameInput] = useInput({type: 'text', placeholder: 'last name'}) 
-    const [country, setCountry, countryInput] = useInput({type: 'text', placeholder: 'country'}) 
-    const [age, setAge, ageInput] = useInput({type: 'text', placeholder: 'age'}) 
+    const [repeat, setRepeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', validationRules:{
+        required: true
+    }, equalsElement: password, equalsName: 'Passwords', isValid}) 
+    const [firstName, setFirstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name', validationRules: {
+        required: true
+    }}) 
+    const [lastName, setLastName, lastNameInput] = useInput({type: 'text', placeholder: 'last name', validationRules: {
+        required: true
+    }}) 
+    const [country, setCountry, countryInput] = useInput({type: 'text', placeholder: 'country', validationRules: {
+        required: true
+    }}) 
+    const [age, setAge, ageInput] = useInput({type: 'number', placeholder: 'age', validationRules: {
+        required: true
+    }}) 
 
 
     const setInfo = (e) => {
