@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export const useInput = ({type, placeholder, validationRules, equalsElement, equals}) => {
+export const useInput = ({type, placeholder, inputErrors, setInputErrors, validationRules, equalsElement, equals}) => {
     const [value, setValue] = useState('');
     const [equalsError, setEqualsError] = useState('') 
     const isMounted = React.useRef(false)
@@ -12,13 +12,13 @@ export const useInput = ({type, placeholder, validationRules, equalsElement, equ
         if(!isMounted.current){
             isMounted.current = true
         }else if(equalsElement != undefined){
-            validateTimeOut = setTimeout(() => {
-                if(equalsElement != value){
-                    equals.setError(equals.name + ' must be equal.')
-                }else if(equals.error){
-                    equals.setError('')
-                }
-            }, 500);
+            if(equalsElement != value && !equals.error){
+                equals.setError(equals.name + ' must be equal.')
+                setInputErrors(inputErrors + 1)
+            }else if(equalsElement == value && equals.error){
+                equals.setError('')
+                setInputErrors(inputErrors - 1)
+            }
         }
         return () => clearTimeout(validateTimeOut)
     }, [value, equalsElement])
