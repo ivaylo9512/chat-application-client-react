@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-export const useInput = ({type, placeholder, validationRules, setIsValid, equals }) => {
+export const useInput = ({type, placeholder, validationRules, setIsValid, equalsElement, equalsName }) => {
     const [value, setValue] = useState('');
     const [error, setError] = useState(undefined)
+    const isMounted = React.useRef(false)
 
     const onChange = (e) => setValue(e.target.value)
 
@@ -12,10 +13,6 @@ export const useInput = ({type, placeholder, validationRules, setIsValid, equals
         const min = validationRules.min
         if(value.length > max || value.length < min){
             errorMessage = placeholder + ` must be between ${min} and ${max}.`
-        }
-
-        if(validationRules.equals != undefined && validationRules.equals != value){
-        errorMessage = 'inputs must be equal.'
         }
 
         if(errorMessage){
@@ -28,13 +25,21 @@ export const useInput = ({type, placeholder, validationRules, setIsValid, equals
 
     useEffect(() => {
         let validateTimeOut;
-        if(value != undefined && validationRules){
+        if(!isMounted.current){
+            isMounted.current = true
+        }else{
             validateTimeOut = setTimeout(() => {
-                validate()
+                if(equalsElement != undefined && equalsElement != value){
+                    setError(equalsName + ' must be equal.')
+                }else if(validationRules){
+                        validate()
+                }else{
+                    setError('')
+                }
             }, 500);
         }
         return () => clearTimeout(validateTimeOut)
-    }, [value])
+    }, [value, equalsElement])
 
     const input = 
         <div>
