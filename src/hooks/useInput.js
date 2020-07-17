@@ -1,35 +1,50 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 
-export const useInput = ({type, placeholder, validationRules, setIsValid}) => {
+export const useInput = ({type, placeholder, validationRules, setIsValid, equals }) => {
     const [value, setValue] = useState('');
     const [error, setError] = useState(undefined)
+
     const onChange = (e) => setValue(e.target.value)
 
     const validate = () => {
-        if(validationRules){
-            const max = validationRules.max
-            const min = validationRules.min
-            if(value > max || value < min){
-                setError(placeholder + `must be between ${max} and ${min}.`)
-            }
-            if(validationRules.equals && validationRules.equals != value){
-                setError('inputs must be equal.')
-            }
+        let errorMessage
+        const max = validationRules.max
+        const min = validationRules.min
+        if(value.length > max || value.length < min){
+            errorMessage = placeholder + ` must be between ${min} and ${max}.`
+        }
 
-            if(error){
-                setIsValid(false)
-            }
+        if(validationRules.equals != undefined && validationRules.equals != value){
+        errorMessage = 'inputs must be equal.'
+        }
+
+        if(errorMessage){
+            setError(errorMessage)
+            setIsValid(false)
+        }else{
+            setError(undefined)
         }
     }
+
+    useEffect(() => {
+        let validateTimeOut;
+        if(value != undefined && validationRules){
+            validateTimeOut = setTimeout(() => {
+                validate()
+            }, 500);
+        }
+        return () => clearTimeout(validateTimeOut)
+    }, [value])
+
     const input = 
-    <div>
-        <input value={value} onChange={onChange} onBlur={validate} type={type} placeholder={placeholder}/>
-        <span>{error}</span>
-    </div>
+        <div>
+            <input value={value} onChange={onChange} type={type} placeholder={placeholder}/>
+            <span>{error}</span>
+        </div>
     
     return[
         value,
         setValue,
-        input
+        input 
     ]
 }
