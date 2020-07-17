@@ -1,32 +1,22 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+import { useInput } from '../hooks/useInput';
 
-class MessageForm extends Component {
-    state = {
-        message : ''
-    }
-    submitForm = (e) => {
+const MessageForm = ({sendNewMessage}) => {
+    const [message, setMessage, messageInput] = useInput({type: 'text', placeholder: 'Send message'})
+
+    const submitForm = (e) => {
         e.preventDefault()
-
-        this.props.sendNewMessage(this.state.message)
+        sendNewMessage(message)
     }
 
-    changeMessage = (e) => {
-        const{name, value} = e.target
-
-        this.setState({
-            [name]: value
-        })
-    }
-    render() {
-        return (
-            <div className='form-container'>
-                <form onSubmit={this.submitForm}>
-                    <input name='message' value={this.state.message} onChange={this.changeMessage} placeholder='Send message'/>
-                    <button><i className='fas fa-sign-in-alt'></i></button>
-                </form>
-            </div>
-        )
-    }
+    return (
+        <div className='form-container'>
+            <form onSubmit={submitForm}>
+                {messageInput}
+                <button><i className='fas fa-sign-in-alt'></i></button>
+            </form>
+        </div>
+    )
 }
 
 export default MessageForm

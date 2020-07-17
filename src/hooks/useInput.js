@@ -37,7 +37,7 @@ export const useInput = ({type, placeholder, validationRules, setIsValid, equals
                     setError('')
                 }
             }, 500);
-        }
+    }
         return () => clearTimeout(validateTimeOut)
     }, [value, equalsElement])
 
