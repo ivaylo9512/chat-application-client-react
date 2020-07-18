@@ -66,13 +66,14 @@ nav{
 
 .chat-user {
     border-radius: 5px;
-    height: 76%;
-    min-width: 22%;
-    display: inherit;
-    margin-left: 25px;
+    height: 8.5vh;
+    flex: 0 0 22vw;
     background: white;
     justify-content: center;
     align-items: center;
+    display: flex;
+    padding: 0 0.5vw;
+    position: relative;
 }
 .chat-user a {
     border-radius: 5px;

@@ -47,9 +47,7 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
 
         const barHeight = containerHeight - height 
         const newHeight = offsetHeight > clientHeight && height >= containerHeight ? height + paddingBottom : Math.max(containerHeight, containerHeight + barHeight)
-        
-
-        chats.current.style.height = `${newHeight}px` 
+    
         chats.current.style.paddingBottom = `${barHeight}px`
     }
     const scroll = (e) => {
