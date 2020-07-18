@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom'
 import { useInput } from '../hooks/useInput'
 
-const Login = ({setUser, setAuth}) => {
+const Login = ({setUser, setAuth, setAppType}) => {
     const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder:'username'})
     const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [userInfo, setUserInfo] = useState(undefined)
@@ -45,6 +45,7 @@ const Login = ({setUser, setAuth}) => {
 
     return (
         <section>
+            <button onClick={() => setAppType(undefined)}>back</button>
             <form onSubmit={login}>
                 {usernameInput}
                 {passwordInput}

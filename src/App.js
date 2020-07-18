@@ -26,7 +26,7 @@ const App = () => {
                     </> :
                         appType ?
                             <> 
-                                <Route path='/login' render={() => <Login setUser={setUser} setAuth={setAuth} />}/>
+                                <Route path='/login' render={() => <Login setUser={setUser} setAuth={setAuth} setAppType={setAppType} />}/>
                                 <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
                                 <Redirect to="/login" />
                             </> :

@@ -37,13 +37,17 @@ const Header = ({chatsContainer, logout, appType}) => {
                         <li><button onClick={toggleChats}><i className='fas fa-comments'></i></button></li>
                         <li><button><Link to='/searchChat'><i className='fas fa-search'></i></Link></button></li>
                         <li><button><Link to='/searchUsers'><i className='fas fa-user-plus'></i></Link></button></li>
-                        <li><button onClick={logoutAndRedirect}><i className='fas fa-sign-out-alt'></i></button></li>
                         {appType == 'restaurant' && 
                             <>
                                 <li><button>R</button></li>
+                            </>
+                        }                        
+                        <li><button onClick={logoutAndRedirect}><i className='fas fa-sign-out-alt'></i></button></li>
+                        {appType == 'restaurant' && 
+                            <>
                                 <li><button><i class="fas fa-salad"></i>></button></li>
                                 <li><button><i class="fas fa-plus-circle"></i>></button></li>
-                                <li><button><i class="fas fa-bell"></i>></button></li>
+                                <li><button><i class="fas fa-bell"></i></button></li>
                             </>
                         }
                     </ul>
