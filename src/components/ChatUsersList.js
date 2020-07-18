@@ -35,18 +35,15 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
 
     useEffect(() => {
         hideScrollBar()
-    })
+        window.addEventListener('resize', hideScrollBar)
+        return () => window.removeEventListener('resize', hideScrollBar)
+    }, [userChats])
+    
     const hideScrollBar = () => {
-        const clientHeight = chats.current.clientHeight
-        const offsetHeight = chats.current.offsetHeight
-
         const height = parseFloat(window.getComputedStyle(chats.current).height)
         const containerHeight = parseFloat(window.getComputedStyle(chatsContainer.current).height)
-        const paddingBottom = window.getComputedStyle(chatsContainer.current).paddingBottom
-
 
         const barHeight = containerHeight - height 
-        const newHeight = offsetHeight > clientHeight && height >= containerHeight ? height + paddingBottom : Math.max(containerHeight, containerHeight + barHeight)
     
         chats.current.style.paddingBottom = `${barHeight}px`
     }
