@@ -47,7 +47,7 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
     
         chats.current.style.paddingBottom = `${barHeight}px`
     }
-    
+
     const scroll = (e) => {
         e.currentTarget.scroll({left: e.currentTarget.scrollLeft + e.deltaY * 4 , top: e.currentTarget.scrollTop, behavior: 'smooth'})
     }

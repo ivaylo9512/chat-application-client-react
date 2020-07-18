@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
 const Header = ({chatsContainer, logout, appType}) => {
-    const header = React.useRef()
-    const menuCircle = React.useRef()
+    const header = useRef()
+    const menuCircle = useRef()
     const history = useHistory()
-
+    const nav = useRef()
+    const rotationDeg = useRef(0)
 
     const hideMenu = () => {
         header.current.classList.add('hide')
@@ -26,11 +27,22 @@ const Header = ({chatsContainer, logout, appType}) => {
         history.push('/login')
     }
 
+    const rotateNav = (e) => {
+        const newDeg = rotationDeg.current + (e.deltaY + e.deltaX) * 0.1
+        rotationDeg.current = newDeg
+        
+        nav.current.style.msTransform = `rotate(${newDeg}deg)`
+        nav.current.style.webkitTransform = `rotate(${newDeg}deg)`
+        nav.current.style.MozTransform = `rotate(${newDeg}deg)`
+        nav.current.style.OTransform = `rotate(${newDeg}deg)`
+        nav.current.style.transform = `rotate(${newDeg}deg)`
+    }
+
     return (
         <div ref={header} className='header-container'>
             <button className='menu-circle' onClick={showHeader} ref={menuCircle}><i className='fas fa-bars'></i></button>
             <header>
-                <div className='circle-nav' id='cn-wrapper'>
+                <div className='circle-nav' ref={nav} onWheel={rotateNav} id='cn-wrapper'>
                     <button onClick={hideMenu} className='circle-btn'>-</button>
                     <ul>
                         <li><button><i className='fas fa-user'></i></button></li>
@@ -45,9 +57,9 @@ const Header = ({chatsContainer, logout, appType}) => {
                         <li><button onClick={logoutAndRedirect}><i className='fas fa-sign-out-alt'></i></button></li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button><i class="fas fa-salad"></i>></button></li>
-                                <li><button><i class="fas fa-plus-circle"></i>></button></li>
-                                <li><button><i class="fas fa-bell"></i></button></li>
+                                <li><button><i className="fas fa-salad"></i>></button></li>
+                                <li><button><i className="fas fa-plus-circle"></i>></button></li>
+                                <li><button><i className="fas fa-bell"></i></button></li>
                             </>
                         }
                     </ul>

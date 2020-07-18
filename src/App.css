@@ -253,6 +253,36 @@ header{
     -moz-transform: rotate(95deg);
     transform: rotate(95deg);
 }
+.circle-nav li:nth-child(6) {
+    -webkit-transform: rotate(95deg);
+    -ms-transform: rotate(95deg);
+    -moz-transform: rotate(95deg);
+    transform: rotate(95deg);
+}
+.circle-nav li:nth-child(6) {
+    -webkit-transform: rotate(95deg);
+    -ms-transform: rotate(95deg);
+    -moz-transform: rotate(95deg);
+    transform: rotate(95deg);
+}
+.circle-nav li:nth-child(7) {
+    -webkit-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+    transform: rotate(120deg);
+}
+.circle-nav li:nth-child(8) {
+    -webkit-transform: rotate(140deg);
+    -ms-transform: rotate(140deg);
+    -moz-transform: rotate(140deg);
+    transform: rotate(140deg);
+}
+.circle-nav li:nth-child(9) {
+    -webkit-transform: rotate(160deg);
+    -ms-transform: rotate(160deg);
+    -moz-transform: rotate(160deg);
+    transform: rotate(160deg);
+}
 .circle-btn {
     background: rgb(24,27, 33);
     border: 0px;
