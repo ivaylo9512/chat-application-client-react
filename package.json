@@ -4,11 +4,12 @@
   "private": true,
   "dependencies": {
     "@stomp/stompjs": "^5.4.4",
+    "lodash": "^4.17.19",
     "net": "^1.0.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.4.1",
     "react-stomp": "^4.3.0",
     "smoothscroll-polyfill": "^0.4.4",
     "sockjs-client": "^1.4.0",
