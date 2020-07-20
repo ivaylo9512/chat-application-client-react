@@ -9,7 +9,7 @@ class Chat extends Component {
             .then(data => this.props.chat.sessions = data)
     }
     componentWillUnmount(){
-        this.props.removeCurrentChat()
+        this.props.setCurrentChat(null)
     }
     render() {
         return (
