@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import WebSocket from './WebSocket'
 import UsersList from './UsersList';
 import SearchUsers from './SearchUsers';
@@ -7,73 +7,70 @@ import SearchChat from './SearchChat';
 import Chat from './Chat'
 import MessageForm from './MessageForm'
 
-class Main extends Component{
+const Main = () => {
+    const [currentChat, setCurrentChat] = useState(undefined)
+    const [foundUsers, setFoundUsers] = useState([])
+    const [chats, setChats] = useState([])
+    const [filteredChats, setFilteredChats] = useState([])
+    const webSocketClient = useRef()
 
-    state = {
-        currentChat: undefined,
-        foundUsers: [],
-        chats: [],
-        filteredChats: [],
+    const setWebSocketClient = (client) => {
+        webSocketClient.current = client
     }
 
-    setWebSocketClient = (client) => {
-        client.subscribe('/user/message', this.recievedMessage)
-        client.subscribe('/user/createChat', this.recievedNewChat)
+    useEffect(() => {
+        const message = client.subscribe('/user/message', recievedMessage)
+        const creatChat = client.subscribe('/user/createChat', recievedNewChat)
         
-        this.client = client
-    }
+        return () => {
+            message.unsubscribe()
+            creatChat.unsubscribe()
+        }
+    }, [webSocketClient.current])
 
-    recievedMessage = (message) => {
+    const recievedMessage = (message) => {
         console.log(message.body)
     }
 
-    recievedNewChat = (message) => {
+    const recievedNewChat = (message) => {
         console.log(message.body)
     }
     
-    removeCurrentChat = () => {
-        this.setState({
+    const removeCurrentChat = () => {
+        setState({
             currentChat: undefined
         })
     }
 
-    setFoundUsers = (users) => {
-        this.setState({
-            foundUsers: users
-        })
-    }
-
-    createNewChat = (userId) => {
+    const createNewChat = (userId) => {
         console.log('hey')
     }
 
-    sendNewMessage = (message) => { 
-        const chatId = this.state.currentChat.id
-        const receiverId = this.state.currentChat.user.id
-        this.client.publish({destination: '/api/message', body: JSON.stringify({chatId, receiverId, message}), headers: {'Authorization': localStorage.getItem('Authorization')}});
+    const sendNewMessage = (message) => { 
+        const chatId = currentChat.id
+        const receiverId = currentChat.user.id
+        client.publish({destination: '/api/message', body: JSON.stringify({chatId, receiverId, message}), headers: {'Authorization': localStorage.getItem('Authorization')}});
     }
 
-    render(){
-        return(
-            <div className='main-container'>
-                <WebSocket setWebSocketClient={this.setWebSocketClient} />
-         
-                <Route path='/searchUsers' render={({history}) => <UsersList  history={history} createNewChat={this.createNewChat} foundUsers={this.state.foundUsers} />} />
-                <Route path='/searchUsers' render={() => <SearchUsers removeCurrentChat={this.removeCurrentChat} setFoundUsers={this.setFoundUsers} />} />
-                <Route path='/searchChat' render={() => <div className='chats'></div>} />
-                <Route path='/searchChat' render={() => <SearchChat searchChats={this.props.searchChats}/>} />
-                <Route exact path='/' render={() => <p>No chat is selected!</p>} />
+    return(
+        <div className='main-container'>
+            <WebSocket setWebSocketClient={setWebSocketClient} />
+        
+            <Route path='/searchUsers' render={({history}) => <UsersList  history={history} createNewChat={createNewChat} foundUsers={foundUsers} />} />
+            <Route path='/searchUsers' render={() => <SearchUsers removeCurrentChat={removeCurrentChat} setFoundUsers={setFoundUsers} />} />
+            <Route path='/searchChat' render={() => <div className='chats'></div>} />
+            <Route path='/searchChat' render={() => <SearchChat searchChats={searchChats}/>} />
+            <Route exact path='/' render={() => <p>No chat is selected!</p>} />
 
-                <Route path='/chat' render={() => this.props.currentChat !== undefined ? 
-                    <div className='chat-container'>
-                        <Chat removeCurrentChat={this.removeCurrentChat} chat={this.props.currentChat} />
-                        <MessageForm sendNewMessage={this.sendNewMessage} />
-                    </div> :
-                    <p>No chat is selected!</p>
-                }/>
-            </div>
-        )
-    }
+            <Route path='/chat' render={() => currentChat !== undefined ? 
+                <div className='chat-container'>
+                    <Chat removeCurrentChat={removeCurrentChat} chat={currentChat} />
+                    <MessageForm sendNewMessage={sendNewMessage} />
+                </div> :
+                <p>No chat is selected!</p>
+            }/>
+        </div>
+    )
 }
 
 export default Main
