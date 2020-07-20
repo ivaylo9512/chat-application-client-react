@@ -30,19 +30,19 @@ const Header = ({chatsContainer, logout, appType}) => {
     }
 
     const rotateNav = (e) => {
-        const newDeg = (e.deltaY + e.deltaX) * 0.1
-        const sign = Math.sign(newDeg)
+        const sign = Math.sign(e.deltaY + e.deltaX)
         if(!isRotating.current || sign != rotatingSign.current){
             rotatingSign.current = sign
-            smoothRotate(Math.max(Math.abs(newDeg), 40) * sign, 1000, rotationDeg.current)
+            const newDeg = 20 * sign
+            const max = -rotationDeg.current
+            const min = -60 - rotationDeg.current  
+            smoothRotate(Math.min(Math.max(newDeg, min), max), 650, rotationDeg.current)
         }
         
 
     }
 
-    const smoothRotate = (y, durration, startPos) => {
-        console.log(y)
-        console.log(startPos)
+    const smoothRotate = (deg, durration, startPos) => {
         let startTime = null;
 
         const rotate = (currentTime) => {
@@ -50,7 +50,7 @@ const Header = ({chatsContainer, logout, appType}) => {
             if(!startTime) startTime = currentTime;
             const timeElapsed = currentTime - startTime;
 
-            const amount = linearTween(timeElapsed, startPos, y, durration);
+            const amount = linearTween(timeElapsed, startPos, deg, durration);
 
             nav.current.style.msTransform = `rotate(${amount}deg)`
             nav.current.style.webkitTransform = `rotate(${amount}deg)`
@@ -58,12 +58,12 @@ const Header = ({chatsContainer, logout, appType}) => {
             nav.current.style.OTransform = `rotate(${amount}deg)`
             nav.current.style.transform = `rotate(${amount}deg)`
             rotationDeg.current = amount
-
+            
+            if(durration / 2 < timeElapsed ) isRotating.current = false
             if(timeElapsed < durration) return requestAnimationFrame(rotate);
-            isRotating.current = false
         }
 
-        const linearTween = (t, b, c, d) =>  c*t/d + b;
+        const linearTween = (t, b, c, d) => c*t/d + b;
 
         requestAnimationFrame(rotate);
     }
