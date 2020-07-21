@@ -28,41 +28,45 @@ const Header = ({chatsContainer, logout, appType}) => {
         logout()
         history.push('/login')
     }
-
+    
     const rotateNav = (e) => {
         const sign = Math.sign(e.deltaY + e.deltaX)
         if(!isRotating.current || sign != rotatingSign.current){
             rotatingSign.current = sign
+            const newDeg = 20 * sign
             const max = -rotationDeg.current
             const min = -60 - rotationDeg.current  
-            const newDeg = Math.min(Math.max(20 * sign, min), max)
-
-            requestAnimationFrame((currentTime) => {
-                rotate(currentTime, newDeg, 650, rotationDeg.current) });
-        }  
-    }
-
-    const rotate = (currentTime, startTime, deg, durration, startPos) => {
-        isRotating.current = true
-        if(!startTime) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-
-        const amount = linearTween(timeElapsed, startPos, deg, durration);
-
-        nav.current.style.msTransform = `rotate(${amount}deg)`
-        nav.current.style.webkitTransform = `rotate(${amount}deg)`
-        nav.current.style.MozTransform = `rotate(${amount}deg)`
-        nav.current.style.OTransform = `rotate(${amount}deg)`
-        nav.current.style.transform = `rotate(${amount}deg)`
-        rotationDeg.current = amount
+            smoothRotate(Math.min(Math.max(newDeg, min), max), 650, rotationDeg.current)
+        }
         
-        if(durration / 2 < timeElapsed ) isRotating.current = false
-        if(timeElapsed < durration) requestAnimationFrame((currentTime) => {
-            rotate(currentTime,startTime, deg, durration, startPos) });
+
     }
 
-    const linearTween = (t, b, c, d) => c*t/d + b;
+    const smoothRotate = (deg, durration, startPos) => {
+        let startTime = null;
 
+        const rotate = (currentTime) => {
+            isRotating.current = true
+            if(!startTime) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+
+            const amount = linearTween(timeElapsed, startPos, deg, durration);
+
+            nav.current.style.msTransform = `rotate(${amount}deg)`
+            nav.current.style.webkitTransform = `rotate(${amount}deg)`
+            nav.current.style.MozTransform = `rotate(${amount}deg)`
+            nav.current.style.OTransform = `rotate(${amount}deg)`
+            nav.current.style.transform = `rotate(${amount}deg)`
+            rotationDeg.current = amount
+            
+            if(durration / 2 < timeElapsed ) isRotating.current = false
+            if(timeElapsed < durration) return requestAnimationFrame(rotate);
+        }
+
+        const linearTween = (t, b, c, d) => c*t/d + b;
+
+        requestAnimationFrame(rotate);
+    }
 
     return (
         <div ref={header} className='header-container'>
