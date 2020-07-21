@@ -56,7 +56,7 @@ const Main = ({searchChats}) => {
 
             <Route path='/chat' render={() => currentChat !== undefined ? 
                 <div className='chat-container'>
-                    <Chat removeCurrentChat={setCurrentChat} chat={currentChat} />
+                    <Chat setCurrentChat={setCurrentChat} currentChat={currentChat} />
                     <MessageForm sendNewMessage={sendNewMessage} />
                 </div> :
                 <p>No chat is selected!</p>

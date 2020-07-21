@@ -1,25 +1,21 @@
 import React, { Component } from 'react'
 import Session from './Session';
 
-class Chat extends Component {  
+const Chat = ({currentChat, setCurrentChat}) => {  
 
-    getNextSessions() {
-        fetch(`http://localhost:8080/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.chat.id}page${this.props.chat.session})`)
+    const getNextSessions = () => {
+        fetch(`http://localhost:8080/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.currentChat.id}page${this.props.currentChat.session})`)
             .then(data => data.json())
-            .then(data => this.props.chat.sessions = data)
+            .then(data => setCurrentChat({...currentChat, sessions: data}))
     }
-    componentWillUnmount(){
-        this.props.setCurrentChat(null)
-    }
-    render() {
-        return (
-            <div className='chat'>
-                {this.props.chat.sessions.map(session =>{
-                    return <Session session={session} key={session.date}/>
-                })}
-            </div>
-        )
-    }
+
+    return (
+        <div className='chat'>
+            {currentChat.sessions.map(session =>{
+                return <Session session={session} key={session.date}/>
+            })}
+        </div>
+    )
 }
 
 export default Chat
