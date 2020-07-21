@@ -10,21 +10,22 @@ import MessageForm from './MessageForm'
 const Main = ({searchChats}) => {
     const [currentChat, setCurrentChat] = useState(undefined)
     const [foundUsers, setFoundUsers] = useState([])
-    const webSocketClient = useRef()
-
-    const setWebSocketClient = (client) => {
-        webSocketClient.current = client
-    }
+    const [webSocketClient, setWebSocketClient] = useState()
+    const isMounted = useRef(false)
 
     useEffect(() => {
-        const message = webSocketClient.subscribe('/user/message', recievedMessage)
-        const creatChat = webSocketClient.subscribe('/user/createChat', recievedNewChat)
-        
-        return () => {
-            message.unsubscribe()
-            creatChat.unsubscribe()
+        if(!isMounted.current){
+            isMounted.current = true
+        }else{
+            const message = webSocketClient.subscribe('/user/message', recievedMessage)
+            const createChat = webSocketClient.subscribe('/user/createChat', recievedNewChat)
+            
+            return () => {
+                message.unsubscribe()
+                createChat.unsubscribe()
+            }
         }
-    }, [webSocketClient.current])
+    }, [webSocketClient])
 
     const recievedMessage = (message) => {
         console.log(message.body)

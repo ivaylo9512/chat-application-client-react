@@ -33,6 +33,7 @@ const WebSocket = ({setWebSocketClient}) => {
         }
     }, [])
 
+    return null
 }
 
 export default WebSocket
