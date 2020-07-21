@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import ChatUser from './ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
 
-const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }) => {
+const ChatUsersList = ({setChats, setCurrentChat, chatsClass, userChats }) => {
     const chats = React.useRef()
     const chatsContainer = React.useRef()
 
@@ -30,8 +30,7 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
 
     useEffect(() => {
         smoothscroll.polyfill()
-        setChatsContainer(chatsContainer)   
-    }, [setChatsContainer])  
+    }, [])  
 
     useEffect(() => {
         hideScrollBar()
@@ -53,7 +52,7 @@ const ChatUsersList = ({setChats, setCurrentChat, setChatsContainer, userChats }
     }
 
     return (
-        <div className='chat-users' ref={chatsContainer}>
+        <div className={chatsClass} ref={chatsContainer}>
             <div ref={chats} onWheel = {scroll}>
                 {userChats.map(chat => {
                     return (

@@ -1,20 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
-const Menu = ({chatsContainer, logout, appType}) => {
-    const menu = useRef()
+const Menu = ({chatClass, setChatsClass, logout, appType}) => {
     const history = useHistory()
     const nav = useRef()
     const rotationDeg = useRef(0)
     const isRotating = useRef(false)
     const rotatingSign = useRef()
+    const [menuClass, setMenuClass] = useState('menu-container hidden')
 
     const toggleMenu = () => {
-        menu.current.classList.toggle('hide')
+        setMenuClass(menuClass == 'menu-container hidden' ? 'menu-container' : 'menu-container hidden')    
     }
 
     const toggleHeader = () => {
-        chatsContainer.current.classList.toggle('hide')
+        setChatsClass(chatClass == 'chat-users hidden' ? 'chat-users' : 'chat-users hidden')    
     }
 
     const logoutAndRedirect = () => {
@@ -72,7 +72,7 @@ const Menu = ({chatsContainer, logout, appType}) => {
     }
 
     return (
-        <div ref={menu} className='menu-container hide'>
+        <div className={menuClass}>
             <button className='menu-circle' onClick={toggleMenu} tabIndex="-1"><i className='fas fa-bars'></i></button>
             <div>
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>

@@ -8,8 +8,8 @@ const Logged = ({logout, user, appType}) => {
     const [chats, setChats] = useState([])
     const [filteredChats, setFilteredChats] = useState([])
     const [currentChat, setCurrentChat] = useState(undefined)
-    const [chatsContainer, setChatsContainer] = useState(undefined)
-    
+    const [chatsClass, setChatsClass] = useState('chat-users hidden')
+
     const setUserChats = useCallback((chats) => {
         setFilteredChats(chats)
         setChats(chats)
@@ -30,9 +30,9 @@ const Logged = ({logout, user, appType}) => {
 
     return(
         <div>
-            <ChatUsersList setChats={setUserChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
+            <ChatUsersList setChats={setUserChats} setCurrentChat={setCurrentChat} chatsClass={chatsClass} userChats={filteredChats} />
             <div className='content'>
-                <Menu chatsContainer={chatsContainer} logout={logout} appType={appType}/>
+                <Menu chatClass={chatsClass} setChatsClass={setChatsClass} logout={logout} appType={appType}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>
             </div>
         </div>
