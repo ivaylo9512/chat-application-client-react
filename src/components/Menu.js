@@ -2,25 +2,18 @@ import React, { useRef } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
 const Menu = ({chatsContainer, logout, appType}) => {
-    const header = useRef()
-    const menuCircle = useRef()
+    const menu = useRef()
     const history = useHistory()
     const nav = useRef()
     const rotationDeg = useRef(0)
     const isRotating = useRef(false)
     const rotatingSign = useRef()
 
-    const hideMenu = () => {
-        header.current.classList.add('hide')
-        menuCircle.current.classList.add('show')
+    const toggleMenu = () => {
+        menu.current.classList.toggle('hide')
     }
 
-    const showHeader = () => {
-        header.current.classList.remove('hide')
-        menuCircle.current.classList.remove('show')
-    }
-
-    const toggleChats = () => {
+    const toggleHeader = () => {
         chatsContainer.current.classList.toggle('hide')
     }
 
@@ -38,8 +31,6 @@ const Menu = ({chatsContainer, logout, appType}) => {
             const min = -60 - rotationDeg.current  
             smoothRotate(Math.min(Math.max(newDeg, min), max), 650, rotationDeg.current)
         }
-        
-
     }
 
     const smoothRotate = (deg, durration, startPos) => {
@@ -68,20 +59,32 @@ const Menu = ({chatsContainer, logout, appType}) => {
         requestAnimationFrame(rotate);
     }
 
+    const showRestMenu = () => {
+        const deg = -60 - rotationDeg.current
+        const transition = deg / -20 * 650
+        smoothRotate(deg, transition, rotationDeg.current)
+    }
+
+    const showChatMenu = () => {
+        const deg = -rotationDeg.current
+        const transition = deg / 20 * 650
+        smoothRotate(deg, transition, rotationDeg.current)
+    }
+
     return (
-        <div ref={header} className='menu-container'>
-            <button className='menu-circle' onClick={showHeader} ref={menuCircle} tabIndex="-1"><i className='fas fa-bars'></i></button>
+        <div ref={menu} className='menu-container hide'>
+            <button className='menu-circle' onClick={toggleMenu} tabIndex="-1"><i className='fas fa-bars'></i></button>
             <div>
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
-                    <button onClick={hideMenu} className='circle-btn' tabIndex="-1">-</button>
+                    <button onClick={toggleMenu} className='circle-btn' tabIndex="-1">-</button>
                     <ul ref={nav}>
                         <li><button tabIndex="-1"><i className='fas fa-user'></i></button></li>
-                        <li><button onClick={toggleChats} tabIndex="-1"><i className='fas fa-comments'></i></button></li>
+                        <li><button onClick={toggleHeader} tabIndex="-1"><i className='fas fa-comments'></i></button></li>
                         <li><Link to='/searchChat' tabIndex="-1"><i className='fas fa-search'></i></Link></li>
                         <li><Link to='/searchUsers' tabIndex="-1"><i className='fas fa-user-plus'></i></Link></li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button tabIndex="-1">R</button></li>
+                                <li><button onClick={showRestMenu} tabIndex="-1">R</button></li>
                             </>
                         }                        
                         <li><button onClick={logoutAndRedirect} tabIndex="-1"><i className='fas fa-sign-out-alt'></i></button></li>

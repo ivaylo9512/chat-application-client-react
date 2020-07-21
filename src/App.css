@@ -155,8 +155,9 @@ nav{
     -ms-transform: translate(0, 0);
     -moz-transform: translate(0, 0);
     transform: translate(0, 0);
+
 }
-.menu-circle.show{
+.menu-container.hide .menu-circle{
     transition: all 2s 1.75s;
     -webkit-transform: translate(4em, -5em);
     -ms-transform: translate(4em, -5em);
