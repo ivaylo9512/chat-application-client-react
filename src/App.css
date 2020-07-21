@@ -1,5 +1,4 @@
 .root{
-    height: 100vh;
     overflow: hidden;
     position: relative;
     display: -webkit-box;
@@ -7,6 +6,8 @@
     display: -webkit-flex;
     display: flex;
     flex-direction: column;
+    border-top: 0.6vh solid rgb(24,27, 33);
+    height: 99.4vh;
 }
 .root > div{
     height: 100vh;
@@ -29,13 +30,12 @@ nav{
 }
 .chat-users {
     height: 11%;
-    border-top: 3px solid rgb(24,27, 33);
     overflow: hidden;
     transition: all 3s;
 
 }
 .chat-users.hide{
-    height: 0;
+    margin-top: -11vh;
 }
 .chat-users > div {
     height: 100%;
@@ -194,20 +194,19 @@ header{
     transform-origin: center;
     list-style: none;
 }
+.circle-nav li a {
+    text-align: center;
+    line-height: 3vw;
+}
 .circle-nav li button,
 .circle-nav li a {
-    font-size: 1.3vw;
-    color: white;
-}
-.circle-nav li button {
     position: absolute;
     top: 1vw;
     border-radius: 50%;
-    text-align: center;
+    font-size: 1.3vw;
+    color: white;
     height: 3vw;
     width: 3vw;
-    align-items: center;
-    justify-content: center;
     background: rgb(24,27, 33);
     padding: 0;
     border: 0;

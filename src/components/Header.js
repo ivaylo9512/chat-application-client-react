@@ -28,7 +28,7 @@ const Header = ({chatsContainer, logout, appType}) => {
         logout()
         history.push('/login')
     }
-    
+
     const rotateNav = (e) => {
         const sign = Math.sign(e.deltaY + e.deltaX)
         if(!isRotating.current || sign != rotatingSign.current){
@@ -70,26 +70,26 @@ const Header = ({chatsContainer, logout, appType}) => {
 
     return (
         <div ref={header} className='header-container'>
-            <button className='menu-circle' onClick={showHeader} ref={menuCircle}><i className='fas fa-bars'></i></button>
+            <button className='menu-circle' onClick={showHeader} ref={menuCircle} tabindex="-1"><i className='fas fa-bars'></i></button>
             <header>
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
-                    <button onClick={hideMenu} className='circle-btn'>-</button>
+                    <button onClick={hideMenu} className='circle-btn' tabindex="-1">-</button>
                     <ul ref={nav}>
-                        <li><button><i className='fas fa-user'></i></button></li>
-                        <li><button onClick={toggleChats}><i className='fas fa-comments'></i></button></li>
-                        <li><button><Link to='/searchChat'><i className='fas fa-search'></i></Link></button></li>
-                        <li><button><Link to='/searchUsers'><i className='fas fa-user-plus'></i></Link></button></li>
+                        <li><button tabindex="-1"><i className='fas fa-user'></i></button></li>
+                        <li><button onClick={toggleChats} tabindex="-1"><i className='fas fa-comments'></i></button></li>
+                        <li><Link to='/searchChat' tabindex="-1"><i className='fas fa-search'></i></Link></li>
+                        <li><Link to='/searchUsers' tabindex="-1"><i className='fas fa-user-plus'></i></Link></li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button>R</button></li>
+                                <li><button tabindex="-1">R</button></li>
                             </>
                         }                        
-                        <li><button onClick={logoutAndRedirect}><i className='fas fa-sign-out-alt'></i></button></li>
+                        <li><button onClick={logoutAndRedirect} tabindex="-1"><i className='fas fa-sign-out-alt'></i></button></li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button><i className="fas fa-salad"></i></button></li>
-                                <li><button><i className="fas fa-plus-circle"></i></button></li>
-                                <li><button><i className="fas fa-bell"></i></button></li>
+                                <li><button tabindex="-1"><i className="fas fa-salad"></i></button></li>
+                                <li><button tabindex="-1"><i className="fas fa-plus-circle"></i></button></li>
+                                <li><button tabindex="-1"><i className="fas fa-bell"></i></button></li>
                             </>
                         }
                     </ul>
