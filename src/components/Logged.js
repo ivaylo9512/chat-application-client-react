@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from 'react'
 import Main from './Main';
-import Header from './Header'
+import Menu from './Menu'
 import ChatUsersList from './ChatUsersList';
 
 const Logged = ({logout, user, appType}) => {
@@ -32,7 +32,7 @@ const Logged = ({logout, user, appType}) => {
         <div>
             <ChatUsersList setChats={setUserChats} setCurrentChat={setCurrentChat} setChatsContainer={setChatsContainer} userChats={filteredChats} />
             <div className='content'>
-                <Header chatsContainer={chatsContainer} logout={logout} appType={appType}/>
+                <Menu chatsContainer={chatsContainer} logout={logout} appType={appType}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>
             </div>
         </div>

@@ -116,14 +116,14 @@ nav{
     display: -webkit-flex;
     display: flex;
 }
-.header-container{
+.menu-container{
     width: 27%;
     transition: all 4s;
 }
-.header-container.hide{
+.menu-container.hide{
     width: 0;
 }
-header{
+.menu-container > div{
     height: 100%;
     width: 100%;
     -webkit-transform: translate(0, 0);
@@ -132,7 +132,7 @@ header{
     transform: translate(0, 0);
     transition: all 4s;
 }
-.header-container.hide header{
+.menu-container.hide > div{
     -webkit-transform: translate(-22.5em, 18em);
     -ms-transform: translate(-22.5em, 18em);
     -moz-transform: translate(-22.5em, 18em);

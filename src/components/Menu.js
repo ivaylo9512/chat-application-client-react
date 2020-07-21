@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
-const Header = ({chatsContainer, logout, appType}) => {
+const Menu = ({chatsContainer, logout, appType}) => {
     const header = useRef()
     const menuCircle = useRef()
     const history = useHistory()
@@ -69,34 +69,34 @@ const Header = ({chatsContainer, logout, appType}) => {
     }
 
     return (
-        <div ref={header} className='header-container'>
-            <button className='menu-circle' onClick={showHeader} ref={menuCircle} tabindex="-1"><i className='fas fa-bars'></i></button>
-            <header>
+        <div ref={header} className='menu-container'>
+            <button className='menu-circle' onClick={showHeader} ref={menuCircle} tabIndex="-1"><i className='fas fa-bars'></i></button>
+            <div>
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
-                    <button onClick={hideMenu} className='circle-btn' tabindex="-1">-</button>
+                    <button onClick={hideMenu} className='circle-btn' tabIndex="-1">-</button>
                     <ul ref={nav}>
-                        <li><button tabindex="-1"><i className='fas fa-user'></i></button></li>
-                        <li><button onClick={toggleChats} tabindex="-1"><i className='fas fa-comments'></i></button></li>
-                        <li><Link to='/searchChat' tabindex="-1"><i className='fas fa-search'></i></Link></li>
-                        <li><Link to='/searchUsers' tabindex="-1"><i className='fas fa-user-plus'></i></Link></li>
+                        <li><button tabIndex="-1"><i className='fas fa-user'></i></button></li>
+                        <li><button onClick={toggleChats} tabIndex="-1"><i className='fas fa-comments'></i></button></li>
+                        <li><Link to='/searchChat' tabIndex="-1"><i className='fas fa-search'></i></Link></li>
+                        <li><Link to='/searchUsers' tabIndex="-1"><i className='fas fa-user-plus'></i></Link></li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button tabindex="-1">R</button></li>
+                                <li><button tabIndex="-1">R</button></li>
                             </>
                         }                        
-                        <li><button onClick={logoutAndRedirect} tabindex="-1"><i className='fas fa-sign-out-alt'></i></button></li>
+                        <li><button onClick={logoutAndRedirect} tabIndex="-1"><i className='fas fa-sign-out-alt'></i></button></li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button tabindex="-1"><i className="fas fa-salad"></i></button></li>
-                                <li><button tabindex="-1"><i className="fas fa-plus-circle"></i></button></li>
-                                <li><button tabindex="-1"><i className="fas fa-bell"></i></button></li>
+                                <li><button tabIndex="-1"><i className="fas fa-salad"></i></button></li>
+                                <li><button tabIndex="-1"><i className="fas fa-plus-circle"></i></button></li>
+                                <li><button tabIndex="-1"><i className="fas fa-bell"></i></button></li>
                             </>
                         }
                     </ul>
                 </div>
-            </header>
+            </div>
         </div>
     )
 }
 
-export default Header
+export default Menu
