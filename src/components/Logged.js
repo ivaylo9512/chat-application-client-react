@@ -4,12 +4,13 @@ import Menu from './Menu'
 import ChatUsersList from './ChatUsersList';
 
 const Logged = ({logout, user, appType}) => {
-
     const [chats, setChats] = useState([])
     const [orders, setOrders] = useState() 
     const [filteredChats, setFilteredChats] = useState([])
     const [currentChat, setCurrentChat] = useState(undefined)
-    const [chatsClass, setChatsClass] = useState('chat-users hidden')
+    const [headerClass, setHeaderClass] = useState('header-scroll hidden')
+    const isMounted = useRef(false)
+
 
     const searchChats = (name) => {
         name = name.toUpperCase()
@@ -77,9 +78,9 @@ const Logged = ({logout, user, appType}) => {
 
     return(
         <div>
-            <ChatUsersList setChats={setUserChats} setCurrentChat={setCurrentChat} chatsClass={chatsClass} userChats={filteredChats} />
+            <HeaderScroll setCurrentChat={setCurrentChat} headerClass={headerClass} userChats={filteredChats} />
             <div className='content'>
-                <Menu chatClass={chatsClass} setChatsClass={setChatsClass} logout={logout} appType={appType}/>
+                <Menu chatClass={chatsClass} setHeaderClass={setHeaderClass} logout={logout} appType={appType}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>
             </div>
         </div>

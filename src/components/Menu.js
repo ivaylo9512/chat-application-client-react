@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
-const Menu = ({chatClass, setChatsClass, logout, appType}) => {
+const Menu = ({chatClass, setHeaderClass, logout, appType}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
     const history = useHistory()
@@ -16,7 +16,7 @@ const Menu = ({chatClass, setChatsClass, logout, appType}) => {
     }
 
     const toggleHeader = () => { 
-        setChatsClass(chatClass == 'chat-users hidden' ? 'chat-users' : 'chat-users hidden')    
+        setHeaderClass(chatClass == 'header-scroll hidden' ? 'header-scroll' : 'header-scroll hidden')    
     }
     
     const logoutAndRedirect = () => {
