@@ -6,14 +6,10 @@ import ChatUsersList from './ChatUsersList';
 const Logged = ({logout, user, appType}) => {
 
     const [chats, setChats] = useState([])
+    const [orders, setOrders] = useState() 
     const [filteredChats, setFilteredChats] = useState([])
     const [currentChat, setCurrentChat] = useState(undefined)
     const [chatsClass, setChatsClass] = useState('chat-users hidden')
-
-    const setUserChats = useCallback((chats) => {
-        setFilteredChats(chats)
-        setChats(chats)
-    }, [])
 
     const searchChats = (name) => {
         name = name.toUpperCase()
@@ -27,6 +23,57 @@ const Logged = ({logout, user, appType}) => {
         })
         setFilteredChats(filteredChats)
     }
+
+    useEffect(() =>  {
+        let isCurrent =  true;
+        if(isMounted){
+            async function fetchChats(){
+                const response = await fetch('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
+                    headers: {
+                        'Authorization': localStorage.getItem('Authorization')
+                    }
+                })
+                const data = await response.text()
+                if(isCurrent){
+                    if(response.ok){
+                        const chats = JSON.parse(data)
+                        setFilteredChats(chats)
+                        setChats(chats)
+                    }else{
+                        setError(data)
+                    }
+                }  
+            }   
+            fetchChats() 
+        }
+        return () => isCurrent = false
+    }, [setUserChats])
+
+    useEffect(() =>  {
+        let isCurrent =  true;
+        if(!isMounted.current){
+            isMounted.current = true
+        }else{
+            async function fetchOrders(){
+                const response = await fetch('http://localhost:8080/api/orders/auth/getOrders',{
+                    headers: {
+                        'Authorization': localStorage.getItem('Authorization')
+                    }
+                })
+                const data = await response.text()
+                if(isCurrent){
+                    if(response.ok){
+                        setOrders(JSON.parse(data))
+                    }else{
+                        setError(data)                
+                    }
+                }  
+            }   
+            fetchOrders() 
+        }
+        return () => isCurrent = false
+    }, [])
+
 
     return(
         <div>
