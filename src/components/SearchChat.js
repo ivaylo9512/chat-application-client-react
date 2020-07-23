@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useInput } from '../hooks/useInput' 
 const SearchChat = ({searchChats}) => {  
     const [name, setName, nameInput] = useInput({type: 'text', placeholder:'search chat'})
@@ -7,6 +7,10 @@ const SearchChat = ({searchChats}) => {
         e.preventDefault()
         searchChats(name)
     }
+
+    useEffect(() => {
+        return () => searchChats('')
+    }, [])
     
     return (
         <div className='form-container'>

@@ -17,26 +17,24 @@ const App = () => {
     }
 
     return (
-        <div className='root'>
-            <Router>
-                {auth ? 
-                    <>
-                        <Logged logout={logout} user={user} appType={appType} /> 
-                        <Redirect from='login' to='/' />
-                    </> :
-                        appType ?
-                            <> 
-                                <Route path='/login' render={() => <Login setUser={setUser} setAuth={setAuth} setAppType={setAppType} />}/>
-                                <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
-                                <Redirect to="/login" />
-                            </> :
-                            <div className='type-buttons'>
-                                <button onClick={() => setAppType('chatOnly')} />
-                                <button onClick={() => setAppType('restaurant')} />
-                            </div> 
-                }
-            </Router>
-        </div>
+        <Router>
+            {auth ? 
+                <>
+                    <Logged logout={logout} user={user} appType={appType} /> 
+                    <Redirect from='login' to='/' />
+                </> :
+                    appType ?
+                        <> 
+                            <Route path='/login' render={() => <Login setUser={setUser} setAuth={setAuth} setAppType={setAppType} />}/>
+                            <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
+                            <Redirect to="/login" />
+                        </> :
+                        <div className='type-buttons'>
+                            <button onClick={() => setAppType('chatOnly')} />
+                            <button onClick={() => setAppType('restaurant')} />
+                        </div> 
+            }
+        </Router>
     )
 }
 
