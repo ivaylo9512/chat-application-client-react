@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatUser from './ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
 
 
 const HeaderScroll = ({headerType, headerClass, setCurrentChat, currentList}) => {
-    const chats = React.useRef()
-    const chatsContainer = React.useRef()
+    const listContainer = React.useRef()
+    const scrollContainer = React.useRef()
+    const [listPadding, setListPadding] = useState({})
 
     useEffect(() => {
         hideScrollBar()
@@ -18,12 +19,12 @@ const HeaderScroll = ({headerType, headerClass, setCurrentChat, currentList}) =>
     }, []) 
 
     const hideScrollBar = () => {
-        const height = parseFloat(window.getComputedStyle(chats.current).height)
-        const containerHeight = parseFloat(window.getComputedStyle(chatsContainer.current).height)
+        const height = parseFloat(window.getComputedStyle(listContainer.current).height)
+        const containerHeight = parseFloat(window.getComputedStyle(scrollContainer.current).height)
 
         const barHeight = containerHeight - height 
     
-        chats.current.style.paddingBottom = `${barHeight}px`
+        setListPadding({paddingBottom:`${barHeight}px`})
     }
 
     const scroll = (e) => {
@@ -31,12 +32,12 @@ const HeaderScroll = ({headerType, headerClass, setCurrentChat, currentList}) =>
     }
 
     return (
-        <div className={headerClass} ref={chatsContainer}>
-            <div ref={chats} onWheel = {scroll}>
-            {currentList.map(chat => 
-                <div className='chat-user' key={chat.id} onClick={() => setCurrentChat(chat)}> 
+        <div className={headerClass} ref={scrollContainer}>
+            <div ref={listContainer} style={listPadding} onWheel={scroll}>
+            {currentList.map(element => 
+                <div className='element-container' key={element.id}> 
                     {headerType == 'chats' 
-                        ? <ChatUser chat={chat}/> 
+                        ? <ChatUser onClick={() => setCurrentChat(element)} chat={element}/> 
                         : <div></div>
                     }
                 </div>

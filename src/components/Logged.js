@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Main from './Main';
 import Menu from './Menu'
-import ChatUsersList from './ChatUsersList';
 import HeaderScroll from './HeaderScroll';
 
 const Logged = ({logout, user, appType}) => {
@@ -53,6 +52,7 @@ const Logged = ({logout, user, appType}) => {
                     if(response.ok){
                         const chats = JSON.parse(data)
                         setChats(chats)
+                        setCurrentList(chats)
                     }else{
                         setError(data)
                     }

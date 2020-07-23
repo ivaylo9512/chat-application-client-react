@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
-const Menu = ({chatClass, setHeader, headerType, setHeaderClass, logout, appType}) => {
+const Menu = ({setHeader, headerClass, headerType, setHeaderClass, logout, appType}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
     const history = useHistory()
@@ -16,7 +16,7 @@ const Menu = ({chatClass, setHeader, headerType, setHeaderClass, logout, appType
     }
 
     const toggleHeader = () => { 
-        setHeaderClass(chatClass == 'header-scroll hidden' ? 'header-scroll' : 'header-scroll hidden')    
+        setHeaderClass(headerClass == 'header-scroll hidden' ? 'header-scroll' : 'header-scroll hidden')    
     }
     
     const logoutAndRedirect = () => {
@@ -77,7 +77,7 @@ const Menu = ({chatClass, setHeader, headerType, setHeaderClass, logout, appType
                     <button onClick={toggleMenu} className='circle-btn' tabIndex="-1">-</button>
                     <ul ref={nav} style={rotate}>
                         <li><button tabIndex="-1"><i className='fas fa-user'></i></button></li>
-                        <li><button onClick={toggleHeader} tabIndex="-1"><i className={chatClass == 'chat-users hidden' ? 'far fa-eye' : 'far fa-eye-slash'}></i></button></li>
+                        <li><button onClick={toggleHeader} tabIndex="-1"><i className={headerClass == 'header-scroll hidden' ? 'far fa-eye' : 'far fa-eye-slash'}></i></button></li>
                         <li><Link to='/searchChat' tabIndex="-1"><i className='fas fa-search'></i></Link></li>
                         <li><Link to='/searchUsers' tabIndex="-1"><i className='fas fa-user-plus'></i></Link></li>
                         {appType == 'restaurant' && 
