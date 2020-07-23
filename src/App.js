@@ -27,7 +27,7 @@ const App = () => {
                         <> 
                             <Route path='/login' render={() => <Login setUser={setUser} setAuth={setAuth} setAppType={setAppType} />}/>
                             <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
-                            <Redirect to="/login" />
+                            <Redirect to='/login' />
                         </> :
                         <div className='type-buttons'>
                             <button onClick={() => setAppType('chatOnly')} />
