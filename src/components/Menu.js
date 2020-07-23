@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 
-const Menu = ({chatClass, setHeaderClass, logout, appType}) => {
+const Menu = ({chatClass, setHeader, headerType, setHeaderClass, logout, appType}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
     const history = useHistory()
@@ -88,7 +88,7 @@ const Menu = ({chatClass, setHeaderClass, logout, appType}) => {
                         <li><button onClick={logoutAndRedirect} tabIndex="-1"><i className='fas fa-sign-out-alt'></i></button></li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button tabIndex="-1"><i className="fas fa-salad"></i></button></li>
+                                <li><button onClick={setHeader} tabIndex="-1"><i className= {headerType == 'chats' ? "fas fa-comments" : "fas fa-utensils" }></i></button></li>
                                 <li><button tabIndex="-1"><i className="fas fa-plus-circle"></i></button></li>
                                 <li><button tabIndex="-1"><i className="fas fa-bell"></i></button></li>
                             </>

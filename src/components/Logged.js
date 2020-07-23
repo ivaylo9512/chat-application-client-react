@@ -1,14 +1,17 @@
-import React, {useState, useCallback} from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Main from './Main';
 import Menu from './Menu'
 import ChatUsersList from './ChatUsersList';
+import HeaderScroll from './HeaderScroll';
 
 const Logged = ({logout, user, appType}) => {
+    const [currentList, setCurrentList] = useState([]) 
     const [chats, setChats] = useState([])
     const [orders, setOrders] = useState() 
-    const [filteredChats, setFilteredChats] = useState([])
+    const [headerType, setHeaderType] = useState('chats')
     const [currentChat, setCurrentChat] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
+    const [error, setError] = useState('')
     const isMounted = useRef(false)
 
 
@@ -22,8 +25,19 @@ const Logged = ({logout, user, appType}) => {
             }
             return null;
         })
-        setFilteredChats(filteredChats)
+        setCurrentList(filteredChats)
+        setHeaderType('chats')
     }
+
+    const setHeader = useCallback(() => {
+        if(headerType == 'chats'){
+            setHeaderType('orders')
+            setCurrentList(chats)
+        }else{
+            setHeaderType('orders')
+            setCurrentList(orders)
+        }
+    })
 
     useEffect(() =>  {
         let isCurrent =  true;
@@ -38,7 +52,6 @@ const Logged = ({logout, user, appType}) => {
                 if(isCurrent){
                     if(response.ok){
                         const chats = JSON.parse(data)
-                        setFilteredChats(chats)
                         setChats(chats)
                     }else{
                         setError(data)
@@ -48,7 +61,7 @@ const Logged = ({logout, user, appType}) => {
             fetchChats() 
         }
         return () => isCurrent = false
-    }, [setUserChats])
+    }, [])
 
     useEffect(() =>  {
         let isCurrent =  true;
@@ -78,9 +91,9 @@ const Logged = ({logout, user, appType}) => {
 
     return(
         <div>
-            <HeaderScroll setCurrentChat={setCurrentChat} headerClass={headerClass} userChats={filteredChats} />
+            <HeaderScroll setCurrentChat={setCurrentChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
             <div className='content'>
-                <Menu chatClass={chatsClass} setHeaderClass={setHeaderClass} logout={logout} appType={appType}/>
+                <Menu headerClass={headerClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} logout={logout} appType={appType}/>
                 <Main searchChats={searchChats} currentChat={currentChat}/>
             </div>
         </div>

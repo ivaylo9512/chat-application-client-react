@@ -1,6 +1,9 @@
-import { useState, useRef } from 'react'
+import React, { useEffect } from 'react';
+import ChatUser from './ChatUser';
+import smoothscroll from 'smoothscroll-polyfill';
 
-const HeaderScroll = (headerType, headerClass, setCurrentChat) => {
+
+const HeaderScroll = ({headerType, headerClass, setCurrentChat, currentList}) => {
     const chats = React.useRef()
     const chatsContainer = React.useRef()
 
@@ -8,8 +11,12 @@ const HeaderScroll = (headerType, headerClass, setCurrentChat) => {
         hideScrollBar()
         window.addEventListener('resize', hideScrollBar)
         return () => window.removeEventListener('resize', hideScrollBar)
-    }, [userChats])
+    }, [currentList])
     
+    useEffect(() => {
+        smoothscroll.polyfill()
+    }, []) 
+
     const hideScrollBar = () => {
         const height = parseFloat(window.getComputedStyle(chats.current).height)
         const containerHeight = parseFloat(window.getComputedStyle(chatsContainer.current).height)
@@ -26,11 +33,14 @@ const HeaderScroll = (headerType, headerClass, setCurrentChat) => {
     return (
         <div className={headerClass} ref={chatsContainer}>
             <div ref={chats} onWheel = {scroll}>
-                {userChats.map(chat => 
-                    <div className='chat-user' key={chat.id} onClick={() => setCurrentChat(chat)}> 
-                        <ChatUser chat={chat}/>
-                    </div>
-                )}  
+            {currentList.map(chat => 
+                <div className='chat-user' key={chat.id} onClick={() => setCurrentChat(chat)}> 
+                    {headerType == 'chats' 
+                        ? <ChatUser chat={chat}/> 
+                        : <div></div>
+                    }
+                </div>
+            )}  
             </div>
         </div>
     )
