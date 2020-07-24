@@ -8,31 +8,31 @@ const Register = ({setUser}) => {
     const [inputErrors, setInputErrors] = useState(0)
     const [pageIndex, setPageIndex] = useState(0)
 
-    const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
+    const [username, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
         minLength: 6,
         maxLength: 15,
         required: true
     }}) 
-    const [password, setPassword, passwordInput, equalsError, setEqualsError] = useInput({type: 'password', placeholder: 'password', validationRules:{
+    const [password, passwordInput, equalsError, setEqualsError] = useInput({type: 'password', placeholder: 'password', validationRules:{
         minLength: 7,
         maxLength: 25,
         required: true
     }}) 
-    const [repeat, setRepeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat',inputErrors, setInputErrors, validationRules:{
+    const [repeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat',inputErrors, setInputErrors, validationRules:{
         required: true
     }, equalsElement: password, equals: {
         name: 'Passwords,', error: equalsError, setError: setEqualsError
     }}) 
-    const [firstName, setFirstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name', validationRules: {
+    const [firstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name', validationRules: {
         required: true
     }}) 
-    const [lastName, setLastName, lastNameInput] = useInput({type: 'text', placeholder: 'last name', validationRules: {
+    const [lastName, lastNameInput] = useInput({type: 'text', placeholder: 'last name', validationRules: {
         required: true
     }}) 
-    const [country, setCountry, countryInput] = useInput({type: 'text', placeholder: 'country', validationRules: {
+    const [country, countryInput] = useInput({type: 'text', placeholder: 'country', validationRules: {
         required: true
     }}) 
-    const [age, setAge, ageInput] = useInput({type: 'number', placeholder: 'age', validationRules: {
+    const [age, ageInput] = useInput({type: 'number', placeholder: 'age', validationRules: {
         required: true
     }}) 
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useInput } from '../hooks/useInput' 
 const SearchChat = ({searchChats}) => {  
-    const [name, setName, nameInput] = useInput({type: 'text', placeholder:'search chat'})
+    const [name, nameInput] = useInput({type: 'text', placeholder:'search chat'})
     
     const search = (e) => {
         e.preventDefault()

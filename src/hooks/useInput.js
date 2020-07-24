@@ -8,7 +8,6 @@ export const useInput = ({type, placeholder, inputErrors, setInputErrors, valida
     const onChange = (e) => setValue(e.target.value)
 
     useEffect(() => {
-        let validateTimeOut;
         if(!isMounted.current){
             isMounted.current = true
         }else if(equalsElement != undefined){
@@ -20,7 +19,6 @@ export const useInput = ({type, placeholder, inputErrors, setInputErrors, valida
                 setInputErrors(inputErrors - 1)
             }
         }
-        return () => clearTimeout(validateTimeOut)
     }, [value, equalsElement])
 
     const input = 
@@ -31,9 +29,6 @@ export const useInput = ({type, placeholder, inputErrors, setInputErrors, valida
     
     return[
         value,
-        setValue,
-        input,
-        equalsError,
-        setEqualsError
+        input
     ]
 }

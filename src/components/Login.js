@@ -4,8 +4,8 @@ import { useInput } from '../hooks/useInput'
 import { useRequest } from '../hooks/useRequest'
 
 const Login = ({setUser, setAuth, setAppType}) => {
-    const [username, setUsername, usernameInput] = useInput({type: 'text', placeholder:'username'})
-    const [password, setPassword, passwordInput] = useInput({type: 'password', placeholder:'password'})
+    const [username, usernameInput] = useInput({type: 'text', placeholder:'username'})
+    const [password, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [error, setError] = useState()
     
     const onSuccessfulLogin  = useCallback((data, token) => {

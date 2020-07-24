@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useInput } from '../hooks/useInput';
 
 const MessageForm = ({sendNewMessage}) => {
-    const [message, setMessage, messageInput] = useInput({type: 'text', placeholder: 'Send message'})
+    const [message, messageInput] = useInput({type: 'text', placeholder: 'Send message'})
 
     const submitForm = (e) => {
         e.preventDefault()

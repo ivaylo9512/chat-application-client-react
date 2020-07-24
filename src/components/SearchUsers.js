@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {useInput} from '../hooks/useInput'
 
 const SearchUsers = ({setFoundUsers}) => {  
-    const [name, setName, nameInput] = useInput({type: 'text', placeholder:'search users'})
+    const [name, nameInput] = useInput({type: 'text', placeholder:'search users'})
     const [url, setUrl] = useState(undefined)
     const [error, setError] = useState(undefined)
 
