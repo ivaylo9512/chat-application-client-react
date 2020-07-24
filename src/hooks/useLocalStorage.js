@@ -1,11 +1,10 @@
 import {useState} from 'react';
 
 export const useLocalStorage = (key, initial) => {
-    const [value, setValue] = useState(() => {
-        let value = localStorage.getItem(key)
-        
-        return value ? value : initial
-    })
+    const [value, setValue] = useState(() => localStorage.getItem(key) 
+        ? localStorage.getItem(key) 
+        : initial
+    )
 
     const set = value => {
         localStorage.setItem(key, value)

@@ -1,17 +1,24 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Main from './Main';
 import Menu from './Menu'
 import HeaderScroll from './HeaderScroll';
+import useRequest from '../hooks/useRequest'
 
 const Logged = ({logout, user, appType}) => {
     const [currentList, setCurrentList] = useState([]) 
-    const [chats, setChats] = useState([])
-    const [orders, setOrders] = useState() 
     const [headerType, setHeaderType] = useState('chats')
     const [currentChat, setCurrentChat] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
-    const [error, setError] = useState('')
-
+    const [chats, chatsError, setChatsParams, setChatsUrl, fetchChats] = useRequest('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
+        headers: {
+            Authorization: localStorage.getItem('Authorization')
+        }
+    }, [], false)
+    const [orders, ordersError, setOrdersParams, setOrdersUrl, fetchOrders] = useRequest('http://localhost:8080/api/orders/auth/getOrders',{
+        headers: {
+            Authorization: localStorage.getItem('Authorization')
+        }
+    }, [], false)
 
     const searchChats = (name) => {
         name = name.toUpperCase()
@@ -38,54 +45,19 @@ const Logged = ({logout, user, appType}) => {
             setHeaderType('orders')
             setCurrentList(orders)
         }
-    })
-
-    useEffect(() =>  {
-        let isCurrent =  true;
-        async function fetchChats(){
-            const response = await fetch('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
-                headers: {
-                    'Authorization': localStorage.getItem('Authorization')
-                }
-            })
-            const data = await response.text()
-            if(isCurrent){
-                if(response.ok){
-                    const chats = JSON.parse(data)
-                    setChats(chats)
-                    setCurrentList(chats)
-                }else{
-                    setError(data)
-                }
-            }  
-        }   
-        fetchChats() 
-        return () => isCurrent = false
     }, [])
 
-    useEffect(() =>  {
-        let isCurrent =  true;
-        if(appType == 'restuarant'){
-            async function fetchOrders(){
-                const response = await fetch('http://localhost:8080/api/orders/auth/getOrders',{
-                    headers: {
-                        'Authorization': localStorage.getItem('Authorization')
-                    }
-                })
-                const data = await response.text()
-                if(isCurrent){
-                    if(response.ok){
-                        setOrders(JSON.parse(data))
-                    }else{
-                        setError(data)                
-                    }
-                }  
-            }   
-            fetchOrders() 
+    useEffect(() => {
+        async function fetch(){
+            const result = await fetchChats()
+            setCurrentList(result)
         }
-        return () => isCurrent = false
-    }, [])
+        fetch()
 
+        if(appType == 'restuarant'){
+            fetchOrders()
+        }
+    }, [appType])
 
     return(
         <div className='content-container'>
