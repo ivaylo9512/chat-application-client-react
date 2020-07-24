@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef} from 'react';
 
-export const useRequest = (initialUrl, initialParams, initialState, fetchOnMount) => {
+export const useRequest = (initialUrl, initialParams, initialState, fetchOnMount, callback) => {
     const [data, setData] = useState(initialState)
     const [params, setParams] = useState(initialParams)
     const [url, setUrl] = useState(initialUrl)
@@ -20,17 +20,21 @@ export const useRequest = (initialUrl, initialParams, initialState, fetchOnMount
     async function fetchRequest() {
         const response = await fetch(url, params)
         let data = await response.text()
+        const headers = response.headers
         if(isCurrent.current){
             if(response.ok){
                 data = JSON.parse(data)
                 setData(data)
-                return data
+                if(callback){
+                    callback(data, headers)
+                }
+            }else{
+                setError(data)
             }
-            setError(data)
         }
     }
 
-    return [data, error, setParams, setUrl, fetchRequest]
+    return [data, fetchRequest, setParams, setUrl, error]
 }
 
 export default useRequest

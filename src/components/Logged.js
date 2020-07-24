@@ -9,12 +9,13 @@ const Logged = ({logout, user, appType}) => {
     const [headerType, setHeaderType] = useState('chats')
     const [currentChat, setCurrentChat] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
-    const [chats, chatsError, setChatsParams, setChatsUrl, fetchChats] = useRequest('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
+
+    const [chats] = useRequest('http://localhost:8080/api/chat/auth/getChats?pageSize=3',{
         headers: {
             Authorization: localStorage.getItem('Authorization')
         }
-    }, [], false)
-    const [orders, ordersError, setOrdersParams, setOrdersUrl, fetchOrders] = useRequest('http://localhost:8080/api/orders/auth/getOrders',{
+    }, [], true, setCurrentList)
+    const [orders, fetchOrders] = useRequest('http://localhost:8080/api/orders/auth/getOrders',{
         headers: {
             Authorization: localStorage.getItem('Authorization')
         }
@@ -48,12 +49,6 @@ const Logged = ({logout, user, appType}) => {
     }, [])
 
     useEffect(() => {
-        async function fetch(){
-            const result = await fetchChats()
-            setCurrentList(result)
-        }
-        fetch()
-
         if(appType == 'restuarant'){
             fetchOrders()
         }
