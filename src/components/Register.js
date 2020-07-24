@@ -5,7 +5,6 @@ import { useInput } from '../hooks/useInput';
 const Register = ({setUser}) => {
     const [userInfo, setUserInfo] = useState(undefined)
     const [apiError, setApiError] = useState('')
-    const [inputErrors, setInputErrors] = useState(0)
     const [pageIndex, setPageIndex] = useState(0)
 
     const [username, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
@@ -13,16 +12,14 @@ const Register = ({setUser}) => {
         maxLength: 15,
         required: true
     }}) 
-    const [password, passwordInput, equalsError, setEqualsError] = useInput({type: 'password', placeholder: 'password', validationRules:{
+    const [password, passwordInput] = useInput({type: 'password', placeholder: 'password', validationRules:{
         minLength: 7,
         maxLength: 25,
         required: true
     }}) 
-    const [repeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat',inputErrors, setInputErrors, validationRules:{
-        required: true
-    }, equalsElement: password, equals: {
-        name: 'Passwords,', error: equalsError, setError: setEqualsError
-    }}) 
+    const [repeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', validationRules:{
+        required: true,
+    },equalsElement: password, equalsName: 'Passwords'}) 
     const [firstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name', validationRules: {
         required: true
     }}) 
@@ -43,14 +40,12 @@ const Register = ({setUser}) => {
 
     const setPage = (e, page) => {
         e.preventDefault()
-        if(inputErrors == 0){
-            setPageIndex(page)
-        }
+        setPageIndex(page)
     }
 
     useEffect(() => {
         let isCurrent = true;
-        if(userInfo && inputErrors == 0){
+        if(userInfo){
             async function register(){
                 const response = await fetch('http://localhost:8080/api/users/register', {
                     method: 'post',
