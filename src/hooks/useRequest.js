@@ -1,24 +1,28 @@
 import { useState, useEffect, useRef} from 'react';
 
-export const useRequest = (initialUrl, initialParams, initialState, fetchOnMount, callback) => {
-    const [data, setData] = useState(initialState)
-    const [params, setParams] = useState(initialParams)
+export const useRequest = ({initialUrl, initialParams, initialValue, initialHeaders, fetchOnMount, callback, method, isAuth}) => {
+    const [data, setData] = useState(initialValue)
+    const [body, setBody] = useState(initialParams)
     const [url, setUrl] = useState(initialUrl)
+    const [requestHeaders, setHeaders] = useState(initialHeaders)
     const [error, setError] = useState()
-    const isMounted = useRef(fetchOnMount)
     const isCurrent = useRef(true)
 
     useEffect(() =>{
-        if(!isMounted.current){
-            isMounted.current = true
-        }else{
+        if(fetchOnMount){
             fetchRequest()
         }
         return () => isCurrent.current = false
-    }, [url, params])
+    }, [])
 
     async function fetchRequest() {
-        const response = await fetch(url, params)
+        const response = await fetch(url, {
+            method,
+            body,
+            headers: isAuth ? 
+                {...requestHeaders, Authorization: localStorage.getItem('Authorization')} :
+                requestHeaders
+        })
         let data = await response.text()
         const headers = response.headers
         if(isCurrent.current){
@@ -34,7 +38,7 @@ export const useRequest = (initialUrl, initialParams, initialState, fetchOnMount
         }
     }
 
-    return [data, fetchRequest, setParams, setUrl, error]
+    return [data, fetchRequest, setBody, setUrl, setHeaders, error]
 }
 
 export default useRequest
