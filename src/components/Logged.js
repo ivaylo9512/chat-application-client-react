@@ -7,7 +7,8 @@ import useRequest from '../hooks/useRequest'
 const Logged = ({logout, user, appType}) => {
     const [currentList, setCurrentList] = useState([]) 
     const [headerType, setHeaderType] = useState('chats')
-    const [currentChat, setCurrentChat] = useState(undefined)
+    const [chat, setChat] = useState(undefined)
+    const [order, setOrder] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
 
     const [chats] = useRequest({initialUrl:'http://localhost:8080/api/chat/auth/getChats?pageSize=3', initialValue:[], auth: true, fetchOnMount:true, callback:setCurrentList})
@@ -48,10 +49,10 @@ const Logged = ({logout, user, appType}) => {
 
     return(
         <div className='content-container'>
-            <HeaderScroll setCurrentChat={setCurrentChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
+            <HeaderScroll setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
             <div className='content'>
                 <Menu headerClass={headerClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} logout={logout} appType={appType}/>
-                <Main searchChats={searchChats} currentChat={currentChat}/>
+                <Main searchChats={searchChats} chat={chat} order={order}/>
             </div>
         </div>
     )

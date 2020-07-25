@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ChatUser from './ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
+import Order from './Order';
 
-
-const HeaderScroll = ({headerType, headerClass, setCurrentChat, currentList}) => {
+const HeaderScroll = ({headerType, headerClass, setChat, setOrder, currentList}) => {
     const listContainer = React.useRef()
     const scrollContainer = React.useRef()
     const [listPadding, setListPadding] = useState({})
@@ -37,8 +37,8 @@ const HeaderScroll = ({headerType, headerClass, setCurrentChat, currentList}) =>
             {currentList.map(element => 
                 <div className='element-container' key={element.id}> 
                     {headerType == 'chats' 
-                        ? <ChatUser onClick={() => setCurrentChat(element)} chat={element}/> 
-                        : <div></div>
+                        ? <ChatUser onClick={() => setChat(element)} chat={element}/> 
+                        : <Order onClick={() => setOrder(element)} order={element}/>
                     }
                 </div>
             )}  
