@@ -1,17 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Message from './Message';
 
-class Session extends Component {  
+const Session =  ({session}) =>  {  
 
-    render() {
-        return (
-            <div className='messages'>
-                {this.props.session.messages.map(message =>{
-                    return <Message key={message.time}/>
-                })}
-            </div>
-        )
-    }
+    return (
+        <div className='messages'>
+            {session.messages.map(message =>{
+                return <Message key={message.time}/>
+            })}
+        </div>
+    )
 }
 
 export default Session
