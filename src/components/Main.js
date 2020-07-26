@@ -47,17 +47,15 @@ const Main = ({searchChats, chat, order}) => {
             <Route path='/searchUsers' render={() => <SearchUsers setCurrentChat={setCurrentChat} setFoundUsers={setFoundUsers} />} />
             <Route path='/searchChat' render={() => <div className='chats'></div>} />
             <Route path='/searchChat' render={() => <SearchChat searchChats={searchChats}/>} />
-            <Route exact path='/' render={() => <p>No chat is selected!</p>} />
-            
             <Route path='/chat' render={() => currentChat !== undefined 
                 ? <OrderView order={order}/>
                 : <p>No order is selected!</p>
             }/>
-            
             <Route path='/chat' render={() => currentChat !== undefined 
                 ? <ChatView webSocketClient={webSocketClient} chat={chat} setCurrentChat={setCurrentChat} currentChat={currentChat} />
                 : <p>No chat is selected!</p>
             }/>
+            <Route render={() => <p>No chat is selected!</p>} />
         </div>
     )
 }
