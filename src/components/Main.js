@@ -4,8 +4,7 @@ import UsersList from './UsersList';
 import SearchUsers from './SearchUsers';
 import { Route } from 'react-router-dom'
 import SearchChat from './SearchChat';
-import Chat from './Chat'
-import MessageForm from './MessageForm'
+import ChatView from './ChatView'
 
 const Main = ({searchChats}) => {
     const [currentChat, setCurrentChat] = useState(undefined)
@@ -55,12 +54,9 @@ const Main = ({searchChats}) => {
             <Route path='/searchChat' render={() => <SearchChat searchChats={searchChats}/>} />
             <Route exact path='/' render={() => <p>No chat is selected!</p>} />
 
-            <Route path='/chat' render={() => currentChat !== undefined ? 
-                <div className='chat-container'>
-                    <Chat setCurrentChat={setCurrentChat} currentChat={currentChat} />
-                    <MessageForm sendNewMessage={sendNewMessage} />
-                </div> :
-                <p>No chat is selected!</p>
+            <Route path='/chat' render={() => currentChat !== undefined 
+                ? <ChatView setCurrentChat={setCurrentChat} currentChat={currentChat} />
+                : <p>No chat is selected!</p>
             }/>
         </div>
     )

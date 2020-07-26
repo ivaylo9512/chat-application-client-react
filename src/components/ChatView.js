@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Session from './Session';
+import MessageForm from './MessageForm'
+
 
 const Chat = ({currentChat, setCurrentChat}) => {  
 
@@ -10,10 +12,13 @@ const Chat = ({currentChat, setCurrentChat}) => {
     }
 
     return (
-        <div className='chat'>
-            {currentChat.sessions.map(session =>{
-                return <Session session={session} key={session.date}/>
-            })}
+        <div className='chat-container'>
+            <MessageForm />
+            <div className='chat'>
+                {currentChat.sessions.map(session =>{
+                    return <Session session={session} key={session.date}/>
+                })}
+            </div>
         </div>
     )
 }
