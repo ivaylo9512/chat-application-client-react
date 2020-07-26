@@ -5,8 +5,9 @@ import SearchUsers from './SearchUsers';
 import { Route } from 'react-router-dom'
 import SearchChat from './SearchChat';
 import ChatView from './ChatView'
+import OrderView from './OrderView'
 
-const Main = ({searchChats}) => {
+const Main = ({searchChats, chat, order}) => {
     const [currentChat, setCurrentChat] = useState(undefined)
     const [foundUsers, setFoundUsers] = useState([])
     const [webSocketClient, setWebSocketClient] = useState()
@@ -47,9 +48,14 @@ const Main = ({searchChats}) => {
             <Route path='/searchChat' render={() => <div className='chats'></div>} />
             <Route path='/searchChat' render={() => <SearchChat searchChats={searchChats}/>} />
             <Route exact path='/' render={() => <p>No chat is selected!</p>} />
-
+            
             <Route path='/chat' render={() => currentChat !== undefined 
-                ? <ChatView webSocketClient={webSocketClient} setCurrentChat={setCurrentChat} currentChat={currentChat} />
+                ? <OrderView order={order}/>
+                : <p>No order is selected!</p>
+            }/>
+            
+            <Route path='/chat' render={() => currentChat !== undefined 
+                ? <ChatView webSocketClient={webSocketClient} chat={chat} setCurrentChat={setCurrentChat} currentChat={currentChat} />
                 : <p>No chat is selected!</p>
             }/>
         </div>

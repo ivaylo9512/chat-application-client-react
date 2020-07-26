@@ -49,7 +49,7 @@ const Logged = ({logout, user, appType}) => {
 
     return(
         <div className='content-container'>
-            <HeaderScroll setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
+            <HeaderScroll setOrder={setOrder} setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
             <div className='content'>
                 <Menu headerClass={headerClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} logout={logout} appType={appType}/>
                 <Main searchChats={searchChats} chat={chat} order={order}/>

@@ -4,16 +4,16 @@ import MessageForm from './MessageForm'
 import { useRequest } from '../hooks/useRequest';
 
 
-const Chat = ({currentChat, setCurrentChat}) => {  
+const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {  
     const [error, setError] = useState()
     const [nextSessions, fetchSessions, setBody, setUrl] = useRequest({callback: setNextSessions, isAuth: true})
 
-    const setNextSessions = () => {
+    const setNextSessions = (nextSessions) => {
         setCurrentChat({
             ...currentChat, 
             sessions:{
                 ...currentChat.sessions, 
-                ...JSON.parse(data)
+                ...JSON.parse(nextSessions)
             }
         })
 
