@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef} from 'react';
 
-export const useRequest = ({initialUrl, initialParams, initialValue, initialHeaders, fetchOnMount, callback, method, isAuth}) => {
+export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, method, isAuth}) => {
     const [data, setData] = useState(initialValue)
-    const [body, setBody] = useState(initialParams)
     const [url, setUrl] = useState(initialUrl)
     const [requestHeaders, setHeaders] = useState(initialHeaders)
+    const [body, setBody] = useState()
     const [error, setError] = useState()
     const isCurrent = useRef(true)
 

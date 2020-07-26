@@ -1,6 +1,27 @@
 import React from 'react'
+import { useRequest } from '../hooks/useRequest';
 
-const OrderView = (order) => {
+const OrderView = (order, orders, setOrder, setOrders) => {
+    const [, fetchDishStatus, , setUrl] = useRequest({callback: updateDish, isAuth: true})
+
+    const updateDish = (dish) => {
+        setOrder({
+            ...order, 
+            dishes:{
+                ...order.dishes,
+                dish
+            }
+        })
+        setOrders({
+            ...orders,
+            order
+        })
+    } 
+
+    const updateDishStatus = (dish) => {
+        setUrl('http://localhost:8080/api/order/auth/updateDish' + dish)
+        fetchDishStatus()
+    }
 
     return(
         <div className="order-view">
@@ -21,7 +42,7 @@ const OrderView = (order) => {
             </div>
             <div className="dishes">
                 {order.dishes.map(dish => {
-                    return <Dish key={dish.id} dish={dish}/>
+                    return <Dish key={dish.id} onClick={() => updateDishStatus(dish.id)} dish={dish}/>
                 })}
             </div>
         </div>
