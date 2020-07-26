@@ -35,13 +35,7 @@ const Main = ({searchChats}) => {
     }
 
     const createNewChat = (userId) => {
-        console.log('hey')
-    }
-
-    const sendNewMessage = (message) => { 
-        const chatId = currentChat.id
-        const receiverId = currentChat.user.id
-        webSocketClient.publish({destination: '/api/message', body: JSON.stringify({chatId, receiverId, message}), headers: {'Authorization': localStorage.getItem('Authorization')}});
+        console.log(userId)
     }
 
     return(
@@ -55,7 +49,7 @@ const Main = ({searchChats}) => {
             <Route exact path='/' render={() => <p>No chat is selected!</p>} />
 
             <Route path='/chat' render={() => currentChat !== undefined 
-                ? <ChatView setCurrentChat={setCurrentChat} currentChat={currentChat} />
+                ? <ChatView webSocketClient={webSocketClient} setCurrentChat={setCurrentChat} currentChat={currentChat} />
                 : <p>No chat is selected!</p>
             }/>
         </div>
