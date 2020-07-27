@@ -4,7 +4,7 @@ import './App.css';
 import Login from './components/Login'
 import Register from './components/Register'
 import Logged from './components/Logged'
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'import ErrorBoundary from './components/ErrorBoundary';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const App = () => {
@@ -19,22 +19,24 @@ const App = () => {
 
     return (
         <ErrorBoundary>
-            <Switch>
+            <Router>
                 {auth ? 
                     <>
                         <Logged logout={logout} user={user} appType={appType} /> 
+                        <Redirect from='login' to='/' />
                     </> :
                         appType ?
-                            <> 
+                            <Switch>
                                 <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
-                                <Route render={() => <Login setUser={setUser} setAuth={setAuth} setAppType={setAppType} />} />
-                            </> :
+                                <Route path='/login'render={() => <Login setUser={setUser} setAuth={setAuth} setAppType={setAppType} />}/>
+                                <Redirect from='/' to='/login'/>
+                            </Switch> :
                             <div className='type-buttons'>
                                 <button onClick={() => setAppType('chatOnly')} />
                                 <button onClick={() => setAppType('restaurant')} />
                             </div> 
                 }
-            </Switch>
+            </Router>
         </ErrorBoundary>
     )
 }
