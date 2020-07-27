@@ -4,8 +4,8 @@ import './App.css';
 import Login from './components/Login'
 import Register from './components/Register'
 import Logged from './components/Logged'
-import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'import ErrorBoundary from './components/ErrorBoundary';
-import ErrorBoundary from './components/ErrorBoundary';
+import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const App = () => {
     const [user, setUser] = useState(undefined)

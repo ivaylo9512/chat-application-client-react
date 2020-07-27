@@ -13,7 +13,7 @@ const Login = ({setUser, setAuth, setAppType}) => {
         setAuth(token)
     },[setAuth, setUser])
 
-    const [userInfo, fetchChats, setUserData] = useRequest({initialUrl:'http://localhost:8080/api/users/login', callback: onSuccessfulLogin, fetchOnMount: false})
+    const [userInfo, fetchChats, setUserData] = useRequest({initialUrl:'http://localhost:8080/api/users/login', callback: onSuccessfulLogin, fetchOnMount: false, method: 'post'})
 
     const login = (e) => {
         e.preventDefault();

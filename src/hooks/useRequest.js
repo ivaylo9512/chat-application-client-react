@@ -4,7 +4,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
     const [data, setData] = useState(initialValue)
     const [url, setUrl] = useState(initialUrl)
     const [requestHeaders, setHeaders] = useState(initialHeaders)
-    const [body, setBody] = useState()
+    const [body, setBodyData] = useState()
     const [error, setError] = useState()
     const isCurrent = useRef(true)
 
@@ -18,7 +18,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
     async function fetchRequest() {
         const response = await fetch(url, {
             method,
-            body,
+            body: JSON.stringify(body),
             headers: isAuth ? 
                 {...requestHeaders, Authorization: localStorage.getItem('Authorization')} :
                 requestHeaders
@@ -38,7 +38,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         }
     }
 
-    return [data, fetchRequest, setBody, setUrl, setHeaders, error]
+    return [data, fetchRequest, setBodyData, setUrl, setHeaders, error]
 }
 
 export default useRequest
