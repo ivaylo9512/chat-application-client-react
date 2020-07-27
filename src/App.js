@@ -23,7 +23,6 @@ const App = () => {
                 {auth ? 
                     <>
                         <Logged logout={logout} user={user} appType={appType} /> 
-                        <Redirect from='login' to='/' />
                     </> :
                         appType ?
                             <Switch>
@@ -37,7 +36,7 @@ const App = () => {
                             </div> 
                 }
             </Router>
-        </ErrorBoundary>
+            </ErrorBoundary>
     )
 }
 

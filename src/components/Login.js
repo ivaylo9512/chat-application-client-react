@@ -8,9 +8,9 @@ const Login = ({setUser, setAuth, setAppType}) => {
     const [password, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [error, setError] = useState()
     
-    const onSuccessfulLogin  = useCallback((data, token) => {
+    const onSuccessfulLogin  = useCallback((data, headers) => {
         setUser(data)
-        setAuth(token)
+        setAuth(headers.get('Authorization'))
     },[setAuth, setUser])
 
     const [userInfo, fetchChats, setUserData] = useRequest({initialUrl:'http://localhost:8080/api/users/login', callback: onSuccessfulLogin, fetchOnMount: false, method: 'post'})

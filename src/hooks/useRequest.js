@@ -4,7 +4,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
     const [data, setData] = useState(initialValue)
     const [url, setUrl] = useState(initialUrl)
     const [requestHeaders, setHeaders] = useState(initialHeaders)
-    const [body, setBodyData] = useState()
+    const [body, setBody] = useState()
     const [error, setError] = useState()
     const isCurrent = useRef(true)
 
@@ -38,7 +38,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         }
     }
 
-    return [data, fetchRequest, setBodyData, setUrl, setHeaders, error]
+    return [data, fetchRequest, setBody, setUrl, setHeaders, error]
 }
 
 export default useRequest

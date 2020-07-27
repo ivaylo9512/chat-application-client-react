@@ -11,8 +11,8 @@ const Logged = ({logout, user, appType}) => {
     const [order, setOrder] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
 
-    const [chats] = useRequest({initialUrl:'http://localhost:8080/api/chat/auth/getChats?pageSize=3', initialValue:[], auth: true, fetchOnMount:true, callback:setCurrentList})
-    const [orders, fetchOrders] = useRequest({initialUrl: 'http://localhost:8080/api/orders/auth/getOrders', initialValue:[], auth: true})
+    const [chats] = useRequest({initialUrl:'http://localhost:8080/api/chat/auth/getChats?pageSize=3', initialValue:[], isAuth: true, fetchOnMount:true, callback:setCurrentList})
+    const [orders, fetchOrders] = useRequest({initialUrl: 'http://localhost:8080/api/orders/auth/getOrders', initialValue:[], isAuth: true})
 
     const searchChats = (name) => {
         name = name.toUpperCase()
