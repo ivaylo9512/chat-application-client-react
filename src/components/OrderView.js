@@ -1,5 +1,6 @@
 import React from 'react'
 import { useRequest } from '../hooks/useRequest';
+import Dish from './Dish';
 
 const OrderView = (order, orders, setOrder, setOrders) => {
     const [, fetchDishStatus, , setUrl] = useRequest({callback: updateDish, isAuth: true})
