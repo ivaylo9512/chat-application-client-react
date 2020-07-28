@@ -41,8 +41,8 @@ const Main = ({searchChats, chat, order}) => {
 
     return(
         <div className='main-container'>
-            <WebSocket setWebSocketClient={setWebSocketClient} />
-`            <Switch>
+            <WebSocket setWebSocketClient={setWebSocketClient} />            
+            <Switch>
                     <Route path='/searchUsers' render={({history}) => 
                         <>
                             <UsersList  history={history} createNewChat={createNewChat} foundUsers={foundUsers} />
