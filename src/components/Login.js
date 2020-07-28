@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useInput } from '../hooks/useInput'
 import { useRequest } from '../hooks/useRequest'
 
-const Login = ({setUser, setAuth, setAppType}) => {
+const Login = ({setUser, setAuth, resetAppType}) => {
     const [username, usernameInput] = useInput({type: 'text', placeholder:'username'})
     const [password, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [error, setError] = useState()
@@ -23,7 +23,7 @@ const Login = ({setUser, setAuth, setAppType}) => {
 
     return (
         <section>
-            <button onClick={() => setAppType(undefined)}>back</button>
+            <button onClick={() => resetAppType}>back</button>
             <form onSubmit={login}>
                 {usernameInput}
                 {passwordInput}

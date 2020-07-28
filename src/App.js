@@ -17,6 +17,21 @@ const App = () => {
         removeAuth()
     }
 
+    const setChatApp = () => {
+        setAppType('chatOnly')
+        localStorage.setItem('baseUrl', 'http://localhost:8080')
+    }
+
+    const setRestaurantApp = () => {
+        setAppType('restaurant')
+        localStorage.setItem('baseUrl', 'http://localhost:8090')
+    }
+
+    const resetAppType = () => {
+        setAppType('undefined')
+        localStorage.removeItem('baseUrl')
+    }
+
     return (
         <ErrorBoundary>
             <Router>
@@ -27,12 +42,12 @@ const App = () => {
                         appType ?
                             <Switch>
                                 <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
-                                <Route path='/login'render={() => <Login setUser={setUser} setAuth={setAuth} setAppType={setAppType} />}/>
+                                <Route path='/login'render={() => <Login setUser={setUser} setAuth={setAuth} resetAppType={resetAppType} />}/>
                                 <Redirect from='/' to='/login'/>
                             </Switch> :
                             <div className='type-buttons'>
-                                <button onClick={() => setAppType('chatOnly')} />
-                                <button onClick={() => setAppType('restaurant')} />
+                                <button onClick={() => setChatApp} />
+                                <button onClick={() => setRestaurantApp} />
                             </div> 
                 }
             </Router>
