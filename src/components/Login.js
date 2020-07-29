@@ -13,12 +13,11 @@ const Login = ({setUser, setAuth, resetAppType}) => {
         setAuth(headers.get('Authorization'))
     },[setAuth, setUser])
 
-    const [userInfo, fetchChats, setUserData] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/login`, callback: onSuccessfulLogin, fetchOnMount: false, method: 'post'})
+    const [userInfo, fetchLogin] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/login`, callback: onSuccessfulLogin, fetchOnMount: false, method: 'post'})
 
     const login = (e) => {
         e.preventDefault();
-        setUserData({username, password})
-        fetchChats()
+        fetchLogin({data:{username, password}})
     }
 
     return (

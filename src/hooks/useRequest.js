@@ -12,7 +12,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         return () => isCurrent.current = false
     }, [])
 
-    async function fetchRequest(url, body, headers) {
+    async function fetchRequest({url, body, headers}) {
         headers = headers || initialHeaders
         headers = isAuth 
             ? {...headers, Authorization: localStorage.getItem('Authorization')} 
@@ -22,14 +22,15 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
             body: JSON.stringify(body),
             headers
         })
+
         let data = await response.text()
-        const headers = response.headers
+        const responseHeaders = response.headers
         if(isCurrent.current){
             if(response.ok){
                 data = JSON.parse(data)
                 setData(data)
                 if(callback){
-                    callback(data, headers)
+                    callback(data, responseHeaders)
                 }
             }else{
                 setError(data)

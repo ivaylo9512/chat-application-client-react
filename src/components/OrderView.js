@@ -3,7 +3,7 @@ import { useRequest } from '../hooks/useRequest';
 import Dish from './Dish';
 
 const OrderView = (order, orders, setOrder, setOrders) => {
-    const [, fetchDishStatus, , setUrl] = useRequest({callback: updateDish, isAuth: true})
+    const [,fetchDishStatus] = useRequest({callback: updateDish, isAuth: true})
 
     const updateDish = (dish) => {
         setOrder({
@@ -20,8 +20,7 @@ const OrderView = (order, orders, setOrder, setOrders) => {
     } 
 
     const updateDishStatus = (dish) => {
-        setUrl(`http://${localStorage.getItem('BaseUrl')}/api/order/auth/updateDish` + dish)
-        fetchDishStatus()
+        fetchDishStatus({url:`http://${localStorage.getItem('BaseUrl')}/api/order/auth/updateDish${dish}`})
     }
 
     return(

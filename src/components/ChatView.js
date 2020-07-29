@@ -6,7 +6,7 @@ import { useRequest } from '../hooks/useRequest';
 
 const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {  
     const [error, setError] = useState()
-    const [nextSessions, fetchSessions, setBody, setUrl] = useRequest({callback: setNextSessions, isAuth: true})
+    const [nextSessions, fetchSessions] = useRequest({callback: setNextSessions, isAuth: true})
     const baseUrl = useRef('http//' + localStorage.getItem('BaseUrl'))
     const setNextSessions = (nextSessions) => {
         setCurrentChat({
@@ -19,8 +19,7 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
 
     }
     const getNextSessions = async () => {
-        setUrl(`${baseUrl.current}/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.currentChat.id}page${this.props.currentChat.session})`)
-        fetchSessions()
+        fetchSessions({url: `${baseUrl.current}/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.currentChat.id}page${this.props.currentChat.session})`})
     }
 
     const sendNewMessage = (message) => { 
