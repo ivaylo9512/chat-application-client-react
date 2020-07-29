@@ -1,7 +1,7 @@
-import React, {useState} from 'react'
+import React, { useState, useRef } from 'react'
 import Session from './Session';
 import MessageForm from './MessageForm'
-import { useRequest, useRef } from '../hooks/useRequest';
+import { useRequest } from '../hooks/useRequest';
 
 
 const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {  

@@ -23,7 +23,7 @@ const Login = ({setUser, setAuth, resetAppType}) => {
 
     return (
         <section>
-            <button onClick={() => resetAppType}>back</button>
+            <button onClick={resetAppType}>back</button>
             <form onSubmit={login}>
                 {usernameInput}
                 {passwordInput}

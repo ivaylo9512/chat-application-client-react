@@ -19,7 +19,7 @@ const App = () => {
 
     const setChatApp = () => {
         setAppType('chatOnly')
-        localStorage.setItem('baseUrl', 'localhost:8080')
+        localStorage.setItem('BaseUrl', 'localhost:8080')
     }
 
     const setRestaurantApp = () => {
@@ -28,8 +28,8 @@ const App = () => {
     }
 
     const resetAppType = () => {
-        setAppType('undefined')
-        localStorage.removeItem('baseUrl')
+        setAppType(undefined)
+        localStorage.removeItem('BaseUrl')
     }
 
     return (
@@ -46,8 +46,8 @@ const App = () => {
                                 <Redirect from='/' to='/login'/>
                             </Switch> :
                             <div className='type-buttons'>
-                                <button onClick={() => setChatApp} />
-                                <button onClick={() => setRestaurantApp} />
+                                <button onClick={setChatApp}>Chat</button>
+                                <button onClick={setRestaurantApp}>Restaurant</button>
                             </div> 
                 }
             </Router>
