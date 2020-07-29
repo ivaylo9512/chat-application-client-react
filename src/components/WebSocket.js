@@ -10,7 +10,7 @@ const WebSocket = ({setWebSocketClient}) => {
             isMounted.current = true
         }else{
             const client = new Client({
-                brokerURL: 'ws://localhost:8080/api/chat/message',
+                brokerURL: `ws://${localStorage.getItem('BaseUrl')}/api/chat/message`,
                 connectHeaders: {
                     'Authorization': localStorage.getItem('Authorization'),
                 },

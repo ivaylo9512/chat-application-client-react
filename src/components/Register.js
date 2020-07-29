@@ -47,7 +47,7 @@ const Register = ({setUser}) => {
         let isCurrent = true;
         if(userInfo){
             async function register(){
-                const response = await fetch('http://localhost:8080/api/users/register', {
+                const response = await fetch(`http://${localStorage.getItem('BaseUrl')}/api/users/register`, {
                     method: 'post',
                     body: JSON.stringify(userInfo)
                 })

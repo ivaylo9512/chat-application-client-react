@@ -3,7 +3,7 @@ import Users from './User'
 const UsersList = ({foundUsers, setChat, createNewChat, history}) => {
 
     const createChat = (userId) => {
-        fetch(`http://localhost:8080/api/chat/auth/create?userId=${userId}`)        
+        fetch(`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/create?userId=${userId}`)        
     }
 
     return (

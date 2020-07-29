@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
 import Session from './Session';
 import MessageForm from './MessageForm'
-import { useRequest } from '../hooks/useRequest';
+import { useRequest, useRef } from '../hooks/useRequest';
 
 
 const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {  
     const [error, setError] = useState()
     const [nextSessions, fetchSessions, setBody, setUrl] = useRequest({callback: setNextSessions, isAuth: true})
-
+    const baseUrl = useRef('http//' + localStorage.getItem('BaseUrl'))
     const setNextSessions = (nextSessions) => {
         setCurrentChat({
             ...currentChat, 
@@ -19,7 +19,7 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
 
     }
     const getNextSessions = async () => {
-        setUrl(`http://localhost:8080/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.currentChat.id}page${this.props.currentChat.session})`)
+        setUrl(`${baseUrl.current}/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.currentChat.id}page${this.props.currentChat.session})`)
         fetchSessions()
     }
 

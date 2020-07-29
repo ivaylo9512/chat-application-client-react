@@ -20,7 +20,7 @@ const OrderView = (order, orders, setOrder, setOrders) => {
     } 
 
     const updateDishStatus = (dish) => {
-        setUrl('http://localhost:8080/api/order/auth/updateDish' + dish)
+        setUrl(`http://${localStorage.getItem('BaseUrl')}/api/order/auth/updateDish` + dish)
         fetchDishStatus()
     }
 

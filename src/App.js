@@ -19,12 +19,12 @@ const App = () => {
 
     const setChatApp = () => {
         setAppType('chatOnly')
-        localStorage.setItem('baseUrl', 'http://localhost:8080')
+        localStorage.setItem('baseUrl', 'localhost:8080')
     }
 
     const setRestaurantApp = () => {
         setAppType('restaurant')
-        localStorage.setItem('baseUrl', 'http://localhost:8090')
+        localStorage.setItem('BaseUrl', 'localhost:8090')
     }
 
     const resetAppType = () => {

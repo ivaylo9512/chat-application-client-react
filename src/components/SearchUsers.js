@@ -34,7 +34,7 @@ const SearchUsers = ({setFoundUsers}) => {
     
     return (
         <div className='form-container'>
-            <form onSubmit={() => setUrl(`http://localhost:8080/api/users/auth/searchForUsers/${name}`) }>
+            <form onSubmit={() => setUrl(`http://${localStorage.getItem('BaseUrl')}/api/users/auth/searchForUsers/${name}`) }>
                 {nameInput}
                 <button type='submit'><i className='fas fa-search'></i></button>
             </form>
