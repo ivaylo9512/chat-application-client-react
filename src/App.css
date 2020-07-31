@@ -346,7 +346,6 @@ nav{
     -ms-flex: 1;
     flex: 1;
 }
-
 .form-container{
     height: 31%;
     width: 100%;
@@ -356,6 +355,10 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: 3s;
+}
+.form-container.hidden{
+    margin-bottom: -31vh;
 }
 .main-container form {
     height: 38%;

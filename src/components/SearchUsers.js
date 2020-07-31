@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {useInput} from '../hooks/useInput'
 
-const SearchUsers = ({setFoundUsers}) => {  
+const SearchUsers = ({setFoundUsers, searchClass}) => {  
     const [name, nameInput] = useInput({type: 'text', placeholder:'search users'})
     const [url, setUrl] = useState(undefined)
     const [error, setError] = useState(undefined)
@@ -33,7 +33,7 @@ const SearchUsers = ({setFoundUsers}) => {
     
     
     return (
-        <div className='form-container'>
+        <div className={searchClass}>
             <form onSubmit={() => setUrl(`http://${localStorage.getItem('BaseUrl')}/api/users/auth/searchForUsers/${name}`) }>
                 {nameInput}
                 <button type='submit'><i className='fas fa-search'></i></button>

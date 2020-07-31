@@ -1,11 +1,13 @@
 import React, { useRef, useState } from 'react'
 import {Link, useHistory} from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
-const Menu = ({setHeader, headerClass, headerType, setHeaderClass, setSearchClass, logout, appType}) => {
+const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, setSearchClass, logout, appType}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
     const history = useHistory()
     const nav = useRef()
+    const location = useLocation()
     const [rotationStyle, setrotationStyle] = useState(0)
     const isRotating = useRef(false)
     const rotatingSign = useRef()
@@ -20,7 +22,7 @@ const Menu = ({setHeader, headerClass, headerType, setHeaderClass, setSearchClas
     }
     
     const toggleSearch = () => {
-        setSearchClass(headerClass == 'form-container hidden' ? 'form-container' : 'form-container hidden')    
+        setSearchClass(searchClass == 'form-container hidden' ? 'form-container' : 'form-container hidden')    
     }
     
     const logoutAndRedirect = () => {
@@ -100,6 +102,13 @@ const Menu = ({setHeader, headerClass, headerType, setHeaderClass, setSearchClas
                                 <i className='fas fa-user-plus'></i>
                             </Link>
                         </li>
+                        {(location.pathname == '/searchUsers' || location.pathname == '/searchChat') &&
+                            <li>
+                                <button onClick={toggleSearch}>
+                                    <i className={searchClass == 'form-container' ? 'fas fa-caret-down' : 'fas fa-caret-up' }></i>
+                                </button>
+                            </li>
+                        }
                         {appType == 'restaurant' && 
                             <>
                                 <li>

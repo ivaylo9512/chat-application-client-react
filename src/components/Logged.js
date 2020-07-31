@@ -10,7 +10,7 @@ const Logged = ({logout, user, appType}) => {
     const [chat, setChat] = useState(undefined)
     const [order, setOrder] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
-    const [searchClass, setSearchClass] = useState('search-scroll')
+    const [searchClass, setSearchClass] = useState('form-container')
 
     const [chats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:true, callback:setCurrentList})
     const [orders, fetchOrders] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})

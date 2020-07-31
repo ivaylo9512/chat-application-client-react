@@ -13,7 +13,7 @@ const SearchChat = ({searchChats, searchClass}) => {
     }, [])
     
     return (
-        <div className='form-container'>
+        <div className={searchClass}>
             <form onSubmit={search}>
                 {nameInput}
                 <button><i className='fas fa-search'></i></button>
