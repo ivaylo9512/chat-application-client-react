@@ -12,7 +12,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         return () => isCurrent.current = false
     }, [])
 
-    async function fetchRequest({url, body, headers}) {
+    async function fetchRequest({url, body, headers} = {}) {
         headers = headers || initialHeaders
         headers = isAuth 
             ? {...headers, Authorization: localStorage.getItem('Authorization')} 
