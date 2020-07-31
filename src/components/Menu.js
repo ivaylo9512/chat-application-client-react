@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState } from 'react'
 import {Link, useHistory} from 'react-router-dom'
 
 const Menu = ({setHeader, headerClass, headerType, setHeaderClass, logout, appType}) => {
@@ -76,21 +76,57 @@ const Menu = ({setHeader, headerClass, headerType, setHeaderClass, logout, appTy
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
                     <button onClick={toggleMenu} className='circle-btn' tabIndex='-1'>-</button>
                     <ul ref={nav} style={rotate}>
-                        <li><button tabIndex='-1'><i className='fas fa-user'></i></button></li>
-                        <li><button onClick={toggleHeader} tabIndex='-1'><i className={headerClass == 'header-scroll hidden' ? 'far fa-eye' : 'far fa-eye-slash'}></i></button></li>
-                        <li><Link to='/searchChat' tabIndex='-1'><i className='fas fa-search'></i></Link></li>
-                        <li><Link to='/searchUsers' tabIndex='-1'><i className='fas fa-user-plus'></i></Link></li>
+                        <li>
+                            <button tabIndex='-1'>
+                                <i className='fas fa-user'></i>
+                            </button>
+                        </li>
+                        <li>
+                            <button onClick={toggleHeader} tabIndex='-1'>
+                                <i className={headerClass == 'header-scroll hidden' ? 'far fa-eye' : 'far fa-eye-slash'}></i>
+                            </button>
+                        </li>
+                        <li>
+                            <Link to='/searchChat' tabIndex='-1'>
+                                <i className='fas fa-search'></i>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to='/searchUsers' tabIndex='-1'>
+                                <i className='fas fa-user-plus'></i>
+                            </Link>
+                        </li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button onClick={rotationStyle <= minRotation ? showChatMenu : showRestMenu} tabIndex='-1'>{rotationStyle <= minRotation ? 'C' : 'R'}</button></li>
+                                <li>
+                                    <button onClick={rotationStyle <= minRotation ? showChatMenu : showRestMenu} tabIndex='-1'>
+                                        {rotationStyle <= minRotation ? 'C' : 'R'}
+                                    </button>
+                                </li>
                             </>
                         }                        
-                        <li><button onClick={logoutAndRedirect} tabIndex='-1'><i className='fas fa-sign-out-alt'></i></button></li>
+                        <li>
+                            <button onClick={logoutAndRedirect} tabIndex='-1'>
+                                <i className='fas fa-sign-out-alt'></i>
+                            </button>
+                        </li>
                         {appType == 'restaurant' && 
                             <>
-                                <li><button onClick={setHeader} tabIndex='-1'><i className= {headerType == 'chats' ? 'fas fa-comments' : 'fas fa-utensils' }></i></button></li>
-                                <li><button tabIndex='-1'><i className='fas fa-plus-circle'></i></button></li>
-                                <li><button tabIndex='-1'><i className='fas fa-bell'></i></button></li>
+                                <li>
+                                    <button onClick={setHeader} tabIndex='-1'>
+                                        <i className= {headerType == 'chats' ? 'fas fa-comments' : 'fas fa-utensils' }></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button tabIndex='-1'>
+                                        <i className='fas fa-plus-circle'></i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button tabIndex='-1'>
+                                        <i className='fas fa-bell'></i>
+                                    </button>
+                                </li>
                             </>
                         }
                     </ul>
