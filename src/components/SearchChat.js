@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useInput } from '../hooks/useInput' 
-const SearchChat = ({searchChats}) => {  
+const SearchChat = ({searchChats, searchClass}) => {  
     const [name, nameInput] = useInput({type: 'text', placeholder:'search chat'})
     
     const search = (e) => {

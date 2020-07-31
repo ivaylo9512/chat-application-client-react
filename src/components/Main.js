@@ -7,7 +7,7 @@ import SearchChat from './SearchChat';
 import ChatView from './ChatView'
 import OrderView from './OrderView'
 
-const Main = ({searchChats, chat, order}) => {
+const Main = ({searchChats, chat, order, searchClass}) => {
     const [currentChat, setCurrentChat] = useState(undefined)
     const [foundUsers, setFoundUsers] = useState([])
     const [webSocketClient, setWebSocketClient] = useState()
@@ -45,11 +45,11 @@ const Main = ({searchChats, chat, order}) => {
             <Switch>
                     <Route path='/searchUsers' render={({history}) => 
                         <>
-                            <UsersList  history={history} createNewChat={createNewChat} foundUsers={foundUsers} />
-                            <SearchUsers setCurrentChat={setCurrentChat} setFoundUsers={setFoundUsers} />
+                            <UsersList history={history} createNewChat={createNewChat} foundUsers={foundUsers} />
+                            <SearchUsers setCurrentChat={setCurrentChat} searchClass={searchClass} setFoundUsers={setFoundUsers} />
                         </>
                     }/>
-                    <Route path='/searchChat' render={() => <SearchChat searchChats={searchChats}/>} />
+                    <Route path='/searchChat' render={() => <SearchChat searchClass={searchClass} searchChats={searchChats}/>} />
                     <Route path='/chat' render={() => currentChat !== undefined 
                         ? <OrderView order={order}/>
                         : <p>No order is selected!</p>

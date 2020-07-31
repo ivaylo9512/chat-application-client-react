@@ -10,6 +10,7 @@ const Logged = ({logout, user, appType}) => {
     const [chat, setChat] = useState(undefined)
     const [order, setOrder] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
+    const [searchClass, setSearchClass] = useState('search-scroll')
 
     const [chats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:true, callback:setCurrentList})
     const [orders, fetchOrders] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
@@ -51,8 +52,8 @@ const Logged = ({logout, user, appType}) => {
         <div className='content-container'>
             <HeaderScroll setOrder={setOrder} setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
             <div className='content'>
-                <Menu headerClass={headerClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} logout={logout} appType={appType}/>
-                <Main searchChats={searchChats} chat={chat} order={order}/>
+                <Menu headerClass={headerClass} searchClass={searchClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} setSearchClass={setSearchClass} logout={logout} appType={appType}/>
+                <Main searchChats={searchChats} searchClass={searchClass} chat={chat} order={order}/>
             </div>
         </div>
     )
