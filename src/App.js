@@ -37,7 +37,8 @@ const App = () => {
             <Router>
                 {auth ? 
                     <>
-                        <Logged logout={logout} user={user} appType={appType} /> 
+                        <Logged user={user} appType={appType}/> 
+                        <Route path='/logout'render={logout}/>
                     </> :
                         appType ?
                             <Switch>

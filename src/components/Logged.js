@@ -4,7 +4,7 @@ import Menu from './Menu'
 import HeaderScroll from './HeaderScroll';
 import useRequest from '../hooks/useRequest'
 
-const Logged = ({logout, user, appType}) => {
+const Logged = ({user, appType}) => {
     const [currentList, setCurrentList] = useState([]) 
     const [headerType, setHeaderType] = useState('chats')
     const [chat, setChat] = useState(undefined)
@@ -52,7 +52,7 @@ const Logged = ({logout, user, appType}) => {
         <div className='content-container'>
             <HeaderScroll setOrder={setOrder} setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
             <div className='content'>
-                <Menu headerClass={headerClass} searchClass={searchClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} setSearchClass={setSearchClass} logout={logout} appType={appType}/>
+                <Menu headerClass={headerClass} searchClass={searchClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} setSearchClass={setSearchClass} appType={appType}/>
                 <Main searchChats={searchChats} searchClass={searchClass} chat={chat} order={order}/>
             </div>
         </div>

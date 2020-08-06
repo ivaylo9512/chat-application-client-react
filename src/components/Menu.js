@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import {Link, useHistory} from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 
-const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, setSearchClass, logout, appType}) => {
+const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, setSearchClass, appType}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
     const history = useHistory()
@@ -25,11 +25,6 @@ const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, 
         setSearchClass(searchClass == 'form-container hidden' ? 'form-container' : 'form-container hidden')    
     }
     
-    const logoutAndRedirect = () => {
-        logout()
-        history.push('/login')
-    }
-
     const rotateNav = (e) => {
         const sign = Math.sign(e.deltaY + e.deltaX)
         if(!isRotating.current || sign != rotatingSign.current){
@@ -119,9 +114,9 @@ const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, 
                             </>
                         }                        
                         <li>
-                            <button onClick={logoutAndRedirect} tabIndex='-1'>
+                            <Link to='/logout' tabIndex='-1'>
                                 <i className='fas fa-sign-out-alt'></i>
-                            </button>
+                            </Link>
                         </li>
                         {appType == 'restaurant' && 
                             <>
