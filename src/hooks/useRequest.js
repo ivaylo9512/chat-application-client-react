@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef} from 'react';
 
-export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, method, isAuth}) => {
+export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, method, isAuth, shouldThrow = true}) => {
     const [data, setData] = useState(initialValue)
     const [error, setError] = useState()
     const isCurrent = useRef(true)
@@ -33,7 +33,13 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
                     callback(data, responseHeaders)
                 }
             }else{
-                setError(data)
+                if(shouldThrow){
+                    setError(() => { 
+                        throw {message:data, status: response.status}
+                    })    
+                }else{
+                    setError(data)
+                }
             }
         }
     }

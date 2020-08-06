@@ -13,7 +13,7 @@ const Login = ({setUser, setAuth, resetAppType}) => {
         setAuth(headers.get('Authorization'))
     },[setAuth, setUser])
 
-    const [userInfo, fetchLogin] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/login`, callback: onSuccessfulLogin, fetchOnMount: false, method: 'post'})
+    const [userInfo, fetchLogin] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/login`, callback: onSuccessfulLogin, fetchOnMount: false, method: 'post', shouldThrow: false})
 
     const login = (e) => {
         e.preventDefault();
