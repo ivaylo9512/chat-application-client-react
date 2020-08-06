@@ -33,7 +33,7 @@ const App = () => {
     }
 
     return (
-        <ErrorBoundary>
+        <ErrorBoundary logout={logout}>
             <Router>
                 {auth ? 
                     <>

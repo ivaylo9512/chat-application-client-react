@@ -5,8 +5,17 @@ export default class ErrorBoundary extends Component {
         error: '',
     };
 
+    componentDidCatch(error) {
+        if(error.code == 401){
+            this.props.logout()
+        }
+    }
+
     static getDerivedStateFromError(error) {
-        return  { error: error.message };
+        if(error.code == 401){
+            return { error:'' }
+        }
+        return  { error:error.message };
     }
   
     render() {
