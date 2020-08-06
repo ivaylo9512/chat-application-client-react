@@ -1,28 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 export default class ErrorBoundary extends Component {
-  state = {
-    error: '',
-  };
+    state = {
+        error: '',
+    };
 
-  componentDidCatch(error) {
-    this.setState({ error });
-  }
-
-  static getDerivedStateFromError(error) {
-    return { error };
-  }
+    static getDerivedStateFromError(error) {
+        return  { error: error.message };
+    }
   
-  render() {
-      const { error } = this.state
-      if(error){
-          return(
+    render() {
+        const { error } = this.state
+        if(error){
+            return(
             <div>
-                {error}
+              {error}
             </div>
           )
-      }
-      return this.props.children;
-  }
+        }
+        return this.props.children;
+    }
 }
