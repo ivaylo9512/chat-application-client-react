@@ -44,7 +44,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         }
     }
 
-    return [data, fetchRequest, error]
+    return [data, fetchRequest, error, setData]
 }
 
 export default useRequest

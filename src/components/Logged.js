@@ -13,8 +13,8 @@ const Logged = ({user, appType}) => {
     const [searchClass, setSearchClass] = useState('form-container')
     const isLongPolling = useRef(localStorage.getItem('LongPolling'))
 
-    const [chats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:isLongPolling, callback:setCurrentList})
-    const [orders, fetchOrders] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
+    const [chats, setChats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:!isLongPolling, callback:setCurrentList})
+    const [orders, fetchOrders, error, setData] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
 
     const searchChats = (name) => {
         name = name.toUpperCase()
@@ -33,6 +33,13 @@ const Logged = ({user, appType}) => {
         }
     }
 
+    const setData = useCallback((data) => {
+        setChats([...chats, ...data.chats])
+        setOrders([...orders, ...data.orders])
+    },[]) 
+
+    const [longPollingData, fetchPolling] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/polling/auth/waitData`, initialValue:[], isAuth: true, callback: setData})
+
     const setHeader = useCallback(() => {
         if(headerType == 'chats'){
             setHeaderType('orders')
@@ -44,8 +51,12 @@ const Logged = ({user, appType}) => {
     }, [])
 
     useEffect(() => {
-        if(appType == 'restuarant' && !isLongPolling){
-            fetchOrders()
+        if(appType == 'restuarant'){
+            if(!isLongPolling){
+                fetchOrders()
+            }else{
+                fetchPolling()
+            }
         }
     }, [appType])
 
