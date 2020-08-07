@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom'
 import { useInput } from '../hooks/useInput'
 import { useRequest } from '../hooks/useRequest'
@@ -7,6 +7,7 @@ const Login = ({setUser, setAuth, resetAppType}) => {
     const [username, usernameInput] = useInput({type: 'text', placeholder:'username'})
     const [password, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [error, setError] = useState()
+    const loginUrl = useRef(localStorage.getItem('LongPolling') ? `http://${localStorage.getItem('BaseUrl')}/api/polling/login` : `http://${localStorage.getItem('BaseUrl')}/api/users/login`)
     
     const onSuccessfulLogin  = useCallback((data, headers) => {
         setUser(data)
@@ -17,7 +18,7 @@ const Login = ({setUser, setAuth, resetAppType}) => {
 
     const login = (e) => {
         e.preventDefault();
-        fetchLogin({body:{username, password}})
+        fetchLogin({url:loginUrl.current, body:{username, password}})
     }
 
     return (
