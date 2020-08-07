@@ -7,7 +7,7 @@ const Login = ({setUser, setAuth, resetAppType}) => {
     const [username, usernameInput] = useInput({type: 'text', placeholder:'username'})
     const [password, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [error, setError] = useState()
-    const loginUrl = useRef(localStorage.getItem('LongPolling') ? `http://${localStorage.getItem('BaseUrl')}/api/polling/login` : `http://${localStorage.getItem('BaseUrl')}/api/users/login`)
+    const loginUrl = useRef(isLongPolling ? `http://${localStorage.getItem('BaseUrl')}/api/polling/login` : `http://${localStorage.getItem('BaseUrl')}/api/users/login`)
     
     const onSuccessfulLogin  = useCallback((data, headers) => {
         setUser(data)

@@ -11,8 +11,9 @@ const Logged = ({user, appType}) => {
     const [order, setOrder] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
     const [searchClass, setSearchClass] = useState('form-container')
+    const isLongPolling = useRef(localStorage.getItem('LongPolling'))
 
-    const [chats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:true, callback:setCurrentList})
+    const [chats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:isLongPolling, callback:setCurrentList})
     const [orders, fetchOrders] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
 
     const searchChats = (name) => {
@@ -43,7 +44,7 @@ const Logged = ({user, appType}) => {
     }, [])
 
     useEffect(() => {
-        if(appType == 'restuarant'){
+        if(appType == 'restuarant' && !isLongPolling){
             fetchOrders()
         }
     }, [appType])
