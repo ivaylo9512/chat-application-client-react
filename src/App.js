@@ -42,7 +42,7 @@ const App = () => {
                     </> :
                         appType ?
                             <Switch>
-                                <Route path='/register' render={() => <Register setUser={setUser} setAuth={setAuth} />}/>
+                                <Route path='/register' render={() => <Register setUser={setUser}/>}/>
                                 <Route path='/login'render={() => <Login setUser={setUser} setAuth={setAuth} resetAppType={resetAppType} />}/>
                                 <Redirect from='/' to='/login'/>
                             </Switch> :
