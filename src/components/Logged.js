@@ -5,7 +5,6 @@ import HeaderScroll from './HeaderScroll';
 import useRequest from '../hooks/useRequest'
 
 const Logged = ({user, appType}) => {
-    const [currentList, setCurrentList] = useState([]) 
     const [headerType, setHeaderType] = useState('chats')
     const [chat, setChat] = useState(undefined)
     const [order, setOrder] = useState(undefined)
@@ -13,8 +12,15 @@ const Logged = ({user, appType}) => {
     const [searchClass, setSearchClass] = useState('form-container')
     const isLongPolling = useRef(localStorage.getItem('LongPolling'))
 
-    const [chats, setChats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:!isLongPolling, callback:setCurrentList})
-    const [orders, fetchOrders, error, setData] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
+    const [chats, fetchChats, ordersError, setChats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:!isLongPolling})
+    const [orders, fetchOrders, chatsError, setOrders] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
+
+    const setData = useCallback((data) => {
+        setChats([...chats, ...data.chats])
+        setOrders([...orders, ...data.orders])
+    },[]) 
+
+    const [longPollingData, fetchPolling] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/polling/auth/waitData`, initialValue:[], isAuth: true, callback: setData})
 
     const searchChats = (name) => {
         name = name.toUpperCase()
@@ -27,27 +33,13 @@ const Logged = ({user, appType}) => {
             return null;
         })
         if(headerClass.includes('header-scroll')){
-            setCurrentList(filteredChats)
             setHeaderType('chats')
             setHeaderClass('header-scroll')
         }
     }
 
-    const setData = useCallback((data) => {
-        setChats([...chats, ...data.chats])
-        setOrders([...orders, ...data.orders])
-    },[]) 
-
-    const [longPollingData, fetchPolling] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/polling/auth/waitData`, initialValue:[], isAuth: true, callback: setData})
-
     const setHeader = useCallback(() => {
-        if(headerType == 'chats'){
-            setHeaderType('orders')
-            setCurrentList(chats)
-        }else{
-            setHeaderType('orders')
-            setCurrentList(orders)
-        }
+        setHeaderType(headerType == 'chats' ? 'chats' : 'orders')
     }, [])
 
     useEffect(() => {
@@ -62,7 +54,7 @@ const Logged = ({user, appType}) => {
 
     return(
         <div className='content-container'>
-            <HeaderScroll setOrder={setOrder} setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={currentList}/>
+            <HeaderScroll setOrder={setOrder} setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={headerType == 'chats' ? chats : orders}/>
             <div className='content'>
                 <Menu headerClass={headerClass} searchClass={searchClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} setSearchClass={setSearchClass} appType={appType}/>
                 <Main searchChats={searchChats} searchClass={searchClass} chat={chat} order={order}/>
