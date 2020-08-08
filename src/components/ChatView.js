@@ -2,12 +2,14 @@ import React, { useState, useRef } from 'react'
 import Session from './Session';
 import MessageForm from './MessageForm'
 import { useRequest } from '../hooks/useRequest';
-
+import { useParams } from "react-router";
 
 const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {  
     const [error, setError] = useState()
     const [nextSessions, fetchSessions] = useRequest({callback: setNextSessions, isAuth: true})
+    const { id } = useParams()
     const baseUrl = useRef('http//' + localStorage.getItem('BaseUrl'))
+
     const setNextSessions = (nextSessions) => {
         setCurrentChat({
             ...currentChat, 
@@ -18,6 +20,7 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
         })
 
     }
+    
     const getNextSessions = async () => {
         fetchSessions({url: `${baseUrl.current}/chat/auth/getChats/chat/auth/nextSessions?chatId=${this.props.currentChat.id}page${this.props.currentChat.session})`})
     }
@@ -29,14 +32,19 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
     }
 
     return (
-        <div className='chat-container'>
-            <MessageForm sendNewMessage={sendNewMessage}/>
-            <div className='chat'>
-                {currentChat.sessions.map(session =>{
-                    return <Session session={session} key={session.date}/>
-                })}
-            </div>
-        </div>
+        <>
+            {id !== undefined ? 
+                <div className='chat-container'>
+                    <MessageForm sendNewMessage={sendNewMessage}/>
+                    <div className='chat'>
+                        {currentChat.sessions.map(session =>{
+                            return <Session session={session} key={session.date}/>
+                        })}
+                    </div>
+                </div>
+                : <p>No chat is selected!</p>
+            }
+        </>
     )
 }
 

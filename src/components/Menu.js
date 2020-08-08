@@ -1,11 +1,10 @@
 import React, { useRef, useState } from 'react'
-import {Link, useHistory} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 
 const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, setSearchClass, appType}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
-    const history = useHistory()
     const nav = useRef()
     const location = useLocation()
     const [rotationStyle, setrotationStyle] = useState(0)

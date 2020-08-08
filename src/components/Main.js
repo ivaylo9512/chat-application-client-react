@@ -42,6 +42,9 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
         <div className='main-container'>
             <WebSocket setWebSocketClient={setWebSocketClient}/>            
             <Switch>
+                    {appType == 'restuarant' && 
+                        <Route path='/order/:id' render={() => <OrderView orders={orders}/>}/>
+                    }
                     <Route path='/searchUsers' render={({history}) => 
                         <>
                             <UsersList history={history} createNewChat={createNewChat} foundUsers={foundUsers}/>
@@ -49,11 +52,7 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
                         </>
                     }/>
                     <Route path='/searchChat' render={() => <SearchChat searchClass={searchClass} searchChats={searchChats}/>}/>
-                    <Route path='/order/:id' render={() => <OrderView orders={orders}/>}/>
-                    <Route path='/chat' render={() => currentChat !== undefined 
-                        ? <ChatView chats={chats} webSocketClient={webSocketClient}/>
-                        : <p>No chat is selected!</p>
-                    }/>
+                    <Route path='/chat/:id' render={() => <ChatView chats={chats} webSocketClient={webSocketClient}/>}/>
                     <Route path='/home' render={() => <p>No chat is selected!</p>}/>
                     <Redirect from='/' to='/home'/>
             </Switch>

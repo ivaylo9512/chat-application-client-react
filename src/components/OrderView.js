@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useRequest } from '../hooks/useRequest';
 import Dish from './Dish';
-import { useParams} from "react-router";
+import { useParams } from "react-router";
 
 const OrderView = (order, orders, setOrder, setOrders) => {
     const [,fetchDishStatus] = useRequest({callback: updateDish, isAuth: true})
     const { id } = useParams();
+    const baseUrl = useRef(localStorage.getItem('BaseUrl'))
 
     const updateDish = (dish) => {
         setOrder({
@@ -22,7 +23,7 @@ const OrderView = (order, orders, setOrder, setOrders) => {
     } 
 
     const updateDishStatus = (dish) => {
-        fetchDishStatus({url:`http://${localStorage.getItem('BaseUrl')}/api/order/auth/updateDish${dish}`})
+        fetchDishStatus({url:`http://${baseUrl}/api/order/auth/updateDish${dish}`})
     }
 
     return(

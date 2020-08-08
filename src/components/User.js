@@ -1,6 +1,9 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom'
 
-export const User = ({history, setChat, user, createNewChat}) => {
+export const User = ({setChat, user, createNewChat}) => {
+    const history = useHistory()
+
     return (
         <div>
             <div className='image'>
@@ -11,7 +14,7 @@ export const User = ({history, setChat, user, createNewChat}) => {
                 <span></span>    
             </div>
             <button onClick={()=> user.hasChatWithLoggedUser 
-                ? history.push('/chat') &&setChat(user.id)  
+                ? history.push('/chat') && setChat(user.id)  
                 : createNewChat} >
             </button>
         </div>
