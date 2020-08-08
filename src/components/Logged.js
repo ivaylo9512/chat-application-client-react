@@ -6,9 +6,7 @@ import useRequest from '../hooks/useRequest'
 
 const Logged = ({user, appType}) => {
     const [headerType, setHeaderType] = useState('chats')
-    const [chat, setChat] = useState(undefined)
     const [filteredChats, setfilteredChats] = useState([])
-    const [order, setOrder] = useState(undefined)
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
     const [searchClass, setSearchClass] = useState('form-container')
     const isLongPolling = useRef(localStorage.getItem('LongPolling'))
@@ -58,10 +56,10 @@ const Logged = ({user, appType}) => {
 
     return(
         <div className='content-container'>
-            <HeaderScroll setOrder={setOrder} setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={headerType == 'chats' ? filteredChats : orders}/>
+            <HeaderScroll headerClass={headerClass} headerType={headerType} currentList={headerType == 'chats' ? filteredChats : orders}/>
             <div className='content'>
                 <Menu headerClass={headerClass} searchClass={searchClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} setSearchClass={setSearchClass} appType={appType}/>
-                <Main searchChats={searchChats} searchClass={searchClass} chat={chat} order={order}/>
+                <Main searchChats={searchChats} searchClass={searchClass} chats={chats} orders={orders}/>
             </div>
         </div>
     )

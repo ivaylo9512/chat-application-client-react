@@ -3,7 +3,7 @@ import ChatUser from './ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
 import Order from './Order';
 
-const HeaderScroll = ({headerType, headerClass, setChat, setOrder, currentList}) => {
+const HeaderScroll = ({headerType, headerClass, currentList}) => {
     const listContainer = React.useRef()
     const scrollContainer = React.useRef()
     const [listPadding, setListPadding] = useState({})
