@@ -8,7 +8,6 @@ import ChatView from './ChatView'
 import OrderView from './OrderView'
 
 const Main = ({searchChats, searchClass, chats, orders}) => {
-    const [currentChat, setCurrentChat] = useState(undefined)
     const [foundUsers, setFoundUsers] = useState([])
     const [webSocketClient, setWebSocketClient] = useState()
     const isMounted = useRef(false)
@@ -41,25 +40,22 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
 
     return(
         <div className='main-container'>
-            <WebSocket setWebSocketClient={setWebSocketClient} />            
+            <WebSocket setWebSocketClient={setWebSocketClient}/>            
             <Switch>
                     <Route path='/searchUsers' render={({history}) => 
                         <>
-                            <UsersList history={history} createNewChat={createNewChat} foundUsers={foundUsers} />
-                            <SearchUsers setCurrentChat={setCurrentChat} searchClass={searchClass} setFoundUsers={setFoundUsers} />
+                            <UsersList history={history} createNewChat={createNewChat} foundUsers={foundUsers}/>
+                            <SearchUsers searchClass={searchClass} setFoundUsers={setFoundUsers}/>
                         </>
                     }/>
-                    <Route path='/searchChat' render={() => <SearchChat searchClass={searchClass} searchChats={searchChats}/>} />
+                    <Route path='/searchChat' render={() => <SearchChat searchClass={searchClass} searchChats={searchChats}/>}/>
+                    <Route path='/order/:id' render={() => <OrderView orders={orders}/>}/>
                     <Route path='/chat' render={() => currentChat !== undefined 
-                        ? <OrderView orders={orders}/>
-                        : <p>No order is selected!</p>
-                    }/>
-                    <Route path='/chat' render={() => currentChat !== undefined 
-                        ? <ChatView chats={chats} webSocketClient={webSocketClient} setCurrentChat={setCurrentChat} currentChat={currentChat} />
+                        ? <ChatView chats={chats} webSocketClient={webSocketClient}/>
                         : <p>No chat is selected!</p>
                     }/>
-                    <Route path='/home' render={() => <p>No chat is selected!</p>} />
-                    <Redirect from='/' to='/home' />
+                    <Route path='/home' render={() => <p>No chat is selected!</p>}/>
+                    <Redirect from='/' to='/home'/>
             </Switch>
         </div>
     )

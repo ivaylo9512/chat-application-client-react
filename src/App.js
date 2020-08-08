@@ -37,7 +37,7 @@ const App = () => {
             <Router>
                 {auth ? 
                     <>
-                        <Logged user={user} appType={appType}/> 
+                        <Logged user={user}/> 
                         <Route path='/logout'render={logout}/>
                     </> :
                         appType ?
