@@ -50,6 +50,12 @@ const Logged = ({user, appType}) => {
         }
     }, [appType])
 
+    useEffect(() => {
+        setfilteredChats(user.chats)
+        setChats(user.chats)
+        setOrders(user.orders)
+    }, [user])
+
     return(
         <div className='content-container'>
             <HeaderScroll setOrder={setOrder} setChat={setChat} headerClass={headerClass} headerType={headerType} currentList={headerType == 'chats' ? filteredChats : orders}/>
