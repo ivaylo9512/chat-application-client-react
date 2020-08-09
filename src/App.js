@@ -32,6 +32,13 @@ const App = () => {
         localStorage.removeItem('BaseUrl')
     }
 
+    useEffect(() => {
+        localStorage.setItem('Polling', 'WebSocket' in window && window.WebSocket.CLOSING === 2 
+            ? '' 
+            : 'polling'
+        )
+    },[])
+
     return (
         <ErrorBoundary logout={logout}>
             <Router>
