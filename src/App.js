@@ -11,7 +11,9 @@ import { useRequest } from './hooks/useRequest';
 const App = () => {
     const [user, setUser] = useState(undefined)
     const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null)
-    const [appType, setAppType] = useLocalStorage('appType', null)
+    const [appType, setAppType] = useLocalStorage('AppType', null)
+    const [longPolling, setLongPolling] = useLocalStorage('LongPolling', '')
+    const [baseUrl, setBaseUrl, removeBaseUrl] = useLocalStorage('BaseUrl', null)
     const [user, fetchUser, userError, setUser] = useRequest({isAuth:true})
 
     const logout = () => {
@@ -21,29 +23,29 @@ const App = () => {
 
     const setChatApp = () => {
         setAppType('chatOnly')
-        localStorage.setItem('BaseUrl', 'localhost:8080')
-        localStorage.setItem('LongPolling', '')
+        setBaseUrl('localhost:8080')
+        setLongPolling('')
     }
 
     const setRestaurantApp = () => {
         setAppType('restaurant')
-        localStorage.setItem('LongPolling', 'WebSocket' in window && window.WebSocket.CLOSING === 2
+        setLongPolling('WebSocket' in window && window.WebSocket.CLOSING === 2
             ? '' 
             : 'polling/'
         )
-        localStorage.setItem('BaseUrl', 'localhost:8090')
+        setBaseUrl('localhost:8090')
     }
 
     const resetAppType = () => {
         setAppType(undefined)
-        localStorage.removeItem('BaseUrl')
+        removeBaseUrl()
     }
 
     useEffect(() => {
-        if(auth){
-            fetchUser({url:`http://${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}auth/getLoggedUser`})
+        if(auth && appType && !user){
+            fetchUser({url:`http://${baseUrl}/api/users/${longPolling}auth/getLoggedUser`})
         }
-    },[])
+    },[appType])
 
     return (
         <ErrorBoundary logout={logout}>

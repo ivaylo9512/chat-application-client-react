@@ -2,10 +2,11 @@ import React, { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useLocation } from 'react-router-dom'
 
-const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, setSearchClass, appType}) => {
+const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, setSearchClass}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
     const nav = useRef()
+    const appType = useRef(localStorage.getItem('AppType'))
     const location = useLocation()
     const [rotationStyle, setrotationStyle] = useState(0)
     const isRotating = useRef(false)
