@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {useLocalStorage} from './hooks/useLocalStorage'
 import './App.css';
 import Login from './components/Login'
@@ -20,6 +20,11 @@ const App = () => {
         setUser(null)
         removeAuth()
     }
+
+    const setAuthUser = useCallback((user, headers) => {
+        setUser(user)
+        setAuth(headers.get('Authorization'))
+    },[])
 
     const setChatApp = () => {
         setAppType('chatOnly')
@@ -57,8 +62,8 @@ const App = () => {
                     </> :
                         appType ?
                             <Switch>
-                                <Route path='/register' render={() => <Register setUser={setUser}/>}/>
-                                <Route path='/login'render={() => <Login setUser={setUser} setAuth={setAuth} resetAppType={resetAppType} />}/>
+                                <Route path='/register' render={() => <Register setAuthUser={setAuthUser}/>}/>
+                                <Route path='/login'render={() => <Login setAuthUser={setAuthUser} resetAppType={resetAppType} />}/>
                                 <Redirect from='/' to='/login'/>
                             </Switch> :
                             <div className='type-buttons'>

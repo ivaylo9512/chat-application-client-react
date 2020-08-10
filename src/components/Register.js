@@ -3,11 +3,11 @@ import {Link, useHistory} from 'react-router-dom'
 import { useInput } from '../hooks/useInput';
 import { useRequest } from '../hooks/useRequest';
 
-const Register = ({setUser}) => {
+const Register = ({setAuthUser}) => {
     const [userInfo, setUserInfo] = useState(undefined)
     const [apiError, setApiError] = useState('')
     const [pageIndex, setPageIndex] = useState(0)
-    const [registerUser, fetchRegister] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}/register`, shouldThrow:false, callback:setUser, method:'post'})
+    const [registerUser, fetchRegister] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}/register`, shouldThrow:false, callback:setAuthUser, method:'post'})
 
     const [username, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
         minLength: 6,

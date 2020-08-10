@@ -3,17 +3,11 @@ import { Link } from 'react-router-dom'
 import { useInput } from '../hooks/useInput'
 import { useRequest } from '../hooks/useRequest'
 
-const Login = ({setUser, setAuth, resetAppType}) => {
+const Login = ({setAuthUser, resetAppType}) => {
     const [username, usernameInput] = useInput({type: 'text', placeholder:'username'})
     const [password, passwordInput] = useInput({type: 'password', placeholder:'password'})
     const [error] = useState()
-
-    const onSuccessfulLogin  = useCallback((data, headers) => {
-        setUser(data)
-        setAuth(headers.get('Authorization'))
-    },[setAuth, setUser])
-
-    const [userInfo, fetchLogin] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}login`, callback: onSuccessfulLogin, fetchOnMount: false, method: 'post', shouldThrow: false})
+    const [userInfo, fetchLogin] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}login`, callback: setAuthUser, fetchOnMount: false, method: 'post', shouldThrow: false})
 
     const login = (e) => {
         e.preventDefault();
