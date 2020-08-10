@@ -55,21 +55,23 @@ const App = () => {
     return (
         <ErrorBoundary logout={logout}>
             <Router>
-                {auth ? 
-                    <>
-                        <Logged user={user}/> 
-                        <Route path='/logout'render={logout}/>
-                    </> :
-                        appType ?
-                            <Switch>
-                                <Route path='/register' render={() => <Register setAuthUser={setAuthUser}/>}/>
-                                <Route path='/login'render={() => <Login setAuthUser={setAuthUser} resetAppType={resetAppType} />}/>
-                                <Redirect from='/' to='/login'/>
-                            </Switch> :
-                            <div className='type-buttons'>
-                                <button onClick={setChatApp}>Chat</button>
-                                <button onClick={setRestaurantApp}>Restaurant</button>
-                            </div> 
+                {appType ?
+                    auth ? 
+                        <>
+                            <Logged user={user}/> 
+                            <Route path='/logout'render={logout}/>
+                        </> 
+                        :
+                        <Switch>
+                            <Route path='/register' render={() => <Register setAuthUser={setAuthUser}/>}/>
+                            <Route path='/login'render={() => <Login setAuthUser={setAuthUser} resetAppType={resetAppType} />}/>
+                            <Redirect from='/' to='/login'/>
+                        </Switch> 
+                    :
+                    <div className='type-buttons'>
+                        <button onClick={setChatApp}>Chat</button>
+                        <button onClick={setRestaurantApp}>Restaurant</button>
+                    </div> 
                 }
             </Router>
             </ErrorBoundary>
