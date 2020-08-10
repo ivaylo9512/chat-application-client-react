@@ -22,10 +22,15 @@ const App = () => {
     const setChatApp = () => {
         setAppType('chatOnly')
         localStorage.setItem('BaseUrl', 'localhost:8080')
+        localStorage.setItem('LongPolling', '')
     }
 
     const setRestaurantApp = () => {
         setAppType('restaurant')
+        localStorage.setItem('LongPolling', 'WebSocket' in window && window.WebSocket.CLOSING === 2
+            ? '' 
+            : 'polling/'
+        )
         localStorage.setItem('BaseUrl', 'localhost:8090')
     }
 
@@ -33,13 +38,6 @@ const App = () => {
         setAppType(undefined)
         localStorage.removeItem('BaseUrl')
     }
-
-    useEffect(() => {
-        localStorage.setItem('LongPolling', 'WebSocket' in window && window.WebSocket.CLOSING === 2 
-            ? '' 
-            : 'polling/'
-        )
-    },[])
 
     useEffect(() => {
         if(auth){
