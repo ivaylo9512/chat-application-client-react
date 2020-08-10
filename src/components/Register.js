@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 import { useInput } from '../hooks/useInput';
+import { useRequest } from '../hooks/useRequest';
 
 const Register = ({setUser}) => {
     const [userInfo, setUserInfo] = useState(undefined)
     const [apiError, setApiError] = useState('')
     const [pageIndex, setPageIndex] = useState(0)
+    const [registerUser, fetchRegister] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}/register`, shouldThrow:false, callback:setUser, method:'post'})
 
     const [username, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
         minLength: 6,
@@ -33,39 +35,15 @@ const Register = ({setUser}) => {
         required: true
     }}) 
 
-    const setInfo = (e) => {
+    const register = (e) => {
         e.preventDefault()
-        setUserInfo({username, password, repeat, firstName, lastName, country, age})
+        fetchRegister({body:{username, password, repeat, firstName, lastName, country, age}})
     }
 
     const setPage = (e, page) => {
         e.preventDefault()
         setPageIndex(page)
     }
-
-    useEffect(() => {
-        let isCurrent = true;
-        if(userInfo){
-            async function register(){
-                const response = await fetch(`http://${localStorage.getItem('BaseUrl')}/api/users/register`, {
-                    method: 'post',
-                    body: JSON.stringify(userInfo)
-                })
-                const data = await response.text()
-                if(isCurrent){
-                    if(response.ok){
-                        setUser(JSON.parse(data))
-                    }else{
-                        setApiError(data)
-                    }    
-                }
-            }
-            register()
-        }
-        return () => {
-            isCurrent = false
-        }
-    }, [userInfo])
 
     return (
         <section>
@@ -78,7 +56,7 @@ const Register = ({setUser}) => {
                     <span>Already have an account?<Link to='/login'> Log in.</Link></span>
                     <span>{apiError}</span>
                 </form> :
-                <form onSubmit={setInfo}>
+                <form onSubmit={register}>
                     {firstNameInput}
                     {lastNameInput}
                     {countryInput}
