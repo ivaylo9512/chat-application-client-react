@@ -54,7 +54,6 @@ const OrderView = (order, orders, setOrder, setOrders) => {
                 <p>No order is selected!</p>
             }
         </>
-
     )
 }
 
