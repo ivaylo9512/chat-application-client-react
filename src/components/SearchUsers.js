@@ -6,6 +6,10 @@ const SearchUsers = ({setFoundUsers, searchClass}) => {
     const [name, nameInput] = useInput({type: 'text', placeholder:'search users'})
     const [users, fetchRequest] = useRequest({initialValue: [], isAuth: true, callback: setFoundUsers})
 
+    useEffect(() => {
+        return () => setFoundUsers([])
+    }, [])
+
     return (
         <div className={searchClass}>
             <form onSubmit={() => fetchRequest({url:`http://${localStorage.getItem('BaseUrl')}/api/users/auth/searchForUsers/${name}`})}>
