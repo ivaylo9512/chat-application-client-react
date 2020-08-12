@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useInput } from '../hooks/useInput';
 
-const Search = (callback, placeholder, searchClass) => {
+const Search = ({callback, placeholder, searchClass}) => {
     const [inputValue, input] = useInput({type:'text', placeholder})
 
-    const submit = () => callback(input)
+    const submit = () => {
+        e.preventDefault()
+        callback(inputValue)
+    }
+
+    useEffect(() => {
+        return () => callback('')
+    }, [])
 
     return (
         <div className={searchClass}>
