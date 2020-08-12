@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 import { useInput } from '../hooks/useInput'
 import { useRequest } from '../hooks/useRequest'
@@ -27,11 +27,4 @@ const Login = ({setAuthUser, resetAppType}) => {
         </section>
     )
 }
-
-export default Login
-
-export default Login
-
-export default Login
-
 export default Login
