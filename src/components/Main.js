@@ -1,15 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react'
 import WebSocket from './WebSocket'
 import UsersList from './UsersList';
-import SearchUsers from './SearchUsers';
 import { Route, Redirect, Switch } from 'react-router-dom'
-import SearchChat from './SearchChat';
+import Search from './Search';
 import ChatView from './ChatView'
 import OrderView from './OrderView'
 
 const Main = ({searchChats, searchClass, chats, orders}) => {
     const [foundUsers, setFoundUsers] = useState([])
     const [webSocketClient, setWebSocketClient] = useState()
+    const [users, fetchRequest] = useRequest({initialValue: [], isAuth: true, callback: setFoundUsers})
     const isMounted = useRef(false)
 
     useEffect(() => {
@@ -26,15 +26,19 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
         }
     }, [webSocketClient])
 
-    const recievedMessage = (message) => {
+    const searchUsers = name => {
+        fetchRequest({url:`http://${localStorage.getItem('BaseUrl')}/api/users/auth/searchForUsers/${name}`})
+    }
+
+    const recievedMessage = message => {
         console.log(message.body)
     }
 
-    const recievedNewChat = (message) => {
+    const recievedNewChat = message => {
         console.log(message.body)
     }
 
-    const createNewChat = (userId) => {
+    const createNewChat = userId => {
         console.log(userId)
     }
 
@@ -48,10 +52,10 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
                     <Route path='/searchUsers' render={({history}) => 
                         <>
                             <UsersList history={history} createNewChat={createNewChat} foundUsers={foundUsers}/>
-                            <SearchUsers searchClass={searchClass} setFoundUsers={setFoundUsers}/>
+                            <Search searchClass={searchClass} callback={searchUsers} placeholder={'search users'}/>
                         </>
                     }/>
-                    <Route path='/searchChat' render={() => <SearchChat searchClass={searchClass} searchChats={searchChats}/>}/>
+                    <Route path='/searchChat' render={() => <Search searchClass={searchClass} callback={searchChats} placeholder={'search chat'}/>}/>
                     <Route path='/chat/:id' render={() => <ChatView chats={chats} webSocketClient={webSocketClient}/>}/>
                     <Route path='/home' render={() => <p>No chat is selected!</p>}/>
                     <Redirect from='/' to='/home'/>
