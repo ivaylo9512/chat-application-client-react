@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import ChatUser from './ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
 import Order from './Order';
+import { useHistory } from 'react-router-dom'
 
 const HeaderScroll = ({headerType, headerClass, currentList}) => {
     const listContainer = React.useRef()
     const scrollContainer = React.useRef()
     const [listPadding, setListPadding] = useState({})
+    const history = useHistory()
 
     useEffect(() => {
         hideScrollBar()
@@ -37,8 +39,8 @@ const HeaderScroll = ({headerType, headerClass, currentList}) => {
             {currentList.map(element => 
                 <div className='element-container' key={element.id}> 
                     {headerType == 'chats' 
-                        ? <ChatUser onClick={() => setChat(element)} chat={element}/> 
-                        : <Order onClick={() => setOrder(element)} order={element}/>
+                        ? <ChatUser onClick={() => history.push('/chat/' + element.id)} chat={element}/> 
+                        : <Order onClick={() => history.push('/chat/' + element.id)} order={element}/>
                     }
                 </div>
             )}  

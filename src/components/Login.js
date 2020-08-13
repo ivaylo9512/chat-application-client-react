@@ -11,7 +11,7 @@ const Login = ({setAuthUser, resetAppType}) => {
 
     const login = (e) => {
         e.preventDefault();
-        fetchLogin({url:loginUrl.current, body:{username, password}})
+        fetchLogin({body:{username, password}})
     }
 
     return (

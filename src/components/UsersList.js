@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Users from './User'
 const UsersList = ({foundUsers, setChat, createNewChat}) => {
     const baseUrl = useRef(localStorage.getItem('BaseUrl'))

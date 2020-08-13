@@ -5,11 +5,13 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 import Search from './Search';
 import ChatView from './ChatView'
 import OrderView from './OrderView'
+import { useRequest } from '../hooks/useRequest';
 
 const Main = ({searchChats, searchClass, chats, orders}) => {
     const [foundUsers, setFoundUsers] = useState([])
     const [webSocketClient, setWebSocketClient] = useState()
     const [users, fetchRequest] = useRequest({initialValue: [], isAuth: true, callback: setFoundUsers})
+    const appType = useRef(localStorage.getItem('AppType'))
     const isMounted = useRef(false)
 
     useEffect(() => {
@@ -55,7 +57,7 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
                             <Search searchClass={searchClass} callback={searchUsers} placeholder={'search users'}/>
                         </>
                     }/>
-                    <Route path='/searchChat' render={() => <Search searchClass={searchClass} callback={searchChats} placeholder={'search chat'}/>}/>
+                    <Route path='/searchChat' render={() => <Search searchClass={searchClass} callback={searchChats} placeholder={'search chat'} onUnmount={searchChats}/>}/>
                     <Route path='/chat/:id' render={() => <ChatView chats={chats} webSocketClient={webSocketClient}/>}/>
                     <Route path='/home' render={() => <p>No chat is selected!</p>}/>
                     <Redirect from='/' to='/home'/>

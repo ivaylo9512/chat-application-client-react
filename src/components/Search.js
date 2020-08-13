@@ -1,16 +1,18 @@
 import React, { useEffect } from 'react'
 import { useInput } from '../hooks/useInput';
 
-const Search = ({callback, placeholder, searchClass}) => {
+const Search = ({callback, placeholder, searchClass, onUnmount}) => {
     const [inputValue, input] = useInput({type:'text', placeholder})
 
-    const submit = () => {
+    const submit = (e) => {
         e.preventDefault()
         callback(inputValue)
     }
 
     useEffect(() => {
-        return () => callback('')
+        if(onUnmount){
+            return () => onUnmount('')
+        }
     }, [])
 
     return (

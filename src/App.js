@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {useLocalStorage} from './hooks/useLocalStorage'
 import './App.css';
 import Login from './components/Login'
@@ -9,7 +9,6 @@ import ErrorBoundary from './components/ErrorBoundary'
 import { useRequest } from './hooks/useRequest';
 
 const App = () => {
-    const [user, setUser] = useState(undefined)
     const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null)
     const [appType, setAppType] = useLocalStorage('AppType', null)
     const [longPolling, setLongPolling] = useLocalStorage('LongPolling', '')
@@ -38,7 +37,7 @@ const App = () => {
             ? '' 
             : 'polling/'
         )
-        setBaseUrl('localhost:8090')
+        setBaseUrl('localhost:8095')
     }
 
     const resetAppType = () => {
