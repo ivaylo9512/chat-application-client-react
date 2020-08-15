@@ -4,14 +4,15 @@ import Menu from './Menu'
 import HeaderScroll from './HeaderScroll';
 import useRequest from '../hooks/useRequest'
 
-const Logged = ({user}) => {
+const Logged = ({user, setUser}) => {
     const [headerType, setHeaderType] = useState('chats')
     const [filteredChats, setfilteredChats] = useState([])
     const [headerClass, setHeaderClass] = useState('header-scroll hidden')
     const [searchClass, setSearchClass] = useState('form-container')
     const isLongPolling = useRef(localStorage.getItem('LongPolling'))
     const appType = useRef(localStorage.getItem('AppType'))
-
+    const [,fetchUser] = useRequest({isAuth:true, initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/auth/${isLongPolling.current}getLoggedUser`, callback: setUser})
+    
     const [chats, fetchChats, ordersError, setChats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:!isLongPolling, callback:setfilteredChats})
     const [orders, fetchOrders, chatsError, setOrders] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
 
@@ -47,12 +48,16 @@ const Logged = ({user}) => {
                 fetchPolling()
             }
         }
-    }, [appType])
+    }, [])
 
     useEffect(() => {
-        setfilteredChats(user.chats)
-        setChats(user.chats)
-        setOrders(user.orders)
+        if(user){
+            setfilteredChats(user.chats)
+            setChats(user.chats)
+            setOrders(user.orders)
+        }else{
+            fetchUser()
+        }
     }, [user])
 
     return(

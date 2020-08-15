@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import {useLocalStorage} from './hooks/useLocalStorage'
 import './App.css';
 import Login from './components/Login'
@@ -6,14 +6,13 @@ import Register from './components/Register'
 import Logged from './components/Logged'
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
 import ErrorBoundary from './components/ErrorBoundary'
-import { useRequest } from './hooks/useRequest';
 
 const App = () => {
     const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null)
     const [appType, setAppType] = useLocalStorage('AppType', null)
     const [longPolling, setLongPolling] = useLocalStorage('LongPolling', '')
     const [baseUrl, setBaseUrl, removeBaseUrl] = useLocalStorage('BaseUrl', null)
-    const [user, fetchUser, userError, setUser] = useRequest({isAuth:true})
+    const [user, setUser] = useState()
 
     const logout = () => {
         setUser(null)
@@ -45,19 +44,13 @@ const App = () => {
         removeBaseUrl()
     }
 
-    useEffect(() => {
-        if(auth && appType && !user){
-            fetchUser({url:`http://${baseUrl}/api/users/${longPolling}auth/getLoggedUser`})
-        }
-    },[appType])
-
     return (
         <ErrorBoundary logout={logout}>
             <Router>
                 {appType ?
                     auth ? 
                         <>
-                            <Logged user={user}/> 
+                            <Logged user={user} setUser={setUser}/> 
                             <Route path='/logout'render={logout}/>
                         </> 
                         :
@@ -73,7 +66,7 @@ const App = () => {
                     </div> 
                 }
             </Router>
-            </ErrorBoundary>
+        </ErrorBoundary>
     )
 }
 

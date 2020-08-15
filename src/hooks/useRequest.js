@@ -2,6 +2,7 @@ import { useState, useEffect, useRef} from 'react';
 
 export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, method, isAuth, shouldThrow = true}) => {
     const [data, setData] = useState(initialValue)
+    const [requestUrl, setRequestUrl] = useState(initialUrl)
     const [error, setError] = useState()
     const isCurrent = useRef(true)
 
@@ -17,7 +18,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         headers = isAuth 
             ? {...headers, Authorization: localStorage.getItem('Authorization')} 
             : headers
-        const response = await fetch(url || initialUrl, {
+        const response = await fetch(url || requestUrl, {
             method,
             body: JSON.stringify(body),
             headers
@@ -44,7 +45,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         }
     }
 
-    return [data, fetchRequest, error, setData]
+    return [data, fetchRequest, error, setData, setRequestUrl]
 }
 
 export default useRequest
