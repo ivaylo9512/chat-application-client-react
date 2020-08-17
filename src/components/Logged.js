@@ -13,8 +13,8 @@ const Logged = ({user, setUser}) => {
     const appType = useRef(localStorage.getItem('AppType'))
     const [,fetchUser] = useRequest({isAuth:true, initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/auth/${isLongPolling.current}getLoggedUser/20`, callback: setUser})
     
-    const [chats, fetchChats, ordersError, setChats] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/chat/auth/getChats?pageSize=3`, initialValue:[], isAuth: true, fetchOnMount:!isLongPolling, callback:setfilteredChats})
-    const [orders, fetchOrders, chatsError, setOrders] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/orders/auth/getOrders`, initialValue:[], isAuth: true})
+    const [chats, setChats] = useState([])
+    const [orders, setOrders] = useState([])
 
     const setData = useCallback((data) => {
         setChats([...chats, ...data.chats])
@@ -42,9 +42,7 @@ const Logged = ({user, setUser}) => {
 
     useEffect(() => {
         if(appType == 'restuarant'){
-            if(!isLongPolling){
-                fetchOrders()
-            }else{
+            if(isLongPolling){
                 fetchPolling()
             }
         }
