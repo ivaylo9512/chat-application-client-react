@@ -1,23 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-export const useInput = ({type, placeholder, validationRules, equalsElement, equalsName}) => {
+export const useInput = ({type, placeholder, validationRules, equalsValue, equalsName}) => {
     const [value, setValue] = useState('');
+    const inputElement = useRef()
 
-    const onChange = (e) => {
-        setValue(e.target.value)
-        validate(e.target)
+    const onChange = ({target, target: {value}}) => {
+        setValue(value)
+        validate(target, value)
     }
 
-    const validate = (input) => {
-        if(equalsElement){
-            input.setCustomValidity(equalsElement != value 
+    const validate = (input, value) => {
+        if(equalsValue){
+            input.setCustomValidity(equalsValue != value 
                 ? equalsName + ' must be equal.'
                 : ''
             )
         }
     }
 
-    const input = <input value={value} onChange={onChange} {...validationRules} type={type} placeholder={placeholder} />
+    useEffect(() =>{
+        if(equalsValue){
+            validate(inputElement.current, value)    
+        }
+    },[equalsValue])
+
+    const input = <input value={value} ref={inputElement} onChange={onChange} {...validationRules} type={type} placeholder={placeholder} />
     
     return[
         value,

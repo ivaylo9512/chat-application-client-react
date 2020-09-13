@@ -21,7 +21,7 @@ const Register = ({setAuthUser}) => {
     }}) 
     const [repeat, repeatInput] = useInput({type: 'password', placeholder: 'repeat', validationRules:{
         required: true,
-    },equalsElement: password, equalsName: 'Passwords'}) 
+    },equalsValue: password, equalsName: 'Passwords'}) 
     const [firstName, firstNameInput] = useInput({type: 'text', placeholder: 'first name', validationRules: {
         required: true
     }}) 
