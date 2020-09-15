@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import ChatUser from './ChatUser';
+import ChatUser from '../ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
-import Order from './Order';
+import Order from '../Order';
 import { useHistory } from 'react-router-dom'
+import './HeaderScroll.css'
 
 const HeaderScroll = ({headerType, headerClass, currentList}) => {
     const listContainer = React.useRef()
