@@ -116,24 +116,6 @@ nav{
     display: -webkit-flex;
     display: flex;
 }
-.main-container{    
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
-
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-}
-.main-container p{
-    margin: auto;
-    font-weight: bold;
-}
 .hide-search{
     padding: 2px;
     border-radius: 50%;
@@ -203,33 +185,4 @@ nav{
     border: 0;
     color: #c2001b;
     outline: none;
-}
-@keyframes translate {
-    from {
-        transform: translate(0, 0);
-    }
-
-    to {
-        transform: translate(4em, -5em);
-    }
-}
-
-@-webkit-keyframes translate {
-    from {
-        transform: translate(0, 0);
-    }
-
-    to {
-        transform: translate(4em, -5em);
-    }
-}
-
-@-moz-keyframes translate {
-    from {
-        transform: translate(0, 0);
-    }
-
-    to {
-        transform: translate(4em, -5em);
-    }
 }

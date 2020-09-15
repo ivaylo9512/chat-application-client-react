@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
-import WebSocket from './WebSocket'
-import UsersList from './UsersList';
+import WebSocket from '../WebSocket'
+import UsersList from '../UsersList';
 import { Route, Redirect, Switch } from 'react-router-dom'
-import Search from './Search';
-import ChatView from './ChatView'
-import OrderView from './OrderView'
-import { useRequest } from '../hooks/useRequest';
+import Search from '../Search';
+import ChatView from '../ChatView'
+import OrderView from '../OrderView'
+import { useRequest } from '../../hooks/useRequest';
+import './Main.css'
 
 const Main = ({searchChats, searchClass, chats, orders}) => {
     const [foundUsers, setFoundUsers] = useState([])
@@ -45,7 +46,7 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
     }
 
     return(
-        <div className='main-container'>
+        <main className='main-container'>
             <WebSocket setWebSocketClient={setWebSocketClient}/>            
             <Switch>
                     {appType == 'restuarant' && 
@@ -62,7 +63,7 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
                     <Route path='/home' render={() => <p>No chat is selected!</p>}/>
                     <Redirect from='/' to='/home'/>
             </Switch>
-        </div>
+        </main>
     )
 }
 

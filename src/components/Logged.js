@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import Main from './Main';
+import Main from './Main/Main';
 import Menu from './Menu/Menu'
 import HeaderScroll from './HeaderScroll';
 import useRequest from '../hooks/useRequest'
@@ -61,13 +61,13 @@ const Logged = ({user, setUser}) => {
     }, [user])
 
     return(
-        <div className='content-container'>
+        <section className='content-container'>
             <HeaderScroll headerClass={headerClass} headerType={headerType} currentList={headerType == 'chats' ? filteredChats : orders}/>
             <div className='content'>
                 <Menu headerClass={headerClass} searchClass={searchClass} headerType={headerType} setHeader={setHeader} setHeaderClass={setHeaderClass} setSearchClass={setSearchClass}/>
                 <Main searchChats={searchChats} searchClass={searchClass} chats={chats} orders={orders}/>
             </div>
-        </div>
+        </section>
     )
 } 
 export default Logged
