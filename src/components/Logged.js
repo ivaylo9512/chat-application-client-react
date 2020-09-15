@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Main from './Main';
-import Menu from './Menu'
+import Menu from './Menu/Menu'
 import HeaderScroll from './HeaderScroll';
 import useRequest from '../hooks/useRequest'
 
