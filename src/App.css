@@ -178,14 +178,12 @@ nav{
     justify-content: center;
     box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.75);
 }
-.circle-nav ul {
-    margin: 0;
-    padding: 0;
+.circle-nav nav {
     position: relative;
     height: 32vw;
     width: 32vw;
 }
-.circle-nav li {
+.circle-nav div {
     position: absolute;
     font-size: 1.5em;
     width: 4vw;
@@ -195,12 +193,12 @@ nav{
     transform-origin: center;
     list-style: none;
 }
-.circle-nav li a {
+.circle-nav div a {
     text-align: center;
     line-height: 3vw;
 }
-.circle-nav li button,
-.circle-nav li a {
+.circle-nav div button,
+.circle-nav div a {
     position: absolute;
     top: 1vw;
     border-radius: 50%;
@@ -213,71 +211,71 @@ nav{
     border: 0;
     box-shadow: 0px 0px 3px 1.4px rgba(0,0,0,0.8);
 } 
-.circle-nav li a span {
+.circle-nav div a span {
     font-size: 1.1em;
     opacity: 0.7;
 }
-.circle-nav li:first-child {
+.circle-nav div:first-child {
     -webkit-transform: rotate(-5deg);
     -ms-transform: rotate(-5deg);
     -moz-transform: rotate(-5deg);
     transform: rotate(-5deg);
 }
-.circle-nav li:nth-child(2) {
+.circle-nav div:nth-child(2) {
     -webkit-transform: rotate(15deg);
     -ms-transform: rotate(15deg);
     -moz-transform: rotate(15deg);
     transform: rotate(15deg);
 }
-.circle-nav li:nth-child(3) {
+.circle-nav div:nth-child(3) {
     -webkit-transform: rotate(35deg);
     -ms-transform: rotate(35deg);
     -moz-transform: rotate(35deg);
     transform: rotate(35deg);
 }
-.circle-nav li:nth-child(4) {
+.circle-nav div:nth-child(4) {
     -webkit-transform: rotate(55deg);
     -ms-transform: rotate(55deg);
     -moz-transform: rotate(55deg);
     transform: rotate(55deg);
 }
-.circle-nav li:nth-child(5) {
+.circle-nav div:nth-child(5) {
     -webkit-transform: rotate(75deg);
     -ms-transform: rotate(75deg);
     -moz-transform: rotate(75deg);
     transform: rotate(75deg);
 }
-.circle-nav li:nth-child(6) {
+.circle-nav div:nth-child(6) {
     -webkit-transform: rotate(95deg);
     -ms-transform: rotate(95deg);
     -moz-transform: rotate(95deg);
     transform: rotate(95deg);
 }
-.circle-nav li:nth-child(6) {
+.circle-nav div:nth-child(6) {
     -webkit-transform: rotate(95deg);
     -ms-transform: rotate(95deg);
     -moz-transform: rotate(95deg);
     transform: rotate(95deg);
 }
-.circle-nav li:nth-child(6) {
+.circle-nav div:nth-child(6) {
     -webkit-transform: rotate(95deg);
     -ms-transform: rotate(95deg);
     -moz-transform: rotate(95deg);
     transform: rotate(95deg);
 }
-.circle-nav li:nth-child(7) {
+.circle-nav div:nth-child(7) {
     -webkit-transform: rotate(120deg);
     -ms-transform: rotate(120deg);
     -moz-transform: rotate(120deg);
     transform: rotate(120deg);
 }
-.circle-nav li:nth-child(8) {
+.circle-nav div:nth-child(8) {
     -webkit-transform: rotate(140deg);
     -ms-transform: rotate(140deg);
     -moz-transform: rotate(140deg);
     transform: rotate(140deg);
 }
-.circle-nav li:nth-child(9) {
+.circle-nav div:nth-child(9) {
     -webkit-transform: rotate(160deg);
     -ms-transform: rotate(160deg);
     -moz-transform: rotate(160deg);

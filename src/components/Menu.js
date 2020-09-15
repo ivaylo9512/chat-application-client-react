@@ -76,68 +76,68 @@ const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, 
             <div>
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
                     <button onClick={toggleMenu} className='circle-btn' tabIndex='-1'>-</button>
-                    <ul ref={nav} style={rotate}>
-                        <li>
+                    <nav ref={nav} style={rotate}>
+                        <div>
                             <button tabIndex='-1'>
                                 <i className='fas fa-user'></i>
                             </button>
-                        </li>
-                        <li>
+                        </div>
+                        <div>
                             <button onClick={toggleHeader} tabIndex='-1'>
                                 <i className={headerClass == 'header-scroll hidden' ? 'far fa-eye' : 'far fa-eye-slash'}></i>
                             </button>
-                        </li>
-                        <li>
+                        </div>
+                        <div>
                             <Link to='/searchChat' tabIndex='-1'>
                                 <i className='fas fa-search'></i>
                             </Link>
-                        </li>
-                        <li>
+                        </div>
+                        <div>
                             <Link to='/searchUsers' tabIndex='-1'>
                                 <i className='fas fa-user-plus'></i>
                             </Link>
-                        </li>
+                        </div>
                         {(location.pathname == '/searchUsers' || location.pathname == '/searchChat') &&
-                            <li>
+                            <div>
                                 <button onClick={toggleSearch}>
                                     <i className={searchClass == 'form-container' ? 'fas fa-caret-down' : 'fas fa-caret-up' }></i>
                                 </button>
-                            </li>
+                            </div>
                         }
                         {appType == 'restaurant' && 
                             <>
-                                <li>
+                                <div>
                                     <button onClick={rotationStyle <= minRotation ? showChatMenu : showRestMenu} tabIndex='-1'>
                                         {rotationStyle <= minRotation ? 'C' : 'R'}
                                     </button>
-                                </li>
+                                </div>
                             </>
                         }                        
-                        <li>
+                        <div>
                             <Link to='/logout' tabIndex='-1'>
                                 <i className='fas fa-sign-out-alt'></i>
                             </Link>
-                        </li>
+                        </div>
                         {appType == 'restaurant' && 
                             <>
-                                <li>
+                                <div>
                                     <button onClick={setHeader} tabIndex='-1'>
                                         <i className= {headerType == 'chats' ? 'fas fa-comments' : 'fas fa-utensils' }></i>
                                     </button>
-                                </li>
-                                <li>
+                                </div>
+                                <div>
                                     <button tabIndex='-1'>
                                         <i className='fas fa-plus-circle'></i>
                                     </button>
-                                </li>
-                                <li>
+                                </div>
+                                <div>
                                     <button tabIndex='-1'>
                                         <i className='fas fa-bell'></i>
                                     </button>
-                                </li>
+                                </div>
                             </>
                         }
-                    </ul>
+                    </nav>
                 </div>
             </div>
         </div>

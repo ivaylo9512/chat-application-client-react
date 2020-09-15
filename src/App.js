@@ -48,7 +48,7 @@ const App = () => {
         <ErrorBoundary logout={logout}>
             <Router>
                 {appType ?
-                    auth ? 
+                    !auth ? 
                         <>
                             <Logged user={user} setUser={setUser}/> 
                             <Route path='/logout'render={logout}/>
