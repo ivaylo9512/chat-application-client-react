@@ -52,7 +52,9 @@ const Logged = ({user, setUser}) => {
         if(user){
             setfilteredChats(user.chats)
             setChats(user.chats)
-            setOrders(user.orders)
+            if(appType == 'restaurant'){
+                setOrders(user.orders)
+            }
         }else{
             fetchUser()
         }
