@@ -1,0 +1,26 @@
+.form-container{
+    height: 31%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 3s;
+}
+.form-container.hidden{
+    margin-bottom: -31vh;
+}
+.form-container form input {
+    flex: 1;
+    border: 0.5px solid #171a20;
+    border-radius: 1px 0px 0px 1px;
+    text-align: center;
+    outline: none;
+    box-sizing: border-box;
+}
+.form-container form button{
+    width: 25%;
+    background: #181b21;
+    border: 0;
+    color: #c2001b;
+    outline: none;
+}

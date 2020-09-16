@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import WebSocket from '../WebSocket'
 import UsersList from '../UsersList';
 import { Route, Redirect, Switch } from 'react-router-dom'
-import Search from '../Form';
+import Form from '../Form/Form';
 import ChatView from '../ChatView'
 import OrderView from '../OrderView'
 import { useRequest } from '../../hooks/useRequest';
@@ -55,10 +55,10 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
                     <Route path='/searchUsers' render={({history}) => 
                         <>
                             <UsersList history={history} createNewChat={createNewChat} foundUsers={foundUsers}/>
-                            <Search searchClass={searchClass} callback={searchUsers} placeholder={'search users'}/>
+                            <Form searchClass={searchClass} callback={searchUsers} placeholder={'search users'}/>
                         </>
                     }/>
-                    <Route path='/searchChat' render={() => <Search searchClass={searchClass} callback={searchChats} placeholder={'search chat'} onUnmount={searchChats}/>}/>
+                    <Route path='/searchChat' render={() => <Form searchClass={searchClass} callback={searchChats} placeholder={'search chat'} onUnmount={searchChats}/>}/>
                     <Route path='/chat/:id' render={() => <ChatView chats={chats} webSocketClient={webSocketClient}/>}/>
                     <Route path='/home' render={() => <p>No chat is selected!</p>}/>
                     <Redirect from='/' to='/home'/>

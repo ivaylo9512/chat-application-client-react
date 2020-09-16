@@ -1,7 +1,7 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom'
 
-export const User = ({setChat, user, createNewChat}) => {
+const User = ({setChat, user, createNewChat}) => {
     const history = useHistory()
 
     return (

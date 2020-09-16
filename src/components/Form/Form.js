@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import { useInput } from '../hooks/useInput';
+import { useInput } from '../../hooks/useInput'
+import './Form.css'
 
-const Search = ({callback, placeholder, searchClass, onUnmount}) => {
+const Form = ({callback, placeholder, searchClass, onUnmount}) => {
     const [inputValue, input] = useInput({type:'text', placeholder})
 
     const submit = (e) => {
@@ -24,4 +25,4 @@ const Search = ({callback, placeholder, searchClass, onUnmount}) => {
         </div>
     )
 }
-export default Search
+export default Form
