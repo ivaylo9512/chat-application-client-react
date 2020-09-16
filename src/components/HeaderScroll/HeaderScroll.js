@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import ChatUser from '../ChatUser';
+import ChatUser from '../ChatUser/ChatUser';
 import smoothscroll from 'smoothscroll-polyfill';
-import Order from '../Order';
+import Order from '../Order/Order';
 import { useHistory } from 'react-router-dom'
 import './HeaderScroll.css'
 

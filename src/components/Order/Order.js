@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const Order = ({order}) => {
     return (
-        <Link to='/chat' className='chat'>
+        <Link to='/chat' className='order'>
             {order.id}
         </Link>
     )
