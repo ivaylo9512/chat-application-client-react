@@ -8,16 +8,10 @@
 .menu-container > div{
     height: 100%;
     width: 100%;
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
     transform: translate(0, 0);
     transition: all 4s;
 }
 .menu-container.hidden > div{
-    -webkit-transform: translate(-22.5em, 18em);
-    -ms-transform: translate(-22.5em, 18em);
-    -moz-transform: translate(-22.5em, 18em);
     transform: translate(-22.5em, 18em);
 }
 .menu-circle{
@@ -33,17 +27,11 @@
     top: 100%;
     left: -2em;
     transition: all 2s;
-    -webkit-transform: translate(0, 0);
-    -ms-transform: translate(0, 0);
-    -moz-transform: translate(0, 0);
     transform: translate(0, 0);
 
 }
 .menu-container.hidden .menu-circle{
     transition: all 2s 1.75s;
-    -webkit-transform: translate(4em, -5em);
-    -ms-transform: translate(4em, -5em);
-    -moz-transform:  translate(4em, -5em);
     transform: translate(4em, -5em);
 }
 .circle-nav {
@@ -98,69 +86,36 @@
     opacity: 0.7;
 }
 .circle-nav div:first-child {
-    -webkit-transform: rotate(-5deg);
-    -ms-transform: rotate(-5deg);
-    -moz-transform: rotate(-5deg);
     transform: rotate(-5deg);
 }
 .circle-nav div:nth-child(2) {
-    -webkit-transform: rotate(15deg);
-    -ms-transform: rotate(15deg);
-    -moz-transform: rotate(15deg);
     transform: rotate(15deg);
 }
 .circle-nav div:nth-child(3) {
-    -webkit-transform: rotate(35deg);
-    -ms-transform: rotate(35deg);
-    -moz-transform: rotate(35deg);
     transform: rotate(35deg);
 }
 .circle-nav div:nth-child(4) {
-    -webkit-transform: rotate(55deg);
-    -ms-transform: rotate(55deg);
-    -moz-transform: rotate(55deg);
     transform: rotate(55deg);
 }
 .circle-nav div:nth-child(5) {
-    -webkit-transform: rotate(75deg);
-    -ms-transform: rotate(75deg);
-    -moz-transform: rotate(75deg);
     transform: rotate(75deg);
 }
 .circle-nav div:nth-child(6) {
-    -webkit-transform: rotate(95deg);
-    -ms-transform: rotate(95deg);
-    -moz-transform: rotate(95deg);
     transform: rotate(95deg);
 }
 .circle-nav div:nth-child(6) {
-    -webkit-transform: rotate(95deg);
-    -ms-transform: rotate(95deg);
-    -moz-transform: rotate(95deg);
     transform: rotate(95deg);
 }
 .circle-nav div:nth-child(6) {
-    -webkit-transform: rotate(95deg);
-    -ms-transform: rotate(95deg);
-    -moz-transform: rotate(95deg);
     transform: rotate(95deg);
 }
 .circle-nav div:nth-child(7) {
-    -webkit-transform: rotate(120deg);
-    -ms-transform: rotate(120deg);
-    -moz-transform: rotate(120deg);
     transform: rotate(120deg);
 }
 .circle-nav div:nth-child(8) {
-    -webkit-transform: rotate(140deg);
-    -ms-transform: rotate(140deg);
-    -moz-transform: rotate(140deg);
     transform: rotate(140deg);
 }
 .circle-nav div:nth-child(9) {
-    -webkit-transform: rotate(160deg);
-    -ms-transform: rotate(160deg);
-    -moz-transform: rotate(160deg);
     transform: rotate(160deg);
 }
 .circle-btn {
