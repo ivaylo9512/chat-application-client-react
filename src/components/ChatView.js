@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react'
 import Session from './Session';
-import MessageForm from './MessageForm'
+import Form from './Form'
 import { useRequest } from '../hooks/useRequest';
 import { useParams } from "react-router";
 
@@ -35,7 +35,7 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
         <>
             {id !== undefined ? 
                 <div className='chat-container'>
-                    <MessageForm sendNewMessage={sendNewMessage}/>
+                    <Form sendNewMessage={sendNewMessage}/>
                     <div className='chat'>
                         {currentChat.sessions.map(session =>{
                             return <Session session={session} key={session.date}/>

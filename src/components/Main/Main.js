@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import WebSocket from '../WebSocket'
 import UsersList from '../UsersList';
 import { Route, Redirect, Switch } from 'react-router-dom'
-import Search from '../Search';
+import Search from '../Form';
 import ChatView from '../ChatView'
 import OrderView from '../OrderView'
 import { useRequest } from '../../hooks/useRequest';
