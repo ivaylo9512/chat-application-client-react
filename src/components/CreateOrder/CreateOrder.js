@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useRequest } from '../hooks/useRequest'
-import Form from './Form/Form'
+import { useRequest } from '../../hooks/useRequest'
+import Form from '../Form/Form'
 
 const CreateOrder = ({menu, searchClass}) => {
     const [order, fetchNewOrder] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/order/auth/create}`, isAuth:true})

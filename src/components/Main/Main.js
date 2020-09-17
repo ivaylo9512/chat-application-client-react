@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import WebSocket from '../WebSocket'
-import UsersList from '../UsersList';
+import WebSocket from '../../Helpers/WebSocket'
+import UsersList from '../UsersList/UsersList';
 import { Route, Redirect, Switch } from 'react-router-dom'
 import Form from '../Form/Form';
-import ChatView from '../ChatView'
-import OrderView from '../OrderView'
+import ChatView from '../ChatView/ChatView'
+import OrderView from '../OrderView/OrderView'
 import { useRequest } from '../../hooks/useRequest';
 import './Main.css'
 

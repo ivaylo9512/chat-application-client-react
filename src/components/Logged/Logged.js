@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import Main from './Main/Main';
-import Menu from './Menu/Menu'
-import HeaderScroll from './HeaderScroll/HeaderScroll';
-import useRequest from '../hooks/useRequest'
+import Main from '../Main/Main';
+import Menu from '../Menu/Menu'
+import HeaderScroll from '../HeaderScroll/HeaderScroll';
+import useRequest from '../../hooks/useRequest'
 
 const Logged = ({user, setUser}) => {
     const [headerType, setHeaderType] = useState('chats')

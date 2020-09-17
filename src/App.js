@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from 'react';
 import {useLocalStorage} from './hooks/useLocalStorage'
 import './App.css';
-import Login from './components/Login'
-import Register from './components/Register'
-import Logged from './components/Logged'
+import Login from './components/Login/Login'
+import Register from './components/Register/Register'
+import Logged from './components/Logged/Logged'
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
-import ErrorBoundary from './components/ErrorBoundary'
+import ErrorBoundary from './Helpers/ErrorBoundary'
 
 const App = () => {
     const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null)

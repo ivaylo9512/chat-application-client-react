@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
-import { useRequest } from '../hooks/useRequest';
-import Dish from './Dish';
+import { useRequest } from '../../hooks/useRequest';
+import Dish from '../Dish/Dish';
 import { useParams } from "react-router";
 
 const OrderView = (order, orders, setOrder, setOrders) => {

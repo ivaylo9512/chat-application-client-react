@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
-import { useInput } from '../hooks/useInput';
-import { useRequest } from '../hooks/useRequest';
+import { useInput } from '../../hooks/useInput';
+import { useRequest } from '../../hooks/useRequest';
 
 const Register = ({setAuthUser}) => {
     const [userInfo, setUserInfo] = useState(undefined)
