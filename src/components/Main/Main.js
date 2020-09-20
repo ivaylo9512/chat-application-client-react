@@ -15,34 +15,8 @@ const Main = ({searchChats, searchClass, chats, orders}) => {
     const appType = useRef(localStorage.getItem('AppType'))
     const isMounted = useRef(false)
 
-    useEffect(() => {
-        if(!isMounted.current){
-            isMounted.current = true
-        }else{
-            const message = webSocketClient.subscribe('/user/message', recievedMessage)
-            const createChat = webSocketClient.subscribe('/user/createChat', recievedNewChat)
-            
-            return () => {
-                message.unsubscribe()
-                createChat.unsubscribe()
-            }
-        }
-    }, [webSocketClient])
-
     const searchUsers = name => {
         fetchRequest({url:`http://${localStorage.getItem('BaseUrl')}/api/users/auth/searchForUsers/${name}`})
-    }
-
-    const recievedMessage = message => {
-        console.log(message.body)
-    }
-
-    const recievedNewChat = message => {
-        console.log(message.body)
-    }
-
-    const createNewChat = userId => {
-        console.log(userId)
     }
 
     return(
