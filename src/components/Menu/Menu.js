@@ -98,7 +98,7 @@ const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, 
                                 <i className='fas fa-user-plus'></i>
                             </Link>
                         </div>
-                        {(location.pathname == '/searchUsers' || location.pathname == '/searchChat') &&
+                        {location.pathname == '/searchUsers' || location.pathname == '/searchChat' &&
                             <div>
                                 <button onClick={toggleSearch}>
                                     <i className={searchClass == 'form-container' ? 'fas fa-caret-down' : 'fas fa-caret-up' }></i>
