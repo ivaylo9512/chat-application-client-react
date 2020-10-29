@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import WebSocket from '../../Helpers/WebSocket'
+import WebSocket from '../../helpers/WebSocket'
 import UsersList from '../UsersList/UsersList';
 import { Route, Redirect, Switch } from 'react-router-dom'
 import Form from '../Form/Form';

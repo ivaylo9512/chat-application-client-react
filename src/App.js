@@ -5,7 +5,7 @@ import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import Logged from './components/Logged/Logged'
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
-import ErrorBoundary from './Helpers/ErrorBoundary'
+import ErrorBoundary from './helpers/ErrorBoundary'
 
 const App = () => {
     const [auth, setAuth, removeAuth] = useLocalStorage('Authorization', null)

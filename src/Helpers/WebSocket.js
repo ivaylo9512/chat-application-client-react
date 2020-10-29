@@ -1,5 +1,5 @@
-import {useRef, useEffect} from 'react';
-import {Client} from '@stomp/stompjs'
+import {useRef, useEffect} from './node_modules/react';
+import {Client} from './node_modules/@stomp/stompjs'
 
 const WebSocket = ({setWebSocketClient}) => {
 
