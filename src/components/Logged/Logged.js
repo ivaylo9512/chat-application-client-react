@@ -11,7 +11,7 @@ const Logged = ({user, setUser}) => {
     const [searchClass, setSearchClass] = useState('form-container')
     const isLongPolling = useRef(localStorage.getItem('LongPolling'))
     const appType = useRef(localStorage.getItem('AppType'))
-    const [,fetchUser] = useRequest({isAuth:true, initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/users/auth/${isLongPolling.current}getLoggedUser/20`, callback: setUser})
+    const [,fetchUser] = useRequest({isAuth:true, initialUrl:`${localStorage.getItem('BaseUrl')}/api/users/auth/${isLongPolling.current}getLoggedUser/20`, callback: setUser})
     
     const [chats, setChats] = useState([])
     const [orders, setOrders] = useState([])
@@ -21,7 +21,7 @@ const Logged = ({user, setUser}) => {
         setOrders([...orders, ...data.orders])
     },[]) 
 
-    const [longPollingData, fetchPolling] = useRequest({initialUrl: `http://${localStorage.getItem('BaseUrl')}/api/polling/auth/waitData`, initialValue:[], isAuth: true, callback: setData})
+    const [longPollingData, fetchPolling] = useRequest({initialUrl: `${localStorage.getItem('BaseUrl')}/api/polling/auth/waitData`, initialValue:[], isAuth: true, callback: setData})
 
     const searchChats = (name) => {
         name = name.toUpperCase()

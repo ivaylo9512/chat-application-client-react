@@ -26,7 +26,7 @@ const App = () => {
 
     const setChatApp = () => {
         setAppType('chatOnly')
-        setBaseUrl('localhost:8080')
+        setBaseUrl('http://localhost:8080')
         setLongPolling('')
     }
 
@@ -36,7 +36,7 @@ const App = () => {
             ? '' 
             : 'polling/'
         )
-        setBaseUrl('localhost:8095')
+        setBaseUrl('http://localhost:8095')
     }
 
     const resetAppType = () => {

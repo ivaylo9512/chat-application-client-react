@@ -23,7 +23,7 @@ const OrderView = (order, orders, setOrder, setOrders) => {
     } 
 
     const updateDishStatus = (dish) => {
-        fetchDishStatus({url:`http://${baseUrl}/api/order/auth/updateDish${dish}`})
+        fetchDishStatus({url:`${baseUrl}/api/order/auth/updateDish${dish}`})
     }
 
     return(

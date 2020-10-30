@@ -3,7 +3,7 @@ import { useRequest } from '../../hooks/useRequest'
 import Form from '../Form/Form'
 
 const CreateOrder = ({menu, searchClass}) => {
-    const [order, fetchNewOrder] = useRequest({initialUrl:`http://${localStorage.getItem('BaseUrl')}/api/order/auth/create}`, isAuth:true})
+    const [order, fetchNewOrder] = useRequest({initialUrl:`${localStorage.getItem('BaseUrl')}/api/order/auth/create}`, isAuth:true})
     const [filteredMenu, setFilteredMenu] = useState()
 
     const search = (e) => {
