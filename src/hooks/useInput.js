@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
+import { useEffectInitial } from './useEffectInitial';
 
 export const useInput = ({type, placeholder, name, validationRules, equalsValue, equalsName}) => {
     const [value, setValue] = useState('');
@@ -18,7 +19,7 @@ export const useInput = ({type, placeholder, name, validationRules, equalsValue,
         }
     };
 
-    useEffect(() =>{
+    useEffectInitial(() =>{
         if(equalsValue){
             validate(inputElement.current, value);    
         }
