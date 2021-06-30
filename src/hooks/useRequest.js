@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef} from 'react';
 
-export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, method, isAuth, shouldThrow = true}) => {
+export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, type = 'get', shouldThrow = true}) => {
     const [data, setData] = useState(initialValue)
-    const [requestUrl, setRequestUrl] = useState(initialUrl)
     const [error, setError] = useState()
     const isCurrent = useRef(true)
 
@@ -10,42 +9,51 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         if(fetchOnMount){
             fetchRequest()
         }
-        return () => isCurrent.current = false
+        return () => isCurrent.current = false;
     }, [])
 
     async function fetchRequest({url, body, headers} = {}) {
-        headers = headers || initialHeaders
-        headers = isAuth 
-            ? {...headers, Authorization: localStorage.getItem('Authorization')} 
-            : headers
-        const response = await fetch(url || requestUrl, {
-            method,
+        headers = {
+            ...headers, 
+            ...initialHeaders
+        }
+        const response = await fetch(url || initialUrl, {
+            type,
             body: JSON.stringify(body),
             headers
         })
 
+        handleResponse(response);
+    }
+
+    const handleResponse = (response) => {
         let data = await response.text()
         const responseHeaders = response.headers
-        if(isCurrent.current){
-            if(response.ok){
-                data = JSON.parse(data)
-                setData(data)
-                if(callback){
-                    callback(data, responseHeaders)
-                }
+        if(!isCurrent.current){
+            return;
+        }
+
+        if(response.ok){
+            data = JSON.parse(data)
+            setData(data)
+            if(callback){
+                callback(data, responseHeaders)
+            }
+        }else{
+            if(shouldThrow){
+                setError(() => { 
+                    throw {
+                        message:data, 
+                        status: response.status
+                    }
+                })    
             }else{
-                if(shouldThrow){
-                    setError(() => { 
-                        throw {message:data, status: response.status}
-                    })    
-                }else{
-                    setError(data)
-                }
+                setError(data)
             }
         }
     }
 
-    return [data, fetchRequest, error, setData, setRequestUrl]
+    return [data, fetchRequest, error]
 }
 
 export default useRequest
