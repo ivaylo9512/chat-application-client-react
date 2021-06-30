@@ -9,5 +9,5 @@ export const useEffectInitial = (callback, state) => {
             return;
         }
         callback()
-    }, [state])
+    }, state)
 }

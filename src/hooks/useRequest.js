@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef} from 'react';
 
-export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, type = 'get', shouldThrow = true}) => {
+export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, type = 'get', isAuth, shouldThrow = true}) => {
     const [data, setData] = useState(initialValue)
     const [error, setError] = useState()
     const isCurrent = useRef(true)
@@ -15,7 +15,8 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
     async function fetchRequest({url, body, headers} = {}) {
         headers = {
             ...headers, 
-            ...initialHeaders
+            ...initialHeaders,
+            Authorization: isAuth && localStorage.getItem('Authorization')
         }
         const response = await fetch(url || initialUrl, {
             type,

@@ -18,7 +18,7 @@ export const useLocalStorage = (key, initial) => {
 
     const remove = () => {
         localStorage.removeItem(key)
-        setValue(initial)
+        setValue(null)
     }
     
     return [value, set, remove]
