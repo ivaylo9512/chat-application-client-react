@@ -7,7 +7,7 @@ const Register = ({setAuthUser}) => {
     const [userInfo, setUserInfo] = useState(undefined)
     const [apiError, setApiError] = useState('')
     const [pageIndex, setPageIndex] = useState(0)
-    const [registeredUser, fetchRegister] = useRequest({initialUrl: `${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}/register`, shouldThrow: false, callback: setAuthUser, method: 'post'})
+    const [registeredUser, fetchRegister] = useRequest({initialUrl: `${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}/register`, shouldThrow: false, callback: setAuthUser, type: 'post'})
 
     const [username, usernameInput] = useInput({type: 'text', placeholder: 'username', validationRules: {
         minLength: 6,

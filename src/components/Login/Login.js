@@ -4,10 +4,10 @@ import { useInput } from '../../hooks/useInput'
 import { useRequest } from '../../hooks/useRequest'
 
 const Login = ({setAuthUser, resetAppType}) => {
-    const [username, usernameInput] = useInput({type: 'text', placeholder:'username'})
-    const [password, passwordInput] = useInput({type: 'password', placeholder:'password'})
+    const [username, usernameInput] = useInput({type: 'text', placeholder:'username', name: 'username'})
+    const [password, passwordInput] = useInput({type: 'password', placeholder:'password', name: 'password'})
     const [error] = useState()
-    const [userInfo, fetchLogin] = useRequest({initialUrl:`${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}login?pageSize=20`, callback: setAuthUser, fetchOnMount: false, method: 'post', shouldThrow: false})
+    const [userInfo, fetchLogin] = useRequest({initialUrl:`${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}login?pageSize=20`, callback: setAuthUser, fetchOnMount: false, type: 'post', shouldThrow: false})
 
     const login = (e) => {
         e.preventDefault()

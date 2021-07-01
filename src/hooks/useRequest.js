@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef} from 'react';
 
-export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMount, callback, type = 'get', isAuth, shouldThrow = true}) => {
+export const useRequest = ({initialUrl, initialValue, initialHeaders, isFetchOnMount, callback, type = 'get', isAuth, shouldThrow = true}) => {
     const [data, setData] = useState(initialValue)
     const [error, setError] = useState()
     const isCurrent = useRef(true)
 
     useEffect(() =>{
-        if(fetchOnMount){
+        if(isFetchOnMount){
             fetchRequest()
         }
         return () => isCurrent.current = false;
@@ -44,7 +44,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
             if(shouldThrow){
                 setError(() => { 
                     throw {
-                        message:data, 
+                        message: data, 
                         status: response.status
                     }
                 })    
@@ -54,7 +54,7 @@ export const useRequest = ({initialUrl, initialValue, initialHeaders, fetchOnMou
         }
     }
 
-    return [data, fetchRequest, error]
+    return [fetchRequest, data, error]
 }
 
 export default useRequest
