@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useEffectInitial } from './useEffectInitial';
 
-export const useInput = ({type, placeholder, name, validationRules, equalsValue, equalsName}) => {
+export const useInput = ({type = 'text', placeholder, name, validationRules, equalsValue, equalsName}) => {
     const [value, setValue] = useState('');
     const inputElement = useRef();
 
@@ -20,9 +20,7 @@ export const useInput = ({type, placeholder, name, validationRules, equalsValue,
     };
 
     useEffectInitial(() =>{
-        if(equalsValue){
-            validate(inputElement.current, value);    
-        }
+        validate(inputElement.current, value);    
     },[equalsValue]);
 
     const input = <input value={value} ref={inputElement} name={name} onChange={onChange} {...validationRules} type={type} placeholder={placeholder} />
