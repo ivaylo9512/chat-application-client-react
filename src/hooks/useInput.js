@@ -1,32 +1,33 @@
-import React, { useState, useRef } from 'react';
-import { useEffectInitial } from './useEffectInitial';
+import { useEffect, useRef, useState } from 'react';
 
-export const useInput = ({type = 'text', placeholder, name, validationRules, equalsValue, equalsName}) => {
-    const [value, setValue] = useState('');
-    const inputElement = useRef();
+const useInput = ({ name, placeholder, initialValue = '', type = '', autoComplete, validationRules, equalsValue, equalsName}) => {
+    const [value, setValue] = useState(initialValue);
+    const inputRef = useRef();
 
-    const onChange = ({target, target: {value}}) => {
-        setValue(value);
-        validate(target, value);
-    };
+    useEffect(() => {
+        validate(value);
+    },[equalsValue])
 
-    const validate = (input, value) => {
-        if(equalsValue){
-            input.setCustomValidity(equalsValue != value 
-                ? equalsName + ' must be equal.'
+    const validate = (value) => {
+        if(equalsValue !== undefined){
+            inputRef.setCustomValidation(equalsValue != value 
+                ? `${equalsName} are not equal` 
                 : ''
-            )
+            );
         }
-    };
+    }
 
-    useEffectInitial(() =>{
-        validate(inputElement.current, value);    
-    },[equalsValue]);
+    const onChange = ({ target: { value } }) => {
+        setValue(value);
+        validate(value);
+    }
 
-    const input = <input value={value} ref={inputElement} name={name} onChange={onChange} {...validationRules} type={type} placeholder={placeholder} />
-    
-    return[
-        value,
-        input,
+    const input = <input onChange={onChange} placeholder={placeholder} ref={inputRef} autoComplete={autoComplete} name={name} type={type} {...validationRules} value={value}/>
+
+
+    return [
+        value, 
+        input
     ]
 }
+export default useInput;
