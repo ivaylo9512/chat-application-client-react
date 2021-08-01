@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {Link, useHistory} from 'react-router-dom'
 import { useInput } from '../../hooks/useInput';
+import useInput from '../../hooks/useInput';
+import useInput from '../../hooks/usePasswordInput';
 import { useRequest } from '../../hooks/useRequest';
 
 const Register = ({setAuthUser}) => {
@@ -10,63 +12,9 @@ const Register = ({setAuthUser}) => {
         shouldThrow: false, 
         callback: 
         setAuthUser, 
-        type: 'post'
+        method: 'POST'
     })
-
-    const [username, usernameInput] = useInput({
-        type: 'text', 
-        placeholder: 'username', 
-        validationRules: {
-            minLength: 6,
-            maxLength: 15,
-            required: true
-        }
-    }) 
-    const [password, passwordInput] = useInput({
-        type: 'password', 
-        placeholder: 'password', 
-        validationRules:{
-            minLength: 7,
-            maxLength: 25,
-            required: true
-        }
-    }) 
-    const [repeat, repeatInput] = useInput({
-        type: 'password', 
-        placeholder: 'repeat', 
-        validationRules: {
-            required: true,
-        },
-        equalsValue: password, 
-        equalsName: 'Passwords'
-    }) 
-    const [firstName, firstNameInput] = useInput({
-        type: 'text', 
-        placeholder: 'first name', 
-        validationRules: {
-            required: true
-        }
-    }) 
-    const [lastName, lastNameInput] = useInput({
-        type: 'text', 
-        placeholder: 'last name', 
-        validationRules: {
-            required: true}
-        }) 
-    const [country, countryInput] = useInput({
-        type: 'text', 
-        placeholder: 'country', 
-        validationRules: {
-            required: true
-        }
-    }) 
-    const [age, ageInput] = useInput({
-        type: 'number', 
-        placeholder: 'age', 
-        validationRules: {
-            required: true
-        }
-    }) 
+    const [registerValues, { usernameInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, ageInput, countryInput }] = createFields();
 
     const register = (e) => {
         e.preventDefault()
@@ -85,9 +33,9 @@ const Register = ({setAuthUser}) => {
                 <form onSubmit={(e) => setPage(e, 1)}>
                     {usernameInput}
                     {passwordInput}
-                    {repeatInput}
+                    {repeatPasswordInput}
                     <button type='submit'>next</button>
-                    <span>Already have an account?<Link to='/login'> Log in.</Link></span>
+                    <span>Already have an account?<Link to='/login'> Sign in.</Link></span>
                     <span>{error}</span>
                 </form> :
                 <form onSubmit={register}>
@@ -102,5 +50,73 @@ const Register = ({setAuthUser}) => {
         </section>
     )
 }
+
+const createInputs = () => {
+    const [username, usernameInput] = useInput({
+        name: 'username',
+        placeholder: 'username',
+        autoComplete: 'username',
+        validationRules: {
+            required: true, 
+            minLength: 8, 
+            maxLength: 20}
+        },
+    )
+
+    const [password, passwordInput] = usePasswordInput({
+        name: 'password',
+        type: 'password',
+        autoComplete: 'new-password',
+        placeholder: 'password',
+        validationRules: {
+            minLength: 10,
+            maxLength: 22,
+            required: true
+        }
+    })
+
+    const [repeatPassword, repeatPasswordInput] = usePasswordInput({
+        name: 'repeat-password',
+        type: 'password',
+        autoComplete: 'new-password',
+        placeholder: 'repeat',
+        validationRules:{
+            required: true
+        },
+        equalValue: password,
+        equalName: 'Passwords'
+    })
+
+    const [firstName, firstNameInput] = useInput({
+        placeholder: 'First name' , 
+        name: 'firstName', 
+        validationRules: {
+            required: true
+        } 
+    })
+
+    const [lastName, lastNameInput] = useInput({
+        placeholder: 'Last name' , 
+        name: 'lastName', 
+        validationRules: {
+            required: true
+        } 
+    })
+
+    const [age, ageInput] = useInput({
+        type: 'number',
+        name: 'age', 
+        validationRules:{
+            required: true,
+        } 
+    })
+
+    const [country, countryInput] = useInput({
+        placeholder: 'country',
+        name: 'country',
+    })
+
+    return [{username, password, repeatPassword, firstName, lastName, country, age}, {usernameInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, countryInput, ageInput}]
+}   
 
 export default Register
