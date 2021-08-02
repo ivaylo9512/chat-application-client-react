@@ -1,48 +1,54 @@
 import React, { useEffect, useState } from 'react';
-import {Link, useHistory} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useInput } from '../../hooks/useInput';
 import useInput from '../../hooks/useInput';
 import useInput from '../../hooks/usePasswordInput';
-import { useRequest } from '../../hooks/useRequest';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Register = ({setAuthUser}) => {
     const [pageIndex, setPageIndex] = useState(0)
-    const [registeredUser, fetchRegister, error] = useRequest({
-        initialUrl: `${localStorage.getItem('BaseUrl')}/api/users/${localStorage.getItem('LongPolling')}/register`, 
-        shouldThrow: false, 
-        callback: 
-        setAuthUser, 
-        method: 'POST'
-    })
-    const [registerValues, { usernameInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, ageInput, countryInput }] = createFields();
-
-    const register = (e) => {
-        e.preventDefault()
-        fetchRegister({
-            body:{username, password, repeat, firstName, lastName, country, age}})
-    }
+    const [registerValues, { usernameInput, emailInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, ageInput, countryInput }] = createInputs();
+    
+    const {loading, error} = useSelector(state => state.authenticate.registerRequest)
+    const dispatch = useDispatch();
 
     const setPage = (e, page) => {
         e.preventDefault()
         setPageIndex(page)
     }
+ 
+    const register = (e) => {
+        e.preventDefault();
+        const {repeatPassword, ...registerObject} = registerValues;
+
+        dispatch(registerRequest(registerObject))
+    }
+
+    useEffect(() => {
+        const {username, password, email} = error || {};
+
+        if(username || password || email){
+            setPageIndex(0);
+        }
+    },[error])
 
     return (
         <section>
             {pageIndex == 0 ?
                 <form onSubmit={(e) => setPage(e, 1)}>
-                    {usernameInput}
-                    {passwordInput}
-                    {repeatPasswordInput}
+                    <InputWithError input={usernameInput} error={error?.username}/>
+                    <InputWithError input={passwordInput} error={error?.password}/>
+                    <InputWithError input={repeatPasswordInput} error={error?.password}/>
+                    <InputWithError input={emailInput} error={error?.email}/>
                     <button type='submit'>next</button>
                     <span>Already have an account?<Link to='/login'> Sign in.</Link></span>
                     <span>{error}</span>
                 </form> :
                 <form onSubmit={register}>
-                    {firstNameInput}
-                    {lastNameInput}
-                    {countryInput}
-                    {ageInput}
+                    <InputWithError input={firstNameInput} error={error?.firstName}/>
+                    <InputWithError input={lastNameInput} error={error?.lastName}/>
+                    <InputWithError input={countryInput} error={error?.country}/>
+                    <InputWithError input={ageInput} error={error?.age}/>
                     <button onClick={(e) => setPage(e, 0)} >back</button>
                     <button>register</button>
                 </form>
@@ -62,6 +68,16 @@ const createInputs = () => {
             maxLength: 20}
         },
     )
+
+    const [email, emailInput] = useInput({
+        type: 'email',
+        placeholder: 'email',
+        name: 'email',
+        autoComplete: 'email',
+        validationRules: {
+            required: true
+        } 
+    })
 
     const [password, passwordInput] = usePasswordInput({
         name: 'password',
@@ -116,7 +132,7 @@ const createInputs = () => {
         name: 'country',
     })
 
-    return [{username, password, repeatPassword, firstName, lastName, country, age}, {usernameInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, countryInput, ageInput}]
+    return [{username, email, password, repeatPassword, firstName, lastName, country, age}, {usernameInput, emailInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, countryInput, ageInput}]
 }   
 
 export default Register
