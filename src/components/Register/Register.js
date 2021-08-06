@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-import { useInput } from '../../hooks/useInput';
 import useInput from '../../hooks/useInput';
-import useInput from '../../hooks/usePasswordInput';
+import usePasswordInput from '../../hooks/usePasswordInput';
 import { useSelector, useDispatch } from 'react-redux';
+import InputWithError from '../InputWithError';
+import { getRegisterRequest, registerRequest } from '../../app/slicers/authenticate';
 
-const Register = ({setAuthUser}) => {
+const Register = () => {
     const [pageIndex, setPageIndex] = useState(0)
-    const [registerValues, { usernameInput, emailInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, ageInput, countryInput }] = createInputs();
-    
-    const {loading, error} = useSelector(state => state.authenticate.registerRequest)
+    const [registerValues, { usernameInput, emailInput, passwordInput, repeatPasswordInput, firstNameInput, lastNameInput, ageInput, countryInput }] = useCreateInputs();
+    const {isLoading, error} = useSelector(getRegisterRequest)
     const dispatch = useDispatch();
 
     const setPage = (e, page) => {
@@ -57,7 +57,7 @@ const Register = ({setAuthUser}) => {
     )
 }
 
-const createInputs = () => {
+const useCreateInputs = () => {
     const [username, usernameInput] = useInput({
         name: 'username',
         placeholder: 'username',
@@ -81,7 +81,6 @@ const createInputs = () => {
 
     const [password, passwordInput] = usePasswordInput({
         name: 'password',
-        type: 'password',
         autoComplete: 'new-password',
         placeholder: 'password',
         validationRules: {
@@ -93,7 +92,6 @@ const createInputs = () => {
 
     const [repeatPassword, repeatPasswordInput] = usePasswordInput({
         name: 'repeat-password',
-        type: 'password',
         autoComplete: 'new-password',
         placeholder: 'repeat',
         validationRules:{

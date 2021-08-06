@@ -5,10 +5,11 @@ import Register from './components/Register/Register'
 import Logged from './components/Logged/Logged'
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
 import ErrorBoundary from './helpers/ErrorBoundary'
-import { useDispatch } from 'react-redux';
-import { onLogout } from './app/slicers/authenticate';
+import { useDispatch, useSelector } from 'react-redux';
+import { onLogout, getIsAuth } from './app/slicers/authenticate';
 
 const App = () => {
+    const isAuth = useSelector(getIsAuth);
     const dispatch = useDispatch();
 
     const logout = () => {
@@ -20,14 +21,14 @@ const App = () => {
     return (
         <ErrorBoundary>
             <Router>
-                {auth 
+                {isAuth
                     ? <>
                         <Logged/> 
                         <Route path='/logout' render={logout}/>
                     </> 
                     : <Switch>
-                        <Route path='/register' render={() => <Register setAuthUser={setAuthUser}/>}/>
-                        <Route path='/login'render={() => <Login setAuthUser={setAuthUser} resetAppType={resetAppType} />}/>
+                        <Route path='/register' render={() => <Register />}/>
+                        <Route path='/login'render={() => <Login />}/>
                         <Redirect from='/' to='/login'/>
                     </Switch>
                 } 
