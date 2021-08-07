@@ -1,26 +1,30 @@
 import React, { useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Menu.css'
+import { useSelector, useDispatch } from 'react-redux'
+import { getStylesState, toggleHeaderVisibility, toggleSearchVisibility } from '../../app/slices/stylesSlice'
 
-const Menu = ({headerClass, searchClass, setHeaderClass, setSearchClass}) => {
-    const [menuClass, setMenuClass] = useState('menu-container hidden')
+const Menu = () => {
+    const [isMenuHidden, setIsMenuHidden] = useState(true)
     const [rotate, setRotate] = useState({})
     const nav = useRef()
     const location = useLocation()
     const [rotationStyle, setrotationStyle] = useState(0)
     const isRotating = useRef(false)
     const rotatingSign = useRef()
+    const {isHeaderHidden, isSearchHidden} = useSelector(getStylesState)
+    const dispatch = useDispatch();
 
     const toggleMenu = () => {
-        setMenuClass(menuClass == 'menu-container hidden' ? 'menu-container' : 'menu-container hidden')    
+        setIsMenuHidden(!isMenuHidden)    
     }
 
     const toggleHeader = () => { 
-        setHeaderClass(headerClass == 'header-scroll hidden' ? 'header-scroll' : 'header-scroll hidden')    
+        dispatch(toggleHeaderVisibility());
     }
     
     const toggleSearch = () => {
-        setSearchClass(searchClass == 'form-container hidden' ? 'form-container' : 'form-container hidden')    
+        dispatch(toggleSearchVisibility());
     }
     
     const rotateNav = (e) => {
@@ -57,7 +61,7 @@ const Menu = ({headerClass, searchClass, setHeaderClass, setSearchClass}) => {
     }
 
     return (
-        <div className={menuClass}>
+        <div className={`menu-container${isMenuHidden ? ' hidden' : ''}`}>
             <button className='menu-circle' onClick={toggleMenu} tabIndex='-1'><i className='fas fa-bars'></i></button>
             <div>
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
@@ -70,7 +74,7 @@ const Menu = ({headerClass, searchClass, setHeaderClass, setSearchClass}) => {
                         </div>
                         <div>
                             <button onClick={toggleHeader} tabIndex='-1'>
-                                <i className={headerClass == 'header-scroll hidden' ? 'far fa-eye' : 'far fa-eye-slash'}></i>
+                                <i className={isHeaderHidden  ? 'far fa-eye' : 'far fa-eye-slash'}></i>
                             </button>
                         </div>
                         <div>
@@ -86,7 +90,7 @@ const Menu = ({headerClass, searchClass, setHeaderClass, setSearchClass}) => {
                         {location.pathname == '/searchUsers' || location.pathname == '/searchChat' &&
                             <div>
                                 <button onClick={toggleSearch}>
-                                    <i className={searchClass == 'form-container' ? 'fas fa-caret-down' : 'fas fa-caret-up' }></i>
+                                    <i className={isSearchHidden ? 'fas fa-caret-up' : 'fas fa-caret-down' }></i>
                                 </button>
                             </div>
                         }

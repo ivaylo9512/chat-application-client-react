@@ -2,13 +2,11 @@ import React, { useState, useRef } from 'react'
 import Session from '../Session/Session';
 import Form from '../Form/Form'
 import { useRequest } from '../../hooks/useRequest';
-import { useParams } from "react-router";
+import { useSelector } from 'react-redux';
 
-const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {  
-    const [error, setError] = useState()
+const ChatView = ({webSocketClient}) => {  
     const [nextSessions, fetchSessions] = useRequest({callback: setNextSessions, isAuth: true})
-    const { id } = useParams()
-    const baseUrl = useRef('http//' + localStorage.getItem('BaseUrl'))
+    const chat = useSelector(getCurrentChat);
 
     const setNextSessions = (nextSessions) => {
         setCurrentChat({
@@ -18,7 +16,6 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
                 ...JSON.parse(nextSessions)
             }
         })
-
     }
     
     const getNextSessions = async () => {
@@ -37,7 +34,7 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
                 <div className='chat-container'>
                     <Form sendNewMessage={sendNewMessage}/>
                     <div className='chat'>
-                        {currentChat.sessions.map(session =>{
+                        {chat.sessions.map(session =>{
                             return <Session session={session} key={session.date}/>
                         })}
                     </div>
@@ -48,4 +45,4 @@ const Chat = ({currentChat, setCurrentChat, webSocketClient}) => {
     )
 }
 
-export default Chat
+export default ChatView

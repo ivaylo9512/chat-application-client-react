@@ -1,4 +1,5 @@
 import authenticate from './slices/authenticateSlice';
+import styles from './slices/stylesSlice'
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from './sagas/index';
@@ -8,7 +9,8 @@ const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];
 
 const store = configureStore({
     reducer: {
-        authenticate
+        authenticate,
+        styles
     },
     middleware
 });

@@ -1,12 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
 import './HeaderScroll.css'
+import { getStylesHeaderState } from '../../app/slices/stylesSlice';
 
-const HeaderScroll = ({headerClass}) => {
+const HeaderScroll = () => {
     const listContainer = useRef()
     const scrollContainer = useRef()
     const [listPadding, setListPadding] = useState({})
     const name = useSelector(getChatSearchName)
+    const isHidden = useSelector(getStylesHeaderState) 
 
     useEffect(() => {
         hideScrollBar()
@@ -23,7 +25,7 @@ const HeaderScroll = ({headerClass}) => {
         const height = parseFloat(window.getComputedStyle(listContainer.current).height)
         const containerHeight = parseFloat(window.getComputedStyle(scrollContainer.current).height)
 
-        const barHeight = containerHeight - height 
+        const barHeight = containerHeight - height
     
         setListPadding({paddingBottom:`${barHeight}px`})
     }
@@ -33,7 +35,7 @@ const HeaderScroll = ({headerClass}) => {
     }
 
     return (
-        <div className={headerClass} ref={scrollContainer}>
+        <div className={`header-scroll${isHidden ? ' hidden' : ''}`} ref={scrollContainer}>
             <div ref={listContainer} style={listPadding} onWheel={scroll}>
                 <ChatList />
             </div>
