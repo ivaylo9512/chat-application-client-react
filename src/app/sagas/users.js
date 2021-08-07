@@ -1,5 +1,6 @@
 import { takeEvery, select } from 'redux-saga/effects';
 import { BASE_URL } from '../../constants';
+import { getUsersData, onUsersComplete, onUsersError} from '../slices/usersSlice';
 
 export default takeEvery('users/getUsers', getUsers);
 
@@ -23,7 +24,7 @@ function* getUsers({payload: query}){
             query
         }))
     }else{
-        yield put (onUsersComplete(response.text()));
+        yield put (onUsersError(response.text()));
     }
 
 }
