@@ -1,19 +1,29 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { setCurrentChat } from '../../app/slices/chatsSlice';
 
-const ChatUser = ({chat:{secondUser, lastMessage}}) => {
+const ChatUser = ({chat}) => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const setChat = () => {
+        dispatch(setCurrentChat(chat));
+        history.push('/chat')
+    }
+
     return (
-        <Link to='/chat' className='chat'>
+        <button onClick={setChat} className='chat'>
             <div>
                 <div className='image'>
-                    <img alt='profile' src={secondUser.profilePicture}/>
+                    <img alt='profile' src={chat.secondUser.profilePicture}/>
                 </div>
                 <div className='info'>
-                    <b>{secondUser.username}</b>
+                    <b>{chat.secondUser.username}</b>
                     <span></span>    
                 </div>
             </div>
-        </Link>
+        </button>
     )
 }
 
