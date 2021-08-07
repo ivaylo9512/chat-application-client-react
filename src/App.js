@@ -4,9 +4,9 @@ import Login from './components/Login/Login'
 import Register from './components/Register/Register'
 import Logged from './components/Logged/Logged'
 import { Route, Switch, Redirect, BrowserRouter as Router } from 'react-router-dom'
-import ErrorBoundary from './helpers/ErrorBoundary'
+import ErrorBoundary from './utils/ErrorBoundary'
 import { useDispatch, useSelector } from 'react-redux';
-import { onLogout, getIsAuth } from './app/slicers/authenticate';
+import { onLogout, getIsAuth } from './app/slices/authenticateSlice';
 
 const App = () => {
     const isAuth = useSelector(getIsAuth);

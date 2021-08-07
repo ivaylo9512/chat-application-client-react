@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const useInput = ({ name, placeholder, initialValue = '', type = '', autoComplete, validationRules, equalsValue, equalsName}) => {
     const [value, setValue] = useState(initialValue);

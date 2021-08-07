@@ -4,7 +4,7 @@ import useInput from '../../hooks/useInput';
 import usePasswordInput from '../../hooks/usePasswordInput';
 import { useSelector, useDispatch } from 'react-redux';
 import InputWithError from '../InputWithError';
-import { getRegisterRequest, registerRequest } from '../../app/slicers/authenticate';
+import { getRegisterRequest, registerRequest } from '../../app/slices/authenticateSlice';
 
 const Register = () => {
     const [pageIndex, setPageIndex] = useState(0)

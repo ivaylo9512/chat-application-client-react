@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useInput } from '../../hooks/useInput'
+import useInput from '../../hooks/useInput'
 import './Form.css'
 
 const Form = ({callback, placeholder, searchClass, onUnmount}) => {

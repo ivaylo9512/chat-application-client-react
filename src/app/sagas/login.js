@@ -1,13 +1,13 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { onLoginComplete } from '../slices/authenticate';
-import Router from 'next/router';
+import { onLoginComplete } from '../slices/authenticateSlice';
+import history from '../../utils/history';
 import { BASE_URL } from '../../constants';
 
 
 export default takeLatest('authenticate/loginRequest', login)
 
 function* login({payload}) {
-    const response = yield fetch(`${BASE_URL}/users/login`,{
+    const response = yield fetch(`${BASE_URL}/api/users/login`,{
         method: 'POST',
         headers:{
             'Content-Type': 'Application/json',
@@ -24,7 +24,7 @@ function* login({payload}) {
 
         localStorage.setItem('Authorization', response.headers.get('Authorization'));
         localStorage.setItem('user', data);
-        Router.push('/')
+        history.push('/')
     }else{
         yield put(onLoginComplete({
             error: data,

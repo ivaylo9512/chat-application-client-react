@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import useInput from '../../hooks/useInput';
 import { useSelector, useDispatch } from 'react-redux';
-import { getLoginRequest, loginRequest } from '../../app/slicers/authenticate';
+import { getLoginRequest, loginRequest } from '../../app/slices/authenticateSlice';
 import usePasswordInput from '../../hooks/usePasswordInput';
 
 const Login = () => {

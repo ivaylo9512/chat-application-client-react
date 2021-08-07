@@ -1,4 +1,4 @@
-import authenticate from './slices/authenticate';
+import authenticate from './slices/authenticateSlice';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from './sagas/index';

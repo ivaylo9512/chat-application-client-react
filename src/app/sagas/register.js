@@ -1,7 +1,7 @@
 import { BASE_URL } from "../../constants"
 import { put, takeLatest } from "redux-saga/effects";
-import Router from 'next/router';
-import { onRegisterComplete } from "../slices/authenticate";
+import history from '../../utils/history';
+import { onRegisterComplete } from "../slices/authenticateSlice";
 
 export default takeLatest('authenticate/registerRequest', register)
 
@@ -22,7 +22,7 @@ function* register({payload}){
 
         localStorage.setItem('Authorization', response.headers.get('Authorization'));
         localStorage.setItem('user', data);
-        Router.push('/')
+        history.push('/')
     }else{
         yield put(onRegisterComplete({
             error: data,

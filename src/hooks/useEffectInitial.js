@@ -8,6 +8,9 @@ export const useEffectInitial = (callback, state) => {
             isInitial.current = false;
             return;
         }
+
         callback()
     }, state)
 }
+
+export default useEffectInitial

@@ -13,7 +13,7 @@
     display: flex;
     overflow-y: hidden;
 }
-.element-container {
+.chat-container {
     border-radius: 5px;
     height: 8.5vh;
     flex: 0 0 22vw;

@@ -1,5 +1,5 @@
-import useInput, { InputParams } from "./useInput"
-import { useState } from "react";
+import useInput from "./useInput"
+import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 import styled from "styled-components";
@@ -20,7 +20,7 @@ const Button = styled.button`
 `
     
 const usePasswordInput = (options) => {
-    const [type, setType] = useState(options.type);
+    const [type, setType] = useState('password');
 
     const [value, input] = useInput({
         ...options,
