@@ -2,16 +2,14 @@ import React, { useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './Menu.css'
 
-const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, setSearchClass}) => {
+const Menu = ({headerClass, searchClass, setHeaderClass, setSearchClass}) => {
     const [menuClass, setMenuClass] = useState('menu-container hidden')
     const [rotate, setRotate] = useState({})
     const nav = useRef()
-    const appType = useRef(localStorage.getItem('AppType'))
     const location = useLocation()
     const [rotationStyle, setrotationStyle] = useState(0)
     const isRotating = useRef(false)
     const rotatingSign = useRef()
-    const minRotation = -60
 
     const toggleMenu = () => {
         setMenuClass(menuClass == 'menu-container hidden' ? 'menu-container' : 'menu-container hidden')    
@@ -58,18 +56,6 @@ const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, 
         requestAnimationFrame(rotate);
     }
 
-    const showRestMenu = () => {
-        const deg = -60 - rotationStyle
-        const transition = deg / -20 * 650
-        smoothRotate(deg, transition, rotationStyle)
-    }
-
-    const showChatMenu = () => {
-        const deg = -rotationStyle
-        const transition = deg / 20 * 650
-        smoothRotate(deg, transition, rotationStyle)
-    }
-
     return (
         <div className={menuClass}>
             <button className='menu-circle' onClick={toggleMenu} tabIndex='-1'><i className='fas fa-bars'></i></button>
@@ -104,39 +90,11 @@ const Menu = ({setHeader, headerClass, searchClass, headerType, setHeaderClass, 
                                 </button>
                             </div>
                         }
-                        {appType == 'restaurant' && 
-                            <>
-                                <div>
-                                    <button onClick={rotationStyle <= minRotation ? showChatMenu : showRestMenu} tabIndex='-1'>
-                                        {rotationStyle <= minRotation ? 'C' : 'R'}
-                                    </button>
-                                </div>
-                            </>
-                        }                        
                         <div>
                             <Link to='/logout' tabIndex='-1'>
                                 <i className='fas fa-sign-out-alt'></i>
                             </Link>
                         </div>
-                        {appType == 'restaurant' && 
-                            <>
-                                <div>
-                                    <button onClick={setHeader} tabIndex='-1'>
-                                        <i className= {headerType == 'chats' ? 'fas fa-comments' : 'fas fa-utensils' }></i>
-                                    </button>
-                                </div>
-                                <div>
-                                    <button tabIndex='-1'>
-                                        <i className='fas fa-plus-circle'></i>
-                                    </button>
-                                </div>
-                                <div>
-                                    <button tabIndex='-1'>
-                                        <i className='fas fa-bell'></i>
-                                    </button>
-                                </div>
-                            </>
-                        }
                     </nav>
                 </div>
             </div>
