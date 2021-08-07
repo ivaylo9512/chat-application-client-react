@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const ChatList = () => {
     const history = useHistory();
     const chats = useSelector(getChats);
-    const searchName = useSelector(getName);
+    const searchName = useSelector(getChatSearchName);
     const [filteredChats, setFilteredChats] = useState(chats);
 
     useEffect(() => {

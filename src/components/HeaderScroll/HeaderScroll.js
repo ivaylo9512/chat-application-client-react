@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import ChatUser from '../ChatUser/ChatUser';
+import React, { useEffect, useState, useRef } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
-import Order from '../Order/Order';
-import { useHistory } from 'react-router-dom'
 import './HeaderScroll.css'
 
-const HeaderScroll = ({headerType, headerClass, currentList}) => {
-    const listContainer = React.useRef()
-    const scrollContainer = React.useRef()
+const HeaderScroll = ({headerClass}) => {
+    const listContainer = useRef()
+    const scrollContainer = useRef()
     const [listPadding, setListPadding] = useState({})
-    const history = useHistory()
+    const name = useSelector(getChatSearchName)
 
     useEffect(() => {
         hideScrollBar()
-        window.addEventListener('resize', hideScrollBar)
-        return () => window.removeEventListener('resize', hideScrollBar)
-    }, [currentList])
+    }, [name])
     
     useEffect(() => {
+        window.addEventListener('resize', hideScrollBar)
         smoothscroll.polyfill()
+
+        return () => window.removeEventListener('resize', hideScrollBar)
     }, []) 
 
     const hideScrollBar = () => {
@@ -37,14 +35,7 @@ const HeaderScroll = ({headerType, headerClass, currentList}) => {
     return (
         <div className={headerClass} ref={scrollContainer}>
             <div ref={listContainer} style={listPadding} onWheel={scroll}>
-            {currentList.map(element => 
-                <div className='element-container' key={element.id}> 
-                    {headerType == 'chats' 
-                        ? <ChatUser onClick={() => history.push('/chat/' + element.id)} chat={element}/> 
-                        : <Order onClick={() => history.push('/chat/' + element.id)} order={element}/>
-                    }
-                </div>
-            )}  
+                <ChatList />
             </div>
         </div>
     )
