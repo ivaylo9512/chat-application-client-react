@@ -1,8 +1,18 @@
 import React from 'react';
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { setCurrentChat } from '../../app/slices/chatsSlice';
 
-const User = ({setChat, user, createNewChat}) => {
-    const history = useHistory()
+const User = ({user}) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+
+    const setChat = () => {
+        if(user.chatWithUser){
+            history.push('/chat');
+            dispatch(setCurrentChat(user.chatWithUser));
+        }
+    }
 
     return (
         <div>
@@ -13,9 +23,11 @@ const User = ({setChat, user, createNewChat}) => {
                 <b>{user.username}</b>
                 <span></span>    
             </div>
-            <button onClick={()=> user.hasChatWithLoggedUser 
-                ? history.push('/chat') && setChat(user.id)  
-                : createNewChat} >
+            <button onClick={setChat}>
+                {user.chatWithUser 
+                    ? 'open'
+                    : 'add'
+                }
             </button>
         </div>
     )

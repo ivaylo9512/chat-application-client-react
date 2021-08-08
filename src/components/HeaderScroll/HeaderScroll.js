@@ -1,18 +1,21 @@
 import React, { useEffect, useState, useRef } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
 import './HeaderScroll.css'
-import { getStylesHeaderState } from '../../app/slices/stylesSlice';
+import { getHeaderVisibility } from '../../app/slices/stylesSlice';
+import { useSelector } from 'react-redux';
+import { getChatsQuery } from '../../app/slices/chatsSlice';
+import ChatList from '../ChatList/ChatList';
 
 const HeaderScroll = () => {
     const listContainer = useRef()
     const scrollContainer = useRef()
     const [listPadding, setListPadding] = useState({})
-    const name = useSelector(getChatSearchName)
-    const isHidden = useSelector(getStylesHeaderState) 
+    const query = useSelector(getChatsQuery)
+    const isHidden = useSelector(getHeaderVisibility) 
 
     useEffect(() => {
         hideScrollBar()
-    }, [name])
+    }, [query])
     
     useEffect(() => {
         window.addEventListener('resize', hideScrollBar)
