@@ -1,26 +1,15 @@
 import React, { useRef, useEffect } from 'react';
-import Users from '../User/User'
-import { useDispatch } from 'react-redux';
+import User from '../User/User'
+import { useSelector } from 'react-redux';
+import { getCurrentUsers } from '../../app/slices/usersSlice';
 
-const UsersList = ({foundUsers, setChat, createNewChat}) => {
-    const searchName = useSelector(getSearchUsersName);
-    const users = useSelector(getUsers);
-    const dispatch = useDispatch();
-
-    const createChat = (userId) => {
-        fetch(`http://${baseUrl}/api/chat/auth/create?userId=${userId}`)        
-    }
-
-    useEffect(() => {
-        if(searchName != null){
-            dispatch(getUsers());
-        }
-    }, [searchName])
+const UsersList = () => {
+    const users = useSelector(getCurrentUsers);
 
     return (
         <div className='users'>
-            {users.map(user =>
-                <Users user={user} setChat={setChat} createNewChat={createNewChat} key={user.id} />
+            {users && users.map(user =>
+                <User user={user} key={user.id} />
             )}
         </div>
     )
