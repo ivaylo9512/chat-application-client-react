@@ -1,6 +1,8 @@
 import authenticate from './slices/authenticateSlice';
 import styles from './slices/stylesSlice'
 import chats from './slices/chatsSlice'
+import users from './slices/usersSlice'
+import userChats from './slices/userChatsSlice';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from './sagas/index';
@@ -12,7 +14,9 @@ const store = configureStore({
     reducer: {
         authenticate,
         styles,
-        chats
+        chats,
+        users,
+        userChats
     },
     middleware
 });
