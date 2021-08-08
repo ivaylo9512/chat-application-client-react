@@ -1,8 +1,8 @@
-import { takeEvery, select } from 'redux-saga/effects';
 import { BASE_URL } from '../../constants';
 import { getUsersData, onUsersComplete, onUsersError} from '../slices/usersSlice';
+import { takeLatest, select, put } from 'redux-saga/effects';
 
-export default takeEvery('users/getUsers', getUsers);
+export default takeLatest('users/getUsers', getUsers);
 
 function* getUsers({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUsersData));
@@ -17,7 +17,7 @@ function* getUsers({payload: query}){
         
         data.length = data.users.length;
         data.lastUser = data.users[data.length];
-        data.users = splitArray(data.users, take);
+        data.users = splitArray(data.users, query.take);
 
         yield put(onUsersComplete({
             data,
@@ -44,7 +44,7 @@ const getData = (query, data) => {
     let lastUser = data.lastUser;
     const takeAmount = query.take * query.pages;
     
-    if(lastUsuer){
+    if(lastUser){
         lastId = lastUser.id;
         lastName = `${lastUser.firstName} ${lastUser.lastName}`;
     }

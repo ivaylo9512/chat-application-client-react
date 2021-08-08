@@ -5,7 +5,7 @@ const initialState = {
     searchIsHidden: false
 }
 
-const stylesReducer = createSlice({
+const styleSlice = createSlice({
     name: 'styles',
     initialState,
     reducers: {
@@ -22,9 +22,9 @@ const stylesReducer = createSlice({
     }
 })
 
-export const { resetStyleState, toggleHeaderVisibility, toggleSearchVisibility } = stylesReducer.actions;
-export default stylesReducer.reducer;
+export const { resetStyleState, toggleHeaderVisibility, toggleSearchVisibility } = styleSlice.actions;
+export default styleSlice.reducer;
 
-export const getStylesState = state = state.styles;
-export const getStylesHeaderState = state = state.styles.headerIsHidden;
-export const getStylesSearchState = state = state.styles.searchIsHidden;
+export const getStylesState = state => state.styles;
+export const getHeaderVisibility = state => state.styles.headerIsHidden;
+export const getSearchVisibility = state => state.styles.searchIsHidden;

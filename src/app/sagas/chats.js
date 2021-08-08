@@ -1,8 +1,8 @@
-import { takeEvery, select } from 'redux-saga/effects';
 import { BASE_URL } from '../../constants';
 import { getChatsData, onChatsComplete, onChatsError } from '../slices/chatsSlice';
+import { takeLatest, select, put } from 'redux-saga/effects';
 
-export default takeEvery('chats/getChats', getChats);
+export default takeLatest('chats/getChats', getChats);
 
 function* getChats({payload: query}){
     const { lastUpdatedAt, lastId, takeAmount } =  getData(query, yield select(getChatsData));
@@ -17,7 +17,7 @@ function* getChats({payload: query}){
         
         data.length = data.chats.length;
         data.lastChat = data.chats[data.length];
-        data.chats = splitArray(data.chats, take);
+        data.chats = splitArray(data.chats, query.take);
 
         yield put(onChatsComplete({
             data,
