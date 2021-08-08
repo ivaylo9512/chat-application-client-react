@@ -1,33 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import ChatUser from '../ChatUser/ChatUser';
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { getChatsData } from '../../app/slices/chatsSlice';
 
 const ChatList = () => {
-    const history = useHistory();
-    const chats = useSelector(getChats);
-    const searchName = useSelector(getChatSearchName);
-    const [filteredChats, setFilteredChats] = useState(chats);
-
-    useEffect(() => {
-        if(searchName != null){
-            const name = searchName.toUpperCase()
-            setFilteredChats(chats.filter(chat => { 
-                const firstName = chat.user.firstName.toUpperCase()
-                const lastName = chat.user.lastName.toUpperCase()
-                if(firstName.startsWith(name) || lastName.startsWith(name) || (`${firstName} ${lastName}`).startsWith(name)){
-                    return chat
-                }
-            }))
-        }
-    }, [name]);
+    const { chats } = useSelector(getChatsData);
     
     return(
         <>
-            {filteredChats.map(chat => 
-                <div className='chat-container' key={chat.id}> 
-                    <ChatUser onClick={() => history.push('/chat/' + chat.id)} chat={chat}/>
-                </div>
+            {chats && chats.map(chat => 
+                <ChatUser chat={chat}/>
             )}  
         </>
     )

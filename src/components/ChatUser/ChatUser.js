@@ -13,17 +13,19 @@ const ChatUser = ({chat}) => {
     }
 
     return (
-        <button onClick={setChat} className='chat'>
-            <div>
-                <div className='image'>
-                    <img alt='profile' src={chat.secondUser.profilePicture}/>
+        <div className='chat-container' key={chat.id}> 
+            <button onClick={setChat} className='chat'>
+                <div>
+                    <div className='image'>
+                        <img alt='profile' src={chat.secondUser.profilePicture}/>
+                    </div>
+                    <div className='info'>
+                        <b>{chat.secondUser.username}</b>
+                        <span></span>    
+                    </div>
                 </div>
-                <div className='info'>
-                    <b>{chat.secondUser.username}</b>
-                    <span></span>    
-                </div>
-            </div>
-        </button>
+            </button>
+        </div>
     )
 }
 
