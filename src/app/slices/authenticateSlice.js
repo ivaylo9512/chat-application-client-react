@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const user = typeof window != 'undefined' && localStorage.getItem('user') 
+const user = localStorage.getItem('user') 
     ? JSON.parse(localStorage.getItem('user'))
     : undefined;
 
@@ -33,23 +33,25 @@ const authenticateSlice = createSlice({
                 error: undefined
             }
         },
-        onLoginComplete: (state, action) => {
-            const { user, error } = action.payload
-            state.user = user
+        onLoginComplete: (state, {payload}) => {
+            state.user = payload
             state.isAuth = true;
-            state.loginRequest = {
-                isLoading: false,
-                error
-            }
+            state.loginRequest.isLoading = false;
+            state.loginRequest.error = null;
         },
-        onRegisterComplete: (state, action) => {
-            const { user, error } = action.payload
-            state.user = user
+        onLoginError: (state, {payload}) => {
+            state.loginRequest.isLoading = false;
+            state.loginRequest.error = payload;
+        },
+        onRegisterComplete: (state, {payload}) => {
+            state.user = payload
             state.isAuth = true;
-            state.registerRequest = {
-                isLoading: false,
-                error
-            }
+            state.registerRequest.isLoading = false;
+            state.registerRequest.error = null;
+        },
+        onRegisterError: (state, {payload}) => {
+            state.registerRequest.isLoading = false;
+            state.registerRequest.error = payload;
         },
         onLogout: (state) => {
             state.user = undefined;
@@ -58,7 +60,7 @@ const authenticateSlice = createSlice({
     }
 })
 
-export const { loginRequest, registerRequest, onLoginComplete, onRegisterComplete, onLogout } = authenticateSlice.actions
+export const { loginRequest, registerRequest, onLoginComplete, onLoginError, onRegisterComplete, onRegisterError, onLogout } = authenticateSlice.actions
 export default authenticateSlice.reducer
 
 export const getLoginRequest = state => state.authenticate.loginRequest;

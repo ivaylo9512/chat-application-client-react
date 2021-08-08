@@ -1,5 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { onLoginComplete } from '../slices/authenticateSlice';
+import { onLoginComplete, onLoginError } from '../slices/authenticateSlice';
 import history from '../../utils/history';
 import { BASE_URL } from '../../constants';
 
@@ -18,16 +18,13 @@ function* login({payload}) {
     const data = yield response.text();
 
     if(response.ok){
-        yield put(onLoginComplete({
-            user: JSON.parse(data)
-        }))
+        yield put(onLoginComplete(JSON.parse(data)));
 
         localStorage.setItem('Authorization', response.headers.get('Authorization'));
+        console.log(data);
         localStorage.setItem('user', data);
         history.push('/')
     }else{
-        yield put(onLoginComplete({
-            error: data,
-        }))
+        yield put(onLoginError(data))
     }
 }
