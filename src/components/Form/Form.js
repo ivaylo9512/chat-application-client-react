@@ -1,23 +1,28 @@
 import React, { useEffect } from 'react'
 import useInput from '../../hooks/useInput'
 import './Form.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSearchVisibility } from '../../app/slices/stylesSlice'
 
-const Form = ({callback, placeholder, searchClass, onUnmount}) => {
+const Form = ({action, selector,  placeholder, onUnmount}) => {
     const [inputValue, input] = useInput({type:'text', placeholder})
+    const isSearchHidden = useSelector(getSearchVisibility);
+    const dispatch = useDispatch();
+    const query = useSelector(selector);
 
     const submit = (e) => {
         e.preventDefault()
-        callback(inputValue)
+        dispatch(action({...query, name: inputValue, page: 1}));
     }
 
     useEffect(() => {
         if(onUnmount){
-            return () => onUnmount('')
+            return () => dispatch(onUnmount())
         }
     }, [])
 
     return (
-        <div className={searchClass}>
+        <div className={`form-container${isSearchHidden ? ' hidden' : ''}`}>
             <form onSubmit={submit}>
                 {input}
                 <button><i className='fas fa-search'></i></button>

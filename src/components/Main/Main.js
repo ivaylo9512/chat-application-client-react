@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import WebSocket from '../../utils/WebSocket'
 import UsersList from '../UsersList/UsersList';
 import { Route, Redirect, Switch } from 'react-router-dom'
@@ -6,25 +6,24 @@ import Form from '../Form/Form';
 import ChatView from '../ChatView/ChatView'
 import './Main.css'
 import useEffectInitial from '../../hooks/useEffectInitial';
-import { useSelector } from 'react-redux';
-import { getStylesSearchState } from '../../app/slices/stylesSlice';
+import { getChatsQuery, chatsRequest, resetChatsState } from '../../app/slices/chatsSlice';
+import { getUsersQuery, usersRequest, resetUsersState } from '../../app/slices/usersSlice';
 
-const Main = ({searchChats, searchClass}) => {
+const Main = ({searchChats}) => {
     const [webSocketClient, setWebSocketClient] = useState()
-    const isSearchHidden = useSelector(getStylesSearchState);
 
 
     return(
         <main>
             <WebSocket setWebSocketClient={setWebSocketClient}/>            
             <Switch>
-                <Route path='/searchUsers' render={({history}) => 
+                <Route path='/searchUsers' render={() => 
                     <>
-                        <UsersList history={history} createNewChat={createNewChat} foundUsers={foundUsers}/>
-                        <Form searchClass={`form-container${isSearchHidden ? ' hidden' : ''}`} callback={searchUsers} placeholder={'search users'}/>
+                        <UsersList createNewChat={createNewChat} />
+                        <Form action={usersRequest} selector={getUsersQuery} placeholder={'search users'} onUnmount={resetUsersState}/>
                     </>
                 }/>
-                <Route path='/searchChat' render={() => <Form searchClass={searchClass} callback={searchChats} placeholder={'search chat'} onUnmount={searchChats}/>}/>
+                <Route path='/searchChat' render={() => <Form action={chatsRequest} selector={getChatsQuery} placeholder={'search chat'} onUnmount={resetChatsState}/>}/>
                 <Route path='/chat/:id' render={() => <ChatView webSocketClient={webSocketClient}/>}/>
                 <Route path='/home' render={() => <p>No chat is selected!</p>}/>
                 <Redirect from='/' to='/home'/>
