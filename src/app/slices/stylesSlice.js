@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    headerIsHidden: true,
-    searchIsHidden: false
+    isHeaderHidden: true,
+    isSearchHidden: false
 }
 
 const styleSlice = createSlice({
@@ -10,14 +10,14 @@ const styleSlice = createSlice({
     initialState,
     reducers: {
         toggleHeaderVisibility: (state) => {
-            state.headerIsHidden = !state.headerIsHidden;
+            state.isHeaderHidden = !state.isHeaderHidden;
         },
         toggleSearchVisibility: (state) => {
-            state.searchIsHidden = !state.searchIsHidden;
+            state.isSearchHidden = !state.isSearchHidden;
         },
         resetStyleState: (state) => {
-            state.headerIsHidden = initialState.headerIsHidden;
-            state.searchIsHidden = initialState.searchIsHidden;
+            state.isHeaderHidden = initialState.isHeaderHidden;
+            state.isSearchHidden = initialState.isSearchHidden;
         }
     }
 })
@@ -26,5 +26,5 @@ export const { resetStyleState, toggleHeaderVisibility, toggleSearchVisibility }
 export default styleSlice.reducer;
 
 export const getStylesState = state => state.styles;
-export const getHeaderVisibility = state => state.styles.headerIsHidden;
-export const getSearchVisibility = state => state.styles.searchIsHidden;
+export const getHeaderVisibility = state => state.styles.isHeaderHidden;
+export const getSearchVisibility = state => state.styles.isSearchHidden;

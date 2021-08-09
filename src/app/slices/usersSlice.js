@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     data: {
-        length: 0,
         pages: 0,
+        maxPages: 0,
         users: [],
         lastUser: null,
         currentUsers: null
     },
     query: {
-        take: 2,
+        take: 10,
         direction: 'ASC',
         name: '',
     },
@@ -25,13 +25,13 @@ const usersSlice = createSlice({
             state.isLoading = true;
             state.error = null;
         },
-        onUsersComplete: (state, {payload: data, query}) => {
+        onUsersComplete: (state, {payload: {pageable, query}}) => {
             state.query = query;
-            state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
-            state.data.length = state.data.length + data.length;
-            state.data.lastUser = data.lastUser;
-            state.data.users = [...state.data.users, ...data.users];
-            state.data.currentUsers = data.users[data.users.length - 1];
+            state.data.maxPages = state.pages + pageable.pages;
+            state.data.pages = state.data.pages + pageable.data.length;
+            state.data.lastUser = pageable.lastUser;
+            state.data.users = [...state.data.users, ...pageable.data];
+            state.data.currentUsers = pageable.data[pageable.data.length - 1];
             state.data.isLoading = false;
             state.error = null;
         },
@@ -57,4 +57,4 @@ export default usersSlice.reducer;
 export const getUsersState = state => state.users;
 export const getUsersQuery = state => state.users.query;
 export const getUsersData = state => state.users.data;
-export const getCurrentUser = state => state.users.currentUser;
+export const getCurrentUsers = state => state.users.data.currentUsers;

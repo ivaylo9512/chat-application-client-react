@@ -4,7 +4,8 @@ const initialState = {
     data: {
         chats: [],
         lastChat: null,
-        isLastPage: false
+        isLastPage: false,
+        currentChat: null
     },
     query: {
         take: 2,
@@ -22,17 +23,20 @@ const chatsSlice = createSlice({
             state.isLoading = true;
             state.error = null
         },
-        onChatsComplete: (state, {payload: {data, query}}) => {
+        onChatsComplete: (state, {payload: {pageable, query}}) => {
             state.query = query;
-            state.data.isLastPage = data.isLastPage;
-            state.data.lastChat = data.lastChat;
-            state.chats = [...state.chats, ...data.chats];
+            state.data.isLastPage = pageable.isLastPage;
+            state.data.lastChat = pageable.lastChat;
+            state.data.chats = [...state.data.chats, ...pageable.data];
             state.data.isLoading = false;
             state.error = null;
         },
         onChatsError: (state, {payload}) => {
             state.error = payload;
             state.isLoading = false;
+        },
+        setCurrentChat: (state, {payload}) => {
+            state.currentChat = payload;
         },
         resetChatsState: (state) => {
             state.data = initialState.data;
@@ -43,9 +47,11 @@ const chatsSlice = createSlice({
     }
 });
 
-export const {chatsRequest, resetChatsState, onChatsComplete, onChatsError} = chatsSlice.actions;
+export const {chatsRequest, resetChatsState, setCurrentChat, onChatsComplete, onChatsError} = chatsSlice.actions;
 export default chatsSlice.reducer;
 
 export const getChatsState = state => state.chats;
+export const getCurrentChat = state => state.chats.currentChat;
 export const getChatsQuery = state => state.chats.query;
 export const getChatsData = state => state.chats.data;
+export const getIsLastChatPage = state => state.chats.data.isLastPage;
