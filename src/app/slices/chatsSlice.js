@@ -28,7 +28,7 @@ const chatsSlice = createSlice({
             state.data.isLastPage = pageable.isLastPage;
             state.data.lastChat = pageable.lastChat;
             state.data.chats = [...state.data.chats, ...pageable.data];
-            state.data.isLoading = false;
+            state.isLoading = false;
             state.error = null;
         },
         onChatsError: (state, {payload}) => {

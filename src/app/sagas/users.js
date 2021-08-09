@@ -1,41 +1,33 @@
 import { BASE_URL } from '../../constants';
 import { getUsersData, onUsersComplete, onUsersError} from '../slices/usersSlice';
 import { takeLatest, select, put } from 'redux-saga/effects';
+import splitArray from '../../utils/splitArray';
 
-export default takeLatest('users/getUsers', getUsers);
+export default takeLatest('users/usersRequest', getUsers);
 
 function* getUsers({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUsersData));
-    const response = yield fetch(`${BASE_URL}/api/users/auth/searchForUsers/${name}/${takeAmount}${lastName}/${lastId}`,{
+    const lastPath = lastName ? `${lastName}/${lastId}` : '';
+
+    const response = yield fetch(`${BASE_URL}/api/users/auth/searchForUsers/${name}/${takeAmount}/${lastPath}`,{
         headers:{
-            Authorization: `Bearer ${localStorage.getItem('Authorization')}`
+            Authorization: localStorage.getItem('Authorization')
         }
     });
 
     if(response.ok){
-        const data = yield response.json(); 
-        
-        data.length = data.users.length;
-        data.lastUser = data.users[data.length];
-        data.users = splitArray(data.users, query.take);
+        const pageable = yield response.json();
+        pageable.lastUser = pageable.data[pageable.data.length - 1];
+        pageable.data = splitArray(pageable.data, query.take);
 
         yield put(onUsersComplete({
-            data,
+            pageable,
             query
         }))
     }else{
-        yield put (onUsersError(response.text()));
+        yield put (onUsersError(yield response.text()));
     }
 
-}
-
-const splitArray = (users, take) => {
-    return users.reduce((result, user, i) =>  {
-        const page = Math.floor(i / take);
-        result[page] = result[page] ? (result[page].push(user), result[page]) : [user];
-
-        return result;
-    },[])
 }
 
 const getData = (query, data) => {

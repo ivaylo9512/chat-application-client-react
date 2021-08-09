@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { setCurrentChat } from '../../app/slices/chatsSlice';
+import './ChatUser.css';
 
 const ChatUser = ({chat}) => {
     const dispatch = useDispatch();

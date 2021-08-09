@@ -21,7 +21,6 @@ function* login({payload}) {
         yield put(onLoginComplete(JSON.parse(data)));
 
         localStorage.setItem('Authorization', response.headers.get('Authorization'));
-        console.log(data);
         localStorage.setItem('user', data);
         history.push('/')
     }else{
