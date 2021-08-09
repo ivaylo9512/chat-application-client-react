@@ -4,7 +4,7 @@ import './Form.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSearchVisibility } from '../../app/slices/stylesSlice'
 
-const Form = ({action, selector,  placeholder, onUnmount}) => {
+const Form = ({action, resetState, selector,  placeholder, onUnmount}) => {
     const [inputValue, input] = useInput({type:'text', placeholder})
     const isSearchHidden = useSelector(getSearchVisibility);
     const dispatch = useDispatch();
@@ -12,7 +12,8 @@ const Form = ({action, selector,  placeholder, onUnmount}) => {
 
     const submit = (e) => {
         e.preventDefault()
-        dispatch(action({...query, name: inputValue, page: 1}));
+        dispatch(resetState());
+        dispatch(action({...query, name: inputValue, pages: 1}));
     }
 
     useEffect(() => {

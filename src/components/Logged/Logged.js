@@ -4,10 +4,6 @@ import Menu from '../Menu/Menu'
 import HeaderScroll from '../HeaderScroll/HeaderScroll';
 
 const Logged = () => {
-    const [searchClass, setSearchClass] = useState('form-container')
-    
-    const [chats, setChats] = useState([])
-
     return(
         <section className='content-container'>
             <HeaderScroll />
