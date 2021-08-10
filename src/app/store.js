@@ -1,23 +1,38 @@
-import authenticate from './slices/authenticateSlice';
+import authenticate, { onLoginError } from './slices/authenticateSlice';
 import styles from './slices/stylesSlice'
 import chats from './slices/chatsSlice'
 import users from './slices/usersSlice'
 import userChats from './slices/userChatsSlice';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from './sagas/index';
+import { put } from 'redux-saga/effects';
 
 const sagaMiddleware = createSaga();
 const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];
 
+const combinedReducer = combineReducers({
+    authenticate,
+    styles,
+    chats,
+    users,
+    userChats
+})
+
+const rootReducer = (state, action) => {
+    if (action.type === 'logout') { 
+        localStorage.removeItem('Authorization');
+        localStorage.removeItem('user');
+        combinedReducer(undefined, action);
+
+        put(onLoginError('Session has expired.'))
+    }
+
+    return combinedReducer(state, action);
+}
+
 const store = configureStore({
-    reducer: {
-        authenticate,
-        styles,
-        chats,
-        users,
-        userChats
-    },
+    reducer: rootReducer,
     middleware
 });
 

@@ -2,6 +2,7 @@ import { BASE_URL } from '../../constants';
 import { getUsersData, onUsersComplete, onUsersError} from '../slices/usersSlice';
 import { takeLatest, select, put } from 'redux-saga/effects';
 import splitArray from '../../utils/splitArray';
+import UnauthorizedException from '../../exceptions/unauthorizedException';
 
 export default takeLatest('users/usersRequest', getUsers);
 
@@ -25,7 +26,12 @@ function* getUsers({payload: query}){
             query
         }))
     }else{
-        yield put (onUsersError(yield response.text()));
+        const message = yield response.text(); 
+        yield put(onUsersError(message));
+
+        if(response.status == 401){
+            throw new UnauthorizedException(message);            
+        } 
     }
 
 }

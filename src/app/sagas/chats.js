@@ -1,13 +1,15 @@
 import { BASE_URL } from '../../constants';
 import { getChatsData, onChatsComplete, onChatsError } from '../slices/chatsSlice';
 import { takeLatest, select, put } from 'redux-saga/effects';
+import { authWrapper } from './index'
+import UnauthorizedException from '../../exceptions/unauthorizedException';
 
-export default takeLatest('chats/chatsRequest', getChats);
+export default takeLatest('chats/chatsRequest',  authWrapper(getChats));
 
 function* getChats({payload: query}){
     const { lastUpdatedAt, lastId, take } =  getData(query, yield select(getChatsData));
     const lastParam = lastUpdatedAt ? `${lastUpdatedAt}/${lastId}` : ''
-    
+
     const response = yield fetch(`${BASE_URL}/api/chats/auth/findChats/${take}/${lastParam}`, {
         headers:{
             Authorization: localStorage.getItem('Authorization')
@@ -18,13 +20,19 @@ function* getChats({payload: query}){
         const pageable = yield response.json(); 
         pageable.lastChat = pageable.data[pageable.data.length - 1]; 
         pageable.isLastPage = pageable.pages < 2;
-        
+
+        console.log(pageable);
         yield put(onChatsComplete({
             pageable,
             query
         }))
     }else{
-        yield put(onChatsError(yield response.text()));
+        const message = yield response.text();
+        yield put(onChatsError(message));
+
+        if(response.status == 401){
+            throw new UnauthorizedException(message);            
+        } 
     }
 
 }
