@@ -1,59 +1,9 @@
-.menu-container{
-    width: 27%;
-    transition: all 4s;
-}
-.menu-container.hidden{
-    width: 0;
-}
-.menu-container > div{
-    height: 100%;
-    width: 100%;
-    transform: translate(0, 0);
-    transition: all 4s;
-}
-.menu-container.hidden > div{
-    transform: translate(-22.5em, 18em);
-}
-.menu-circle{
-    border-radius: 50%;
-    border: 0px;
-    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
-    height: 2.7em;
-    width: 2.7em;
-    background: rgb(24,27, 33);
-    color: white;
-    font-size: 1.2em;
-    position: absolute;
-    top: 100%;
-    left: -2em;
-    transition: all 2s;
-    transform: translate(0, 0);
-
-}
-.menu-container.hidden .menu-circle{
-    transition: all 2s 1.75s;
-    transform: translate(4em, -5em);
-}
-.circle-nav {
-    overflow: hidden;
-    position: fixed;
-    bottom: -11.6vw;
-    border: 0.5px solid #c2001b;
-    right: 100%;
-    border-radius: 50%;
-    margin-right: -26.8vw;
-    background: rgb(24,27, 33);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 0px 9px 2px rgba(0,0,0,0.75);
-}
 .circle-nav nav {
     position: relative;
     height: 32vw;
     width: 32vw;
 }
-.circle-nav div {
+.circle-nav li {
     position: absolute;
     font-size: 1.5em;
     width: 4vw;
@@ -63,77 +13,58 @@
     transform-origin: center;
     list-style: none;
 }
-.circle-nav div a {
+.circle-nav li a {
     text-align: center;
     line-height: 3vw;
 }
-.circle-nav div button,
-.circle-nav div a {
+.circle-nav li button,
+.circle-nav li a {
     position: absolute;
     top: 1vw;
     border-radius: 50%;
-    font-size: 1.3vw;
+    font-size: 0.95vw;
     color: white;
     height: 3vw;
     width: 3vw;
     background: rgb(24,27, 33);
     padding: 0;
     border: 0;
-    box-shadow: 0px 0px 3px 1.4px rgba(0,0,0,0.8);
+    box-shadow: 0px 0px 0.5vw 0.1vw rgb(0, 0, 0, 0.8)
 } 
-.circle-nav div a span {
+.circle-nav li a span {
     font-size: 1.1em;
     opacity: 0.7;
 }
-.circle-nav div:first-child {
+.circle-nav li:first-child {
     transform: rotate(-5deg);
 }
-.circle-nav div:nth-child(2) {
+.circle-nav li:nth-child(2) {
     transform: rotate(15deg);
 }
-.circle-nav div:nth-child(3) {
+.circle-nav li:nth-child(3) {
     transform: rotate(35deg);
 }
-.circle-nav div:nth-child(4) {
+.circle-nav li:nth-child(4) {
     transform: rotate(55deg);
 }
-.circle-nav div:nth-child(5) {
+.circle-nav li:nth-child(5) {
     transform: rotate(75deg);
 }
-.circle-nav div:nth-child(6) {
+.circle-nav li:nth-child(6) {
     transform: rotate(95deg);
 }
-.circle-nav div:nth-child(6) {
+.circle-nav li:nth-child(6) {
     transform: rotate(95deg);
 }
-.circle-nav div:nth-child(6) {
+.circle-nav li:nth-child(6) {
     transform: rotate(95deg);
 }
-.circle-nav div:nth-child(7) {
+.circle-nav li:nth-child(7) {
     transform: rotate(120deg);
 }
-.circle-nav div:nth-child(8) {
+.circle-nav li:nth-child(8) {
     transform: rotate(140deg);
 }
-.circle-nav div:nth-child(9) {
+.circle-nav li:nth-child(9) {
     transform: rotate(160deg);
-}
-.circle-btn {
-    background: rgb(24,27, 33);
-    border: 0px;
-    color: #c2001b;
-    font-size: 2.3vw;
-    height: 22.5vw;
-    width: 22.5vw;
-    position: absolute;
-    right: 50%;
-    top: 50%;
-    margin-right: -11.25vw;
-    margin-top: -11.25vw;
-    bottom: -6.7vw;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 3;
-    padding: 0;
-    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.8);
 }

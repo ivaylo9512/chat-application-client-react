@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './Menu.css'
 import MenuNav from '../MenuNav/MenuNav'
+import { MenuContainer, MenuCircle, CircleNav, CircleBtn } from './MenuStyle';
 
 const Menu = () => {
     const [rotate, setRotate] = useState({});
@@ -8,10 +9,6 @@ const Menu = () => {
     const [rotationStyle, setrotationStyle] = useState(0)
     const isRotating = useRef(false)
     const rotatingSign = useRef()
-
-    const toggleMenu = () => {
-        setIsMenuHidden(!isMenuHidden)    
-    }
     
     const rotateNav = (e) => {
         const sign = Math.sign(e.deltaY + e.deltaX)
@@ -47,15 +44,15 @@ const Menu = () => {
     }
 
     return (
-        <div className={`menu-container${isMenuHidden ? ' hidden' : ''}`}>
-            <button className='menu-circle' onClick={toggleMenu} tabIndex='-1'><i className='fas fa-bars'></i></button>
+        <MenuContainer isHidden={isMenuHidden}>
+            <MenuCircle onClick={() => setIsMenuHidden(!isMenuHidden)} tabIndex='-1'><i className='fas fa-bars'></i></MenuCircle>
             <div>
-                <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
-                    <button onClick={toggleMenu} className='circle-btn' tabIndex='-1'>-</button>
+                <CircleNav onWheel={rotateNav}>
+                    <CircleBtn onClick={() => setIsMenuHidden(!isMenuHidden)} tabIndex='-1'>-</CircleBtn>
                     <MenuNav rotate={rotate}/>
-                </div>
+                </CircleNav>
             </div>
-        </div>
+        </MenuContainer>
     )
 }
 
