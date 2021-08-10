@@ -13,17 +13,6 @@
     display: flex;
     overflow-y: hidden;
 }
-.chat-container {
-    border-radius: 5px;
-    height: 8.5vh;
-    flex: 0 0 22vw;
-    background: white;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    padding: 0 0.5vw;
-    position: relative;
-}
 .chat-info {
     color: white;
     width: 100%;
