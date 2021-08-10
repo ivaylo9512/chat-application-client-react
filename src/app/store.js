@@ -20,12 +20,11 @@ const combinedReducer = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-    if (action.type === 'logout') { 
+    if (action.type === 'authenticate/onLogout') { 
         localStorage.removeItem('Authorization');
         localStorage.removeItem('user');
-        combinedReducer(undefined, action);
 
-        put(onLoginError('Session has expired.'))
+        return combinedReducer(undefined, action);
     }
 
     return combinedReducer(state, action);

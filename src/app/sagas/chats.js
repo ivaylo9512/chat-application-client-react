@@ -21,7 +21,6 @@ function* getChats({payload: query}){
         pageable.lastChat = pageable.data[pageable.data.length - 1]; 
         pageable.isLastPage = pageable.pages < 2;
 
-        console.log(pageable);
         yield put(onChatsComplete({
             pageable,
             query
