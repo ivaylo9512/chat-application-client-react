@@ -1,9 +1,8 @@
 import React from 'react'
-import { render } from 'react-dom';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStylesState, toggleHeaderVisibility, toggleSearchVisibility } from '../../app/slices/stylesSlice';
-
+import { Button, Li, Nav } from './MenuNavStyles'
 const MenuNav = ({rotate}) => {
     const location = useLocation();
     const {isHeaderHidden, isSearchHidden} = useSelector(getStylesState)
@@ -18,42 +17,42 @@ const MenuNav = ({rotate}) => {
     }
 
     return(
-        <nav style={rotate}>
+        <Nav style={rotate}>
             <ul>
-                <li>
-                    <button tabIndex='-1'>
+                <Li>
+                    <Button tabIndex='-1'>
                         <i className='fas fa-user'></i>
-                    </button>
-                </li>
-                <li>
-                    <button onClick={toggleHeader} tabIndex='-1'>
+                    </Button>
+                </Li>
+                <Li>
+                    <Button onClick={toggleHeader} tabIndex='-1'>
                         <i className={isHeaderHidden  ? 'far fa-eye' : 'far fa-eye-slash'}></i>
-                    </button>
-                </li>
-                <li>
+                    </Button>
+                </Li>
+                <Li>
                     <Link to='/searchChat' tabIndex='-1'>
                         <i className='fas fa-search'></i>
                     </Link>
-                </li>
-                <li>
+                </Li>
+                <Li>
                     <Link to='/searchUsers' tabIndex='-1'>
                         <i className='fas fa-user-plus'></i>
                     </Link>
-                </li>
+                </Li>
                 {(location.pathname == '/searchUsers' || location.pathname == '/searchChat') &&
-                    <li>
-                        <button onClick={toggleSearch}>
+                    <Li>
+                        <Button onClick={toggleSearch}>
                             <i className={isSearchHidden ? 'fas fa-caret-up' : 'fas fa-caret-down' }></i>
-                        </button>
-                    </li>
+                        </Button>
+                    </Li>
                 }
-                <li>
+                <Li>
                     <Link to='/logout' tabIndex='-1'>
                         <i className='fas fa-sign-out-alt'></i>
                     </Link>
-                </li>
+                </Li>
             </ul>
-        </nav>
+        </Nav>
     )
 }
 export default MenuNav
