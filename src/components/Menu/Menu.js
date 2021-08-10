@@ -1,30 +1,16 @@
 import React, { useRef, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import './Menu.css'
-import { useSelector, useDispatch } from 'react-redux'
-import { getStylesState, toggleHeaderVisibility, toggleSearchVisibility } from '../../app/slices/stylesSlice'
+import MenuNav from '../MenuNav/MenuNav'
 
 const Menu = () => {
+    const [rotate, setRotate] = useState({});
     const [isMenuHidden, setIsMenuHidden] = useState(true)
-    const [rotate, setRotate] = useState({})
-    const nav = useRef()
-    const location = useLocation()
     const [rotationStyle, setrotationStyle] = useState(0)
     const isRotating = useRef(false)
     const rotatingSign = useRef()
-    const {isHeaderHidden, isSearchHidden} = useSelector(getStylesState)
-    const dispatch = useDispatch();
 
     const toggleMenu = () => {
         setIsMenuHidden(!isMenuHidden)    
-    }
-
-    const toggleHeader = () => { 
-        dispatch(toggleHeaderVisibility());
-    }
-    
-    const toggleSearch = () => {
-        dispatch(toggleSearchVisibility());
     }
     
     const rotateNav = (e) => {
@@ -33,7 +19,7 @@ const Menu = () => {
             rotatingSign.current = sign
             const newDeg = 20 * sign
             const max = -rotationStyle
-            const min = -60 - rotationStyle  
+            const min = -30 - rotationStyle  
             smoothRotate(Math.min(Math.max(newDeg, min), max), 650, rotationStyle)
         }
     }
@@ -66,40 +52,7 @@ const Menu = () => {
             <div>
                 <div className='circle-nav' onWheel={rotateNav} id='cn-wrapper'>
                     <button onClick={toggleMenu} className='circle-btn' tabIndex='-1'>-</button>
-                    <nav ref={nav} style={rotate}>
-                        <div>
-                            <button tabIndex='-1'>
-                                <i className='fas fa-user'></i>
-                            </button>
-                        </div>
-                        <div>
-                            <button onClick={toggleHeader} tabIndex='-1'>
-                                <i className={isHeaderHidden  ? 'far fa-eye' : 'far fa-eye-slash'}></i>
-                            </button>
-                        </div>
-                        <div>
-                            <Link to='/searchChat' tabIndex='-1'>
-                                <i className='fas fa-search'></i>
-                            </Link>
-                        </div>
-                        <div>
-                            <Link to='/searchUsers' tabIndex='-1'>
-                                <i className='fas fa-user-plus'></i>
-                            </Link>
-                        </div>
-                        {location.pathname == '/searchUsers' || location.pathname == '/searchChat' &&
-                            <div>
-                                <button onClick={toggleSearch}>
-                                    <i className={isSearchHidden ? 'fas fa-caret-up' : 'fas fa-caret-down' }></i>
-                                </button>
-                            </div>
-                        }
-                        <div>
-                            <Link to='/logout' tabIndex='-1'>
-                                <i className='fas fa-sign-out-alt'></i>
-                            </Link>
-                        </div>
-                    </nav>
+                    <MenuNav rotate={rotate}/>
                 </div>
             </div>
         </div>
