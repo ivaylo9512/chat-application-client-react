@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { Container, Ul, Li } from './PaginationStyle';
 
 const Pagination = ({selector, setData, getData, data}) => {
     const {data: { maxPages, isLoading }, query } = useSelector(selector);
@@ -25,27 +26,32 @@ const Pagination = ({selector, setData, getData, data}) => {
         setPage(nextPage)
     }
 
+    useEffect(() => {
+        setPage(1);
+    }, [query.name])
+
     return(
-        <div>
+        <Container>
             {page > 1 &&
                 <button onClick={() => changePage(page - 1)}>prev</button>
             }
-            <ul>
+            <Ul>
                 {
                     Array.from({length: page / pages < 1 ? pages : pages + 1 }).map((el, i) => {
                         const slide = Math.floor(page / pages);
-                        const pageInex = slide * pages + i + 1;
+                        let pageIndex = slide * pages + i;
+                        pageIndex += slide == 0 ? 1 : 0;
 
-                        if(pageInex <= maxPages){
-                            return <li key={pageInex} onClick={() => changePage(pageInex)}>{pageInex}</li>}
+                        if(pageIndex <= maxPages){
+                            return <Li isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
                         }
                     )
                 }
-            </ul>
+            </Ul>
             {page < maxPages &&
                 <button onClick={() => changePage(page + 1)}>next</button>
             }
-        </div>
+        </Container>
     )
 }
 export default Pagination
