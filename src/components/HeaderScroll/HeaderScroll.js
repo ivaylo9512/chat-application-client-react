@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
-import './HeaderScroll.css'
 import { getHeaderVisibility } from '../../app/slices/stylesSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { getChatsQuery, getChatsData, getChatsState, chatsRequest } from '../../app/slices/chatsSlice';
 import ChatList from '../ChatList/ChatList';
+import { Scroll, Container } from './HeaderStyle';
 
 const HeaderScroll = () => {
     const listContainer = useRef()
@@ -50,11 +50,11 @@ const HeaderScroll = () => {
     }
 
     return (
-        <div className={`header-scroll${isHidden ? ' hidden' : ''}`} ref={scrollContainer}>
-            <div ref={listContainer} style={{paddingBottom}} onWheel={scroll}>
+        <Scroll isHidden={isHidden} ref={scrollContainer}>
+            <Container ref={listContainer} style={{paddingBottom}} onWheel={scroll}>
                 <ChatList />
-            </div>
-        </div>
+            </Container>
+        </Scroll>
     )
 }
 
