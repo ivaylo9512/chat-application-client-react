@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import ChatUser from '../ChatUser/ChatUser';
+import ChatUser from '../Chat/Chat';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChatsData, getChatsQuery, chatsRequest } from '../../app/slices/chatsSlice';
-
+import { getChatsQuery, chatsRequest, getChatsState } from '../../app/slices/chatsSlice';
+import { ChatInfo, Span } from './ChatListStyle'
 const ChatList = () => {
-    const { chats, isLastPage } = useSelector(getChatsData);
+    const { isLoading, data: { chats, isLastPage } } = useSelector(getChatsState);
     const dispatch = useDispatch();
     const query = useSelector(getChatsQuery);
 
@@ -15,9 +15,11 @@ const ChatList = () => {
     return(
         <>
             {chats.length == 0 
-                ? <div className='chat-info'>
-                    <span>You don't have any chats.</span>
-                </div>
+                ? isLoading 
+                    ? 'loading'
+                    : <ChatInfo>
+                        <Span>You don't have any chats.</Span>
+                    </ChatInfo>
                 : <>
                     {chats.map(chat => <ChatUser key={chat.id} chat={chat}/>)}
                     {!isLastPage && <span>{'>'}</span>}

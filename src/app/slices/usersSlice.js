@@ -9,7 +9,7 @@ const initialState = {
         currentUsers: null
     },
     query: {
-        take: 10,
+        take: 2,
         direction: 'ASC',
         name: '',
     },
@@ -54,6 +54,7 @@ const usersSlice = createSlice({
 export const {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
 export default usersSlice.reducer;
 
+export const getUsers = state => state.users.data.users;
 export const getUsersState = state => state.users;
 export const getUsersQuery = state => state.users.query;
 export const getUsersData = state => state.users.data;

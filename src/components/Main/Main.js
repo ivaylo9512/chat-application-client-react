@@ -6,21 +6,22 @@ import './Main.css'
 import useEffectInitial from '../../hooks/useEffectInitial';
 import UserChatsView from '../UserChatsView/UserChatsView';
 import UsersView from '../UsersView/UsersView'
+import { MainContainer, P } from './MainStyle'
 
 const Main = () => {
     const [webSocketClient, setWebSocketClient] = useState()
 
     return(
-        <main>
+        <MainContainer>
             <WebSocket setWebSocketClient={setWebSocketClient}/>            
             <Switch>
                 <Route path='/searchUsers' render={() => <UsersView />}/>
                 <Route path='/searchChat' render={() => <UserChatsView /> }/>
                 <Route path='/chat/:id' render={() => <ChatView webSocketClient={webSocketClient}/>}/>
-                <Route path='/home' render={() => <p>Select a chat!</p>}/>
+                <Route path='/home' render={() => <P>Select a chat!</P>}/>
                 <Redirect from='/' to='/home'/>
             </Switch>
-        </main>
+        </MainContainer>
     )
 }
 
