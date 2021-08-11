@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import useInput from '../../hooks/useInput'
-import './Form.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSearchVisibility } from '../../app/slices/stylesSlice'
+import { Container, FormNode, Button } from './FormStyle'
 
 const Form = ({action, resetState, selector,  placeholder}) => {
     const [inputValue, input] = useInput({type:'text', placeholder})
@@ -21,12 +21,12 @@ const Form = ({action, resetState, selector,  placeholder}) => {
     }, [])
 
     return (
-        <div className={`form-container${isSearchHidden ? ' hidden' : ''}`}>
-            <form onSubmit={submit}>
+        <Container isHidden={isSearchHidden}>
+            <FormNode onSubmit={submit}>
                 {input}
-                <button><i className='fas fa-search'></i></button>
-            </form>
-        </div>
+                <Button><i className='fas fa-search'></i></Button>
+            </FormNode>
+        </Container>
     )
 }
 export default Form
