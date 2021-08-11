@@ -6,8 +6,8 @@ import Form from '../Form/Form';
 import ChatView from '../ChatView/ChatView'
 import './Main.css'
 import useEffectInitial from '../../hooks/useEffectInitial';
-import { getChatsQuery, chatsRequest, resetChatsState } from '../../app/slices/chatsSlice';
 import { getUsersQuery, usersRequest, resetUsersState } from '../../app/slices/usersSlice';
+import UserChatsView from '../UserChatsView/UserChatsView';
 
 const Main = () => {
     const [webSocketClient, setWebSocketClient] = useState()
@@ -19,12 +19,12 @@ const Main = () => {
                 <Route path='/searchUsers' render={() => 
                     <>
                         <UsersList  />
-                        <Form action={usersRequest} resetState={resetUsersState} selector={getUsersQuery} placeholder={'search users'} onUnmount={resetUsersState}/>
+                        <Form action={usersRequest} resetState={resetUsersState} selector={getUsersQuery} placeholder={'search users'} />
                     </>
                 }/>
-                <Route path='/searchChat' render={() => <Form action={chatsRequest} resetStat= {resetChatsState} selector={getChatsQuery} placeholder={'search chat'} onUnmount={resetChatsState}/>}/>
+                <Route path='/searchChat' render={() => <UserChatsView /> }/>
                 <Route path='/chat/:id' render={() => <ChatView webSocketClient={webSocketClient}/>}/>
-                <Route path='/home' render={() => <p>No chat is selected!</p>}/>
+                <Route path='/home' render={() => <p>Select a chat!</p>}/>
                 <Redirect from='/' to='/home'/>
             </Switch>
         </main>
