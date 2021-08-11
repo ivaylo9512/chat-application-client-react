@@ -4,7 +4,7 @@ import './Form.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSearchVisibility } from '../../app/slices/stylesSlice'
 
-const Form = ({action, resetState, selector,  placeholder, onUnmount}) => {
+const Form = ({action, resetState, selector,  placeholder}) => {
     const [inputValue, input] = useInput({type:'text', placeholder})
     const isSearchHidden = useSelector(getSearchVisibility);
     const dispatch = useDispatch();
@@ -17,9 +17,7 @@ const Form = ({action, resetState, selector,  placeholder, onUnmount}) => {
     }
 
     useEffect(() => {
-        if(onUnmount){
-            return () => dispatch(onUnmount())
-        }
+        return () => dispatch(resetState())
     }, [])
 
     return (

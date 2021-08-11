@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { setCurrentChat } from '../../app/slices/chatsSlice';
-import { BASE_URL } from '../../constants';
+import { IMAGE_URL } from '../../constants';
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ChatContainer, Chat, ImageContainer, Info, LastMsg, InfoButton } from './ChatUserStyles';
+import { ChatContainer, Chat, ImageContainer, Info, LastMsg, InfoButton } from './ChatStyles';
 
 const ChatUser = ({chat}) => {
     const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const ChatUser = ({chat}) => {
             <Chat onClick={setChat}>
                 <div>
                     <ImageContainer>
-                        <img alt='profile image' src={`${BASE_URL}/images/get/${chat.secondUser.profileImage}`}/>
+                        <img alt='profile image' src={`${IMAGE_URL}/${chat.secondUser.profileImage}`}/>
                     </ImageContainer>
                     <Info displayInfo={displayInfo}>
                         <b>{chat.secondUser.username}</b>

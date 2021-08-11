@@ -27,7 +27,7 @@ const usersSlice = createSlice({
         },
         onUsersComplete: (state, {payload: {pageable, query}}) => {
             state.query = query;
-            state.data.maxPages = state.pages + pageable.pages;
+            state.data.maxPages = state.data.pages + pageable.pages;
             state.data.pages = state.data.pages + pageable.data.length;
             state.data.lastUser = pageable.lastUser;
             state.data.users = [...state.data.users, ...pageable.data];

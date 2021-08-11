@@ -2,7 +2,6 @@
     height: 11%;
     overflow: hidden;
     transition: all 3s;
-
 }
 .header-scroll.hidden{
     margin-top: -11vh;
@@ -10,6 +9,7 @@
 .header-scroll > div {
     height: 100%;
     width: 100%;
+    padding: 0 0.5%;
     display: flex;
     overflow-y: hidden;
 }
