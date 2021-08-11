@@ -10,7 +10,7 @@ function* getUsers({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUsersData));
     const lastPath = lastName ? `${lastName}/${lastId}` : '';
 
-    const response = yield fetch(`${BASE_URL}/api/users/auth/searchForUsers/${name}/${takeAmount}/${lastPath}`,{
+    const response = yield fetch(`${BASE_URL}/api/users/auth/searchForUsers/${name.replace(/[\\?%#/'"]/g, '')}/${takeAmount}/${lastPath}`,{
         headers:{
             Authorization: localStorage.getItem('Authorization')
         }

@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     data: {
-        length: 0,
         pages: 0,
+        maxPages: 0,
         userChats: [],
         lastUserChat: null,
         currentUserChats: null
@@ -25,13 +25,13 @@ const userChatsSlice = createSlice({
             state.isLoading = true;
             state.error = null;
         },
-        onUserChatsComplete: (state, {payload: data, query}) => {
+        onUserChatsComplete: (state, {payload: {pageable, query}}) => {
             state.query = query;
-            state.data.pages = Math.ceil((state.data.length + data.count) / state.query.take);
-            state.data.length = state.data.length + data.length;
-            state.data.lastUserChat = data.lastUserChat;
-            state.data.userChats = [...state.data.userChats, ...data.userChats];
-            state.data.currentUserChats = data.userChats[data.userChats.length - 1];
+            state.data.maxPages = state.data.pages + pageable.pages;
+            state.data.pages = state.data.pages + pageable.data.length;
+            state.data.lastUserChat = pageable.lastUserChat;
+            state.data.userChats = [...state.data.userChats, ...pageable.data];
+            state.data.currentUserChats = pageable.data[pageable.data.length - 1];
             state.data.isLoading = false;
             state.error = null;
         },
@@ -54,6 +54,7 @@ const userChatsSlice = createSlice({
 export const {userChatsRequest, resetUserChatsState, onUserChatsComplete, onUserChatsError,  setCurrentUserChats } = userChatsSlice.actions 
 export default userChatsSlice.reducer;
 
+export const getUserChats = state => state.userChats.data.userChats;
 export const getUserChatsState = state => state.userChats;
 export const getUserChatsQuery = state => state.userChats.query;
 export const getUserChatsData = state => state.userChats.data;

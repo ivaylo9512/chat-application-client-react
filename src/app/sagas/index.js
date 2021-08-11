@@ -3,10 +3,11 @@ import loginWatcher from './login';
 import registerWatcher from './register';
 import usersWatcher from './users';
 import chatsWatcher from './chats';
+import getUserChats from './userChats';
 import { onLogout } from '../slices/authenticateSlice';
 
 export default function* indexSaga(){
-    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher])
+    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats])
 }
 
 export function authWrapper(request){
@@ -20,6 +21,8 @@ export function authWrapper(request){
             if(err.message == 'Jwt is incorrect.' || err.message == 'Jwt is missing.'){
                 return yield put(onLogout());
             }
+
+            console.error(err.message);
         }
     }
 }
