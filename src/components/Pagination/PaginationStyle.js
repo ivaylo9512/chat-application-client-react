@@ -19,6 +19,7 @@ export const Li = styled.li`
     font-size: 0.6vw;
     padding: 0.6vw 1.3vw;
     border: 1px solid rgb(24,27,33);
+    cursor: pointer;
 
     background: ${props => props.isSelected ? 'transparent' : 'rgb(24,27,33)'};
     color: ${props => props.isSelected ? 'rgb(24,27,33)' : 'white'};

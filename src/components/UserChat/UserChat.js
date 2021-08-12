@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IMAGE_URL } from '../../constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faForward } from '@fortawesome/free-solid-svg-icons'
+import { faForward, faInfo } from '@fortawesome/free-solid-svg-icons'
+import { Container, Image, Info, ButtonsContainer, Button, InfoContainer } from './UserChatStyle';
 
-const UserChat = ({userChat: {secondUser}}) => {
+const UserChat = ({userChat: {createdAt, secondUser: {profileImage, lastName, firstName}}}) => {
+    const [isInfoVisible, setIsInfoVisible] = useState(false);
 
     return(
-        <div>
-            <div className='image-container'>
-                <img src={`${IMAGE_URL}/${secondUser.profileImage}`}/>
-            </div>
-            <span><b>{secondUser.firstname}</b></span>
-            <span>Created At: <b>{secondUser.createdAt}</b></span>
-            <button><FontAwesomeIcon icon={faForward}/></button>
-        </div>
+        <Container>
+            <Image className='image-container'>
+                <img src={`${IMAGE_URL}/${profileImage}`}/>
+            </Image>
+            <InfoContainer isInfoVisible={isInfoVisible}>
+                <span><b>{`${firstName} ${lastName}`}</b></span>
+                <Info>
+                   <span><b>{`${firstName} ${lastName}`}</b></span>
+                   <span><b>{createdAt}</b></span>
+                </Info>
+            </InfoContainer>
+            <ButtonsContainer>
+                <Button onClick={() => setIsInfoVisible(!isInfoVisible)}><FontAwesomeIcon icon={faInfo}/></Button>
+                <Button><FontAwesomeIcon icon={faForward}/></Button>
+            </ButtonsContainer>
+        </Container>
     )
 }
 export default UserChat
