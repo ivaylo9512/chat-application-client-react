@@ -1,17 +1,20 @@
 import React from 'react';
 import { useSelector } from "react-redux"
-import { getUserChatsData } from "../../app/slices/userChatsSlice"
+import { getCurrentUserChats } from "../../app/slices/userChatsSlice"
 import UserChat from "../UserChat/UserChat";
+import { Container } from './UserChatsListStyle';
 
 const UserChatsList = () => {
-    const { currentUserChats } = useSelector(getUserChatsData);
+    const userChats = useSelector(getCurrentUserChats);
 
     return(
-        <div>
-            {currentUserChats && currentUserChats.map(userChat => 
-                <UserChat key={userChat.id} userChat={userChat} />)
-            }
-        </div>
+        <Container>
+            {userChats && (userChats.length == 0
+                ? <span><b>No chats found with this search.</b></span> 
+                : userChats.map(userChat => 
+                    <UserChat key={userChat.id} userChat={userChat} />)
+            )}
+        </Container>
     )
 
 }
