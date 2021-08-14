@@ -4,16 +4,17 @@ import Pagination from '../Pagination/Pagination';
 import UserChatsList from '../UserChatsList/UserChatsList';
 import Form from '../Form/Form';
 import { useSelector } from 'react-redux';
+import { Container } from './UserChatsViewStyle';
 
 const UserChatsView = () => {
     const userChats = useSelector(getUserChats);
 
     return(
         <>
-            <div>
+            <Container>
                 <UserChatsList />
                 <Pagination selector={getUserChatsState} setData={setCurrentUserChats} getData={userChatsRequest} data={userChats}/>
-            </div>
+            </Container>
             <Form action={userChatsRequest} resetState={resetUserChatsState} selector={getUserChatsQuery} placeholder={'search chat'} />
         </>
     )
