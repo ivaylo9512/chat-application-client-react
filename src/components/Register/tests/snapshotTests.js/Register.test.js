@@ -1,6 +1,6 @@
 import React from 'react';
 import Register from '../../Register';
-import { shallow, render, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import { getRegisterRequest } from '../../../../app/slices/authenticateSlice';
 
@@ -26,7 +26,7 @@ describe("RegisterSnapshotTests", () => {
         const wrapper = createWrapper({isLoading: false, error: null});
     
         const form = wrapper.find('form');
-        form.simulate('submit', { target: form, preventDefault: jest.fn() })
+        form.simulate('submit', { target: form, preventDefault: jest.fn() });
 
         expect(toJson(wrapper)).toMatchSnapshot();
     });
@@ -41,7 +41,7 @@ describe("RegisterSnapshotTests", () => {
         const wrapper = createWrapper({isLoading: false, error: {country: 'Country is invalid.', age: 'Age is required.', firstName: 'First name is required.', lastName: 'Last name is required.'}});
 
         const form = wrapper.find('form');
-        form.simulate('submit', { target: form, preventDefault: jest.fn() })
+        form.simulate('submit', { target: form, preventDefault: jest.fn() });
 
         expect(toJson(wrapper)).toMatchSnapshot();
     });
