@@ -33,12 +33,14 @@ const useCreateInputs = () => {
     const [username, usernameInput] = useInput({
         type: 'text', 
         placeholder:'username', 
-        name: 'username'
+        name: 'username',
+        testid: 'username'
     });
 
     const [password, passwordInput] = usePasswordInput({
         placeholder:'password', 
-        name: 'password'
+        name: 'password',
+        testid: 'password'
     });
 
     return [{username, password}, {usernameInput, passwordInput}];
