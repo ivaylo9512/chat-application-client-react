@@ -1,7 +1,6 @@
 import React from 'react';
 import Register from '../../Register';
 import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import { getRegisterRequest } from '../../../../app/slices/authenticateSlice';
 
 jest.mock('react-redux', () => ({
@@ -19,7 +18,7 @@ describe("RegisterSnapshotTests", () => {
     it('renders correctly page 0', () => {
         const wrapper = createWrapper({isLoading: false, error: null});
      
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly page 1', () => {
@@ -28,13 +27,13 @@ describe("RegisterSnapshotTests", () => {
         const form = wrapper.find('form');
         form.simulate('submit', { target: form, preventDefault: jest.fn() });
 
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with passed errors props and page 0', () => {
         const wrapper = createWrapper({isLoading: false, error: {username: 'Username is already taken.', password: 'Password must be between 10 and 20 characters.', email: 'Email is already taken.'}});
 
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with passed errors props and page 1', () => {
@@ -43,6 +42,6 @@ describe("RegisterSnapshotTests", () => {
         const form = wrapper.find('form');
         form.simulate('submit', { target: form, preventDefault: jest.fn() });
 
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 });

@@ -1,7 +1,6 @@
 import React from 'react';
 import Login from '../Login';
 import { shallow } from 'enzyme';
-import toJson from 'enzyme-to-json';
 import { getLoginRequest } from '../../../app/slices/authenticateSlice';
 
 jest.mock('react-redux', () => ({
@@ -19,12 +18,12 @@ describe("Login snapshot tests", () => {
     it('renders correctly', () => {
         const wrapper = createWrapper({isLoading: false, error: null});
      
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 
     it('renders correctly with passed errors props', () => {
         const wrapper = createWrapper({isLoading: false, error: 'Bad credentials.'});
 
-        expect(toJson(wrapper)).toMatchSnapshot();
+        expect(wrapper).toMatchSnapshot();
     });
 });
