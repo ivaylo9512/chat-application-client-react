@@ -6,10 +6,11 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="usernameContainer"
       input={
         <input
           autoComplete="username"
-          id="username"
+          data-testid="username"
           maxLength={20}
           minLength={8}
           name="username"
@@ -22,10 +23,11 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       }
     />
     <InputWithError
+      data-testid="emailContainer"
       input={
         <input
           autoComplete="email"
-          id="email"
+          data-testid="email"
           name="email"
           onChange={[Function]}
           placeholder="email"
@@ -36,11 +38,12 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       }
     />
     <InputWithError
+      data-testid="passwordContainer"
       input={
         <ForwardRef(styled.div)>
           <input
             autoComplete="new-password"
-            id="password"
+            data-testid="password"
             maxLength={22}
             minLength={10}
             name="password"
@@ -90,11 +93,12 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
       }
     />
     <InputWithError
+      data-testid="repeatPasswordContainer"
       input={
         <ForwardRef(styled.div)>
           <input
             autoComplete="new-password"
-            id="repeatPassword"
+            data-testid="repeatPassword"
             name="repeatPassword"
             onChange={[Function]}
             placeholder="repeat"
@@ -164,9 +168,10 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="firstNameContainer"
       input={
         <input
-          id="firstName"
+          data-testid="firstName"
           name="firstName"
           onChange={[Function]}
           placeholder="First name"
@@ -177,9 +182,10 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
       }
     />
     <InputWithError
+      data-testid="lastNameContainer"
       input={
         <input
-          id="lastName"
+          data-testid="lastName"
           name="lastName"
           onChange={[Function]}
           placeholder="Last name"
@@ -190,9 +196,10 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
       }
     />
     <InputWithError
+      data-testid="countryContainer"
       input={
         <input
-          id="country"
+          data-testid="country"
           name="country"
           onChange={[Function]}
           placeholder="country"
@@ -202,9 +209,10 @@ exports[`RegisterSnapshotTests renders correctly page 1 1`] = `
       }
     />
     <InputWithError
+      data-testid="ageContainer"
       input={
         <input
-          id="age"
+          data-testid="age"
           name="age"
           onChange={[Function]}
           required={true}
@@ -231,11 +239,12 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="usernameContainer"
       error="Username is already taken."
       input={
         <input
           autoComplete="username"
-          id="username"
+          data-testid="username"
           maxLength={20}
           minLength={8}
           name="username"
@@ -248,11 +257,12 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
       }
     />
     <InputWithError
+      data-testid="emailContainer"
       error="Email is already taken."
       input={
         <input
           autoComplete="email"
-          id="email"
+          data-testid="email"
           name="email"
           onChange={[Function]}
           placeholder="email"
@@ -263,12 +273,13 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
       }
     />
     <InputWithError
+      data-testid="passwordContainer"
       error="Password must be between 10 and 20 characters."
       input={
         <ForwardRef(styled.div)>
           <input
             autoComplete="new-password"
-            id="password"
+            data-testid="password"
             maxLength={22}
             minLength={10}
             name="password"
@@ -318,12 +329,13 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
       }
     />
     <InputWithError
+      data-testid="repeatPasswordContainer"
       error="Password must be between 10 and 20 characters."
       input={
         <ForwardRef(styled.div)>
           <input
             autoComplete="new-password"
-            id="repeatPassword"
+            data-testid="repeatPassword"
             name="repeatPassword"
             onChange={[Function]}
             placeholder="repeat"
@@ -393,10 +405,11 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
     onSubmit={[Function]}
   >
     <InputWithError
+      data-testid="firstNameContainer"
       error="First name is required."
       input={
         <input
-          id="firstName"
+          data-testid="firstName"
           name="firstName"
           onChange={[Function]}
           placeholder="First name"
@@ -407,10 +420,11 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
       }
     />
     <InputWithError
+      data-testid="lastNameContainer"
       error="Last name is required."
       input={
         <input
-          id="lastName"
+          data-testid="lastName"
           name="lastName"
           onChange={[Function]}
           placeholder="Last name"
@@ -421,10 +435,11 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
       }
     />
     <InputWithError
+      data-testid="countryContainer"
       error="Country is invalid."
       input={
         <input
-          id="country"
+          data-testid="country"
           name="country"
           onChange={[Function]}
           placeholder="country"
@@ -434,10 +449,11 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
       }
     />
     <InputWithError
+      data-testid="ageContainer"
       error="Age is required."
       input={
         <input
-          id="age"
+          data-testid="age"
           name="age"
           onChange={[Function]}
           required={true}
