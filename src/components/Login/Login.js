@@ -20,9 +20,9 @@ const Login = () => {
             <form onSubmit={login}>
                 {usernameInput}
                 {passwordInput}
-                {error && <span>{error}</span>}
-                <button type='submit'>login</button>
-                <span>Don't have an account?<Link to='/register'> Sign up.</Link></span>
+                {error && <span data-testid='error'>{error}</span>}
+                <button data-testid='login' type='submit'>login</button>
+                <span data-testid='redirect' >Don't have an account?<Link to='/register'> Sign up.</Link></span>
             </form>
         </section>
     )
