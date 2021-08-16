@@ -5,8 +5,8 @@ import { onRegisterComplete, onRegisterError } from "../slices/authenticateSlice
 
 export default takeLatest('authenticate/registerRequest', register)
 
-function* register({payload}){
-    const response = yield fetch(`${BASE_URL}/users/register`,{
+export function* register({payload}){
+    const response = yield fetch(`${BASE_URL}/api/users/register`,{
         method: 'POST',
         headers: {
             'Content-Type': 'Application/json'

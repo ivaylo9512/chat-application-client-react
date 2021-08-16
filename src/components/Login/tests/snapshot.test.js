@@ -14,7 +14,7 @@ const createWrapper = (state) => {
     getLoginRequest.mockReturnValue(state);
     return shallow(<Login /> )
 }
-describe("Login snapshot tests", () => {
+describe('Login snapshot tests', () => {
     it('renders correctly', () => {
         const wrapper = createWrapper({isLoading: false, error: null});
      

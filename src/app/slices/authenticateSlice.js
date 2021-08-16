@@ -22,16 +22,12 @@ const authenticateSlice = createSlice({
     initialState,
     reducers: {
         loginRequest: (state) => {
-            state.loginRequest = {
-                isLoading: true,
-                error: undefined
-            }
+            state.loginRequest.isLoading = true;
+            state.loginRequest.error = null;
         },
         registerRequest: (state) => {
-            state.registerRequest = {
-                isLoading: true,
-                error: undefined
-            }
+            state.registerRequest.isLoading = true;
+            state.registerRequest.error = null;
         },
         onLoginComplete: (state, {payload}) => {
             state.user = payload
