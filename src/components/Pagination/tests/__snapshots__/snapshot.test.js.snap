@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pagination snpashot tests renders correctly with pages 1`] = `
+<Fragment>
+  <styled.div>
+    <styled.ul>
+      <styled.li
+        data-testid="1"
+        isSelected={true}
+        key="1"
+        onClick={[Function]}
+      >
+        1
+      </styled.li>
+      <styled.li
+        data-testid="2"
+        isSelected={false}
+        key="2"
+        onClick={[Function]}
+      >
+        2
+      </styled.li>
+      <styled.li
+        data-testid="3"
+        isSelected={false}
+        key="3"
+        onClick={[Function]}
+      >
+        3
+      </styled.li>
+      <styled.li
+        data-testid="4"
+        isSelected={false}
+        key="4"
+        onClick={[Function]}
+      >
+        4
+      </styled.li>
+      <styled.li
+        data-testid="5"
+        isSelected={false}
+        key="5"
+        onClick={[Function]}
+      >
+        5
+      </styled.li>
+    </styled.ul>
+    <button
+      onClick={[Function]}
+    >
+      next
+    </button>
+  </styled.div>
+</Fragment>
+`;
+
+exports[`Pagination snpashot tests renders correctly without pages 1`] = `<Fragment />`;
