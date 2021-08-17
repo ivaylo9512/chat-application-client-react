@@ -1,25 +1,28 @@
 import React from 'react';
-import { getLoginRequest, loginRequest } from '../../../app/slices/authenticateSlice';
+import { loginRequest } from '../../../app/slices/authenticateSlice';
 import { shallow } from 'enzyme';
 import Login from '../Login';
 import { Link } from 'react-router-dom';
 import * as Redux from 'react-redux';
 
-jest.mock('react-redux', () => ({
-    useSelector: jest.fn(fn => fn()),
-    useDispatch: jest.fn()
-}))
-
-jest.mock('../../../app/slices/authenticateSlice');
-
-const createWrapper = (value) => {
-    getLoginRequest.mockReturnValue(value);
-    return shallow(
-        <Login />
-    )
-}
-
 describe('Login unit tests', () => {
+    let selectorSpy;
+    let dispatchSpy;
+
+    beforeAll(() => {
+        selectorSpy = jest.spyOn(Redux, 'useSelector');
+    
+        dispatchSpy = jest.spyOn(Redux, 'useDispatch');
+        dispatchSpy.mockReturnValue(jest.fn());
+    });
+
+    const createWrapper = (state) => {
+        selectorSpy.mockReturnValue(state);
+        return shallow(
+            <Login />
+        )
+    }
+
     it('should render inputs', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
 
@@ -71,7 +74,9 @@ describe('Login unit tests', () => {
     it('should render redirect', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
 
-        expect(wrapper.findByTestid('redirect').find(Link).prop('to')).toBe('/register');
-        expect(wrapper.findByTestid('redirect').text()).toBe(`Don't have an account? Sign up.`);
+        const redirect = wrapper.findByTestid('redirect');
+
+        expect(redirect.find(Link).prop('to')).toBe('/register');
+        expect(redirect.text()).toBe(`Don't have an account? Sign up.`);
     })
 })

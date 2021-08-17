@@ -1,23 +1,29 @@
 import React from 'react';
-import { getRegisterRequest } from '../../../../app/slices/authenticateSlice';
 import Register from '../../Register';
 import { shallow } from 'enzyme';
 import InputWithError from '../../../InputWithError';
 import { Link } from 'react-router-dom';
+import * as Redux from 'react-redux';
 
-jest.mock('react-redux', () => ({
-    useSelector: jest.fn(fn => fn()),
-    useDispatch: jest.fn()
-}));
+describe('unit tests for Register', () => {
+    let selectorSpy;
+    let dispatchSpy;
 
-jest.mock('../../../../app/slices/authenticateSlice')
+    beforeAll(() => {
+        selectorSpy = jest.spyOn(Redux, 'useSelector');
+        dispatchSpy = jest.spyOn(Redux, 'useDispatch');
 
-const createWrapper = (value) => {
-    getRegisterRequest.mockReturnValue(value);
-    return shallow(<Register />)
-}
+        dispatchSpy.mockReturnValue(jest.fn());
+    })
 
-describe('unit tests for Register', () =>{
+    const createWrapper = (state) => {
+        selectorSpy.mockReturnValue(state);
+        
+        return shallow(
+            <Register /> 
+        )
+    }
+    
     it('should render inputs, with page 0', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
         

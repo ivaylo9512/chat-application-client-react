@@ -7,6 +7,7 @@ import { mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import authenticate from '../../../app/slices/authenticateSlice'
 import Login from '../Login';
+
 const saga = createSaga();
 const middleware = [...getDefaultMiddleware({ thunk: false }), saga]
 
