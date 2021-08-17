@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom'
-import useInput, { getId } from '../../hooks/useInput';
-import usePasswordInput, { getPasswordId } from '../../hooks/usePasswordInput';
+import useInput from '../../hooks/useInput';
+import usePasswordInput from '../../hooks/usePasswordInput';
 import { useSelector, useDispatch } from 'react-redux';
-import InputWithError from '../InputWithError';
+import InputWithError, { getContainerId } from '../InputWithError';
 import { getRegisterRequest, registerRequest } from '../../app/slices/authenticateSlice';
+import useEffectInitial from '../../hooks/useEffectInitial';
 
 const Register = () => {
     const [pageIndex, setPageIndex] = useState(0);
@@ -24,12 +25,11 @@ const Register = () => {
         dispatch(registerRequest(registerObject));
     }
 
-    useEffect(() => {
+    useEffectInitial(() => {
         const {username, password, email} = error || {};
 
         if(username || password || email){
             setPageIndex(0);
-            console.log(username)
         }
     },[error])
 
@@ -38,20 +38,20 @@ const Register = () => {
         <section>
             {pageIndex == 0 ?
                 <form onSubmit={(e) => setPage(e, 1)}>
-                    <InputWithError data-testid={getId(usernameInput)} input={usernameInput} error={error?.username}/>
-                    <InputWithError data-testid={getId(emailInput)} input={emailInput} error={error?.email}/>
-                    <InputWithError data-testid={getId(passwordInput)} input={passwordInput} error={error?.password}/>
-                    <InputWithError data-testid={getId(repeatPasswordInput)} input={repeatPasswordInput} error={error?.password}/>
-                    <button type='submit'>next</button>
-                    <span>Already have an account?<Link to='/login'> Sign in.</Link></span>
+                    <InputWithError data-testid={getContainerId(usernameInput)} input={usernameInput} error={error?.username}/>
+                    <InputWithError data-testid={getContainerId(emailInput)} input={emailInput} error={error?.email}/>
+                    <InputWithError data-testid={getContainerId(passwordInput)} input={passwordInput} error={error?.password}/>
+                    <InputWithError data-testid={getContainerId(repeatPasswordInput)} input={repeatPasswordInput} error={error?.password}/>
+                    <button data-testid='next' type='submit'>next</button>
+                    <span data-testid='redirect'>Already have an account?<Link to='/login'> Sign in.</Link></span>
                 </form> :
                 <form onSubmit={register}>
-                    <InputWithError data-testid={getId(firstNameInput)} input={firstNameInput} error={error?.firstName}/>
-                    <InputWithError data-testid={getId(lastNameInput)} input={lastNameInput} error={error?.lastName}/>
-                    <InputWithError data-testid={getId(countryInput)} input={countryInput} error={error?.country}/>
-                    <InputWithError data-testid={getId(ageInput)} input={ageInput} error={error?.age}/>
-                    <button onClick={(e) => setPage(e, 0)} >back</button>
-                    <button>register</button>
+                    <InputWithError data-testid={getContainerId(firstNameInput)} input={firstNameInput} error={error?.firstName}/>
+                    <InputWithError data-testid={getContainerId(lastNameInput)} input={lastNameInput} error={error?.lastName}/>
+                    <InputWithError data-testid={getContainerId(countryInput)} input={countryInput} error={error?.country}/>
+                    <InputWithError data-testid={getContainerId(ageInput)} input={ageInput} error={error?.age}/>
+                    <button data-testid='back' onClick={(e) => setPage(e, 0)} >back</button>
+                    <button data-testid='register' type='submit'>register</button>
                 </form>
             }
         </section>
@@ -102,8 +102,8 @@ const useCreateInputs = () => {
         validationRules:{
             required: true
         },
-        equalValue: password,
-        equalName: 'Passwords'
+        equalsValue: password,
+        equalsName: 'Passwords'
     });
 
     const [firstName, firstNameInput] = useInput({
