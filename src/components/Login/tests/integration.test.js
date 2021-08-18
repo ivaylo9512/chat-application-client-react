@@ -7,6 +7,7 @@ import { mount } from 'enzyme';
 import { BrowserRouter as Router } from 'react-router-dom';
 import authenticate from '../../../app/slices/authenticateSlice'
 import Login from '../Login';
+import { act } from 'react-dom/test-utils';
 
 const saga = createSaga();
 const middleware = [...getDefaultMiddleware({ thunk: false }), saga]
@@ -35,23 +36,17 @@ const createWrapper = () => {
 }
 
 describe('Login integration tests', () => {
-    it('should render error', (done) => {
+    it('should render error', async () => {
         fetch.mockImplementationOnce(() => new Response('Bad credentials.', { status: 401 }));
 
         const wrapper = createWrapper();
 
         wrapper.findByTestid('username').simulate('change', { target: { value: 'username' }});
         wrapper.findByTestid('password').simulate('change', { target: { value: 'password' }});
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn()});
+        
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        wrapper.update();
 
-        setInterval(() => {
-            wrapper.update();
-            
-            const error = wrapper.findByTestid('error');
-            if(error.length > 0){
-                expect(error.text()).toBe('Bad credentials.');
-                done()
-            }            
-        }, 200);
+        expect(wrapper.findByTestid('error').text()).toBe('Bad credentials.');
     })
 })
