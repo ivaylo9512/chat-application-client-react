@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container } from './UsersViewStyle'
 import UsersList from 'components/UsersList/UsersList';
 import { getUsersQuery, usersRequest, resetUsersState, getUsersState, setCurrentUsers, getUsers } from 'app/slices/usersSlice';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { resetUserChatsState, getUserChatsQuery, userChatsRequest, getUserChatsState, getUserChats, setCurrentUserChats } from 'app/slices/userChatsSlice';
 import Pagination from 'components/Pagination/Pagination';
 import UserChatsList from 'components/UserChatsList/UserChatsList';

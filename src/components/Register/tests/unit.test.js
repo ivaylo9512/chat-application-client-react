@@ -1,7 +1,6 @@
-import React from 'react';
-import Register from '../../Register';
+import Register from '../Register';
 import { shallow } from 'enzyme';
-import InputWithError from '../../../InputWithError';
+import InputWithError from 'components/InputWithError';
 import { Link } from 'react-router-dom';
 import * as Redux from 'react-redux';
 

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import useEffectInitial from './useEffectInitial';
 
 const useInput = ({ name, placeholder, initialValue = '', type = '', testid, autoComplete, validationRules, equalsValue, equalsName}) => {

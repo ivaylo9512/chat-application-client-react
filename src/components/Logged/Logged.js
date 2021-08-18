@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Main from 'components/Main/Main';
 import Menu from 'components/Menu/Menu'
 import HeaderScroll from 'components/HeaderScroll/HeaderScroll';

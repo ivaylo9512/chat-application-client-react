@@ -40,7 +40,7 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
     <InputWithError
       data-testid="passwordContainer"
       input={
-        <ForwardRef(styled.div)>
+        <styled.div>
           <input
             autoComplete="new-password"
             data-testid="password"
@@ -53,7 +53,7 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
             type="password"
             value=""
           />
-          <ForwardRef(styled.button)
+          <styled.button
             onClick={[Function]}
             type="button"
           >
@@ -88,14 +88,14 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
               title=""
               transform={null}
             />
-          </ForwardRef(styled.button)>
-        </ForwardRef(styled.div)>
+          </styled.button>
+        </styled.div>
       }
     />
     <InputWithError
       data-testid="repeatPasswordContainer"
       input={
-        <ForwardRef(styled.div)>
+        <styled.div>
           <input
             autoComplete="new-password"
             data-testid="repeatPassword"
@@ -106,7 +106,7 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
             type="password"
             value=""
           />
-          <ForwardRef(styled.button)
+          <styled.button
             onClick={[Function]}
             type="button"
           >
@@ -141,8 +141,8 @@ exports[`RegisterSnapshotTests renders correctly page 0 1`] = `
               title=""
               transform={null}
             />
-          </ForwardRef(styled.button)>
-        </ForwardRef(styled.div)>
+          </styled.button>
+        </styled.div>
       }
     />
     <button
@@ -283,7 +283,7 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
       data-testid="passwordContainer"
       error="Password must be between 10 and 20 characters."
       input={
-        <ForwardRef(styled.div)>
+        <styled.div>
           <input
             autoComplete="new-password"
             data-testid="password"
@@ -296,7 +296,7 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
             type="password"
             value=""
           />
-          <ForwardRef(styled.button)
+          <styled.button
             onClick={[Function]}
             type="button"
           >
@@ -331,15 +331,15 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
               title=""
               transform={null}
             />
-          </ForwardRef(styled.button)>
-        </ForwardRef(styled.div)>
+          </styled.button>
+        </styled.div>
       }
     />
     <InputWithError
       data-testid="repeatPasswordContainer"
       error="Password must be between 10 and 20 characters."
       input={
-        <ForwardRef(styled.div)>
+        <styled.div>
           <input
             autoComplete="new-password"
             data-testid="repeatPassword"
@@ -350,7 +350,7 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
             type="password"
             value=""
           />
-          <ForwardRef(styled.button)
+          <styled.button
             onClick={[Function]}
             type="button"
           >
@@ -385,8 +385,8 @@ exports[`RegisterSnapshotTests renders correctly with passed errors props and pa
               title=""
               transform={null}
             />
-          </ForwardRef(styled.button)>
-        </ForwardRef(styled.div)>
+          </styled.button>
+        </styled.div>
       }
     />
     <button

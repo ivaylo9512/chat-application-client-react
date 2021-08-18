@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSelector } from "react-redux"
 import { getCurrentUserChats } from "../../app/slices/userChatsSlice"
 import UserChat from "../UserChat/UserChat";

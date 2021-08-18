@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import ChatUser from 'components/Chat/Chat';
 import { useSelector, useDispatch } from 'react-redux';
 import { getChatsQuery, chatsRequest, getChatsState } from 'app/slices/chatsSlice';

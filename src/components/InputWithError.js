@@ -1,4 +1,3 @@
-import React from 'react';
 import { getId } from 'hooks/useInput';
 
 const InputWithError = ({error, classname = '', input}) => {

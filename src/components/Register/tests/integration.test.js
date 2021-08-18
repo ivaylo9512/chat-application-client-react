@@ -1,10 +1,9 @@
-import React from 'react';
 import { mount } from 'enzyme';
-import Register from '../../Register';
+import Register from '../Register';
 import { BrowserRouter as Router } from 'react-router-dom';
-import authenticate, { registerRequest } from '../../../../app/slices/authenticateSlice';
+import authenticate, { registerRequest } from 'app/slices/authenticateSlice';
 import * as Redux from 'react-redux';
-import registerWatcher from '../../../../app/sagas/register'
+import registerWatcher from 'app/sagas/register'
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import { act } from 'react-dom/test-utils';

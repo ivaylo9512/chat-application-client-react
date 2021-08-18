@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom'
 import useInput from '../../hooks/useInput';
 import { useSelector, useDispatch } from 'react-redux';

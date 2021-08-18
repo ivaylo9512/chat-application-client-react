@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getStylesState, toggleHeaderVisibility, toggleSearchVisibility } from 'app/slices/stylesSlice';

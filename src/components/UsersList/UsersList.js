@@ -1,4 +1,3 @@
-import React, { useRef, useEffect } from 'react';
 import User from 'components/User/User'
 import { useSelector } from 'react-redux';
 import { getCurrentUsers } from 'app/slices/usersSlice';

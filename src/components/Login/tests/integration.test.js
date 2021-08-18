@@ -1,4 +1,3 @@
-import React from 'react';
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import LoginWatcher from '../../../app/sagas/login'

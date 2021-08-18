@@ -1,4 +1,3 @@
-import React from 'react';
 import Login from '../Login';
 import { shallow } from 'enzyme';
 import * as Redux from 'react-redux';

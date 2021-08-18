@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
 import { getHeaderVisibility } from 'app/slices/stylesSlice';
 import { useSelector, useDispatch } from 'react-redux';

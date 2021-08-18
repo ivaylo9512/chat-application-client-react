@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { IMAGE_URL } from 'appConstants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faForward, faInfo } from '@fortawesome/free-solid-svg-icons'

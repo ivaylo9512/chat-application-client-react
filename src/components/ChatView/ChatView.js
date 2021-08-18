@@ -1,4 +1,3 @@
-import React from 'react'
 import Session from 'components/Session/Session';
 import Form from 'components/Form/Form'
 import { useSelector } from 'react-redux';

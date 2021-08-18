@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import MenuNav from 'components/MenuNav/MenuNav'
 import { MenuContainer, MenuCircle, CircleNav, CircleBtn } from './MenuStyles';
 

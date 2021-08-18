@@ -1,17 +1,13 @@
-import React from 'react';
-import Register from '../../Register';
+import Register from '../Register';
 import { shallow } from 'enzyme';
 import * as Redux from 'react-redux';
 
 describe("RegisterSnapshotTests", () => {
     let selectorSpy;
-    let dispatchSpy;
 
     beforeAll(() => {
         selectorSpy = jest.spyOn(Redux, 'useSelector');
-        dispatchSpy = jest.spyOn(Redux, 'useDispatch');
-
-        dispatchSpy.mockReturnValue(jest.fn());
+        jest.spyOn(Redux, 'useDispatch').mockReturnValue(jest.fn());
     })
     
     const createWrapper = (state) => {

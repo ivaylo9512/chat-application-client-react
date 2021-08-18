@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRequest } from 'hooks/useRequest';
 
 const Profile = () => {

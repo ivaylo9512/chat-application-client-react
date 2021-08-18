@@ -1,4 +1,3 @@
-import React from 'react';
 import { loginRequest } from 'app/slices/authenticateSlice';
 import { shallow } from 'enzyme';
 import Login from '../Login';
