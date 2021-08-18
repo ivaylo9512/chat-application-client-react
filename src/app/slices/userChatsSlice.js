@@ -9,7 +9,7 @@ const initialState = {
         currentUserChats: null
     },
     query: {
-        take: 2,
+        take: 4,
         direction: 'ASC',
         name: '',
     },
@@ -31,7 +31,7 @@ const userChatsSlice = createSlice({
             state.data.pages = state.data.pages + pageable.data.length;
             state.data.lastUserChat = pageable.lastUserChat;
             state.data.userChats = [...state.data.userChats, ...pageable.data];
-            state.data.currentUserChats = pageable.data[pageable.data.length - 1];
+            state.data.currentUserChats = pageable.data[pageable.data.length - 1] || [];
             state.data.isLoading = false;
             state.error = null;
         },
@@ -58,4 +58,4 @@ export const getUserChats = state => state.userChats.data.userChats;
 export const getUserChatsState = state => state.userChats;
 export const getUserChatsQuery = state => state.userChats.query;
 export const getUserChatsData = state => state.userChats.data;
-export const getCurrentUserChats = state => state.userChats.currentUser;
+export const getCurrentUserChats = state => state.userChats.data.currentUserChats;

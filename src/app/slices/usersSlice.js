@@ -14,7 +14,7 @@ const initialState = {
         name: '',
     },
     isLoading: false,
-    error: null,    
+    error: null,
 }
 
 const usersSlice = createSlice({
@@ -31,7 +31,7 @@ const usersSlice = createSlice({
             state.data.pages = state.data.pages + pageable.data.length;
             state.data.lastUser = pageable.lastUser;
             state.data.users = [...state.data.users, ...pageable.data];
-            state.data.currentUsers = pageable.data[pageable.data.length - 1];
+            state.data.currentUsers = pageable.data[pageable.data.length - 1] || [];
             state.data.isLoading = false;
             state.error = null;
         },

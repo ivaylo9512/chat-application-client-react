@@ -1,7 +1,5 @@
-import Enzyme from "enzyme";
-import EnzymeAdapter from "enzyme-adapter-react-16";
-import ReactWrapper from 'enzyme/ShallowWrapper'
-import ShallowWrapper from "enzyme/ReactWrapper";
+import Enzyme, { ShallowWrapper, ReactWrapper } from "enzyme";
+import EnzymeAdapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({
   adapter: new EnzymeAdapter(),

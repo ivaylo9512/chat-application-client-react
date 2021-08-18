@@ -1,4 +1,4 @@
-import authenticate, { onLoginError } from './slices/authenticateSlice';
+import authenticate from './slices/authenticateSlice';
 import styles from './slices/stylesSlice'
 import chats from './slices/chatsSlice'
 import users from './slices/usersSlice'
@@ -6,7 +6,6 @@ import userChats from './slices/userChatsSlice';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from './sagas/index';
-import { put } from 'redux-saga/effects';
 
 const sagaMiddleware = createSaga();
 const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];

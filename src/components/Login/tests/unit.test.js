@@ -1,5 +1,5 @@
 import React from 'react';
-import { loginRequest } from '../../../app/slices/authenticateSlice';
+import { loginRequest } from 'app/slices/authenticateSlice';
 import { shallow } from 'enzyme';
 import Login from '../Login';
 import { Link } from 'react-router-dom';
@@ -45,7 +45,6 @@ describe('Login unit tests', () => {
 
         expect(mockDispatch).toHaveBeenCalledWith(loginRequest({ username: 'username', password: 'password'}));
     })
-
     
     it('should render error', () => {
         const wrapper = createWrapper({ isLoading: false, error: 'Bad credentials.' });

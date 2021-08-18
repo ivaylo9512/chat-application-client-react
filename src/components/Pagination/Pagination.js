@@ -31,27 +31,31 @@ const Pagination = ({selector, setData, getData, data}) => {
     }, [query.name])
 
     return(
-        <Container>
-            {page > 1 &&
-                <button onClick={() => changePage(page - 1)}>prev</button>
-            }
-            <Ul>
-                {
-                    Array.from({length: page / pages < 1 ? pages : pages + 1 }).map((el, i) => {
-                        const slide = Math.floor(page / pages);
-                        let pageIndex = slide * pages + i;
-                        pageIndex += slide == 0 ? 1 : 0;
-
-                        if(pageIndex <= maxPages){
-                            return <Li isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
-                        }
-                    )
+        <>
+        {maxPages > 0 &&
+            <Container>
+                {page > 1 &&
+                    <button onClick={() => changePage(page - 1)}>prev</button>
                 }
-            </Ul>
-            {page < maxPages &&
-                <button onClick={() => changePage(page + 1)}>next</button>
+                <Ul>
+                    {
+                        Array.from({length: page / pages < 1 ? pages : pages + 1 }).map((el, i) => {
+                            const slide = Math.floor(page / pages);
+                            let pageIndex = slide * pages + i;
+                            pageIndex += slide == 0 ? 1 : 0;
+
+                            if(pageIndex <= maxPages){
+                                return <Li data-testid={`${pageIndex}`} isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
+                            }
+                        )
+                    }
+                </Ul>
+                {page < maxPages &&
+                    <button onClick={() => changePage(page + 1)}>next</button>
+                }
+            </Container>
             }
-        </Container>
+        </>
     )
 }
 export default Pagination
