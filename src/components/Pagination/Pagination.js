@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { Container, Ul, Li } from './PaginationStyle';
 
-const Pagination = ({selector, setData, getData, data}) => {
+const Pagination = ({selector, setData, getData, data, pagesPerSlide = 4}) => {
     const {data: { maxPages, isLoading }, query } = useSelector(selector);
 
     const [page, setPage] = useState(1);
-    const [pages, setPages] = useState(5);
     const dispatch = useDispatch();
 
     const changePage = (nextPage) => {
@@ -39,9 +38,9 @@ const Pagination = ({selector, setData, getData, data}) => {
                 }
                 <Ul>
                     {
-                        Array.from({length: page / pages < 1 ? pages : pages + 1 }).map((el, i) => {
-                            const slide = Math.floor(page / pages);
-                            let pageIndex = slide * pages + i;
+                        Array.from({length: page / pagesPerSlide < 1 ? pagesPerSlide : pagesPerSlide + 1 }).map((el, i) => {
+                            const slide = Math.floor(page / pagesPerSlide);
+                            let pageIndex = slide * pagesPerSlide + i;
                             pageIndex += slide == 0 ? 1 : 0;
 
                             if(pageIndex <= maxPages){
