@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import WebSocket from '../../utils/WebSocket'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import ChatView from '../ChatView/ChatView'
-import './Main.css'
-import useEffectInitial from '../../hooks/useEffectInitial';
-import UserChatsView from '../UserChatsView/UserChatsView';
-import UsersView from '../UsersView/UsersView'
+import useEffectInitial from 'hooks/useEffectInitial';
+import UserChatsView from 'components/UserChatsView/UserChatsView';
+import UsersView from 'components/UsersView/UsersView'
 import { MainContainer, P } from './MainStyle'
 
 const Main = () => {

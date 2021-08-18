@@ -1,7 +1,7 @@
-import { BASE_URL } from "../../constants"
+import { BASE_URL } from "appConstants"
 import { put, takeLatest } from "redux-saga/effects";
-import history from '../../utils/history';
-import { onRegisterComplete, onRegisterError } from "../slices/authenticateSlice";
+import history from 'utils/history';
+import { onRegisterComplete, onRegisterError } from "app/slices/authenticateSlice";
 
 export default takeLatest('authenticate/registerRequest', register)
 

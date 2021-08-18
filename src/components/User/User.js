@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { setCurrentChat } from '../../app/slices/chatsSlice';
+import { setCurrentChat } from 'app/slices/chatsSlice';
 
 const User = ({user}) => {
     const history = useHistory();

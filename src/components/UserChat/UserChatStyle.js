@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ImageContainer } from '../Chat/ChatStyles'
+import { ImageContainer } from 'components/Chat/ChatStyles'
 
 export const Container = styled.div`
     height: 20vh;

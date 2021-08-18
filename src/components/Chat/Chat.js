@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
-import { setCurrentChat } from '../../app/slices/chatsSlice';
-import { IMAGE_URL } from '../../constants';
+import { setCurrentChat } from 'app/slices/chatsSlice';
+import { IMAGE_URL } from 'appConstants';
 import { faInfo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ChatContainer, Chat, ImageContainer, Info, LastMsg, InfoButton } from './ChatStyles';

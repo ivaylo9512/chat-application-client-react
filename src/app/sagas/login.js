@@ -1,7 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects';
-import { onLoginComplete, onLoginError } from '../slices/authenticateSlice';
-import history from '../../utils/history';
-import { BASE_URL } from '../../constants';
+import { onLoginComplete, onLoginError } from 'app/slices/authenticateSlice';
+import history from 'utils/history';
+import { BASE_URL } from 'appConstants';
 
 
 export default takeLatest('authenticate/loginRequest', login)

@@ -1,10 +1,10 @@
 import React from 'react'
 import { Container } from './UsersViewStyle'
-import UsersList from '../UsersList/UsersList';
-import { getUsersQuery, usersRequest, resetUsersState, getUsersState, setCurrentUsers, getUsers } from '../../app/slices/usersSlice';
-import Form from '../Form/Form';
+import UsersList from 'components/UsersList/UsersList';
+import { getUsersQuery, usersRequest, resetUsersState, getUsersState, setCurrentUsers, getUsers } from 'app/slices/usersSlice';
+import Form from 'components/Form/Form';
 import { useSelector } from 'react-redux';
-import Pagination from '../Pagination/Pagination';
+import Pagination from 'components/Pagination/Pagination';
 
 const UsersView = () => {
     const users = useSelector(getUsers);

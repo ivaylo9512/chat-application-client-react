@@ -1,8 +1,8 @@
 import React from 'react'
-import Session from '../Session/Session';
-import Form from '../Form/Form'
+import Session from 'components/Session/Session';
+import Form from 'components/Form/Form'
 import { useSelector } from 'react-redux';
-import { getCurrentChat } from '../../app/slices/chatsSlice';
+import { getCurrentChat } from 'app/slices/chatsSlice';
 
 const ChatView = ({webSocketClient}) => {  
     const chat = useSelector(getCurrentChat);

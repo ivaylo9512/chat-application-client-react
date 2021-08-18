@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRequest } from '../../hooks/useRequest';
+import { useRequest } from 'hooks/useRequest';
 
 const Profile = () => {
     const [userInfo] = useRequest({initialUrl: `${localStorage.getItem('BaseUrl')}/api/users/auth/getUserInfo`, fetchOnMount: true, isAuth})

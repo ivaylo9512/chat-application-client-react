@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getStylesState, toggleHeaderVisibility, toggleSearchVisibility } from '../../app/slices/stylesSlice';
+import { getStylesState, toggleHeaderVisibility, toggleSearchVisibility } from 'app/slices/stylesSlice';
 import { Button, Li, Nav } from './MenuNavStyles'
+
 const MenuNav = ({rotate}) => {
     const location = useLocation();
     const {isHeaderHidden, isSearchHidden} = useSelector(getStylesState)

@@ -1,8 +1,8 @@
 import React from 'react';
-import { resetUserChatsState, getUserChatsQuery, userChatsRequest, getUserChatsState, getUserChats, setCurrentUserChats } from '../../app/slices/userChatsSlice';
-import Pagination from '../Pagination/Pagination';
-import UserChatsList from '../UserChatsList/UserChatsList';
-import Form from '../Form/Form';
+import { resetUserChatsState, getUserChatsQuery, userChatsRequest, getUserChatsState, getUserChats, setCurrentUserChats } from 'app/slices/userChatsSlice';
+import Pagination from 'components/Pagination/Pagination';
+import UserChatsList from 'components/UserChatsList/UserChatsList';
+import Form from 'components/Form/Form';
 import { useSelector } from 'react-redux';
 import { Container } from './UserChatsViewStyle';
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import ChatUser from '../Chat/Chat';
+import ChatUser from 'components/Chat/Chat';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChatsQuery, chatsRequest, getChatsState } from '../../app/slices/chatsSlice';
+import { getChatsQuery, chatsRequest, getChatsState } from 'app/slices/chatsSlice';
 import { ChatInfo, Span } from './ChatListStyle'
 const ChatList = () => {
     const { isLoading, data: { chats, isLastPage } } = useSelector(getChatsState);

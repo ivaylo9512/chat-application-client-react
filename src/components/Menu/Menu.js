@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import MenuNav from '../MenuNav/MenuNav'
+import MenuNav from 'components/MenuNav/MenuNav'
 import { MenuContainer, MenuCircle, CircleNav, CircleBtn } from './MenuStyles';
 
 const Menu = () => {

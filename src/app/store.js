@@ -1,11 +1,11 @@
-import authenticate from './slices/authenticateSlice';
-import styles from './slices/stylesSlice'
-import chats from './slices/chatsSlice'
-import users from './slices/usersSlice'
-import userChats from './slices/userChatsSlice';
+import authenticate from 'app/slices/authenticateSlice';
+import styles from 'app/slices/stylesSlice'
+import chats from 'app/slices/chatsSlice'
+import users from 'app/slices/usersSlice'
+import userChats from 'app/slices/userChatsSlice';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
-import IndexSaga from './sagas/index';
+import IndexSaga from 'app/sagas/index';
 
 const sagaMiddleware = createSaga();
 const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];

@@ -4,7 +4,7 @@ import registerWatcher from './register';
 import usersWatcher from './users';
 import chatsWatcher from './chats';
 import getUserChats from './userChats';
-import { onLogout } from '../slices/authenticateSlice';
+import { onLogout } from 'app/slices/authenticateSlice';
 
 export default function* indexSaga(){
     yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats])

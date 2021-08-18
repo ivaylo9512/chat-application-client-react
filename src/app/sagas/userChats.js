@@ -1,9 +1,9 @@
-import { onUserChatsComplete, onUserChatsError, getUserChatsData } from "../slices/userChatsSlice";
+import { onUserChatsComplete, onUserChatsError, getUserChatsData } from "app/slices/userChatsSlice";
 import { select, takeLatest, put } from "redux-saga/effects";
+import { BASE_URL } from "appConstants";
+import UnauthorizedException from "exceptions/unauthorizedException";
+import splitArray from "utils/splitArray";
 import { authWrapper } from ".";
-import { BASE_URL } from "../../constants";
-import UnauthorizedException from "../../exceptions/unauthorizedException";
-import splitArray from "../../utils/splitArray";
 
 export default takeLatest('userChats/userChatsRequest', authWrapper(getUserChats));
 

@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
-import useInput from '../../hooks/useInput';
-import usePasswordInput from '../../hooks/usePasswordInput';
+import useInput from 'hooks/useInput';
+import usePasswordInput from 'hooks/usePasswordInput';
 import { useSelector, useDispatch } from 'react-redux';
-import InputWithError, { getContainerId } from '../InputWithError';
-import { getRegisterRequest, registerRequest } from '../../app/slices/authenticateSlice';
-import useEffectInitial from '../../hooks/useEffectInitial';
+import InputWithError, { getContainerId } from 'components/InputWithError';
+import { getRegisterRequest, registerRequest } from 'app/slices/authenticateSlice';
+import useEffectInitial from 'hooks/useEffectInitial';
 
 const Register = () => {
     const [pageIndex, setPageIndex] = useState(0);

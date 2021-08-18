@@ -1,8 +1,8 @@
-import { BASE_URL } from '../../constants';
-import { getChatsData, onChatsComplete, onChatsError } from '../slices/chatsSlice';
+import { BASE_URL } from 'appConstants';
+import { getChatsData, onChatsComplete, onChatsError } from 'app/slices/chatsSlice';
 import { takeLatest, select, put } from 'redux-saga/effects';
 import { authWrapper } from './index'
-import UnauthorizedException from '../../exceptions/unauthorizedException';
+import UnauthorizedException from 'exceptions/unauthorizedException';
 
 export default takeLatest('chats/chatsRequest',  authWrapper(getChats));
 

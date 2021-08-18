@@ -1,8 +1,8 @@
-import { BASE_URL } from '../../constants';
-import { getUsersData, onUsersComplete, onUsersError} from '../slices/usersSlice';
+import { BASE_URL } from 'appConstants';
+import { getUsersData, onUsersComplete, onUsersError} from 'app/slices/usersSlice';
 import { takeLatest, select, put } from 'redux-saga/effects';
-import splitArray from '../../utils/splitArray';
-import UnauthorizedException from '../../exceptions/unauthorizedException';
+import splitArray from 'utils/splitArray';
+import UnauthorizedException from 'exceptions/unauthorizedException';
 
 export default takeLatest('users/usersRequest', getUsers);
 

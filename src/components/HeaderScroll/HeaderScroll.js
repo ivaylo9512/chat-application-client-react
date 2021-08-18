@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
-import { getHeaderVisibility } from '../../app/slices/stylesSlice';
+import { getHeaderVisibility } from 'app/slices/stylesSlice';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChatsQuery, getChatsData, getChatsState, chatsRequest } from '../../app/slices/chatsSlice';
-import ChatList from '../ChatList/ChatList';
+import { getChatsQuery, getChatsData, getChatsState, chatsRequest } from 'app/slices/chatsSlice';
+import ChatList from 'components/ChatList/ChatList';
 import { Scroll, Container } from './HeaderStyle';
 
 const HeaderScroll = () => {

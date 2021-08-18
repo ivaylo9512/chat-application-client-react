@@ -13,6 +13,7 @@ describe("RegisterSnapshotTests", () => {
 
         dispatchSpy.mockReturnValue(jest.fn());
     })
+    
     const createWrapper = (state) => {
         selectorSpy.mockReturnValue(state);
         

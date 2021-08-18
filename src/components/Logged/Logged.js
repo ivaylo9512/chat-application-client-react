@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import Main from '../Main/Main';
-import Menu from '../Menu/Menu'
-import HeaderScroll from '../HeaderScroll/HeaderScroll';
+import Main from 'components/Main/Main';
+import Menu from 'components/Menu/Menu'
+import HeaderScroll from 'components/HeaderScroll/HeaderScroll';
 
 const Logged = () => {
     return(

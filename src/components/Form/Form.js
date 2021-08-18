@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import useInput from '../../hooks/useInput'
+import useInput from 'hooks/useInput'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSearchVisibility } from '../../app/slices/stylesSlice'
+import { getSearchVisibility } from 'app/slices/stylesSlice'
 import { Container, FormNode, Button } from './FormStyle'
 
 const Form = ({action, resetState, selector,  placeholder}) => {
