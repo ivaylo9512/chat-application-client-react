@@ -45,4 +45,9 @@ describe('Form unit tests', () => {
 
         expect(dispatchMock).toHaveBeenNthCalledWith(2, userChatsRequest({name: 'change', pages: 1}));
     })
+
+    it('should render input with passed placeholder', () => {
+        const wrapper = createWrapper(false);
+        expect(wrapper.find('input').prop('placeholder')).toBe('search chat');
+    })
 })
