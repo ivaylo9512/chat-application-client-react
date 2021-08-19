@@ -21,7 +21,7 @@ const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
         }
 
         const pagesCount = nextPage - pages; 
-        dispatch(getData({...query, pagesCount}))
+        dispatch(getData({...query, pages: pagesCount}))
         setPage(nextPage)
     }
 
@@ -34,7 +34,7 @@ const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
         {maxPages > 0 &&
             <Container>
                 {page > 1 &&
-                    <button onClick={() => changePage(page - 1)}>prev</button>
+                    <button data-testid='back' onClick={() => changePage(page - 1)}>prev</button>
                 }
                 <Ul>
                     {
@@ -50,7 +50,7 @@ const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
                     }
                 </Ul>
                 {page < maxPages &&
-                    <button onClick={() => changePage(page + 1)}>next</button>
+                    <button data-testid='next' onClick={() => changePage(page + 1)}>next</button>
                 }
             </Container>
             }

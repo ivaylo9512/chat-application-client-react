@@ -6,13 +6,12 @@ import * as Redux from 'react-redux';
 
 describe('Login unit tests', () => {
     let selectorSpy;
-    let dispatchSpy;
+    let dispatchMock = jest.fn();
 
-    beforeAll(() => {
+    beforeEach(() => {
         selectorSpy = jest.spyOn(Redux, 'useSelector');
     
-        dispatchSpy = jest.spyOn(Redux, 'useDispatch');
-        dispatchSpy.mockReturnValue(jest.fn());
+        jest.spyOn(Redux, 'useDispatch').mockReturnValue(dispatchMock);
     });
 
     const createWrapper = (state) => {
@@ -32,17 +31,13 @@ describe('Login unit tests', () => {
     })
 
     it('should call dispatch login with input values', () => {
-        const mockDispatch = jest.fn();
-        const spy = jest.spyOn(Redux, 'useDispatch');
-        spy.mockReturnValue(mockDispatch);
-
         const wrapper = createWrapper({ isLoading: false, error: null});
 
         wrapper.findByTestid('username').simulate('change', { target: { value: 'username'} });
         wrapper.findByTestid('password').simulate('change', { target: { value: 'password'} });
         wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
 
-        expect(mockDispatch).toHaveBeenCalledWith(loginRequest({ username: 'username', password: 'password'}));
+        expect(dispatchMock).toHaveBeenCalledWith(loginRequest({ username: 'username', password: 'password'}));
     })
     
     it('should render error', () => {

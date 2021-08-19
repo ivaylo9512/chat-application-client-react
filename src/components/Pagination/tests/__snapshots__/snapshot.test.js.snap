@@ -4,6 +4,7 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
 <Fragment>
   <styled.div>
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       prev
@@ -59,6 +60,7 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
       </styled.li>
     </styled.ul>
     <button
+      data-testid="next"
       onClick={[Function]}
     >
       next
@@ -113,6 +115,7 @@ exports[`Pagination snapshot tests renders correctly with pages 1`] = `
       </styled.li>
     </styled.ul>
     <button
+      data-testid="next"
       onClick={[Function]}
     >
       next
@@ -125,6 +128,7 @@ exports[`Pagination snapshot tests renders correctly with pages at last page 1`]
 <Fragment>
   <styled.div>
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       prev
@@ -171,6 +175,7 @@ exports[`Pagination snapshot tests renders correctly with pages at page 2 and ba
 <Fragment>
   <styled.div>
     <button
+      data-testid="back"
       onClick={[Function]}
     >
       prev
@@ -218,6 +223,7 @@ exports[`Pagination snapshot tests renders correctly with pages at page 2 and ba
       </styled.li>
     </styled.ul>
     <button
+      data-testid="next"
       onClick={[Function]}
     >
       next
