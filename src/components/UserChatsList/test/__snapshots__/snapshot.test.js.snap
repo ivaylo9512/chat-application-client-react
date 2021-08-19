@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserChatsList snapshot tests should not render container with undefined state 1`] = `<styled.div />`;
+
+exports[`UserChatsList snapshot tests should render info message when empty users array 1`] = `
+<styled.div>
+  <span
+    data-testid="info"
+  >
+    <b>
+      No chats found with this search.
+    </b>
+  </span>
+</styled.div>
+`;
+
+exports[`UserChatsList snapshot tests should render message without data 1`] = `
+<styled.div>
+  <span
+    data-testid="info"
+  >
+    <b>
+      No chats found with this search.
+    </b>
+  </span>
+</styled.div>
+`;
+
+exports[`UserChatsList snapshot tests should render with data 1`] = `
+<styled.div>
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+</styled.div>
+`;
+
+exports[`UserChatsList snapshot tests should render with users 1`] = `
+<styled.div>
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+  <UserChat
+    userChat={
+      Object {
+        "firstName": "test",
+      }
+    }
+  />
+</styled.div>
+`;
