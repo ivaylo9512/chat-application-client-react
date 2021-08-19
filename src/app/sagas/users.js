@@ -37,10 +37,10 @@ function* getUsers({payload: query}){
 
 }
 
-const getData = (query, data) => {
+const getData = (query, dataInfo) => {
     let lastId = 0;
     let lastName;
-    let lastUser = data.lastUser;
+    let lastUser = dataInfo.lastData;
     const takeAmount = query.take * query.pages;
     
     if(lastUser){

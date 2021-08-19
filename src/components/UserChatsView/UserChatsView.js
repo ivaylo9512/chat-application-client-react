@@ -6,13 +6,11 @@ import { useSelector } from 'react-redux';
 import { Container } from './UserChatsViewStyle';
 
 const UserChatsView = () => {
-    const userChats = useSelector(getUserChats);
-
     return(
         <>
             <Container>
                 <UserChatsList />
-                <Pagination selector={getUserChatsState} setData={setCurrentUserChats} getData={userChatsRequest} data={userChats}/>
+                <Pagination selector={getUserChatsState} setData={setCurrentUserChats} getData={userChatsRequest}/>
             </Container>
             <Form action={userChatsRequest} resetState={resetUserChatsState} selector={getUserChatsQuery} placeholder={'search chat'} />
         </>

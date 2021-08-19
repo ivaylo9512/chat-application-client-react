@@ -5,7 +5,7 @@ Enzyme.configure({
   adapter: new EnzymeAdapter(),
 });
 
-const findByTestid = function (testid) {
+function findByTestid(testid) {
   return this.find(`[data-testid="${testid}"]`)
 }
 

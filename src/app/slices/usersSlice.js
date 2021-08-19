@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    data: {
+    dataInfo: {
         pages: 0,
         maxPages: 0,
-        users: [],
-        lastUser: null,
-        currentUsers: null
+        data: [],
+        lastData: null,
+        currentData: null
     },
     query: {
         take: 2,
@@ -27,12 +27,12 @@ const usersSlice = createSlice({
         },
         onUsersComplete: (state, {payload: {pageable, query}}) => {
             state.query = query;
-            state.data.maxPages = state.data.pages + pageable.pages;
-            state.data.pages = state.data.pages + pageable.data.length;
-            state.data.lastUser = pageable.lastUser;
-            state.data.users = [...state.data.users, ...pageable.data];
-            state.data.currentUsers = pageable.data[pageable.data.length - 1] || [];
-            state.data.isLoading = false;
+            state.dataInfo.maxPages = state.dataInfo.pages + pageable.pages;
+            state.dataInfo.pages = state.dataInfo.pages + pageable.data.length;
+            state.dataInfo.lastData = pageable.lastUser;
+            state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
+            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
+            state.dataInfo.isLoading = false;
             state.error = null;
         },
         onUsersError: (state, {payload}) => {
@@ -40,10 +40,10 @@ const usersSlice = createSlice({
             state.isLoading = false;
         },
         setCurrentUsers: (state, {payload}) => {
-            state.data.currentUsers = payload;
+            state.dataInfo.currentData = payload;
         },
         resetUsersState: (state) => {
-            state.data = initialState.data;
+            state.dataInfo = initialState.dataInfo;
             state.query = initialState.query;
             state.isLoading = initialState.isLoading;
             state.error = initialState.error;
@@ -54,8 +54,8 @@ const usersSlice = createSlice({
 export const {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
 export default usersSlice.reducer;
 
-export const getUsers = state => state.users.data.users;
+export const getUsers = state => state.users.dataInfo.data;
 export const getUsersState = state => state.users;
 export const getUsersQuery = state => state.users.query;
-export const getUsersData = state => state.users.data;
-export const getCurrentUsers = state => state.users.data.currentUsers;
+export const getUsersData = state => state.users.dataInfo;
+export const getCurrentUsers = state => state.users.dataInfo.currentData;

@@ -37,10 +37,10 @@ function* getUserChats({payload: query}){
     }
 }
 
-const getData = (query, data) => {
+const getData = (query, dataInfo) => {
     let lastId = 0;
     let lastName;
-    let lastUserChat = data.lastUserChat;
+    let lastUserChat = dataInfo.lastData;
     const takeAmount = query.take * query.pages;
 
     if(lastUserChat){

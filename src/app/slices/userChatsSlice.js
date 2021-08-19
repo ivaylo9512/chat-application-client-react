@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    data: {
+    dataInfo: {
         pages: 0,
         maxPages: 0,
-        userChats: [],
-        lastUserChat: null,
-        currentUserChats: null
+        data: [],
+        lastData: null,
+        currentData: null
     },
     query: {
         take: 4,
@@ -27,12 +27,12 @@ const userChatsSlice = createSlice({
         },
         onUserChatsComplete: (state, {payload: {pageable, query}}) => {
             state.query = query;
-            state.data.maxPages = state.data.pages + pageable.pages;
-            state.data.pages = state.data.pages + pageable.data.length;
-            state.data.lastUserChat = pageable.lastUserChat;
-            state.data.userChats = [...state.data.userChats, ...pageable.data];
-            state.data.currentUserChats = pageable.data[pageable.data.length - 1] || [];
-            state.data.isLoading = false;
+            state.dataInfo.maxPages = state.dataInfo.pages + pageable.pages;
+            state.dataInfo.pages = state.dataInfo.pages + pageable.data.length;
+            state.dataInfo.lastData = pageable.lastUserChat;
+            state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
+            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
+            state.dataInfo.isLoading = false;
             state.error = null;
         },
         onUserChatsError: (state, {payload}) => {
@@ -40,10 +40,10 @@ const userChatsSlice = createSlice({
             state.isLoading = false;
         },
         setCurrentUserChats: (state, {payload}) => {
-            state.data.currentUserChats = payload;
+            state.dataInfo.currentData = payload;
         },
         resetUserChatsState: (state) => {
-            state.data = initialState.data;
+            state.dataInfo = initialState.dataInfo;
             state.query = initialState.query;
             state.isLoading = initialState.isLoading;
             state.error = initialState.error;
@@ -54,8 +54,8 @@ const userChatsSlice = createSlice({
 export const {userChatsRequest, resetUserChatsState, onUserChatsComplete, onUserChatsError,  setCurrentUserChats } = userChatsSlice.actions 
 export default userChatsSlice.reducer;
 
-export const getUserChats = state => state.userChats.data.userChats;
+export const getUserChats = state => state.userChats.dataInfo.data;
 export const getUserChatsState = state => state.userChats;
 export const getUserChatsQuery = state => state.userChats.query;
-export const getUserChatsData = state => state.userChats.data;
-export const getCurrentUserChats = state => state.userChats.data.currentUserChats;
+export const getUserChatsData = state => state.userChats.dataInfo;
+export const getCurrentUserChats = state => state.userChats.dataInfo.currentData;

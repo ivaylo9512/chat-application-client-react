@@ -6,13 +6,11 @@ import { useSelector } from 'react-redux';
 import Pagination from 'components/Pagination/Pagination';
 
 const UsersView = () => {
-    const users = useSelector(getUsers);
-
     return(
         <>
             <Container>
                 <UsersList />
-                <Pagination selector={getUsersState} setData={setCurrentUsers} getData={usersRequest} data={users}/>
+                <Pagination selector={getUsersState} setData={setCurrentUsers} getData={usersRequest} />
             </Container>
             <Form action={usersRequest} resetState={resetUsersState} selector={getUsersQuery} placeholder={'search users'} />
 
