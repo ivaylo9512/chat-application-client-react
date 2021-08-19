@@ -6,7 +6,7 @@ import { Li } from '../PaginationStyle';
 
 describe('Pagination unit tests', () => {
     let selectorSpy;
-    let dispatchMock = jest.fn();
+    let dispatchMock;
 
     const createWrapper = (value) => {
         selectorSpy.mockReturnValue(value);
@@ -16,7 +16,7 @@ describe('Pagination unit tests', () => {
 
     beforeEach(() => {
         selectorSpy = jest.spyOn(redux, 'useSelector');
-        jest.spyOn(redux, 'useDispatch').mockReturnValue(dispatchMock);
+        dispatchMock = jest.spyOn(redux, 'useDispatch').mockReturnValue(dispatchMock);
     })
 
     it('should render 5 Li pages', () => {
@@ -26,14 +26,13 @@ describe('Pagination unit tests', () => {
     })
 
     it('should render 5 Li pages when page exceed pagesPerSlice', () => {
-        const wrapper = createWrapper({dataInfo: { data:[], pages: 10, maxPages: 5}, query: { take: 2, name: '' }});
+        const wrapper = createWrapper({dataInfo: { data:[], pages: 5, maxPages: 5}, query: { take: 2, name: '' }});
 
         expect(wrapper.find(Li).length).toBe(5);
     })
 
-    
     it('should not render back button at 1st page', () => {
-        const wrapper = createWrapper({dataInfo: { data:[], pages: 10, maxPages: 5}, query: { take: 2, name: '' }});
+        const wrapper = createWrapper({dataInfo: { data:[], pages: 5, maxPages: 5}, query: { take: 2, name: '' }});
 
         expect(wrapper.findByTestid('back').length).toBe(0);
     })
@@ -43,6 +42,16 @@ describe('Pagination unit tests', () => {
         wrapper.findByTestid(5).simulate('click');
 
         expect(wrapper.findByTestid('next').length).toBe(0);
+    })
+
+    it('should render 6 Li with 5 pages of next slide when last page of slide is clicked pages', () => {
+        const wrapper = createWrapper({dataInfo: { data:[], pages: 10, maxPages: 10}, query: { take: 2, name: '' }});
+        wrapper.findByTestid(5).simulate('click');
+
+        expect(wrapper.find(Li).length).toBe(6);
+        expect(wrapper.findByTestid('4').length).toBe(0);
+        expect(wrapper.findByTestid('5').at(0).length).toBe(1);
+        expect(wrapper.findByTestid('6').at(0).length).toBe(1);
     })
 
     it('should dispatch getChats', () => {

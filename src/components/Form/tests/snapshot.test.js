@@ -3,18 +3,16 @@ import Form from 'components/Form/Form';
 import * as Redux from 'react-redux';
 
 describe('Pagination snapshot tests', () => {
-    let selectorSpy;
-
     beforeEach(() => {
-        selectorSpy = jest.spyOn(Redux, 'useSelector');
         jest.spyOn(Redux, 'useDispatch').mockReturnValue(jest.fn());
     })
     const createWrapper = (state) => {
-        selectorSpy.mockReturnValue(state);
+        jest.spyOn(Redux, 'useSelector').mockReturnValue(state);
 
         return shallow(<Form />)   
     }
 
+    it('should call dispatch on submit', () => {})
     it('should render snanpshot', () => {
         const wrapper = createWrapper(true);
 

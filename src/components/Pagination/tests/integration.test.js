@@ -78,8 +78,8 @@ describe('Pagination integration tests', () => {
         expect(state.dataInfo.pages).toBe(2);
     })
 
-    it('should should get pages from 2 to 5 and add 1 more to max pages', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 8, data: [...getChatPair(), ...getChatPair(), ...getChatPair()]}), {status: 200}));
+    it('should should get pages from 2 to 5 and add 2 more to max pages', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: [...getChatPair(), ...getChatPair(), ...getChatPair()]}), {status: 200}));
         const wrapper = createWrapper();  
 
         await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
@@ -87,11 +87,27 @@ describe('Pagination integration tests', () => {
         wrapper.update();
 
         expect(state.dataInfo.currentData).toBe(state.dataInfo.data[4]);
-        expect(state.dataInfo.maxPages).toBe(6);
+        expect(state.dataInfo.maxPages).toBe(7);
         expect(state.dataInfo.pages).toBe(5);
         expect(wrapper.findByTestid(6).at(0).length).toBe(1);
+        expect(wrapper.findByTestid(7).at(0).length).toBe(1);
     })
 
+    it('should should get last page', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...getChatPair()]}), {status: 200}));
+        const wrapper = createWrapper();  
+
+        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        wrapper.update();
+        await act(async() => wrapper.findByTestid(6).at(0).simulate('click'));
+
+        expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/chats/auth/findChatsByName/2//test test/9', {
+            headers: {
+                Authorization: null
+            },
+
+        });
+    })
     
     it('should should get last page', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: [...getChatPair()]}), {status: 200}));
@@ -99,13 +115,13 @@ describe('Pagination integration tests', () => {
 
         await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
         wrapper.update();
-        await act(async() => wrapper.findByTestid(6).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(7).at(0).simulate('click'));
         const state = store.getState().userChats;
         wrapper.update();
 
-        expect(state.dataInfo.currentData).toBe(state.dataInfo.data[5]);
-        expect(state.dataInfo.maxPages).toBe(6);
-        expect(state.dataInfo.pages).toBe(6);
-        expect(wrapper.findByTestid(7).length).toBe(0);
+        expect(state.dataInfo.currentData).toBe(state.dataInfo.data[6]);
+        expect(state.dataInfo.maxPages).toBe(7);
+        expect(state.dataInfo.pages).toBe(7);
+        expect(wrapper.findByTestid(8).length).toBe(0);
     })
 })

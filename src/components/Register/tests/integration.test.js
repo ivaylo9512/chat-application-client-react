@@ -36,7 +36,7 @@ const createWrapper = () => {
     )
 }
 
-const user = { username: 'username', email: 'email@gmail.com', password: 'password', firstName: 'firstName', lastName: 'lastName', age: '25', country: 'Bulgaria' };
+const user = { username: 'username', email: 'email@gmail.com', password: 'password', firstName: 'firstName', lastName: 'lastName', country: 'Bulgaria', age: '25' };
 
 const changeFirstPageInputs = (wrapper) => {
     let inputs = wrapper.find('input');
@@ -74,7 +74,6 @@ describe('Register integration tests', () => {
         expect(wrapper.findByTestid('usernameError').text()).toBe('Username is taken.')
         expect(wrapper.findByTestid('emailError').text()).toBe('Email is taken.')
         expect(wrapper.findByTestid('passwordError').text()).toBe('Password must be atleast 10 characters.')
-
     })
 
     it('should dispatch register return errors with page 1', async() => {
@@ -114,6 +113,20 @@ describe('Register integration tests', () => {
         expect(inputs.findByTestid('lastName').prop('value')).toBe(user.lastName);
         expect(inputs.findByTestid('country').prop('value')).toBe(user.country);
         expect(inputs.findByTestid('age').prop('value')).toBe(user.age);
+    })
+
+    it('should call fetch with data', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({}), { status: 200 }))
+
+        const wrapper = createWrapper({ isLoading: false, error: null });
+        
+        changeFirstPageInputs(wrapper);
+        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        
+        changeSecondPageInputs(wrapper);
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+
+        expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/users/register', {body: JSON.stringify(user), headers: {'Content-Type': 'Application/json'}, method: 'POST'})
     })
 
     it('should call dispatch with user object with input values', () => {
