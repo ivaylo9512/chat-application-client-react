@@ -14,78 +14,50 @@ exports[`UserChatsList snapshot tests should render info message when empty user
 </styled.div>
 `;
 
-exports[`UserChatsList snapshot tests should render message without data 1`] = `
-<styled.div>
-  <span
-    data-testid="info"
-  >
-    <b>
-      No chats found with this search.
-    </b>
-  </span>
-</styled.div>
-`;
-
-exports[`UserChatsList snapshot tests should render with data 1`] = `
-<styled.div>
-  <UserChat
-    userChat={
-      Object {
-        "firstName": "test",
-      }
-    }
-  />
-  <UserChat
-    userChat={
-      Object {
-        "firstName": "test",
-      }
-    }
-  />
-  <UserChat
-    userChat={
-      Object {
-        "firstName": "test",
-      }
-    }
-  />
-  <UserChat
-    userChat={
-      Object {
-        "firstName": "test",
-      }
-    }
-  />
-</styled.div>
-`;
-
 exports[`UserChatsList snapshot tests should render with users 1`] = `
 <styled.div>
   <UserChat
+    key="1"
     userChat={
       Object {
         "firstName": "test",
+        "id": 1,
       }
     }
   />
   <UserChat
+    key="2"
     userChat={
       Object {
         "firstName": "test",
+        "id": 2,
       }
     }
   />
   <UserChat
+    key="3"
     userChat={
       Object {
         "firstName": "test",
+        "id": 3,
       }
     }
   />
   <UserChat
+    key="4"
     userChat={
       Object {
         "firstName": "test",
+        "id": 4,
+      }
+    }
+  />
+  <UserChat
+    key="5"
+    userChat={
+      Object {
+        "firstName": "test",
+        "id": 5,
       }
     }
   />
