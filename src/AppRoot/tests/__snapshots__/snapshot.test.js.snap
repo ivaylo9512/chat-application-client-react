@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App snapshot tests should render with logged user 1`] = `
+<Fragment>
+  <Logged />
+  <Route
+    path="/logout"
+    render={[Function]}
+  />
+</Fragment>
+`;
+
+exports[`App snapshot tests should render without logged user 1`] = `
+<Fragment>
+  <Switch>
+    <Route
+      path="/register"
+      render={[Function]}
+    />
+    <Route
+      data-testid="login"
+      path="/login"
+      render={[Function]}
+    />
+    <Redirect
+      from="/"
+      to="/login"
+    />
+  </Switch>
+</Fragment>
+`;
