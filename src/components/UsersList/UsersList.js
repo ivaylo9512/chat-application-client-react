@@ -9,7 +9,7 @@ const UsersList = () => {
     return (
         <Container>
             {users && (users.length == 0 
-                ? <span><b>No users found with this search.</b></span>
+                ? <span data-testid='info'><b>No users found with this search.</b></span>
                 : users.map(user =>
                     <User user={user} key={user.id} />
             ))}
