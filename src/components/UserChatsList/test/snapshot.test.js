@@ -10,8 +10,8 @@ describe('UserChatsList snapshot tests', () => {
     }
 
     it('should render with users', () => {
-        const wrapper = createWrapper([{firstName: 'test'}, {firstName: 'test'}, {firstName: 'test'}, {firstName: 'test'}])
-    
+        const wrapper = createWrapper([{id: 1, firstName: 'test'}, {id: 2, firstName: 'test'}, {id: 3, firstName: 'test'}, {id: 4, firstName: 'test'}, {id: 5, firstName: 'test'}])
+
         expect(wrapper).toMatchSnapshot();
     })
 
