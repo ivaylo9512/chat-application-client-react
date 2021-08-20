@@ -10,7 +10,7 @@ const UsersView = () => {
         <>
             <Container>
                 <UsersList />
-                <Pagination selector={getUsersState} setData={setCurrentUsers} getData={usersRequest} />
+                <Pagination selector={getUsersState} setData={setCurrentUsers} getData={usersRequest} pagesPerSlide={5}/>
             </Container>
             <Form action={usersRequest} resetState={resetUsersState} selector={getUsersQuery} placeholder={'search users'} />
 

@@ -118,4 +118,63 @@ describe('UsersView integration tests', () => {
         expect(li.at(0).prop('data-testid')).toBe('1');
         expect(li.at(1).prop('data-testid')).toBe('2');
     })
+
+    it('should update currentUsers when next button is clicked', async() => {
+        const wrapper = createWrapper();
+      
+        await act(async() => wrapper.findByTestid('next').simulate('click'));
+        wrapper.update();
+
+        const users = wrapper.find(User)
+        const li = wrapper.find(Li);
+        const data = store.getState().users.dataInfo.data[1];
+
+        expect(li.length).toBe(5);
+        expect(users.length).toBe(2);
+
+
+        expect(users.at(0).prop('user')).toStrictEqual(data[0]);
+        expect(users.at(1).prop('user')).toStrictEqual(data[1]);
+    
+        expect(li.at(1).prop('isSelected')).toBe(true);
+        expect(li.at(0).prop('data-testid')).toBe('1');
+        expect(li.at(1).prop('data-testid')).toBe('2');
+    })
+
+    it('should reset state when new search is submit', async() => {
+        const wrapper = createWrapper();
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 0, data: []}), {status: 200}));
+      
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        wrapper.update();
+
+        const users = wrapper.find(User)
+        const li = wrapper.find(Li);
+
+        expect(li.length).toBe(0);
+        expect(users.length).toBe(0);
+    })
+
+    it('should reset state on unmount', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: createPair()}), {status: 200}));
+        
+        const wrapper = createWrapper();
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        wrapper.update();
+
+        const users =  wrapper.find(User)
+        const li = wrapper.find(Li);
+
+        expect(li.length).toBe(5);
+        expect(users.length).toBe(2);
+
+        await act(async() => wrapper.unmount());
+
+        const {pages, maxPages, data, lastData, currentData} = store.getState().users.dataInfo;
+        expect(pages).toBe(0);
+        expect(maxPages).toBe(0);
+        expect(data).toStrictEqual([]);
+        expect(currentData).toBe(null);
+        expect(lastData).toBe(null);
+    })
 })

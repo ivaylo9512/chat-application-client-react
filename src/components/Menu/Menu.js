@@ -21,7 +21,7 @@ const Menu = () => {
     }
 
     const smoothRotate = (deg, durration, startPos) => {
-        let startTime = null;
+        let startTime;
 
         const rotate = (currentTime) => {
             isRotating.current = true
