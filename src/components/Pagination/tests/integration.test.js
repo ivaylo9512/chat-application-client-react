@@ -43,8 +43,7 @@ saga.run(function*(){
     yield userChatsWatcher
 })
 
-const mockedFetch = jest.fn();
-global.fetch = mockedFetch;
+global.fetch = jest.fn();
 
 const createWrapper = () => mount(
     <Provider store={store}>
@@ -93,8 +92,8 @@ describe('Pagination integration tests', () => {
         expect(wrapper.findByTestid(7).at(0).length).toBe(1);
     })
 
-    it('should should get last page', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...getChatPair()]}), {status: 200}));
+    it('should call fetch with data', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: getChatPair()}), {status: 200}));
         const wrapper = createWrapper();  
 
         await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
@@ -109,8 +108,8 @@ describe('Pagination integration tests', () => {
         });
     })
     
-    it('should should get last page', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: [...getChatPair()]}), {status: 200}));
+    it('should get last page', async() => {
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: getChatPair()}), {status: 200}));
         const wrapper = createWrapper();  
 
         await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));

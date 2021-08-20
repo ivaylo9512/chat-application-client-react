@@ -22,7 +22,13 @@ describe('Pagination unit tests', () => {
     it('should render 5 Li pages', () => {
         const wrapper = createWrapper({dataInfo: { data:[], pages: 5, maxPages: 5}, query: { take: 2, name: '' }});
 
-        expect(wrapper.find(Li).length).toBe(5);
+        const li = wrapper.find(Li);
+
+        expect(li.at(0).prop('isSelected')).toBe(true);
+        expect(li.length).toBe(5);
+
+        expect(li.at(0).prop('data-testid')).toBe('1');
+        expect(li.at(1).prop('data-testid')).toBe('2');
     })
 
     it('should render 5 Li pages when page exceed pagesPerSlice', () => {
@@ -41,6 +47,8 @@ describe('Pagination unit tests', () => {
         const wrapper = createWrapper({dataInfo: { data:[], pages: 5, maxPages: 5}, query: { take: 2, name: '' }});
         wrapper.findByTestid(5).simulate('click');
 
+        expect(wrapper.find(Li).length).toBe(1);
+        expect(wrapper.findByTestid(5).prop('isSelected')).toBe(true);
         expect(wrapper.findByTestid('next').length).toBe(0);
     })
 
@@ -67,6 +75,7 @@ describe('Pagination unit tests', () => {
 
         wrapper.findByTestid(2).at(0).simulate('click');
 
+        expect(wrapper.findByTestid(2).prop('isSelected')).toBe(true);
         expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats(['data2']));
     })
 
@@ -75,6 +84,7 @@ describe('Pagination unit tests', () => {
 
         wrapper.findByTestid('next').simulate('click');
 
+        expect(wrapper.findByTestid(2).prop('isSelected')).toBe(true);
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 1}));
     })
 
@@ -84,6 +94,7 @@ describe('Pagination unit tests', () => {
         wrapper.findByTestid(2).at(0).simulate('click');
         wrapper.findByTestid('back').simulate('click');
 
+        expect(wrapper.findByTestid(1).prop('isSelected')).toBe(true);
         expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats(['data1']));
     })
 
@@ -95,7 +106,7 @@ describe('Pagination unit tests', () => {
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 4}));
     })
 
-    it('should dispatch getChats with 3 pages when rquesting 5th at 1st page and 2nd page is already present', () => {
+    it('should dispatch getChats with 3 pages when rEquesting 5th at 1st page and 2nd page is already present', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1'], ['data2']], pages: 2, maxPages: 5}, query: { take: 2, name: '' }});
 
         wrapper.findByTestid(5).at(0).simulate('click');
