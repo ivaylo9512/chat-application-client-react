@@ -18,6 +18,7 @@ function* getUsers({payload: query}){
 
     if(response.ok){
         const pageable = yield response.json();
+        
         pageable.lastUser = pageable.data[pageable.data.length - 1];
         pageable.pages = Math.ceil(pageable.count / query.take);
         pageable.data = splitArray(pageable.data, query.take);
