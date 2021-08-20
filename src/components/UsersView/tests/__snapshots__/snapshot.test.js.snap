@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserChatsView snapshot tests should match snapshot 1`] = `
+<Fragment>
+  <styled.div>
+    <UsersList />
+    <Pagination
+      getData={[Function]}
+      pagesPerSlide={5}
+      selector={[Function]}
+      setData={[Function]}
+    />
+  </styled.div>
+  <Form
+    action={[Function]}
+    placeholder="search users"
+    resetState={[Function]}
+    selector={[Function]}
+  />
+</Fragment>
+`;
