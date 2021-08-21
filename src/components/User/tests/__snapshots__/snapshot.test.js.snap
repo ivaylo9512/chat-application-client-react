@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegisterSnapshotTests should render snapshot with request 1`] = `
+<div>
+  <div
+    className="image"
+  >
+    <img
+      alt="profile"
+      src="image.png"
+    />
+  </div>
+  <div
+    className="info"
+  >
+    <b>
+      First Last
+    </b>
+    <span />
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    send
+  </button>
+</div>
+`;
+
+exports[`RegisterSnapshotTests should render snapshot without request with chat 1`] = `
+<div>
+  <div
+    className="image"
+  >
+    <img
+      alt="profile"
+      src="image.png"
+    />
+  </div>
+  <div
+    className="info"
+  >
+    <b>
+      First Last
+    </b>
+    <span />
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    open
+  </button>
+</div>
+`;
+
+exports[`RegisterSnapshotTests should render snapshot without request without chat 1`] = `
+<div>
+  <div
+    className="image"
+  >
+    <img
+      alt="profile"
+      src="image.png"
+    />
+  </div>
+  <div
+    className="info"
+  >
+    <b>
+      First Last
+    </b>
+    <span />
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    send
+  </button>
+</div>
+`;
