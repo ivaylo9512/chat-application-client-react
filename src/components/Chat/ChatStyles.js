@@ -10,7 +10,7 @@ export const ChatContainer = styled.div`
     display: flex;
     margin-right: 0.5vw;
 `
-export const Chat = styled.div`
+export const ChatNode = styled.div`
     padding: 0 5%;
     border-radius: 0.5vw;
     width: 95%;
@@ -35,7 +35,7 @@ export const ImageContainer = styled.button`
     width: 9.5vh;
     border-radius: 50%;
     background: rgb(24,27, 33);
-    box-shadow: 0px 0px 0.5vw 0.12vw rgb(0 0 0 / 80%);
+    box-shadow:0px 0px 0.2vw 0.09vw rgb(0, 0, 0, 0.8);
 
     img{
         border-radius: 50%;
@@ -49,6 +49,7 @@ export const LastMsg = styled.span`
     color: #dbdada;
     text-decoration: overline;
     display: none;
+    text-align: center;
 `
 
 export const Info = styled.div`
