@@ -4,10 +4,11 @@ import registerWatcher from './register';
 import usersWatcher from './users';
 import chatsWatcher from './chats';
 import getUserChats from './userChats';
+import requestsWatcher from './requests';
 import { onLogout } from 'app/slices/authenticateSlice';
 
 export default function* indexSaga(){
-    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats])
+    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats, requestsWatcher])
 }
 
 export function authWrapper(request){
@@ -18,7 +19,7 @@ export function authWrapper(request){
             if(err.message == 'Jwt token has expired.'){
                 return yield put(onLogout('Session has expired.')); 
             }
-            if(err.message == 'Jwt is incorrect.' || err.message == 'Jwt is missing.'){
+            if(err.message == 'Jwt token is incorrect' || err.message == 'Jwt token is missing'){
                 return yield put(onLogout());
             }
 
