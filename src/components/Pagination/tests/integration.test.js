@@ -6,6 +6,7 @@ import { mount } from 'enzyme';
 import Pagination from '../Pagination';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
+import { BASE_URL } from 'appConstants';
 
 const saga = createSaga();
 const middleware = [...getDefaultMiddleware({ thunk: false }), saga];
@@ -100,7 +101,7 @@ describe('Pagination integration tests', () => {
         wrapper.update();
         await act(async() => wrapper.findByTestid(6).at(0).simulate('click'));
 
-        expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/chats/auth/findChatsByName/2//test test/9', {
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChatsByName/2//test test/9`, {
             headers: {
                 Authorization: null
             },

@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import authenticate from 'app/slices/authenticateSlice'
 import Login from '../Login';
 import { act } from 'react-dom/test-utils';
+import { BASE_URL } from 'appConstants';
 
 const saga = createSaga();
 const middleware = [...getDefaultMiddleware({ thunk: false }), saga]
@@ -59,6 +60,11 @@ describe('Login integration tests', () => {
         
         await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
 
-        expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/users/login', {body: JSON.stringify({username: 'username', password: 'password'}), headers: {'Content-Type': 'Application/json'}, method: 'POST'})
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/users/login`, {
+            body: JSON.stringify({username: 'username', password: 'password'}), 
+            headers: {
+                'Content-Type': 'Application/json'
+            }, 
+            method: 'POST'})
     })
 })

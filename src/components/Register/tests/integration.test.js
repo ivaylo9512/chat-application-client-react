@@ -7,6 +7,7 @@ import registerWatcher from 'app/sagas/register'
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import { act } from 'react-dom/test-utils';
+import { BASE_URL } from 'appConstants';
 
 const { Provider } = Redux;
 
@@ -126,7 +127,13 @@ describe('Register integration tests', () => {
         changeSecondPageInputs(wrapper);
         await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
 
-        expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/users/register', {body: JSON.stringify(user), headers: {'Content-Type': 'Application/json'}, method: 'POST'})
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/users/register`, {
+            body: JSON.stringify(user), 
+            headers: {
+                'Content-Type': 'Application/json'
+            }, 
+            method: 'POST'
+        })
     })
 
     it('should call dispatch with user object with input values', () => {

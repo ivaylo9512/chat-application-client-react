@@ -17,7 +17,14 @@ const store = configureStore({
         userChats,
         styles
     },
-    middleware
+    middleware,
+    preloadedState: {
+        userChats: {
+            query: {
+                take: 2
+            }
+        }
+    }
 })
 
 saga.run(function*(){
@@ -35,29 +42,40 @@ const createWrapper = (state) => mount(
 describe('Form integration tests', () => {
     it('should update state on form submit', async() => {
         const chats = [['data1', 'data'], ['data3', 'data4']];
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: chats}), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...chats[0], ...chats[1]]}), {status: 200}));
         
         const wrapper = createWrapper();
         await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
         
         const { data, lastData, currentData} = store.getState().userChats.dataInfo
-        console.log(data);
-        expect(data).toBe(chats);
-        expect(lastData).toBe(chats[1]);
-        expect(lastData).toBe(chats[1][1]);
+        expect(data).toStrictEqual(chats);
+        expect(lastData).toStrictEqual(chats[1][1]);
+        expect(currentData).toStrictEqual(chats[1]);
     })
     
     it('should call reset state on unmount', async() => {
+        const wrapper = createWrapper();
+        await act(async() => wrapper.unmount())
+
+        const { data, lastData, currentData} = store.getState().userChats.dataInfo
+        expect(data).toStrictEqual([]);
+        expect(lastData).toBe(null);
+        expect(currentData).toBe(null);
+    })
+
+    it('should reset previous state on second form submit', async() => {
         const chats = [['data1', 'data'], ['data3', 'data4']];
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: chats}), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...chats[0], ...chats[1]]}), {status: 200}));
         
         const wrapper = createWrapper();
         await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
-        await act(async() => wrapper.unmount)
-
-        const { data, lastData, currentData} = store.getState().userChats.dataInfo
-        expect(data).toBe([]);
-        expect(lastData).toBe(null);
-        expect(currentData).toBe(null);
+        
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 0, data: []}), {status: 200}));
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        
+        const { data, lastData, currentData } = store.getState().userChats.dataInfo
+        expect(data).toStrictEqual([]);
+        expect(lastData).toStrictEqual(undefined);
+        expect(currentData).toStrictEqual([]);
     })
 })
