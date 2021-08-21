@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ChatList snapshot tests should render Chats 1`] = `
+<Fragment>
+  <Chat
+    chat={
+      Object {
+        "id": 1,
+      }
+    }
+    key="1"
+  />
+  <Chat
+    chat={
+      Object {
+        "id": 2,
+      }
+    }
+    key="2"
+  />
+  <Chat
+    chat={
+      Object {
+        "id": 3,
+      }
+    }
+    key="3"
+  />
+  <Chat
+    chat={
+      Object {
+        "id": 4,
+      }
+    }
+    key="4"
+  />
+</Fragment>
+`;
+
+exports[`ChatList snapshot tests should render Chats and more button when lastPage is false 1`] = `
+<Fragment>
+  <Chat
+    chat={
+      Object {
+        "id": 1,
+      }
+    }
+    key="1"
+  />
+  <Chat
+    chat={
+      Object {
+        "id": 2,
+      }
+    }
+    key="2"
+  />
+  <Chat
+    chat={
+      Object {
+        "id": 3,
+      }
+    }
+    key="3"
+  />
+  <Chat
+    chat={
+      Object {
+        "id": 4,
+      }
+    }
+    key="4"
+  />
+  <span
+    data-testid="more"
+  >
+    &gt;
+  </span>
+</Fragment>
+`;
+
+exports[`ChatList snapshot tests should render LoadingIndicator when loading 1`] = `
+<Fragment>
+  <div>
+    <LoadingIndicator />
+  </div>
+</Fragment>
+`;
+
+exports[`ChatList snapshot tests should render info when empty chats array and not loading  1`] = `
+<Fragment>
+  <styled.div
+    data-testid="info"
+  >
+    <styled.span>
+      You don't have any chats.
+    </styled.span>
+  </styled.div>
+</Fragment>
+`;
