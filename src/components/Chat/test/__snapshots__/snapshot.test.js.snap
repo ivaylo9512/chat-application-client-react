@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chat snapshot tests should rednder with snapshot 1`] = `
+<styled.div>
+  <styled.div
+    onClick={[Function]}
+  >
+    <div>
+      <styled.button>
+        <img
+          alt="profile image"
+          src="http://localhost:8080/images/download/image1.png"
+        />
+      </styled.button>
+      <styled.div
+        displayInfo={false}
+      >
+        <b>
+          first last
+        </b>
+        <styled.span>
+          last message
+        </styled.span>
+      </styled.div>
+      <styled.button
+        onClick={[Function]}
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                192,
+                512,
+                Array [],
+                "f129",
+                "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
+              ],
+              "iconName": "info",
+              "prefix": "fas",
+            }
+          }
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </styled.button>
+    </div>
+  </styled.div>
+</styled.div>
+`;
