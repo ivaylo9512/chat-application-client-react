@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserChatsView snapshot tests should match snapshot 1`] = `
+exports[`UserView snapshot tests should match snapshot 1`] = `
 <Fragment>
   <styled.div>
     <UsersList />

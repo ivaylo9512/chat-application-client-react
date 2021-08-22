@@ -1,32 +1,30 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    requests: {}
+    data: {}
 }
 
 const requestsSlice = createSlice({
     name: 'requests',
     initialState,
     reducers: {
-        sendRequest: (state, { payload: id }) => {
-            const request = state.requests[id];
+        sendRequest: (state, { payload: { id } }) => {
+            const request = state.data[id];
             request 
                 ? request.isLoading = true 
-                : state.requests[id] = { isLoading: true };
+                : state.data[id] = { isLoading: true };
         },
-        onRequestComplete: (state, { payload }) => {
-            const request = state.requests[payload.id];
-            request.isLoading = false;
-            request.state = payload.data;
+        onRequestComplete: (state, { payload: id }) => {
+            state.data[id].isLoading = false;
         },
-        onRequestError: (state, { payload }) => {
-            const request = state.requests[payload.id];
-
-            request.isLoading = false;
-            request.error = payload.error;
+        onRequestError: (state, { payload: id }) => {
+            state.data[id].isLoading = false;
+        },
+        resetRequests: (state) => {
+            state.data = initialState.data;
         }
     }
 })
 
-export const { onRequestComplete, sendRequest, onRequestError } = requestsSlice.actions;
+export const { onRequestComplete, sendRequest, onRequestError, resetRequests } = requestsSlice.actions;
 export default requestsSlice.reducer;

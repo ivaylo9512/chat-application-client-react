@@ -1,11 +1,22 @@
 import { Container } from './UsersViewStyle'
 import UsersList from 'components/UsersList/UsersList';
-import { getUsersQuery, usersRequest, resetUsersState, getUsersState, setCurrentUsers, getUsers } from 'app/slices/usersSlice';
+import { getUsersQuery, usersRequest, resetUsersState, getUsersState, setCurrentUsers, getUsersData } from 'app/slices/usersSlice';
 import Form from 'components/Form/Form';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Pagination from 'components/Pagination/Pagination';
+import { resetRequests } from 'app/slices/requestsSlice';
+import { useEffect } from 'react';
 
 const UsersView = () => {
+    const dispatch = useDispatch();
+    const { currentData } = useSelector(getUsersData);
+
+    useEffect(() => {
+        if(!currentData){
+            dispatch(resetRequests());
+        }
+    }, [currentData]);
+
     return(
         <>
             <Container>

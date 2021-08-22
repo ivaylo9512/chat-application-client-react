@@ -1,8 +1,7 @@
 import MenuNav from 'components/MenuNav/MenuNav';
 import { mount } from 'enzyme';
 import * as Redux from 'react-redux';
-import { Router, MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import { MemoryRouter } from 'react-router-dom';
 
 describe('MenuNav snapshot tests', () => {
     let selectorSpy;

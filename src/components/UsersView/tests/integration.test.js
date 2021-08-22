@@ -2,13 +2,16 @@ import createSaga from 'redux-saga';
 import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import users from 'app/slices/usersSlice';
 import usersWatcher from 'app/sagas/users';
+import requestsWatcher from 'app/sagas/requests';
 import styles from 'app/slices/stylesSlice';
+import requests from 'app/slices/requestsSlice';
 import UsersView from 'components/UsersView/UsersView';
 import { Provider } from 'react-redux';
 import User from 'components/User/User';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import { Li } from 'components/Pagination/PaginationStyle';
+import { all } from 'redux-saga/effects';
 
 const saga = createSaga();
 const middleware = [...getDefaultMiddleware(), saga];
@@ -16,7 +19,8 @@ const middleware = [...getDefaultMiddleware(), saga];
 const store = configureStore({
     reducer: {
         users,
-        styles
+        styles,
+        requests
     },
     middleware,
     preloadedState: {
@@ -31,12 +35,18 @@ const store = configureStore({
             query: {
                 take: 2,
             },
+        },
+        requests: {
+            data: {
+                0: { isLoading: false },
+                1: { isLoading: false }
+            }
         }
     }
 })
 
 saga.run(function*(){
-    yield usersWatcher
+    yield all([usersWatcher, requestsWatcher])
 })
 
 global.fetch = jest.fn();
@@ -176,5 +186,27 @@ describe('UsersView integration tests', () => {
         expect(data).toStrictEqual([]);
         expect(currentData).toBe(null);
         expect(lastData).toBe(null);
+    })
+
+    it('should reset requests on currentData change', async () => {
+        const data = createPair(); 
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify(data[0]), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), {status: 200}));
+        
+        const wrapper = createWrapper();
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        wrapper.update();
+
+        const users =  wrapper.find(User)
+        await act(async() => users.at(0).find('button').simulate('click'));
+
+        let requests = store.getState().requests.data;
+        expect(requests[data[0].id]).toStrictEqual({ isLoading: false });
+
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+
+        requests = store.getState().requests.data;
+        expect(requests[data[0].id]).toBe(undefined)
     })
 })
