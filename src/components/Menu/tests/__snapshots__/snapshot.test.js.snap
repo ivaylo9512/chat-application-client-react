@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu snapshot tests should match snapshot with isMenuHidden to false 1`] = `
+<styled.div
+  isHidden={false}
+>
+  <styled.button
+    isHidden={false}
+    onClick={[Function]}
+    tabIndex="-1"
+  >
+    <i
+      className="fas fa-bars"
+    />
+  </styled.button>
+  <div>
+    <styled.div
+      onWheel={[Function]}
+    >
+      <styled.button
+        onClick={[Function]}
+        tabIndex="-1"
+      >
+        -
+      </styled.button>
+      <MenuNav
+        rotate={Object {}}
+      />
+    </styled.div>
+  </div>
+</styled.div>
+`;
+
+exports[`Menu snapshot tests should match snapshot with isMenuHidden to true 1`] = `
+<styled.div
+  isHidden={true}
+>
+  <styled.button
+    isHidden={true}
+    onClick={[Function]}
+    tabIndex="-1"
+  >
+    <i
+      className="fas fa-bars"
+    />
+  </styled.button>
+  <div>
+    <styled.div
+      onWheel={[Function]}
+    >
+      <styled.button
+        onClick={[Function]}
+        tabIndex="-1"
+      >
+        -
+      </styled.button>
+      <MenuNav
+        rotate={Object {}}
+      />
+    </styled.div>
+  </div>
+</styled.div>
+`;
