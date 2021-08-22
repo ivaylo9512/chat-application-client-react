@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main snapshot tests should match snapshot 1`] = `
+<styled.div>
+  <Switch>
+    <Route
+      path="/searchUsers"
+      render={[Function]}
+    />
+    <Route
+      path="/searchChat"
+      render={[Function]}
+    />
+    <Route
+      path="/chat/:id"
+      render={[Function]}
+    />
+    <Route
+      path="/home"
+      render={[Function]}
+    />
+    <Redirect
+      from="/"
+      to="/home"
+    />
+  </Switch>
+</styled.div>
+`;
