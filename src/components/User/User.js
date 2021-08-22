@@ -1,15 +1,23 @@
 import { useHistory } from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentChat } from 'app/slices/chatsSlice';
+import { sendRequest } from 'app/slices/requestsSlice';
+import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
+import { memo } from 'react';
 
-const User = ({user}) => {
+const User = memo(({user, page}) => {
     const history = useHistory();
     const dispatch = useDispatch();
+    const request = useSelector(state => state.requests.data[user.id]);
 
     const setChat = () => {
-        if(user.chatWithUser){
-            history.push('/chat');
-            dispatch(setCurrentChat(user.chatWithUser));
+        history.push('/chat');
+        dispatch(setCurrentChat(user.chatWithUser));
+    }
+
+    const manageRequest = () => {
+        if(user.requestState != 'pending'){
+            dispatch(sendRequest({ id: user.id, page}));
         }
     }
 
@@ -19,17 +27,19 @@ const User = ({user}) => {
                 <img alt='profile' src={user.profilePicture}/>
             </div>
             <div className='info'>
-                <b>{user.username}</b>
+                <b>{`${user.firstName} ${user.lastName}`}</b>
                 <span></span>    
             </div>
-            <button onClick={setChat}>
-                {user.chatWithUser 
+            <button onClick={user.chatWithUser ? setChat : manageRequest}>
+                {request?.isLoading
+                    ? <LoadingIndicator />
+                : user.chatWithUser 
                     ? 'open'
-                    : 'add'
+                    : user.requestState
                 }
             </button>
         </div>
     )
-}
+})
 
 export default User

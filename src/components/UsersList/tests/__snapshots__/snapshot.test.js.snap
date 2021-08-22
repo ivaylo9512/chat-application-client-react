@@ -16,8 +16,9 @@ exports[`UsersList snapshot tests should render info message when empty users ar
 
 exports[`UsersList snapshot tests should render with users 1`] = `
 <styled.div>
-  <User
+  <Memo()
     key="1"
+    page={1}
     user={
       Object {
         "firstName": "test",
@@ -25,8 +26,9 @@ exports[`UsersList snapshot tests should render with users 1`] = `
       }
     }
   />
-  <User
+  <Memo()
     key="2"
+    page={1}
     user={
       Object {
         "firstName": "test",
@@ -34,8 +36,9 @@ exports[`UsersList snapshot tests should render with users 1`] = `
       }
     }
   />
-  <User
+  <Memo()
     key="3"
+    page={1}
     user={
       Object {
         "firstName": "test",
@@ -43,8 +46,9 @@ exports[`UsersList snapshot tests should render with users 1`] = `
       }
     }
   />
-  <User
+  <Memo()
     key="4"
+    page={1}
     user={
       Object {
         "firstName": "test",
@@ -52,8 +56,9 @@ exports[`UsersList snapshot tests should render with users 1`] = `
       }
     }
   />
-  <User
+  <Memo()
     key="5"
+    page={1}
     user={
       Object {
         "firstName": "test",
