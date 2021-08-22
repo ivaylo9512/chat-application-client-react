@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
-import WebSocket from '../../utils/WebSocket'
+import { useState } from 'react'
 import { Route, Redirect, Switch } from 'react-router-dom'
-import ChatView from '../ChatView/ChatView'
+import ChatView from 'components/ChatView/ChatView'
 import useEffectInitial from 'hooks/useEffectInitial';
 import UserChatsView from 'components/UserChatsView/UserChatsView';
 import UsersView from 'components/UsersView/UsersView'
@@ -12,11 +11,10 @@ const Main = () => {
 
     return(
         <MainContainer>
-            <WebSocket setWebSocketClient={setWebSocketClient}/>            
             <Switch>
                 <Route path='/searchUsers' render={() => <UsersView />}/>
                 <Route path='/searchChat' render={() => <UserChatsView /> }/>
-                <Route path='/chat/:id' render={() => <ChatView webSocketClient={webSocketClient}/>}/>
+                <Route path='/chat' render={() => <ChatView />}/>
                 <Route path='/home' render={() => <P>Select a chat!</P>}/>
                 <Redirect from='/' to='/home'/>
             </Switch>

@@ -24,14 +24,14 @@ describe("RegisterSnapshotTests", () => {
         expect(wrapper).toMatchSnapshot();
     })
 
-    it('should render snapshot without request without chat', () => {
+    it('should render snapshot without request without chatWithUser', () => {
         const wrapper = createWrapper(undefined,  {firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send'});
     
         expect(wrapper).toMatchSnapshot();
     })
 
     it('should render snapshot with request', () => {
-        const wrapper = createWrapper({ isLoading: false, state: 'send'},  {firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send'});
+        const wrapper = createWrapper({ isLoading: false },  {firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send'});
     
         expect(wrapper).toMatchSnapshot();
     })

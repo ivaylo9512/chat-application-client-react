@@ -17,7 +17,9 @@ exports[`UserChat snapshot tests should match snapshot 1`] = `
         firstname lastName
       </b>
     </span>
-    <styled.div>
+    <styled.div
+      isInfoVisible={false}
+    >
       <span>
         <b>
           firstname lastName
@@ -124,7 +126,9 @@ exports[`UserChat snapshot tests should match snapshot with toggled info 1`] = `
         firstname lastName
       </b>
     </span>
-    <styled.div>
+    <styled.div
+      isInfoVisible={true}
+    >
       <span>
         <b>
           firstname lastName

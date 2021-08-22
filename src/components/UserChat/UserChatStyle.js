@@ -10,7 +10,6 @@ export const Container = styled.div`
 `
 
 export const Info = styled.div`
-    display: flex;
     flex-direction: column;
     flex: 1;
     align-items: center;
@@ -20,6 +19,8 @@ export const Info = styled.div`
     span:nth-child(2){
         text-decoration: overline;
     }
+
+    display: ${props => props.isInfoVisible ? 'flex' : 'none'}
 `
 
 export const InfoContainer = styled.div`
@@ -39,10 +40,6 @@ export const InfoContainer = styled.div`
     align-items: center;
     font-size: 0.8vw;
     justify-content: center;
-
-    ${Info}{
-        display: ${props => props.isInfoVisible ? 'flex' : 'none'}
-    }
 
     > span{
         display: ${props => props.isInfoVisible ? 'none' : 'block'}

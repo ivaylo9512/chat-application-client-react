@@ -12,7 +12,7 @@ exports[`Main snapshot tests should match snapshot 1`] = `
       render={[Function]}
     />
     <Route
-      path="/chat/:id"
+      path="/chat"
       render={[Function]}
     />
     <Route

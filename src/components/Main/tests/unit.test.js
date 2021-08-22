@@ -32,7 +32,7 @@ describe('Main snapshot tests', () => {
     })
 
     it('should render ChatView', () => {
-        const wrapper = createWrapper('/chat/1');
+        const wrapper = createWrapper('/chat');
 
         expect(wrapper.find(ChatView).length).toBe(1);
     })

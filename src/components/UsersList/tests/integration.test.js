@@ -1,6 +1,7 @@
 import createSaga from 'redux-saga';
 import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import users from 'app/slices/usersSlice';
+import requests from 'app/slices/requestsSlice';
 import UsersList from 'components/UsersList/UsersList';
 import { Provider } from 'react-redux';
 import User from 'components/User/User';
@@ -12,7 +13,8 @@ const middleware = [...getDefaultMiddleware(), saga];
 const data = [{ id: 1, firstName: 'first', lastName: 'first' }, { id: 2, firstName: 'second', lastName: 'second' }];
 const store = configureStore({
     reducer: {
-        users
+        users,
+        requests
     },
     middleware,
     preloadedState: {
@@ -22,7 +24,8 @@ const store = configureStore({
                 maxPages: 0,
                 data: data,
                 lastData: data[0][1],
-                currentData: data
+                currentData: data,
+                currentPage: 1
             },
             query: {
                 take: 2,

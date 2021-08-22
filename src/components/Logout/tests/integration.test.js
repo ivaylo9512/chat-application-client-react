@@ -1,9 +1,9 @@
 import Logout from 'components/Logout/Logout';
 import { mount } from 'enzyme';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import authenticate from 'app/slices/authenticateSlice'
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 const store = configureStore({
     reducer: {
@@ -32,12 +32,12 @@ jest.mock('components/Register/Register', () =>  () => <div></div>);
 jest.mock('components/Login/Login', () => () => <div></div>);
 
 
-describe('App integration tests', () => {
+describe('Logout integration tests', () => {
     const createWrapper = () => mount(
         <Provider store={store}>
-            <Router>
+            <MemoryRouter>
                 <Logout />
-            </Router>
+            </MemoryRouter>
         </Provider>
     )
 

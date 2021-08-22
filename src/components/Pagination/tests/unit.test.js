@@ -76,7 +76,7 @@ describe('Pagination unit tests', () => {
         wrapper.findByTestid(2).at(0).simulate('click');
 
         expect(wrapper.findByTestid(2).prop('isSelected')).toBe(true);
-        expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats(['data2']));
+        expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats({ data: ['data2'], page: 2 }));
     })
 
     it('should dispatch getChats with next button', () => {
@@ -95,7 +95,7 @@ describe('Pagination unit tests', () => {
         wrapper.findByTestid('back').simulate('click');
 
         expect(wrapper.findByTestid(1).prop('isSelected')).toBe(true);
-        expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats(['data1']));
+        expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats({data:['data2'], page: 2}));
     })
 
     it('should dispatch getChats with 4 pages when at 1st page and requesting 5th page', () => {

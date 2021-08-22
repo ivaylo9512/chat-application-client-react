@@ -5,14 +5,16 @@ import { Container } from 'components/UsersList/UsersListStyle';
 import User from 'components/User/User';
 
 describe('UsersList unit tests', () => {
-    const createWrapper = (state) => {
-        jest.spyOn(redux, 'useSelector').mockReturnValue(state);
+    const createWrapper = (users, page) => {
+        const selectorSpy = jest.spyOn(redux, 'useSelector');
+        selectorSpy.mockReturnValueOnce(users);
+        selectorSpy.mockReturnValueOnce(page);
 
         return shallow(<UsersList />)
     }
 
     it('should render users', () => {
-        const wrapper = createWrapper([{id: 1, firstName: 'first'}, {id: 2, firstName: 'second'}, {id: 3, firstName: 'test'}, {id: 4, firstName: 'test'}, {id: 5, firstName: 'test'}])
+        const wrapper = createWrapper([{id: 1, firstName: 'first'}, {id: 2, firstName: 'second'}, {id: 3, firstName: 'test'}, {id: 4, firstName: 'test'}, {id: 5, firstName: 'test'}], 1)
     
         const user = wrapper.find(User);
         

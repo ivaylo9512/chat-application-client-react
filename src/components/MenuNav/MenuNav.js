@@ -25,29 +25,29 @@ const MenuNav = ({rotate}) => {
                     </Button>
                 </Li>
                 <Li>
-                    <Button onClick={toggleHeader} tabIndex='-1'>
+                    <Button data-testid='toggleHeader' onClick={toggleHeader} tabIndex='-1'>
                         <i className={isHeaderHidden  ? 'far fa-eye' : 'far fa-eye-slash'}></i>
                     </Button>
                 </Li>
                 <Li>
-                    <Link to='/searchChat' tabIndex='-1'>
+                    <Link data-testid='searchChat' to='/searchChat' tabIndex='-1'>
                         <i className='fas fa-search'></i>
                     </Link>
                 </Li>
                 <Li>
-                    <Link to='/searchUsers' tabIndex='-1'>
+                    <Link data-testid='searchUsers' to='/searchUsers' tabIndex='-1'>
                         <i className='fas fa-user-plus'></i>
                     </Link>
                 </Li>
                 {(location.pathname == '/searchUsers' || location.pathname == '/searchChat') &&
                     <Li>
-                        <Button onClick={toggleSearch}>
+                        <Button data-testid='toggleSearch' onClick={toggleSearch}>
                             <i className={isSearchHidden ? 'fas fa-caret-up' : 'fas fa-caret-down' }></i>
                         </Button>
                     </Li>
                 }
                 <Li>
-                    <Link to='/logout' tabIndex='-1'>
+                    <Link data-testid='logout' to='/logout' tabIndex='-1'>
                         <i className='fas fa-sign-out-alt'></i>
                     </Link>
                 </Li>
