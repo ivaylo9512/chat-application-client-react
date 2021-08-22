@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import requests from 'app/sagas/requests';
 
 const initialState = {
     data: {}
@@ -9,16 +10,22 @@ const requestsSlice = createSlice({
     initialState,
     reducers: {
         sendRequest: (state, { payload: { id } }) => {
+            let request = state.data[id] ? state.data[id] : state.data[id] = {}; 
+            request.isLoading = true; 
+            request.error = null;
+        },
+        onRequestComplete: (state, { payload: { id, chatWithUser, requestState }}) => {
             const request = state.data[id];
-            request 
-                ? request.isLoading = true 
-                : state.data[id] = { isLoading: true };
+
+            request.isLoading = false;
+            request.chatWithUser = chatWithUser;
+            request.state = requestState;
         },
-        onRequestComplete: (state, { payload: id }) => {
-            state.data[id].isLoading = false;
-        },
-        onRequestError: (state, { payload: id }) => {
-            state.data[id].isLoading = false;
+        onRequestError: (state, { payload: { id, message }}) => {
+            const request = state.data[id];
+            
+            request.isLoading = false;
+            request.error = message;
         },
         resetRequests: (state) => {
             state.data = initialState.data;

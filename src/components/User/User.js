@@ -4,11 +4,18 @@ import { setCurrentChat } from 'app/slices/chatsSlice';
 import { sendRequest } from 'app/slices/requestsSlice';
 import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
 import { memo } from 'react';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import requests from 'app/sagas/requests';
 
 const User = memo(({user, page}) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const request = useSelector(state => state.requests.data[user.id]);
+    const [message, setMessage] = useState(user.chatWithUser 
+        ? 'open' 
+        : user.requestState
+    );
 
     const setChat = () => {
         history.push('/chat');
@@ -16,10 +23,16 @@ const User = memo(({user, page}) => {
     }
 
     const manageRequest = () => {
-        if(user.requestState != 'pending'){
+        if(message != 'pending'){
             dispatch(sendRequest({ id: user.id, page}));
         }
     }
+
+    useEffect(() => {
+        if(request && !request.isLoading){
+            setMessage(request.chatWithUser ? 'open' : request.state);
+        }
+    }, [request])
 
     return (
         <div>
@@ -30,12 +43,10 @@ const User = memo(({user, page}) => {
                 <b>{`${user.firstName} ${user.lastName}`}</b>
                 <span></span>    
             </div>
-            <button onClick={user.chatWithUser ? setChat : manageRequest}>
+            <button onClick={message == 'open' ? setChat : manageRequest}>
                 {request?.isLoading
                     ? <LoadingIndicator />
-                : user.chatWithUser 
-                    ? 'open'
-                    : user.requestState
+                    : message
                 }
             </button>
         </div>

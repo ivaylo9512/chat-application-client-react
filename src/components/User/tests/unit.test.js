@@ -15,7 +15,7 @@ describe('User unit tests', () => {
         jest.spyOn(redux, 'useDispatch').mockReturnValue(dispatchMock);
     })
 
-    const createWrapper = (state, user) => {
+    const createWrapper = (user, state) => {
         history = createMemoryHistory();
         jest.spyOn(redux, 'useSelector').mockReturnValue(state);
 
@@ -29,44 +29,44 @@ describe('User unit tests', () => {
         
     it('should call dispatch with setCurrent chat when user has chatWithUser', () => {
         const chatWithUser = {id: 1, secondUser: { firstName: 'firstname', lastName: 'lastname' }}
-        const wrapper = createWrapper({ isLoading: false }, { chatWithUser, requestState: 'pending' });
+        const wrapper = createWrapper({ chatWithUser, requestState: 'pending' });
         expect(wrapper.find('button').simulate('click'));
 
         expect(dispatchMock).toHaveBeenCalledWith(setCurrentChat(chatWithUser));
     })
     
     it('should call dispatch with sendRequest when user does not have chatWithUser ', () => {
-        const wrapper = createWrapper({ isLoading: false }, { chatWithUser: false, requestState: 'send' });
+        const wrapper = createWrapper({ chatWithUser: false, requestState: 'send' });
         expect(wrapper.find('button').simulate('click'));
 
         expect(dispatchMock).toHaveBeenCalledWith(sendRequest({ id: 5, page: 1 }));
     })
 
     it('should not call dispatch when requestState is pending', () => {
-        const wrapper = createWrapper({ isLoading: false }, { chatWithUser: false, requestState: 'pending' });
+        const wrapper = createWrapper({ chatWithUser: false, requestState: 'pending' });
         expect(wrapper.find('button').simulate('click'));
 
         expect(dispatchMock).not.toHaveBeenCalled();
     })
 
     it('should render Loading when request is loading', () => {
-        const wrapper = createWrapper({ isLoading: true });
+        const wrapper = createWrapper({ chatWithUser: false }, { isLoading: true });
         expect(wrapper.find(LoadingIndicator).exists()).toBe(true);
     })
 
     it('should render open when user has chatWithUser', () => {
-        const wrapper = createWrapper({ isLoading: false }, { chatWithUser: true });
+        const wrapper = createWrapper({ chatWithUser: true });
         expect(wrapper.find('button').text()).toBe('open');
     })
 
-    it('should render requestState when user is does not have chatWithUser', () => {
-        const wrapper = createWrapper({ isLoading: false }, { chatWithUser: false, requestState: 'pending' });
+    it('should render requestState when user does not have chatWithUser', () => {
+        const wrapper = createWrapper({ chatWithUser: false, requestState: 'pending' });
         expect(wrapper.find('button').text()).toBe('pending');
     })
 
     it('should call history push when setCurrent', () => {
         const chatWithUser = {id: 1, secondUser: { firstName: 'firstname', lastName: 'lastname' }}
-        const wrapper = createWrapper({ isLoading: false }, { chatWithUser, requestState: 'pending' });
+        const wrapper = createWrapper({ chatWithUser, requestState: 'pending' });
         expect(wrapper.find('button').simulate('click'));
 
         expect(history.location.pathname).toBe('/chat');

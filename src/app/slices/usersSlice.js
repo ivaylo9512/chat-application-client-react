@@ -50,20 +50,11 @@ const usersSlice = createSlice({
             state.query = initialState.query;
             state.isLoading = initialState.isLoading;
             state.error = initialState.error;
-        },
-        updateUser: (state, { payload: {page, user} }) => {
-            const pageArr = state.dataInfo.data[page - 1];
-            const index = pageArr.findIndex(u => u.id == user.id);
-            pageArr[index] = user;
-
-            if(state.dataInfo.currentPage == page){
-                state.dataInfo.currentData[index] = user;
-            }
         }
     }
 });
 
-export const {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers, updateUser } = usersSlice.actions 
+export const {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
 export default usersSlice.reducer;
 
 export const getUsers = state => state.users.dataInfo.data;

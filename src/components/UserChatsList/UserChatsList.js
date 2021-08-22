@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import { getCurrentUserChats } from "../../app/slices/userChatsSlice"
-import UserChat from "../UserChat/UserChat";
+import { getCurrentUserChats } from "app/slices/userChatsSlice"
+import UserChat from "components/UserChat/UserChat";
 import { Container } from './UserChatsListStyle';
 
 const UserChatsList = () => {
