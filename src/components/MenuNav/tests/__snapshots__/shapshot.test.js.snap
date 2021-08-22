@@ -1,0 +1,601 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] = `
+<MenuNav>
+  <styled.nav>
+    <nav
+      className="sc-bdnxRM dCmWw"
+    >
+      <ul>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                tabIndex="-1"
+              >
+                <i
+                  className="fas fa-user"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              data-testid="toggleHeader"
+              onClick={[Function]}
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                data-testid="toggleHeader"
+                onClick={[Function]}
+                tabIndex="-1"
+              >
+                <i
+                  className="far fa-eye"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchChat"
+              tabIndex="-1"
+              to="/searchChat"
+            >
+              <LinkAnchor
+                data-testid="searchChat"
+                href="/searchChat"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchChat"
+                  href="/searchChat"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-search"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchUsers"
+              tabIndex="-1"
+              to="/searchUsers"
+            >
+              <LinkAnchor
+                data-testid="searchUsers"
+                href="/searchUsers"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchUsers"
+                  href="/searchUsers"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-user-plus"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="logout"
+              tabIndex="-1"
+              to="/logout"
+            >
+              <LinkAnchor
+                data-testid="logout"
+                href="/logout"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="logout"
+                  href="/logout"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-sign-out-alt"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+      </ul>
+    </nav>
+  </styled.nav>
+</MenuNav>
+`;
+
+exports[`MenuNav snapshot tests should match snapshot when header is not hidden 1`] = `
+<MenuNav>
+  <styled.nav>
+    <nav
+      className="sc-bdnxRM dCmWw"
+    >
+      <ul>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                tabIndex="-1"
+              >
+                <i
+                  className="fas fa-user"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              data-testid="toggleHeader"
+              onClick={[Function]}
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                data-testid="toggleHeader"
+                onClick={[Function]}
+                tabIndex="-1"
+              >
+                <i
+                  className="far fa-eye-slash"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchChat"
+              tabIndex="-1"
+              to="/searchChat"
+            >
+              <LinkAnchor
+                data-testid="searchChat"
+                href="/searchChat"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchChat"
+                  href="/searchChat"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-search"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchUsers"
+              tabIndex="-1"
+              to="/searchUsers"
+            >
+              <LinkAnchor
+                data-testid="searchUsers"
+                href="/searchUsers"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchUsers"
+                  href="/searchUsers"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-user-plus"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="logout"
+              tabIndex="-1"
+              to="/logout"
+            >
+              <LinkAnchor
+                data-testid="logout"
+                href="/logout"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="logout"
+                  href="/logout"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-sign-out-alt"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+      </ul>
+    </nav>
+  </styled.nav>
+</MenuNav>
+`;
+
+exports[`MenuNav snapshot tests should match snapshot when search is hidden and path is /searchChat 1`] = `
+<MenuNav>
+  <styled.nav>
+    <nav
+      className="sc-bdnxRM dCmWw"
+    >
+      <ul>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                tabIndex="-1"
+              >
+                <i
+                  className="fas fa-user"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              data-testid="toggleHeader"
+              onClick={[Function]}
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                data-testid="toggleHeader"
+                onClick={[Function]}
+                tabIndex="-1"
+              >
+                <i
+                  className="far fa-eye-slash"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchChat"
+              tabIndex="-1"
+              to="/searchChat"
+            >
+              <LinkAnchor
+                data-testid="searchChat"
+                href="/searchChat"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchChat"
+                  href="/searchChat"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-search"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchUsers"
+              tabIndex="-1"
+              to="/searchUsers"
+            >
+              <LinkAnchor
+                data-testid="searchUsers"
+                href="/searchUsers"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchUsers"
+                  href="/searchUsers"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-user-plus"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              data-testid="toggleSearch"
+              onClick={[Function]}
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                data-testid="toggleSearch"
+                onClick={[Function]}
+              >
+                <i
+                  className="fas fa-caret-up"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="logout"
+              tabIndex="-1"
+              to="/logout"
+            >
+              <LinkAnchor
+                data-testid="logout"
+                href="/logout"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="logout"
+                  href="/logout"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-sign-out-alt"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+      </ul>
+    </nav>
+  </styled.nav>
+</MenuNav>
+`;
+
+exports[`MenuNav snapshot tests should match snapshot when search is not hidden and path is /searchChat 1`] = `
+<MenuNav>
+  <styled.nav>
+    <nav
+      className="sc-bdnxRM dCmWw"
+    >
+      <ul>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                tabIndex="-1"
+              >
+                <i
+                  className="fas fa-user"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              data-testid="toggleHeader"
+              onClick={[Function]}
+              tabIndex="-1"
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                data-testid="toggleHeader"
+                onClick={[Function]}
+                tabIndex="-1"
+              >
+                <i
+                  className="far fa-eye-slash"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchChat"
+              tabIndex="-1"
+              to="/searchChat"
+            >
+              <LinkAnchor
+                data-testid="searchChat"
+                href="/searchChat"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchChat"
+                  href="/searchChat"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-search"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="searchUsers"
+              tabIndex="-1"
+              to="/searchUsers"
+            >
+              <LinkAnchor
+                data-testid="searchUsers"
+                href="/searchUsers"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="searchUsers"
+                  href="/searchUsers"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-user-plus"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <styled.button
+              data-testid="toggleSearch"
+              onClick={[Function]}
+            >
+              <button
+                className="sc-dlnjwi hodYHm"
+                data-testid="toggleSearch"
+                onClick={[Function]}
+              >
+                <i
+                  className="fas fa-caret-down"
+                />
+              </button>
+            </styled.button>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="logout"
+              tabIndex="-1"
+              to="/logout"
+            >
+              <LinkAnchor
+                data-testid="logout"
+                href="/logout"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="logout"
+                  href="/logout"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-sign-out-alt"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+      </ul>
+    </nav>
+  </styled.nav>
+</MenuNav>
+`;
