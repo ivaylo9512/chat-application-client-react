@@ -6,7 +6,8 @@ const initialState = {
         maxPages: 0,
         data: [],
         lastData: null,
-        currentData: null
+        currentData: null,
+        currentPage: 1
     },
     query: {
         take: 4,
@@ -29,6 +30,7 @@ const userChatsSlice = createSlice({
             state.query = query;
             state.dataInfo.maxPages = state.dataInfo.pages + pageable.pages;
             state.dataInfo.pages = state.dataInfo.pages + pageable.data.length;
+            state.dataInfo.currentPage = state.dataInfo.pages;
             state.dataInfo.lastData = pageable.lastUserChat;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
             state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
@@ -40,7 +42,8 @@ const userChatsSlice = createSlice({
             state.isLoading = false;
         },
         setCurrentUserChats: (state, {payload}) => {
-            state.dataInfo.currentData = payload;
+            state.dataInfo.currentData = payload.data;
+            state.dataInfo.currentPage = payload.page
         },
         resetUserChatsState: (state) => {
             state.dataInfo = initialState.dataInfo;
@@ -59,3 +62,4 @@ export const getUserChatsState = state => state.userChats;
 export const getUserChatsQuery = state => state.userChats.query;
 export const getUserChatsData = state => state.userChats.dataInfo;
 export const getCurrentUserChats = state => state.userChats.dataInfo.currentData;
+export const getCurrentPage = state => state.userChats.dataInfo.currentPage;

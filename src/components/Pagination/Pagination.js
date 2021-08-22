@@ -16,7 +16,7 @@ const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
 
         const currentData = data[nextPage - 1];
         if(currentData){
-            dispatch(setData(currentData));
+            dispatch(setData({data: currentData, page: nextPage }));
             return setPage(nextPage);
         }
 

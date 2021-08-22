@@ -6,7 +6,8 @@ const initialState = {
         maxPages: 0,
         data: [],
         lastData: null,
-        currentData: null
+        currentData: null,
+        currentPage: 1
     },
     query: {
         take: 2,
@@ -29,6 +30,7 @@ const usersSlice = createSlice({
             state.query = query;
             state.dataInfo.maxPages = state.dataInfo.pages + pageable.pages;
             state.dataInfo.pages = state.dataInfo.pages + pageable.data.length;
+            state.dataInfo.currentPage = state.dataInfo.pages;
             state.dataInfo.lastData = pageable.lastUser;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
             state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
@@ -40,7 +42,8 @@ const usersSlice = createSlice({
             state.isLoading = false;
         },
         setCurrentUsers: (state, {payload}) => {
-            state.dataInfo.currentData = payload;
+            state.dataInfo.currentData = payload.data;
+            state.dataInfo.currentPage = payload.page
         },
         resetUsersState: (state) => {
             state.dataInfo = initialState.dataInfo;
@@ -48,10 +51,19 @@ const usersSlice = createSlice({
             state.isLoading = initialState.isLoading;
             state.error = initialState.error;
         },
+        updateUser: (state, { payload: {page, user} }) => {
+            const pageArr = state.dataInfo.data[page - 1];
+            const index = pageArr.findIndex(u => u.id == user.id);
+            pageArr[index] = user;
+
+            if(state.dataInfo.currentPage == page){
+                state.dataInfo.currentData[index] = user;
+            }
+        }
     }
 });
 
-export const {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
+export const {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers, updateUser } = usersSlice.actions 
 export default usersSlice.reducer;
 
 export const getUsers = state => state.users.dataInfo.data;
@@ -59,3 +71,4 @@ export const getUsersState = state => state.users;
 export const getUsersQuery = state => state.users.query;
 export const getUsersData = state => state.users.dataInfo;
 export const getCurrentUsers = state => state.users.dataInfo.currentData;
+export const getCurrentPage = state => state.users.dataInfo.currentPage;
