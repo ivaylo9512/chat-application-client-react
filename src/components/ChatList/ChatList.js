@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
-import ChatUser from 'components/Chat/Chat';
+import Chat from 'components/Chat/Chat';
+import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
 import { useSelector, useDispatch } from 'react-redux';
-import { getChatsQuery, chatsRequest, getChatsState } from 'app/slices/chatsSlice';
+import { getChatsQuery, chatsRequest, getChatsState, resetChatsState } from 'app/slices/chatsSlice';
 import { ChatInfo, Span } from './ChatListStyle'
+
 const ChatList = () => {
     const { isLoading, data: { chats, isLastPage } } = useSelector(getChatsState);
     const dispatch = useDispatch();
@@ -10,19 +12,25 @@ const ChatList = () => {
 
     useEffect(() => {
         dispatch(chatsRequest({...query}));
+
+        return () => dispatch(resetChatsState());
     },[])
 
     return(
         <>
+            {isLoading && 
+                <div>
+                    {isLoading && <LoadingIndicator />}  
+                </div>
+            }
             {chats.length == 0 
-                ? isLoading 
-                    ? 'loading'
-                    : <ChatInfo>
+                ? !isLoading && 
+                    <ChatInfo data-testid ='info'>
                         <Span>You don't have any chats.</Span>
                     </ChatInfo>
                 : <>
-                    {chats.map(chat => <ChatUser key={chat.id} chat={chat}/>)}
-                    {!isLastPage && <span>{'>'}</span>}
+                    {chats.map(chat => <Chat key={chat.id} chat={chat}/>)}
+                    {!isLastPage && <span data-testid='more'>{'>'}</span>}
                 </>
             }   
         </>

@@ -63,7 +63,12 @@ export const Li = styled.li`
         background: rgb(24,27, 33);
         padding: 0;
         border: 0;
-        box-shadow: 0px 0px 0.5vw 0.1vw rgb(0, 0, 0, 0.8)
+        box-shadow: 0px 0px 0.5vw 0.05vw rgb(0, 0, 0, 0.8);
+    }
+
+    a:hover,
+    button:hover {
+        box-shadow: 0px 0px 0.2vw 0.05vw rgb(0 0 0 / 50%);
     }
 `
 
@@ -79,6 +84,7 @@ export const Button = styled.button`
     padding: 0;
     border: 0;
     box-shadow: 0px 0px 0.5vw 0.1vw rgb(0, 0, 0, 0.8);
+    cursor: pointer;
 `
 
 export const Span = styled.span`

@@ -3,15 +3,24 @@ import styled from 'styled-components'
 export const MenuCircle = styled.button`
     border-radius: 50%;
     border: 0px;
-    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.75);
-    height: 2.7em;
-    width: 2.7em;
+    box-shadow: 0px 0px 0.2vw 0.1vw rgba(0,0,0,0.75);
+    height: 4vw;
+    width: 4vw;
     background: rgb(24,27, 33);
     color: white;
-    font-size: 1.2em;
+    font-size: 1.4vw;
     position: absolute;
-    top: 100%;
-    left: -2em;
+    bottom: -4vw;
+    left: -4vw;
+
+    transition: ${props => props.isHidden 
+        ? 'all 2s 1.75s' 
+        : 'all 2s'
+    };
+    transform: ${props => props.isHidden 
+        ? 'translate(7vw, -7vw)'
+        : 'translate(0, 0)'
+    };
 `
 
 export const MenuContainer = styled.div`
@@ -21,22 +30,11 @@ export const MenuContainer = styled.div`
     };
     transition: all 4s;
 
-    ${MenuCircle}{
-        transition: ${props => props.isHidden 
-            ? 'all 2s 1.75s' 
-            : 'all 2s'
-        };
-        transform: ${props => props.isHidden 
-            ? 'translate(4em, -5em)'
-            : 'translate(0, 0)'
-        };
-    }
-
     > div{
         height: 100%;
         width: 100%;
         transform: ${props => props.isHidden 
-            ? 'translate(-22.5em, 18em);'
+            ? 'translate(-27.8vw, 21vw);'
             : 'translate(0, 0)'
         };
         transition: all 4s; 
