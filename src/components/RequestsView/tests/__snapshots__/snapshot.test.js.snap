@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequestView snapshot tests should match snapshot 1`] = `
+<styled.div>
+  <RequestsList />
+  <Pagination
+    getData={[Function]}
+    pagesPerSlide={5}
+    selector={[Function]}
+    setData={[Function]}
+  />
+</styled.div>
+`;
