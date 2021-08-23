@@ -18,7 +18,6 @@ exports[`UsersList snapshot tests should render with users 1`] = `
 <styled.div>
   <Memo()
     key="1"
-    page={1}
     user={
       Object {
         "firstName": "test",
@@ -28,7 +27,6 @@ exports[`UsersList snapshot tests should render with users 1`] = `
   />
   <Memo()
     key="2"
-    page={1}
     user={
       Object {
         "firstName": "test",
@@ -38,7 +36,6 @@ exports[`UsersList snapshot tests should render with users 1`] = `
   />
   <Memo()
     key="3"
-    page={1}
     user={
       Object {
         "firstName": "test",
@@ -48,7 +45,6 @@ exports[`UsersList snapshot tests should render with users 1`] = `
   />
   <Memo()
     key="4"
-    page={1}
     user={
       Object {
         "firstName": "test",
@@ -58,7 +54,6 @@ exports[`UsersList snapshot tests should render with users 1`] = `
   />
   <Memo()
     key="5"
-    page={1}
     user={
       Object {
         "firstName": "test",
