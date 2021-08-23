@@ -38,7 +38,7 @@ const Request = ({request: {id, createdAt, sender: { profileImage, lastName, fir
             </InfoContainer>
             <ButtonsContainer>
                 <Button data-testid='toggleInfo' onClick={() => setIsInfoVisible(!isInfoVisible)}><FontAwesomeIcon icon={faInfo}/></Button>
-                <Button data-testid='setChat' onClick={request?.chatWithUser ? setChat : accept}>
+                <Button data-testid='action' onClick={request?.chatWithUser ? setChat : accept}>
                     {request?.isLoading
                         ? <LoadingIndicator />
                         : request?.chatWithUser  
