@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequestList snapshot tests should render empty Container when requests returns undefined 1`] = `<styled.div />`;
+
+exports[`RequestList snapshot tests should render info requests data is empty 1`] = `
+<styled.div>
+  <span
+    data-testid="info"
+  >
+    <b>
+      No requests found.
+    </b>
+  </span>
+</styled.div>
+`;
+
+exports[`RequestList snapshot tests should render list when requests data is not empty 1`] = `
+<styled.div>
+  <Request
+    key="5"
+    request={
+      Object {
+        "createdAt": "2021-08-23",
+        "id": 5,
+        "sender": Object {
+          "firstName": "firstname",
+          "lastName": "lastName",
+          "profileImage": "image.png",
+        },
+      }
+    }
+  />
+  <Request
+    key="6"
+    request={
+      Object {
+        "createdAt": "2021-08-23",
+        "id": 6,
+        "sender": Object {
+          "firstName": "firstname2",
+          "lastName": "lastName2",
+          "profileImage": "image2.png",
+        },
+      }
+    }
+  />
+</styled.div>
+`;
