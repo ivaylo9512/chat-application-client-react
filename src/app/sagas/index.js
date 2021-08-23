@@ -1,14 +1,16 @@
-import { all, call, put,  } from 'redux-saga/effects';
+import { all, put,  } from 'redux-saga/effects';
 import loginWatcher from './login';
 import registerWatcher from './register';
 import usersWatcher from './users';
+import acceptRequestWatcher from './acceptRequest';
 import chatsWatcher from './chats';
 import getUserChats from './userChats';
 import requestsWatcher from './requests';
+import allRequestsWatcher from './allRequests';
 import { onLogout } from 'app/slices/authenticateSlice';
 
 export default function* indexSaga(){
-    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats, requestsWatcher])
+    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats, requestsWatcher, allRequestsWatcher, acceptRequestWatcher])
 }
 
 export function authWrapper(request){
