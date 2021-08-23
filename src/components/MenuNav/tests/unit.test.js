@@ -46,6 +46,11 @@ describe('MenuNav snapshot tests', () => {
         expect(wrapper.findByTestid('logout').at(0).prop('to')).toBe('/logout')
     })
 
+    it('should match requests to prop', () => {
+        const wrapper = createWrapper({isHeaderHidden: false, isSearchHidden: false}, '/');
+        expect(wrapper.findByTestid('requests').at(0).prop('to')).toBe('/requests')
+    })
+
     it('should have toggleChat when path is /searchChat', () => {
         const wrapper = createWrapper({isHeaderHidden: false, isSearchHidden: false}, '/searchChat');
 

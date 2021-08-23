@@ -39,6 +39,11 @@ const MenuNav = ({rotate}) => {
                         <i className='fas fa-user-plus'></i>
                     </Link>
                 </Li>
+                <Li>
+                    <Link data-testid='requests' to='/requests' tabIndex='-1'>
+                        <i className='fas fa-address-card'></i>
+                    </Link>
+                </Li>
                 {(location.pathname == '/searchUsers' || location.pathname == '/searchChat') &&
                     <Li>
                         <Button data-testid='toggleSearch' onClick={toggleSearch}>

@@ -2,6 +2,7 @@ import Main from 'components/Main/Main';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import ChatView from 'components/ChatView/ChatView'
+import RequestsView from 'components/RequestsView/RequestsView'
 import UserChatsView from 'components/UserChatsView/UserChatsView';
 import UsersView from 'components/UsersView/UsersView';
 import { P } from 'components/Main/MainStyle';
@@ -9,6 +10,7 @@ import { P } from 'components/Main/MainStyle';
 jest.mock('components/UsersView/UsersView', () => () => <div></div>);
 jest.mock('components/UserChatsView/UserChatsView', () =>  () => <div></div>);
 jest.mock('components/ChatView/ChatView', () => () => <div></div>);
+jest.mock('components/RequestsView/RequestsView', () => () => <div></div>);
 
 describe('Main snapshot tests', () => {
     const createWrapper = (route) => {
@@ -35,6 +37,12 @@ describe('Main snapshot tests', () => {
         const wrapper = createWrapper('/chat');
 
         expect(wrapper.find(ChatView).length).toBe(1);
+    })
+
+    it('should render RequestsView', () => {
+        const wrapper = createWrapper('/requests');
+
+        expect(wrapper.find(RequestsView).length).toBe(1);
     })
 
     it('should render P on /home', () => {

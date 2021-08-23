@@ -43,7 +43,7 @@ const usersSlice = createSlice({
         },
         setCurrentUsers: (state, {payload}) => {
             state.dataInfo.currentData = payload.data;
-            state.dataInfo.currentPage = payload.page
+            state.dataInfo.currentPage = payload.page;
         },
         resetUsersState: (state) => {
             state.dataInfo = initialState.dataInfo;

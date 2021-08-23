@@ -1,12 +1,14 @@
 import { authWrapper } from ".";
-import { takeLatest, put } from "redux-saga/effects";
+import { takeLatest, put, select } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import UnauthorizedException from "exceptions/unauthorizedException";
+import { getAllRequestsData, onGetRequestsComplete, onGetRequestsError } from 'app/slices/allRequestsSlice';
+import splitArray from "utils/splitArray";
 
-export default takeLatest('requests/allRequests', authWrapper(getRequests));
+export default takeLatest('allRequests/getRequests', authWrapper(getRequests));
 
 function* getRequests({payload: query}){
-    const { lastCreatedAt, lastId, takeAmount } =  getData(query, yield select(getRequestsData));
+    const { lastCreatedAt, lastId, takeAmount } =  getData(query, yield select(getAllRequestsData));
     const lastPath = lastCreatedAt ? `${lastCreatedAt}/${lastId}` : '';
 
     const response = yield fetch(`${BASE_URL}/api/requests/auth/findAll/${takeAmount}/${lastPath}`, {
@@ -22,7 +24,7 @@ function* getRequests({payload: query}){
         pageable.pages = Math.ceil(pageable.count / query.take);
         pageable.data = splitArray(pageable.data, query.take);
 
-        yield put(onPendingRequestsComplete({            
+        yield put(onGetRequestsComplete({            
             pageable,
             query
         }))
@@ -32,7 +34,7 @@ function* getRequests({payload: query}){
             throw new UnauthorizedException(message);            
         } 
 
-        yield put(onPendingRequestsError(message));
+        yield put(onGetRequestsError(message));
     }
 }
 

@@ -110,6 +110,35 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
             className="sc-gtsrHT cBCFnl"
           >
             <Link
+              data-testid="requests"
+              tabIndex="-1"
+              to="/requests"
+            >
+              <LinkAnchor
+                data-testid="requests"
+                href="/requests"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="requests"
+                  href="/requests"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-address-card"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
               data-testid="logout"
               tabIndex="-1"
               to="/logout"
@@ -250,6 +279,35 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
             className="sc-gtsrHT cBCFnl"
           >
             <Link
+              data-testid="requests"
+              tabIndex="-1"
+              to="/requests"
+            >
+              <LinkAnchor
+                data-testid="requests"
+                href="/requests"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="requests"
+                  href="/requests"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-address-card"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
               data-testid="logout"
               tabIndex="-1"
               to="/logout"
@@ -379,6 +437,35 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
                 >
                   <i
                     className="fas fa-user-plus"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="requests"
+              tabIndex="-1"
+              to="/requests"
+            >
+              <LinkAnchor
+                data-testid="requests"
+                href="/requests"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="requests"
+                  href="/requests"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-address-card"
                   />
                 </a>
               </LinkAnchor>
@@ -539,6 +626,35 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
                 >
                   <i
                     className="fas fa-user-plus"
+                  />
+                </a>
+              </LinkAnchor>
+            </Link>
+          </li>
+        </styled.li>
+        <styled.li>
+          <li
+            className="sc-gtsrHT cBCFnl"
+          >
+            <Link
+              data-testid="requests"
+              tabIndex="-1"
+              to="/requests"
+            >
+              <LinkAnchor
+                data-testid="requests"
+                href="/requests"
+                navigate={[Function]}
+                tabIndex="-1"
+              >
+                <a
+                  data-testid="requests"
+                  href="/requests"
+                  onClick={[Function]}
+                  tabIndex="-1"
+                >
+                  <i
+                    className="fas fa-address-card"
                   />
                 </a>
               </LinkAnchor>

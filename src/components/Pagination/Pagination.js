@@ -44,7 +44,7 @@ const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
                             pageIndex += slide == 0 ? 1 : 0;
 
                             if(pageIndex <= maxPages){
-                                return <Li data-testid={`${pageIndex}`} isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
+                                return <Li data-testid={`${pageIndex}`} maxPages={maxPages} isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
                             }
                         )
                     }

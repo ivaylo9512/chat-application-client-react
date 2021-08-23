@@ -21,11 +21,11 @@ export const Li = styled.li`
     border: 1px solid rgb(24,27,33);
     cursor: pointer;
 
-    background: ${props => props.isSelected ? 'transparent' : 'rgb(24,27,33)'};
-    color: ${props => props.isSelected ? 'rgb(24,27,33)' : 'white'};
-    text-decoration: ${props => props.isSelected ? 'underline' : 'none'};
-    box-shadow:  ${props => props.isSelected ? 'none' : '0px 0px 0.3vw 0px rgb(0 0 0 / 75%)'};
-    border-color ${props => props.isSelected ? 'transparent' : 'rgb(24,27,33)'};
+    background: ${props => props.isSelected && props.maxPages > 1 ? 'transparent' : 'rgb(24,27,33)'};
+    color: ${props => props.isSelected && props.maxPages > 1 ? 'rgb(24,27,33)' : 'white'};
+    text-decoration: ${props => props.isSelected && props.maxPages > 1 ? 'underline' : 'none'};
+    box-shadow:  ${props => props.isSelected && props.maxPages > 1 ? 'none' : '0px 0px 0.3vw 0px rgb(0 0 0 / 75%)'};
+    border-color ${props => props.isSelected && props.maxPages > 1 ? 'transparent' : 'rgb(24,27,33)'};
 
 
 `
