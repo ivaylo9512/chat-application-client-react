@@ -4,6 +4,7 @@ import chats from 'app/slices/chatsSlice'
 import users from 'app/slices/usersSlice'
 import userChats from 'app/slices/userChatsSlice';
 import requests from 'app/slices/requestsSlice';
+import allRequests from 'app/slices/allRequestsSlice';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from 'app/sagas/index';
@@ -17,7 +18,8 @@ const combinedReducer = combineReducers({
     chats,
     users,
     userChats,
-    requests
+    requests,
+    allRequests
 })
 
 const rootReducer = (state, action) => {
