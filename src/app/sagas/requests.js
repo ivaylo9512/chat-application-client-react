@@ -6,7 +6,7 @@ import UnauthorizedException from "exceptions/unauthorizedException";
 
 export default takeLatest('requests/sendRequest', authWrapper(sendRequests));
 
-function* sendRequests({payload: {id, page}}){
+function* sendRequests({payload: id}){
     const response = yield fetch(`${BASE_URL}/api/requests/auth/addRequest/${id}`, {
         method: 'POST',
         headers:{

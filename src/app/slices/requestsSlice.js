@@ -9,8 +9,15 @@ const requestsSlice = createSlice({
     name: 'requests',
     initialState,
     reducers: {
-        sendRequest: (state, { payload: { id } }) => {
+        sendRequest: (state, { payload: id }) => {
             let request = state.data[id] ? state.data[id] : state.data[id] = {}; 
+            
+            request.isLoading = true; 
+            request.error = null;
+        },
+        acceptRequest: (state, { payload: id }) => {
+            let request = state.data[id] ? state.data[id] : state.data[id] = {}; 
+
             request.isLoading = true; 
             request.error = null;
         },
@@ -23,7 +30,7 @@ const requestsSlice = createSlice({
         },
         onRequestError: (state, { payload: { id, message }}) => {
             const request = state.data[id];
-            
+
             request.isLoading = false;
             request.error = message;
         },
@@ -33,5 +40,5 @@ const requestsSlice = createSlice({
     }
 })
 
-export const { onRequestComplete, sendRequest, onRequestError, resetRequests } = requestsSlice.actions;
+export const { onRequestComplete, sendRequest, onRequestError, resetRequests, acceptRequest } = requestsSlice.actions;
 export default requestsSlice.reducer;

@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import requests from 'app/sagas/requests';
 
-const User = memo(({user, page}) => {
+const User = memo(({user}) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const request = useSelector(state => state.requests.data[user.id]);
@@ -24,7 +24,7 @@ const User = memo(({user, page}) => {
 
     const manageRequest = () => {
         if(message != 'pending'){
-            dispatch(sendRequest({ id: user.id, page}));
+            dispatch(sendRequest(user.id));
         }
     }
 

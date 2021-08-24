@@ -3,7 +3,9 @@ import Chat from 'components/Chat/Chat';
 import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
 import { useSelector, useDispatch } from 'react-redux';
 import { getChatsQuery, chatsRequest, getChatsState, resetChatsState } from 'app/slices/chatsSlice';
-import { ChatInfo, Span } from './ChatListStyle'
+import { ChatInfo, Span, MoreInfo, LoadingContainer } from './ChatListStyle'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEllipsisH } from '@fortawesome/free-solid-svg-icons'
 
 const ChatList = () => {
     const { isLoading, data: { chats, isLastPage } } = useSelector(getChatsState);
@@ -18,10 +20,10 @@ const ChatList = () => {
 
     return(
         <>
-            {isLoading && 
-                <div>
-                    {isLoading && <LoadingIndicator />}  
-                </div>
+            {isLoading && chats.length == 0 &&
+                <LoadingContainer>
+                    <LoadingIndicator />
+                </LoadingContainer>
             }
             {chats.length == 0 
                 ? !isLoading && 
@@ -30,7 +32,12 @@ const ChatList = () => {
                     </ChatInfo>
                 : <>
                     {chats.map(chat => <Chat key={chat.id} chat={chat}/>)}
-                    {!isLastPage && <span data-testid='more'>{'>'}</span>}
+                    {!isLastPage && 
+                        <MoreInfo data-testid='more'>{isLoading 
+                            ? <LoadingIndicator /> 
+                            : <FontAwesomeIcon icon={faEllipsisH} />}
+                        </MoreInfo>
+                    }
                 </>
             }   
         </>
