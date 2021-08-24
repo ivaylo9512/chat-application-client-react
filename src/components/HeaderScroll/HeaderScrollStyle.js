@@ -13,4 +13,5 @@ export const Container = styled.div`
     padding: 0 0.5%;
     display: flex;
     overflow-y: hidden;
+    align-items: center;
 `

@@ -14,8 +14,8 @@ export const MenuCircle = styled.button`
     left: -4vw;
 
     transition: ${props => props.isHidden 
-        ? 'all 2s 1.75s' 
-        : 'all 2s'
+        ? 'transform 2s 1.75s' 
+        : 'transform 2s'
     };
     transform: ${props => props.isHidden 
         ? 'translate(7vw, -7vw)'

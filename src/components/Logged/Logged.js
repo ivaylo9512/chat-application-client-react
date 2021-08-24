@@ -1,16 +1,17 @@
 import Main from 'components/Main/Main';
 import Menu from 'components/Menu/Menu'
 import HeaderScroll from 'components/HeaderScroll/HeaderScroll';
+import { Container, Section } from 'components/Logged/LoggedStyle';
 
 const Logged = () => {
     return(
-        <section className='content-container'>
+        <Section>
             <HeaderScroll />
-            <div className='content'>
+            <Container>
                 <Menu />
                 <Main />
-            </div>
-        </section>
+            </Container>
+        </Section>
     )
 } 
 export default Logged

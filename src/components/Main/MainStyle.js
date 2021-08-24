@@ -10,4 +10,5 @@ export const MainContainer = styled.div`
 export const P = styled.p`
     margin: auto;
     font-weight: bold;
+    font-size: 1.3vw;
 `
