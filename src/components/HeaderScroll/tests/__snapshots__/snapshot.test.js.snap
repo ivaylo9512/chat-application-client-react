@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderScroll snapshot tests should match snapshot 1`] = `
+<styled.div
+  isHidden={true}
+>
+  <styled.div
+    onWheel={[Function]}
+    style={
+      Object {
+        "paddingBottom": 0,
+      }
+    }
+  >
+    <ChatList />
+  </styled.div>
+</styled.div>
+`;
+
+exports[`HeaderScroll snapshot tests should match snapshot 2`] = `
+<styled.div
+  isHidden={false}
+>
+  <styled.div
+    onWheel={[Function]}
+    style={
+      Object {
+        "paddingBottom": 0,
+      }
+    }
+  >
+    <ChatList />
+  </styled.div>
+</styled.div>
+`;
