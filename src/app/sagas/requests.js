@@ -1,10 +1,10 @@
-import { authWrapper } from ".";
+import { wrapper } from ".";
 import { takeLatest, put } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import {onRequestComplete, onRequestError} from 'app/slices/requestsSlice';
 import UnauthorizedException from "exceptions/unauthorizedException";
 
-export default takeLatest('requests/sendRequest', authWrapper(sendRequests));
+export default takeLatest('requests/sendRequest', wrapper(sendRequests));
 
 function* sendRequests({payload: id}){
     const response = yield fetch(`${BASE_URL}/api/requests/auth/addRequest/${id}`, {

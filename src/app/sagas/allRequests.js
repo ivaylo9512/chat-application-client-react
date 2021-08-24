@@ -1,11 +1,11 @@
-import { authWrapper } from ".";
+import { wrapper } from ".";
 import { takeLatest, put, select } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import UnauthorizedException from "exceptions/unauthorizedException";
 import { getAllRequestsData, onGetRequestsComplete, onGetRequestsError } from 'app/slices/allRequestsSlice';
 import splitArray from "utils/splitArray";
 
-export default takeLatest('allRequests/getRequests', authWrapper(getRequests));
+export default takeLatest('allRequests/getRequests', wrapper(getRequests));
 
 function* getRequests({payload: query}){
     const { lastCreatedAt, lastId, takeAmount } =  getData(query, yield select(getAllRequestsData));

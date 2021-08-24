@@ -1,13 +1,13 @@
 import { BASE_URL } from 'appConstants';
 import { getChatsData, onChatsComplete, onChatsError } from 'app/slices/chatsSlice';
 import { takeLatest, select, put } from 'redux-saga/effects';
-import { authWrapper } from './index'
+import { wrapper } from './index'
 import UnauthorizedException from 'exceptions/unauthorizedException';
 
-export default takeLatest('chats/chatsRequest',  authWrapper(getChats));
+export default takeLatest('chats/chatsRequest',  wrapper(getChats));
 
 function* getChats({payload: query}){
-    const { lastUpdatedAt, lastId, take } =  getData(query, yield select(getChatsData));
+    const { lastUpdatedAt, lastId, take } = getData(query, yield select(getChatsData));
     const lastParam = lastUpdatedAt ? `${lastUpdatedAt}/${lastId}` : ''
 
     const response = yield fetch(`${BASE_URL}/api/chats/auth/findChats/${take}/${lastParam}`, {

@@ -13,14 +13,20 @@ export default function* indexSaga(){
     yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats, requestsWatcher, allRequestsWatcher, acceptRequestWatcher])
 }
 
-export function authWrapper(request){
-    return function*(action){
+export function wrapper(request){
+    return function* fetch(action){
         try{
             yield request(action);
         }catch(err){
+            if(err.message == 'Failed to fetch'){
+                yield new Promise(resolve => setTimeout(resolve, 5000));
+                return yield fetch(action);
+            }
+
             if(err.message == 'Jwt token has expired.'){
                 return yield put(onLogout('Session has expired.')); 
             }
+
             if(err.message == 'Jwt token is incorrect' || err.message == 'Jwt token is missing'){
                 return yield put(onLogout());
             }

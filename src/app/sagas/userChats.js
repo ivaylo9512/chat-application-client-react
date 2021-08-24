@@ -3,9 +3,9 @@ import { select, takeLatest, put } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import UnauthorizedException from "exceptions/unauthorizedException";
 import splitArray from "utils/splitArray";
-import { authWrapper } from ".";
+import { wrapper } from ".";
 
-export default takeLatest('userChats/userChatsRequest', authWrapper(getUserChats));
+export default takeLatest('userChats/userChatsRequest', wrapper(getUserChats));
 
 function* getUserChats({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUserChatsData));

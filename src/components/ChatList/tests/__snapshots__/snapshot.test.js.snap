@@ -71,19 +71,49 @@ exports[`ChatList snapshot tests should render Chats and more button when lastPa
     }
     key="4"
   />
-  <span
+  <styled.span
     data-testid="more"
   >
-    &gt;
-  </span>
+    <FontAwesomeIcon
+      border={false}
+      className=""
+      fixedWidth={false}
+      flip={null}
+      icon={
+        Object {
+          "icon": Array [
+            512,
+            512,
+            Array [],
+            "f141",
+            "M328 256c0 39.8-32.2 72-72 72s-72-32.2-72-72 32.2-72 72-72 72 32.2 72 72zm104-72c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72zm-352 0c-39.8 0-72 32.2-72 72s32.2 72 72 72 72-32.2 72-72-32.2-72-72-72z",
+          ],
+          "iconName": "ellipsis-h",
+          "prefix": "fas",
+        }
+      }
+      inverse={false}
+      listItem={false}
+      mask={null}
+      pull={null}
+      pulse={false}
+      rotation={null}
+      size={null}
+      spin={false}
+      swapOpacity={false}
+      symbol={false}
+      title=""
+      transform={null}
+    />
+  </styled.span>
 </Fragment>
 `;
 
 exports[`ChatList snapshot tests should render LoadingIndicator when loading 1`] = `
 <Fragment>
-  <div>
+  <styled.div>
     <LoadingIndicator />
-  </div>
+  </styled.div>
 </Fragment>
 `;
 

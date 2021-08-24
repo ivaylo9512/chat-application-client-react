@@ -14,7 +14,7 @@ describe('Menu unit tests', () => {
 
     it('should translate with isMenuHidden to true', () => {
         expect(wrapper.find(MenuContainer)).toHaveStyleRule('width', '0%');
-        expect(wrapper.find(MenuCircle)).toHaveStyleRule('transition', 'all 2s 1.75s');
+        expect(wrapper.find(MenuCircle)).toHaveStyleRule('transition', 'transform 2s 1.75s');
         expect(wrapper.find(MenuCircle)).toHaveStyleRule('transform', 'translate(7vw,-7vw)');
     })
 
@@ -22,7 +22,7 @@ describe('Menu unit tests', () => {
         wrapper.find(MenuCircle).simulate('click');
 
         expect(wrapper.find(MenuContainer)).toHaveStyleRule('width', '27%');
-        expect(wrapper.find(MenuCircle)).toHaveStyleRule('transition', 'all 2s');
+        expect(wrapper.find(MenuCircle)).toHaveStyleRule('transition', 'transform 2s');
         expect(wrapper.find(MenuCircle)).toHaveStyleRule('transform', 'translate(0,0)');
     })
 })

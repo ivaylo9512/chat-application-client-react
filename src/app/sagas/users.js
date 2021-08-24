@@ -3,8 +3,9 @@ import { getUsersData, onUsersComplete, onUsersError} from 'app/slices/usersSlic
 import { takeLatest, select, put } from 'redux-saga/effects';
 import splitArray from 'utils/splitArray';
 import UnauthorizedException from 'exceptions/unauthorizedException';
+import { wrapper } from '.';
 
-export default takeLatest('users/usersRequest', getUsers);
+export default takeLatest('users/usersRequest', wrapper(getUsers));
 
 function* getUsers({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUsersData));

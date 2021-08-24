@@ -69,7 +69,7 @@ describe('HeaderScroll unit tests', () => {
         wrapper.update();
 
         expect(window.getComputedStyle).toHaveBeenCalledTimes(2);
-        expect(wrapper.find(Container).prop('style')).toEqual({ paddingBottom: '15px' })
+        expect(wrapper.find(Container).prop('style')).toEqual({ padding: '7.5px 0.5% 15px 0.5%' })
     })
 
     it('should calculate padding on resize', async() => {
@@ -81,7 +81,7 @@ describe('HeaderScroll unit tests', () => {
         await act(async() => window.dispatchEvent(new Event('resize')));
         wrapper.update();
 
-        expect(wrapper.find(Container).prop('style')).toEqual({ paddingBottom: '2px' })
+        expect(wrapper.find(Container).prop('style')).toEqual({ padding: '1px 0.5% 2px 0.5%' })
     })
 
     it('should have right style with isHeaderHidden set to true', () => {
