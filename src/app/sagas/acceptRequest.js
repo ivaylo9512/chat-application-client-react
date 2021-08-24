@@ -1,10 +1,11 @@
 import { wrapper } from ".";
-import { takeLatest, put } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import {onRequestComplete, onRequestError} from 'app/slices/requestsSlice';
 import UnauthorizedException from "exceptions/unauthorizedException";
+import { addChat } from "app/slices/chatsSlice";
 
-export default takeLatest('requests/acceptRequest', wrapper(acceptRequest));
+export default takeEvery('requests/acceptRequest', wrapper(acceptRequest));
 
 function* acceptRequest({payload: id}){
     const response = yield fetch(`${BASE_URL}/api/requests/auth/accept/${id}`, {
@@ -15,7 +16,10 @@ function* acceptRequest({payload: id}){
     });
 
     if(response.ok){
-        yield put(onRequestComplete({id, chatWithUser: yield response.json(), requestState: 'complete'}))
+        const chatWithUser = yield response.json();
+        
+        yield put(addChat(chatWithUser));
+        yield put(onRequestComplete({id, chatWithUser, requestState: 'complete'}))
     }else{
         const message = yield response.text()
         if(response.status == 401){

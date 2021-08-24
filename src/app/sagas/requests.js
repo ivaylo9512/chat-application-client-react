@@ -1,10 +1,11 @@
 import { wrapper } from ".";
-import { takeLatest, put } from "redux-saga/effects";
+import { takeLatest, put, takeEvery } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import {onRequestComplete, onRequestError} from 'app/slices/requestsSlice';
 import UnauthorizedException from "exceptions/unauthorizedException";
+import { addChat } from "app/slices/chatsSlice";
 
-export default takeLatest('requests/sendRequest', wrapper(sendRequests));
+export default takeEvery('requests/sendRequest', wrapper(sendRequests));
 
 function* sendRequests({payload: id}){
     const response = yield fetch(`${BASE_URL}/api/requests/auth/addRequest/${id}`, {
@@ -15,7 +16,11 @@ function* sendRequests({payload: id}){
     });
 
     if(response.ok){
-        const { chatWithUser, requestState } = yield response.json();
+        const { chatWithUser, requestState } = yield response.json();  
+        if(chatWithUser){
+            yield put(addChat(chatWithUser));
+        }   
+
         yield put(onRequestComplete({id, chatWithUser, requestState}))
     }else{
         const message = yield response.text()

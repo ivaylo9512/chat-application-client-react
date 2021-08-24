@@ -23,7 +23,7 @@ const chatsSlice = createSlice({
             state.isLoading = true;
             state.error = null
         },
-        onChatsComplete: (state, {payload: {pageable, query}}) => {
+        onChatsComplete: (state, { payload: { pageable, query }}) => {
             state.query = query;
             state.data.isLastPage = pageable.isLastPage;
             state.data.lastChat = pageable.lastChat;
@@ -31,12 +31,15 @@ const chatsSlice = createSlice({
             state.isLoading = false;
             state.error = null;
         },
-        onChatsError: (state, {payload}) => {
+        onChatsError: (state, { payload }) => {
             state.error = payload;
             state.isLoading = false;
         },
-        setCurrentChat: (state, {payload}) => {
+        setCurrentChat: (state, { payload }) => {
             state.currentChat = payload;
+        },
+        addChat: (state, { payload }) => {
+            state.data.chats = [payload, ...state.data.chats]
         },
         resetChatsState: (state) => {
             state.data = initialState.data;
@@ -47,7 +50,7 @@ const chatsSlice = createSlice({
     }
 });
 
-export const {chatsRequest, resetChatsState, setCurrentChat, onChatsComplete, onChatsError} = chatsSlice.actions;
+export const { chatsRequest, resetChatsState, setCurrentChat, onChatsComplete, onChatsError, addChat } = chatsSlice.actions;
 export default chatsSlice.reducer;
 
 export const getChatsState = state => state.chats;

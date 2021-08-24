@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import ChatList from 'components/ChatList/ChatList';
 import Chat from 'components/Chat/Chat';
 import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
-import { chatsRequest } from 'app/slices/chatsSlice';
+import { LoadingContainer } from 'components/ChatList/ChatListStyle'
 
 const chats = [ { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 } ];
 
@@ -33,10 +33,10 @@ describe('ChatList unit tests', () => {
         expect(foundChats.at(1).key()).toBe('6')
     })
 
-    it('should render LoadingIndicator when loading', () => {
+    it('should render LoadingContainer when loading adn empty array', () => {
         const wrapper = createWrapper({ isLoading: true, data: { chats: [], isLastPage: false }});
 
-        expect(wrapper.find(LoadingIndicator).length).toBe(1);
+        expect(wrapper.find(LoadingContainer).length).toBe(1);
     })
 
     it('should render info when empty chats array and not loading ', () => {
@@ -49,6 +49,13 @@ describe('ChatList unit tests', () => {
         const wrapper = createWrapper({ isLoading: false, data: { chats, isLastPage: false }});
 
         expect(wrapper.findByTestid('more').length).toBe(1);
+    })
+
+    it('should render LoadingIndicator in button when data', () => {
+        const wrapper = createWrapper({ isLoading: true, data: { chats, isLastPage: false }});
+
+        expect(wrapper.find(LoadingContainer).length).toBe(0);
+        expect(wrapper.find(LoadingIndicator).length).toBe(1);
     })
 
 })

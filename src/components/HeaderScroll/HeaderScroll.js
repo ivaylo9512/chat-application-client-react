@@ -11,14 +11,14 @@ const HeaderScroll = () => {
     const scrollContainer = useRef()
     const [padding, setPadding] = useState(`0 0.5%`)
     const isHidden = useSelector(getHeaderVisibility) 
-    const { isLoading, data: { isLastPage }, query } = useSelector(getChatsState);
+    const { isLoading, data: { chats, isLastPage }, query } = useSelector(getChatsState);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(query){
+        if(query || chats){
             hideScrollBar()
         }
-    }, [query])
+    }, [query, chats])
     
     useEffect(() => {
         window.addEventListener('resize', hideScrollBar)

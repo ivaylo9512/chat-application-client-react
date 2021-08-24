@@ -9,9 +9,10 @@ export default takeLatest('users/usersRequest', wrapper(getUsers));
 
 function* getUsers({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUsersData));
-    const lastPath = lastName ? `${lastName}/${lastId}` : '';
+    const lastPath = lastName ? `/${lastName}/${lastId}` : '';
+    const namePath = name ? `/${name.replace(/[\\?%#/'"]/g, '')}` : '';
 
-    const response = yield fetch(`${BASE_URL}/api/users/auth/searchForUsers/${takeAmount}/${name.replace(/[\\?%#/'"]/g, '')}/${lastPath}`,{
+    const response = yield fetch(`${BASE_URL}/api/users/auth/searchForUsers/${takeAmount}${namePath}${lastPath}`,{
         headers:{
             Authorization: localStorage.getItem('Authorization')
         }

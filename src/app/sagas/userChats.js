@@ -9,9 +9,10 @@ export default takeLatest('userChats/userChatsRequest', wrapper(getUserChats));
 
 function* getUserChats({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUserChatsData));
-    const lastPath = lastName ? `${lastName}/${lastId}` : '';
-
-    const response = yield fetch(`${BASE_URL}/api/chats/auth/findChatsByName/${takeAmount}/${name.replace(/[\\?%#/'"]/g, '')}/${lastPath}`,{
+    const lastPath = lastName ? `/${lastName}/${lastId}` : '';
+    const namePath = name ? `/${name.replace(/[\\?%#/'"]/g, '')}` : '';
+    
+    const response = yield fetch(`${BASE_URL}/api/chats/auth/findChatsByName/${takeAmount}${namePath}${lastPath}`,{
         headers:{
             Authorization: localStorage.getItem('Authorization')
         }
