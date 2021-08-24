@@ -96,4 +96,47 @@ describe('HeaderScroll unit tests', () => {
     
         expect(wrapper.find(Scroll)).toHaveStyleRule('margin-top', '0')
     })
+
+    it('should call scroll with values', () => {
+        const wrapper = createWrapper();
+        const scrollMock = jest.fn();
+
+        wrapper.find(Container).props().onWheel({currentTarget: { scrollLeft: 20, scrollTop: 10, clientWidth: 10, scrollWidth: 30, scroll: scrollMock }, deltaY: 10});
+
+        expect(scrollMock).toHaveBeenCalledWith({behavior: 'smooth', left: 60, top: 10})
+    })
+
+    it('should not call dispatch not scrolled to the end', () => {
+        const wrapper = createWrapper();
+
+        wrapper.find(Container).props().onWheel({currentTarget: { scrollLeft: 10, scrollTop: 10, clientWidth: 10, scrollWidth: 30, scroll: jest.fn() }, deltaY: 10});
+
+        expect(dispatchMock).not.toHaveBeenCalled()
+    })
+
+    it('should call dispatch with chatsRequest when isLoading is false and  + isLastPage is false and is scrolled to the end', () => {
+        const wrapper = createWrapper();
+
+        wrapper.find(Container).props().onWheel({currentTarget: { scrollLeft: 20, scrollTop: 10, clientWidth: 10, scrollWidth: 30, scroll: jest.fn() }, deltaY: 10});
+
+        expect(dispatchMock).toHaveBeenCalledWith(chatsRequest({direction: 'ASC', take: 2}))
+    })
+    
+    it('should not call dispatch when isLoading is false', () => {
+        store.dispatch(chatsRequest());
+        const wrapper = createWrapper();
+
+        wrapper.find(Container).props().onWheel({currentTarget: { scrollLeft: 20, scrollTop: 10, clientWidth: 10, scrollWidth: 30, scroll: jest.fn() }, deltaY: 10});
+
+        expect(dispatchMock).not.toHaveBeenCalled()
+    })
+
+    it('should not call dispatch when isLoading is false', () => {
+        store.dispatch(onChatsComplete({pageable: { isLastPage: true, data: []}}));
+        const wrapper = createWrapper();
+
+        wrapper.find(Container).props().onWheel({currentTarget: { scrollLeft: 20, scrollTop: 10, clientWidth: 10, scrollWidth: 30, scroll: jest.fn() }, deltaY: 10});
+
+        expect(dispatchMock).not.toHaveBeenCalled()
+    })
 });
