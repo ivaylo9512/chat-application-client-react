@@ -39,7 +39,7 @@ describe('User unit tests', () => {
         const wrapper = createWrapper({ chatWithUser: false, requestState: 'send' });
         expect(wrapper.find('button').simulate('click'));
 
-        expect(dispatchMock).toHaveBeenCalledWith(sendRequest({ id: 5, page: 1 }));
+        expect(dispatchMock).toHaveBeenCalledWith(sendRequest(5));
     })
 
     it('should not call dispatch when requestState is pending', () => {

@@ -33,8 +33,7 @@ const store = configureStore({
     }
 })
 
-const fetchMock = jest.fn();
-global.fetch = fetchMock;
+global.fetch = jest.fn();
 
 saga.run(function*(){
     yield requestsWatcher
@@ -54,7 +53,7 @@ describe('User integration tests', () => {
         const wrapper = createWrapper({ id: 5, chatWithUser: false });
         await act(async() => wrapper.find('button').simulate('click'));
 
-        expect(fetchMock).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/addRequest/5`,{
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/addRequest/5`,{
             method: 'POST',
             headers: {
                 Authorization: null

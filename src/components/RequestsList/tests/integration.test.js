@@ -12,8 +12,6 @@ import Request from "components/Request/Request";
 const saga = createSaga();
 const middleware = [...getDefaultMiddleware({ thunk: false }), saga];
 
-let id = 0;
-
 const store = configureStore({
     reducer: {
         allRequests,
