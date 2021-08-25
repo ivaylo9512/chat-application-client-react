@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import requests from 'app/sagas/requests';
 
 const initialState = {
     data: {}
@@ -15,22 +14,30 @@ const requestsSlice = createSlice({
             request.isLoading = true; 
             request.error = null;
         },
-        acceptRequest: (state, { payload: id }) => {
-            let request = state.data[id] ? state.data[id] : state.data[id] = {}; 
+        acceptRequest: (state, { payload: { userId } }) => {
+            let request = state.data[userId] ? state.data[userId] : state.data[userId] = {}; 
 
             request.isLoading = true; 
             request.error = null;
         },
-        onRequestComplete: (state, { payload: { id, chatWithUser, requestState }}) => {
-            const request = state.data[id];
+        denyRequest: (state, { payload: { userId }}) => {
+            let request = state.data[userId] ? state.data[userId] : state.data[userId] = {}; 
 
+            request.isLoading = true; 
+            request.error = null;
+        },
+        onRequestComplete: (state, { payload: { userId, chatWithUser, requestState, id }}) => {
+            const request = state.data[userId];
+
+            request.id = id;
             request.isLoading = false;
             request.chatWithUser = chatWithUser;
             request.state = requestState;
         },
-        onRequestError: (state, { payload: { id, message }}) => {
-            const request = state.data[id];
+        onRequestError: (state, { payload: { userId, message, requestState }}) => {
+            const request = state.data[userId];
 
+            request.state = requestState;
             request.isLoading = false;
             request.error = message;
         },
@@ -40,5 +47,5 @@ const requestsSlice = createSlice({
     }
 })
 
-export const { onRequestComplete, sendRequest, onRequestError, resetRequests, acceptRequest } = requestsSlice.actions;
+export const { onRequestComplete, sendRequest, onRequestError, resetRequests, acceptRequest, denyRequest } = requestsSlice.actions;
 export default requestsSlice.reducer;

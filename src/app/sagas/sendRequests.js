@@ -16,18 +16,18 @@ function* sendRequests({payload: id}){
     });
 
     if(response.ok){
-        const { chatWithUser, requestState } = yield response.json();  
+        const { chatWithUser, requestState, requestId } = yield response.json();  
         if(chatWithUser){
             yield put(addChat(chatWithUser));
         }   
 
-        yield put(onRequestComplete({id, chatWithUser, requestState}))
+        yield put(onRequestComplete({ userId: id, chatWithUser, requestState, id: requestId }))
     }else{
         const message = yield response.text()
         if(response.status == 401){
             throw new UnauthorizedException(message);            
         } 
 
-        yield put(onRequestError({id, message}));
+        yield put(onRequestError({ userId: id, message, requestState: 'send' }));
     }
 }

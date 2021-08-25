@@ -30,7 +30,7 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
     }, [request])
 
     const accept = () => {
-        dispatch(acceptRequest(requestId));
+        dispatch(acceptRequest({ id: requestId, userId: id}));
     }
 
     const getActionButton = () => {
@@ -38,11 +38,11 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
         let icon;
         switch(message){
             case 'accept':
-                action = () => dispatch(denyRequest({ id: requestId, requestState: 'accept' }));
+                action = () => dispatch(denyRequest({ id: requestId, requestState: 'accept', userId: id }));
                 icon = <FontAwesomeIcon icon={faTimes}/>;
                 break;
             case 'pending':
-                action = () => dispatch(denyRequest({ id: requestId, requestState: 'pending' }));
+                action = () => dispatch(denyRequest({ id: request?.id || requestId, requestState: 'pending', userId: id }));
                 icon = <FontAwesomeIcon icon={faPaperPlane}/>;
                 break;
             case 'send':
@@ -91,6 +91,7 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
                     {getActionButton()}
                 </ButtonsContainer>
             </UserContainer>
+            {request?.error && <Error>{request.error}</Error>}
         </Container>
     )
 })

@@ -80,3 +80,9 @@ export const Image = styled(ImageContainer)`
     display: inline-flex;
     box-shadow: 0px 0px 0.15vw 0.15vw rgb(0 0 0);
 `
+
+export const Error = styled.div`
+    height: 2vh;
+    margin-bottom: -2vh;
+    margin-left: 9.5vh;
+`
