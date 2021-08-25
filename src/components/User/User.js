@@ -11,6 +11,10 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
     const error = useSelector(state => state.requests.data[id]?.error);
     const [isInfoVisible, setIsInfoVisible] = useState(false);
 
+    const toggleInfo = () => {
+        setIsInfoVisible(true);
+    }
+
     return (
         <Container>
             <UserContainer>
@@ -25,9 +29,8 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
                     </Info>
                 </InfoContainer>
                 <ButtonsContainer>
-                    <Button data-testid='toggleInfo' onClick={() => setIsInfoVisible(!isInfoVisible)}><FontAwesomeIcon icon={faInfo}/></Button>
+                    <Button data-testid='toggleInfo' onClick={toggleInfo}><FontAwesomeIcon icon={faInfo}/></Button>
                     <RequestButtons requestId={requestId} userId={id} initialMessage={requestState} chatWithUser={chatWithUser}/>
-
                 </ButtonsContainer>
             </UserContainer>
             {error && <Error>{error}</Error>}

@@ -7,6 +7,13 @@ export const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
+`
+
+export const RequestContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const Info = styled.div`
@@ -72,4 +79,10 @@ export const Button = styled.button`
 export const Image = styled(ImageContainer)`
     display: inline-flex;
     box-shadow: 0px 0px 0.15vw 0.15vw rgb(0 0 0);
+`
+
+export const Error = styled.div`
+    height: 2vh;
+    margin-bottom: -2vh;
+    margin-left: 9.5vh;
 `

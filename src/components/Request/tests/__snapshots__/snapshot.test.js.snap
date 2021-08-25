@@ -1,20 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Request snapshot tests should match snapshot with chat 1`] = `
+exports[`Request snapshot tests should match snapshot 1`] = `
 <styled.div>
-  <Styled(styled.button)>
-    <img
-      src="http://localhost:8080/images/download/image.png"
-    />
-  </Styled(styled.button)>
-  <styled.div
-    isInfoVisible={false}
-  >
-    <span>
-      <b>
-        firstname lastName
-      </b>
-    </span>
+  <styled.div>
+    <Styled(styled.button)>
+      <img
+        src="http://localhost:8080/images/download/image.png"
+      />
+    </Styled(styled.button)>
     <styled.div
       isInfoVisible={false}
     >
@@ -23,148 +16,75 @@ exports[`Request snapshot tests should match snapshot with chat 1`] = `
           firstname lastName
         </b>
       </span>
-      <span>
-        <b>
-          2021-08-23
-        </b>
-      </span>
+      <styled.div
+        isInfoVisible={false}
+      >
+        <span>
+          <b>
+            firstname lastName
+          </b>
+        </span>
+        <span>
+          <b>
+            2021-08-23
+          </b>
+        </span>
+      </styled.div>
     </styled.div>
-  </styled.div>
-  <styled.div>
-    <styled.button
-      data-testid="toggleInfo"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        border={false}
-        className=""
-        fixedWidth={false}
-        flip={null}
-        icon={
-          Object {
-            "icon": Array [
-              192,
-              512,
-              Array [],
-              "f129",
-              "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
-            ],
-            "iconName": "info",
-            "prefix": "fas",
+    <styled.div>
+      <styled.button
+        data-testid="toggleInfo"
+        onClick={[Function]}
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                192,
+                512,
+                Array [],
+                "f129",
+                "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
+              ],
+              "iconName": "info",
+              "prefix": "fas",
+            }
           }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        size={null}
-        spin={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        transform={null}
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </styled.button>
+      <Memo()
+        initialMessage="accept"
+        requestId={1}
       />
-    </styled.button>
-    <Memo()
-      initialMessage="accept"
-      requestId={1}
-    />
-  </styled.div>
-</styled.div>
-`;
-
-exports[`Request snapshot tests should match snapshot with loading request 1`] = `
-<styled.div>
-  <Styled(styled.button)>
-    <img
-      src="http://localhost:8080/images/download/image.png"
-    />
-  </Styled(styled.button)>
-  <styled.div
-    isInfoVisible={false}
-  >
-    <span>
-      <b>
-        firstname lastName
-      </b>
-    </span>
-    <styled.div
-      isInfoVisible={false}
-    >
-      <span>
-        <b>
-          firstname lastName
-        </b>
-      </span>
-      <span>
-        <b>
-          2021-08-23
-        </b>
-      </span>
     </styled.div>
-  </styled.div>
-  <styled.div>
-    <styled.button
-      data-testid="toggleInfo"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        border={false}
-        className=""
-        fixedWidth={false}
-        flip={null}
-        icon={
-          Object {
-            "icon": Array [
-              192,
-              512,
-              Array [],
-              "f129",
-              "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
-            ],
-            "iconName": "info",
-            "prefix": "fas",
-          }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        size={null}
-        spin={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        transform={null}
-      />
-    </styled.button>
-    <Memo()
-      initialMessage="accept"
-      requestId={1}
-    />
   </styled.div>
 </styled.div>
 `;
 
 exports[`Request snapshot tests should match snapshot with toggled info 1`] = `
 <styled.div>
-  <Styled(styled.button)>
-    <img
-      src="http://localhost:8080/images/download/image.png"
-    />
-  </Styled(styled.button)>
-  <styled.div
-    isInfoVisible={false}
-  >
-    <span>
-      <b>
-        firstname lastName
-      </b>
-    </span>
+  <styled.div>
+    <Styled(styled.button)>
+      <img
+        src="http://localhost:8080/images/download/image.png"
+      />
+    </Styled(styled.button)>
     <styled.div
       isInfoVisible={false}
     >
@@ -173,129 +93,63 @@ exports[`Request snapshot tests should match snapshot with toggled info 1`] = `
           firstname lastName
         </b>
       </span>
-      <span>
-        <b>
-          2021-08-23
-        </b>
-      </span>
+      <styled.div
+        isInfoVisible={false}
+      >
+        <span>
+          <b>
+            firstname lastName
+          </b>
+        </span>
+        <span>
+          <b>
+            2021-08-23
+          </b>
+        </span>
+      </styled.div>
     </styled.div>
-  </styled.div>
-  <styled.div>
-    <styled.button
-      data-testid="toggleInfo"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        border={false}
-        className=""
-        fixedWidth={false}
-        flip={null}
-        icon={
-          Object {
-            "icon": Array [
-              192,
-              512,
-              Array [],
-              "f129",
-              "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
-            ],
-            "iconName": "info",
-            "prefix": "fas",
+    <styled.div>
+      <styled.button
+        data-testid="toggleInfo"
+        onClick={[Function]}
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                192,
+                512,
+                Array [],
+                "f129",
+                "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
+              ],
+              "iconName": "info",
+              "prefix": "fas",
+            }
           }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        size={null}
-        spin={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        transform={null}
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </styled.button>
+      <Memo()
+        initialMessage="accept"
+        requestId={1}
       />
-    </styled.button>
-    <Memo()
-      initialMessage="accept"
-      requestId={1}
-    />
-  </styled.div>
-</styled.div>
-`;
-
-exports[`Request snapshot tests should match snapshot without request 1`] = `
-<styled.div>
-  <Styled(styled.button)>
-    <img
-      src="http://localhost:8080/images/download/image.png"
-    />
-  </Styled(styled.button)>
-  <styled.div
-    isInfoVisible={false}
-  >
-    <span>
-      <b>
-        firstname lastName
-      </b>
-    </span>
-    <styled.div
-      isInfoVisible={false}
-    >
-      <span>
-        <b>
-          firstname lastName
-        </b>
-      </span>
-      <span>
-        <b>
-          2021-08-23
-        </b>
-      </span>
     </styled.div>
-  </styled.div>
-  <styled.div>
-    <styled.button
-      data-testid="toggleInfo"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        border={false}
-        className=""
-        fixedWidth={false}
-        flip={null}
-        icon={
-          Object {
-            "icon": Array [
-              192,
-              512,
-              Array [],
-              "f129",
-              "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
-            ],
-            "iconName": "info",
-            "prefix": "fas",
-          }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        size={null}
-        spin={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        transform={null}
-      />
-    </styled.button>
-    <Memo()
-      initialMessage="accept"
-      requestId={1}
-    />
   </styled.div>
 </styled.div>
 `;

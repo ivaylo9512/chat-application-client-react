@@ -1,44 +1,25 @@
 import User from 'components/User/User';
 import { shallow } from 'enzyme';
-import * as Redux from 'react-redux';
+import * as redux from 'react-redux';
 
-describe("RegisterSnapshotTests", () => {
-    let selectorSpy;
-
-    beforeAll(() => {
-        selectorSpy = jest.spyOn(Redux, 'useSelector');
-        jest.spyOn(Redux, 'useDispatch').mockReturnValue(jest.fn());
-    })
-    
-    const createWrapper = (state, user) => {
-        selectorSpy.mockReturnValue(state);
+describe('User snapshot tests', () => {
+    const createWrapper = (state) => {
+        jest.spyOn(redux, 'useSelector').mockReturnValue(state);
         
         return shallow(
-            <User user={user}/> 
+            <User user={{ firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send', requestId: 4, chatWithUser:{ id: 5 } }}/> 
         )
     }
 
-    it('should render snapshot with chatWithUser', () => {
-    const wrapper = createWrapper(undefined,  {firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: true});
+    it('should render snapshot', () => {
+        const wrapper = createWrapper();
 
         expect(wrapper).toMatchSnapshot();
     })
 
-    it('should render snapshot without request without chatWithUser', () => {
-        const wrapper = createWrapper(undefined,  {firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send'});
-    
-        expect(wrapper).toMatchSnapshot();
-    })
+    it('should render snapshot with request error', () => {
+        const wrapper = createWrapper('Request not found.');
 
-    it('should render snapshot with request', () => {
-        const wrapper = createWrapper({ isLoading: false },  {firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send'});
-    
-        expect(wrapper).toMatchSnapshot();
-    })
-
-    it('should render snapshot with loading request', () => {
-        const wrapper = createWrapper({ isLoading: true},  {firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send'});
-    
         expect(wrapper).toMatchSnapshot();
     })
 })
