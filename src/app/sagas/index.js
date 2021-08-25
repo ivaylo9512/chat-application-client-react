@@ -3,14 +3,15 @@ import loginWatcher from './login';
 import registerWatcher from './register';
 import usersWatcher from './users';
 import acceptRequestWatcher from './acceptRequest';
+import denyRequestWatcher from './denyRequest';
 import chatsWatcher from './chats';
 import getUserChats from './userChats';
-import requestsWatcher from './requests';
+import sendRequestsWatcher from './sendRequests';
 import allRequestsWatcher from './allRequests';
 import { onLogout } from 'app/slices/authenticateSlice';
 
 export default function* indexSaga(){
-    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats, requestsWatcher, allRequestsWatcher, acceptRequestWatcher])
+    yield all([loginWatcher, registerWatcher, usersWatcher, chatsWatcher, getUserChats, sendRequestsWatcher, allRequestsWatcher, acceptRequestWatcher, denyRequestWatcher])
 }
 
 export function wrapper(request){
