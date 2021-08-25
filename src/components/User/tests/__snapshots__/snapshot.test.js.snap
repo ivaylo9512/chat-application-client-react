@@ -1,105 +1,306 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RegisterSnapshotTests should render snapshot with chatWithUser 1`] = `
-<div>
-  <div
-    className="image"
-  >
-    <img
-      alt="profile"
-      src="image.png"
-    />
-  </div>
-  <div
-    className="info"
-  >
-    <b>
-      First Last
-    </b>
-    <span />
-  </div>
-  <button
-    onClick={[Function]}
-  >
-    open
-  </button>
-</div>
+<styled.div>
+  <styled.div>
+    <Styled(styled.button)>
+      <img
+        src="http://localhost:8080/images/download/undefined"
+      />
+    </Styled(styled.button)>
+    <styled.div
+      isInfoVisible={false}
+    >
+      <span>
+        <b>
+          First Last
+        </b>
+      </span>
+      <styled.div
+        isInfoVisible={false}
+      >
+        <span>
+          <b>
+            First Last
+          </b>
+        </span>
+        <span>
+          <b />
+        </span>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.button
+        data-testid="toggleInfo"
+        onClick={[Function]}
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                192,
+                512,
+                Array [],
+                "f129",
+                "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
+              ],
+              "iconName": "info",
+              "prefix": "fas",
+            }
+          }
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </styled.button>
+      <Memo()
+        chatWithUser={true}
+      />
+    </styled.div>
+  </styled.div>
+</styled.div>
 `;
 
 exports[`RegisterSnapshotTests should render snapshot with loading request 1`] = `
-<div>
-  <div
-    className="image"
-  >
-    <img
-      alt="profile"
-      src="image.png"
-    />
-  </div>
-  <div
-    className="info"
-  >
-    <b>
-      First Last
-    </b>
-    <span />
-  </div>
-  <button
-    onClick={[Function]}
-  >
-    <LoadingIndicator />
-  </button>
-</div>
+<styled.div>
+  <styled.div>
+    <Styled(styled.button)>
+      <img
+        src="http://localhost:8080/images/download/undefined"
+      />
+    </Styled(styled.button)>
+    <styled.div
+      isInfoVisible={false}
+    >
+      <span>
+        <b>
+          First Last
+        </b>
+      </span>
+      <styled.div
+        isInfoVisible={false}
+      >
+        <span>
+          <b>
+            First Last
+          </b>
+        </span>
+        <span>
+          <b />
+        </span>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.button
+        data-testid="toggleInfo"
+        onClick={[Function]}
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                192,
+                512,
+                Array [],
+                "f129",
+                "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
+              ],
+              "iconName": "info",
+              "prefix": "fas",
+            }
+          }
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </styled.button>
+      <Memo()
+        chatWithUser={false}
+        initialMessage="send"
+      />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <Component />
+  </styled.div>
+</styled.div>
 `;
 
 exports[`RegisterSnapshotTests should render snapshot with request 1`] = `
-<div>
-  <div
-    className="image"
-  >
-    <img
-      alt="profile"
-      src="image.png"
-    />
-  </div>
-  <div
-    className="info"
-  >
-    <b>
-      First Last
-    </b>
-    <span />
-  </div>
-  <button
-    onClick={[Function]}
-  >
-    send
-  </button>
-</div>
+<styled.div>
+  <styled.div>
+    <Styled(styled.button)>
+      <img
+        src="http://localhost:8080/images/download/undefined"
+      />
+    </Styled(styled.button)>
+    <styled.div
+      isInfoVisible={false}
+    >
+      <span>
+        <b>
+          First Last
+        </b>
+      </span>
+      <styled.div
+        isInfoVisible={false}
+      >
+        <span>
+          <b>
+            First Last
+          </b>
+        </span>
+        <span>
+          <b />
+        </span>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.button
+        data-testid="toggleInfo"
+        onClick={[Function]}
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                192,
+                512,
+                Array [],
+                "f129",
+                "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
+              ],
+              "iconName": "info",
+              "prefix": "fas",
+            }
+          }
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </styled.button>
+      <Memo()
+        chatWithUser={false}
+        initialMessage="send"
+      />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <Component />
+  </styled.div>
+</styled.div>
 `;
 
 exports[`RegisterSnapshotTests should render snapshot without request without chatWithUser 1`] = `
-<div>
-  <div
-    className="image"
-  >
-    <img
-      alt="profile"
-      src="image.png"
-    />
-  </div>
-  <div
-    className="info"
-  >
-    <b>
-      First Last
-    </b>
-    <span />
-  </div>
-  <button
-    onClick={[Function]}
-  >
-    send
-  </button>
-</div>
+<styled.div>
+  <styled.div>
+    <Styled(styled.button)>
+      <img
+        src="http://localhost:8080/images/download/undefined"
+      />
+    </Styled(styled.button)>
+    <styled.div
+      isInfoVisible={false}
+    >
+      <span>
+        <b>
+          First Last
+        </b>
+      </span>
+      <styled.div
+        isInfoVisible={false}
+      >
+        <span>
+          <b>
+            First Last
+          </b>
+        </span>
+        <span>
+          <b />
+        </span>
+      </styled.div>
+    </styled.div>
+    <styled.div>
+      <styled.button
+        data-testid="toggleInfo"
+        onClick={[Function]}
+      >
+        <FontAwesomeIcon
+          border={false}
+          className=""
+          fixedWidth={false}
+          flip={null}
+          icon={
+            Object {
+              "icon": Array [
+                192,
+                512,
+                Array [],
+                "f129",
+                "M20 424.229h20V279.771H20c-11.046 0-20-8.954-20-20V212c0-11.046 8.954-20 20-20h112c11.046 0 20 8.954 20 20v212.229h20c11.046 0 20 8.954 20 20V492c0 11.046-8.954 20-20 20H20c-11.046 0-20-8.954-20-20v-47.771c0-11.046 8.954-20 20-20zM96 0C56.235 0 24 32.235 24 72s32.235 72 72 72 72-32.235 72-72S135.764 0 96 0z",
+              ],
+              "iconName": "info",
+              "prefix": "fas",
+            }
+          }
+          inverse={false}
+          listItem={false}
+          mask={null}
+          pull={null}
+          pulse={false}
+          rotation={null}
+          size={null}
+          spin={false}
+          swapOpacity={false}
+          symbol={false}
+          title=""
+          transform={null}
+        />
+      </styled.button>
+      <Memo()
+        chatWithUser={false}
+        initialMessage="send"
+      />
+    </styled.div>
+  </styled.div>
+</styled.div>
 `;

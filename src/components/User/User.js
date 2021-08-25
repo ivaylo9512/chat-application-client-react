@@ -1,71 +1,15 @@
-import { useHistory } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentChat } from 'app/slices/chatsSlice';
-import { sendRequest, acceptRequest, denyRequest } from 'app/slices/requestsSlice';
-import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
+import { useSelector } from 'react-redux';
 import { memo } from 'react';
 import { useState } from 'react';
-import { useEffect } from 'react';
 import { Container, Image, Info, ButtonsContainer, Button, InfoContainer, UserContainer, Error } from 'components/User/UserStyle';
 import { IMAGE_URL } from 'appConstants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faInfo, faForward, faCheck, faTimes, faShare, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faInfo } from '@fortawesome/free-solid-svg-icons'
+import RequestButtons from 'components/RequestButtons/RequestButtons';
 
 const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser, createdAt, requestState, requestId }}) => {
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const request = useSelector(state => state.requests.data[id]);
+    const error = useSelector(state => state.requests.data[id]?.error);
     const [isInfoVisible, setIsInfoVisible] = useState(false);
-    const [message, setMessage] = useState(requestState);
-
-    const setChat = () => {
-        history.push('/chat');
-        dispatch(setCurrentChat(request ? request.chatWithUser : chatWithUser));
-    }
-
-    useEffect(() => {
-        if(request && !request.isLoading){
-            setMessage(request.state);
-        }
-    }, [request])
-
-    const accept = () => {
-        if(!request?.isLoading){
-            dispatch(acceptRequest({ id: requestId, userId: id}));
-        }
-    }
-
-    const getActionButton = () => {
-        let action;
-        let icon;
-        switch(message){
-            case 'accept':
-                action = () => dispatch(denyRequest({ id: requestId, requestState: 'accept', userId: id }));
-                icon = <FontAwesomeIcon icon={faTimes}/>;
-                break;
-            case 'pending':
-                action = () => dispatch(denyRequest({ id: request?.id || requestId, requestState: 'pending', userId: id }));
-                icon = <FontAwesomeIcon icon={faPaperPlane}/>;
-                break;
-            case 'send':
-                action = () => dispatch(sendRequest(id));
-                icon = <FontAwesomeIcon icon={faShare}/>;
-                break;
-            case 'complete':
-                action = setChat;
-                icon = <FontAwesomeIcon icon={faForward}/>;
-                break;
-        }
-        
-        return(
-            <Button data-testid='action' onClick={() => !request?.isLoading && action()}>
-                {request?.isLoading
-                    ? <LoadingIndicator />
-                    : icon
-                }
-            </Button>
-        )
-    }
 
     return (
         <Container>
@@ -82,18 +26,11 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
                 </InfoContainer>
                 <ButtonsContainer>
                     <Button data-testid='toggleInfo' onClick={() => setIsInfoVisible(!isInfoVisible)}><FontAwesomeIcon icon={faInfo}/></Button>
-                    {message == 'accept' &&
-                        <Button data-testid='accept' onClick={accept}>
-                            {request?.isLoading
-                                ? <LoadingIndicator />
-                                : <FontAwesomeIcon icon={faCheck} />
-                            }
-                        </Button>
-                    }
-                    {getActionButton()}
+                    <RequestButtons requestId={requestId} userId={id} initialMessage={requestState} chatWithUser={chatWithUser}/>
+
                 </ButtonsContainer>
             </UserContainer>
-            {request?.error && <Error>{request.error}</Error>}
+            {error && <Error>{error}</Error>}
         </Container>
     )
 })

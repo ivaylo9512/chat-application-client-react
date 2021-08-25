@@ -67,42 +67,10 @@ exports[`Request snapshot tests should match snapshot with chat 1`] = `
         transform={null}
       />
     </styled.button>
-    <styled.button
-      data-testid="action"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        border={false}
-        className=""
-        fixedWidth={false}
-        flip={null}
-        icon={
-          Object {
-            "icon": Array [
-              512,
-              512,
-              Array [],
-              "f04e",
-              "M500.5 231.4l-192-160C287.9 54.3 256 68.6 256 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2zm-256 0l-192-160C31.9 54.3 0 68.6 0 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2z",
-            ],
-            "iconName": "forward",
-            "prefix": "fas",
-          }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        size={null}
-        spin={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        transform={null}
-      />
-    </styled.button>
+    <Memo()
+      initialMessage="accept"
+      requestId={1}
+    />
   </styled.div>
 </styled.div>
 `;
@@ -174,12 +142,10 @@ exports[`Request snapshot tests should match snapshot with loading request 1`] =
         transform={null}
       />
     </styled.button>
-    <styled.button
-      data-testid="action"
-      onClick={[Function]}
-    >
-      <LoadingIndicator />
-    </styled.button>
+    <Memo()
+      initialMessage="accept"
+      requestId={1}
+    />
   </styled.div>
 </styled.div>
 `;
@@ -192,7 +158,7 @@ exports[`Request snapshot tests should match snapshot with toggled info 1`] = `
     />
   </Styled(styled.button)>
   <styled.div
-    isInfoVisible={true}
+    isInfoVisible={false}
   >
     <span>
       <b>
@@ -200,7 +166,7 @@ exports[`Request snapshot tests should match snapshot with toggled info 1`] = `
       </b>
     </span>
     <styled.div
-      isInfoVisible={true}
+      isInfoVisible={false}
     >
       <span>
         <b>
@@ -251,42 +217,10 @@ exports[`Request snapshot tests should match snapshot with toggled info 1`] = `
         transform={null}
       />
     </styled.button>
-    <styled.button
-      data-testid="action"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        border={false}
-        className=""
-        fixedWidth={false}
-        flip={null}
-        icon={
-          Object {
-            "icon": Array [
-              512,
-              512,
-              Array [],
-              "f04e",
-              "M500.5 231.4l-192-160C287.9 54.3 256 68.6 256 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2zm-256 0l-192-160C31.9 54.3 0 68.6 0 96v320c0 27.4 31.9 41.8 52.5 24.6l192-160c15.3-12.8 15.3-36.4 0-49.2z",
-            ],
-            "iconName": "forward",
-            "prefix": "fas",
-          }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        size={null}
-        spin={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        transform={null}
-      />
-    </styled.button>
+    <Memo()
+      initialMessage="accept"
+      requestId={1}
+    />
   </styled.div>
 </styled.div>
 `;
@@ -358,42 +292,10 @@ exports[`Request snapshot tests should match snapshot without request 1`] = `
         transform={null}
       />
     </styled.button>
-    <styled.button
-      data-testid="action"
-      onClick={[Function]}
-    >
-      <FontAwesomeIcon
-        border={false}
-        className=""
-        fixedWidth={false}
-        flip={null}
-        icon={
-          Object {
-            "icon": Array [
-              512,
-              512,
-              Array [],
-              "f00c",
-              "M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z",
-            ],
-            "iconName": "check",
-            "prefix": "fas",
-          }
-        }
-        inverse={false}
-        listItem={false}
-        mask={null}
-        pull={null}
-        pulse={false}
-        rotation={null}
-        size={null}
-        spin={false}
-        swapOpacity={false}
-        symbol={false}
-        title=""
-        transform={null}
-      />
-    </styled.button>
+    <Memo()
+      initialMessage="accept"
+      requestId={1}
+    />
   </styled.div>
 </styled.div>
 `;

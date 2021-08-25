@@ -14,8 +14,8 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
         data-testid="5"
         isSelected={true}
         key="5"
-        maxPages={10}
         onClick={[Function]}
+        pagesOnSlide={5}
       >
         5
       </styled.li>
@@ -23,8 +23,8 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
         data-testid="6"
         isSelected={false}
         key="6"
-        maxPages={10}
         onClick={[Function]}
+        pagesOnSlide={5}
       >
         6
       </styled.li>
@@ -32,8 +32,8 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
         data-testid="7"
         isSelected={false}
         key="7"
-        maxPages={10}
         onClick={[Function]}
+        pagesOnSlide={5}
       >
         7
       </styled.li>
@@ -41,8 +41,8 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
         data-testid="8"
         isSelected={false}
         key="8"
-        maxPages={10}
         onClick={[Function]}
+        pagesOnSlide={5}
       >
         8
       </styled.li>
@@ -50,8 +50,8 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
         data-testid="9"
         isSelected={false}
         key="9"
-        maxPages={10}
         onClick={[Function]}
+        pagesOnSlide={5}
       >
         9
       </styled.li>
@@ -59,8 +59,8 @@ exports[`Pagination snapshot tests renders correctly with page that is last page
         data-testid="10"
         isSelected={false}
         key="10"
-        maxPages={10}
         onClick={[Function]}
+        pagesOnSlide={5}
       >
         10
       </styled.li>
@@ -83,8 +83,8 @@ exports[`Pagination snapshot tests renders correctly with pages 1`] = `
         data-testid="1"
         isSelected={true}
         key="1"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         1
       </styled.li>
@@ -92,8 +92,8 @@ exports[`Pagination snapshot tests renders correctly with pages 1`] = `
         data-testid="2"
         isSelected={false}
         key="2"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         2
       </styled.li>
@@ -101,8 +101,8 @@ exports[`Pagination snapshot tests renders correctly with pages 1`] = `
         data-testid="3"
         isSelected={false}
         key="3"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         3
       </styled.li>
@@ -110,8 +110,8 @@ exports[`Pagination snapshot tests renders correctly with pages 1`] = `
         data-testid="4"
         isSelected={false}
         key="4"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         4
       </styled.li>
@@ -119,8 +119,8 @@ exports[`Pagination snapshot tests renders correctly with pages 1`] = `
         data-testid="5"
         isSelected={false}
         key="5"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         5
       </styled.li>
@@ -149,8 +149,8 @@ exports[`Pagination snapshot tests renders correctly with pages at last page 1`]
         data-testid="1"
         isSelected={false}
         key="1"
-        maxPages={4}
         onClick={[Function]}
+        pagesOnSlide={3}
       >
         1
       </styled.li>
@@ -158,8 +158,8 @@ exports[`Pagination snapshot tests renders correctly with pages at last page 1`]
         data-testid="2"
         isSelected={false}
         key="2"
-        maxPages={4}
         onClick={[Function]}
+        pagesOnSlide={3}
       >
         2
       </styled.li>
@@ -167,8 +167,8 @@ exports[`Pagination snapshot tests renders correctly with pages at last page 1`]
         data-testid="3"
         isSelected={false}
         key="3"
-        maxPages={4}
         onClick={[Function]}
+        pagesOnSlide={3}
       >
         3
       </styled.li>
@@ -176,8 +176,8 @@ exports[`Pagination snapshot tests renders correctly with pages at last page 1`]
         data-testid="4"
         isSelected={true}
         key="4"
-        maxPages={4}
         onClick={[Function]}
+        pagesOnSlide={3}
       >
         4
       </styled.li>
@@ -200,8 +200,8 @@ exports[`Pagination snapshot tests renders correctly with pages at page 2 and ba
         data-testid="1"
         isSelected={false}
         key="1"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         1
       </styled.li>
@@ -209,8 +209,8 @@ exports[`Pagination snapshot tests renders correctly with pages at page 2 and ba
         data-testid="2"
         isSelected={true}
         key="2"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         2
       </styled.li>
@@ -218,8 +218,8 @@ exports[`Pagination snapshot tests renders correctly with pages at page 2 and ba
         data-testid="3"
         isSelected={false}
         key="3"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         3
       </styled.li>
@@ -227,8 +227,8 @@ exports[`Pagination snapshot tests renders correctly with pages at page 2 and ba
         data-testid="4"
         isSelected={false}
         key="4"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         4
       </styled.li>
@@ -236,8 +236,8 @@ exports[`Pagination snapshot tests renders correctly with pages at page 2 and ba
         data-testid="5"
         isSelected={false}
         key="5"
-        maxPages={5}
         onClick={[Function]}
+        pagesOnSlide={4}
       >
         5
       </styled.li>
