@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RequestButtons unit tests should match snapshot with accept state 1`] = `
+exports[`RequestButtons snapshot tests should match snapshot with accept state 1`] = `
 <Fragment>
   <styled.button
     data-testid="accept"
@@ -77,7 +77,7 @@ exports[`RequestButtons unit tests should match snapshot with accept state 1`] =
 </Fragment>
 `;
 
-exports[`RequestButtons unit tests should match snapshot with accept state and loading request 1`] = `
+exports[`RequestButtons snapshot tests should match snapshot with accept state and loading request 1`] = `
 <Fragment>
   <styled.button
     data-testid="accept"
@@ -94,7 +94,7 @@ exports[`RequestButtons unit tests should match snapshot with accept state and l
 </Fragment>
 `;
 
-exports[`RequestButtons unit tests should match snapshot with complete state 1`] = `
+exports[`RequestButtons snapshot tests should match snapshot with complete state 1`] = `
 <Fragment>
   <styled.button
     data-testid="action"
@@ -135,7 +135,7 @@ exports[`RequestButtons unit tests should match snapshot with complete state 1`]
 </Fragment>
 `;
 
-exports[`RequestButtons unit tests should match snapshot with pending state 1`] = `
+exports[`RequestButtons snapshot tests should match snapshot with pending state 1`] = `
 <Fragment>
   <styled.button
     data-testid="action"
@@ -176,7 +176,7 @@ exports[`RequestButtons unit tests should match snapshot with pending state 1`] 
 </Fragment>
 `;
 
-exports[`RequestButtons unit tests should match snapshot with send state 1`] = `
+exports[`RequestButtons snapshot tests should match snapshot with send state 1`] = `
 <Fragment>
   <styled.button
     data-testid="action"
