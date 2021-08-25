@@ -20,7 +20,7 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
 
     const setChat = () => {
         history.push('/chat');
-        dispatch(setCurrentChat(chatWithUser));
+        dispatch(setCurrentChat(request ? request.chatWithUser : chatWithUser));
     }
 
     useEffect(() => {
@@ -30,7 +30,9 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
     }, [request])
 
     const accept = () => {
-        dispatch(acceptRequest({ id: requestId, userId: id}));
+        if(!request?.isLoading){
+            dispatch(acceptRequest({ id: requestId, userId: id}));
+        }
     }
 
     const getActionButton = () => {
@@ -56,7 +58,7 @@ const User = memo(({user: { id, profileImage, firstName, lastName, chatWithUser,
         }
         
         return(
-            <Button data-testid='action' onClick={action}>
+            <Button data-testid='action' onClick={() => !request?.isLoading && action()}>
                 {request?.isLoading
                     ? <LoadingIndicator />
                     : icon
