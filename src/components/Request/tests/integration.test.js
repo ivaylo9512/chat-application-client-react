@@ -2,7 +2,7 @@ import createSaga from 'redux-saga';
 import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import chats from 'app/slices/chatsSlice';
 import requests from 'app/slices/requestsSlice';
-import requestsWatcher from 'app/sagas/requests';
+import requestsWatcher from 'app/sagas/sendRequests';
 import acceptRequestWatcher from 'app/sagas/acceptRequest';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';

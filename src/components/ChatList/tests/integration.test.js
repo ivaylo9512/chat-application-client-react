@@ -37,7 +37,7 @@ describe('ChatList integration tests', () => {
 
     it('should fetch chats on mount', async() => {
         const chatsData = createData();
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({data: chatsData, pages: 1}), { status: 200 }));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({data: chatsData, count: 1}), { status: 200 }));
 
         let wrapper;
         await act(async () => wrapper = createWrapper());
@@ -51,7 +51,7 @@ describe('ChatList integration tests', () => {
         expect(foundChats.at(0).prop('chat')).toStrictEqual(chatsData[0])
         expect(foundChats.at(1).prop('chat')).toStrictEqual(chatsData[1])
 
-        const { chats, lastChat, isLastPage, currentChat } = store.getState().chats.data;
+        const { chats, lastChat, isLastPage } = store.getState().chats.data;
 
         expect(chats).toStrictEqual(chats);
         expect(isLastPage).toBe(true);

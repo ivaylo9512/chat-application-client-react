@@ -38,13 +38,13 @@ const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
                 }
                 <Ul>
                     {
-                        Array.from({length: page / pagesPerSlide < 1 ? pagesPerSlide : pagesPerSlide + 1 }).map((el, i) => {
+                        Array.from({ length: page / pagesPerSlide < 1 ? pagesPerSlide : pagesPerSlide + 1 }).map((el, i) => {
                             const slide = Math.floor(page / pagesPerSlide);
-                            let pageIndex = slide * pagesPerSlide + i;
-                            pageIndex += slide == 0 ? 1 : 0;
+                            const start = slide * pagesPerSlide + (slide == 0 ? 1 : 0);
+                            const pageIndex = start + i;
 
                             if(pageIndex <= maxPages){
-                                return <Li data-testid={`${pageIndex}`} maxPages={maxPages} isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
+                                return <Li data-testid={`${pageIndex}`} pagesOnSlide={maxPages - start} isSelected={pageIndex == page} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
                             }
                         )
                     }

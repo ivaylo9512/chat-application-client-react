@@ -9,6 +9,7 @@ export const ChatContainer = styled.div`
     align-items: center;
     display: flex;
     margin-right: 0.5vw;
+    cursor: pointer;
 `
 export const ChatNode = styled.div`
     padding: 0 5%;
@@ -76,4 +77,5 @@ export const InfoButton = styled.button`
     width: 2.5vh;
     font-size: 1.2vh;
     border-radius: 50%;
+    cursor: pointer;
 `

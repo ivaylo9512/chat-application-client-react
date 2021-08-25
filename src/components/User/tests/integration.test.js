@@ -5,7 +5,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import users from 'app/slices/usersSlice'
 import requests from 'app/slices/requestsSlice'
 import chats from 'app/slices/chatsSlice'
-import requestsWatcher from 'app/sagas/requests'
+import requestsWatcher from 'app/sagas/sendRequests'
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import createSaga from 'redux-saga';

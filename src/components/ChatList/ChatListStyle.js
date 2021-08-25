@@ -38,6 +38,7 @@ export const MoreInfo = styled.span`
     font-size: 1.5vh;
     flex: 0 0 2.8vh;
     margin-right: 1vw;
+    cursor: pointer;
 `
 
 export const LoadingContainer = styled.div`

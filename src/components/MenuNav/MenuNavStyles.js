@@ -49,6 +49,7 @@ export const Li = styled.li`
     margin-left: -2vw;
     transform-origin: center;
     list-style: none;
+    cursor: pointer;
 
     a{
         text-align: center;

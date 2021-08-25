@@ -1,21 +1,143 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] = `
+.c0 {
+  position: relative;
+  height: 32vw;
+  width: 32vw;
+}
+
+.c0 li:first-child {
+  -webkit-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+}
+
+.c0 li:nth-child(2) {
+  -webkit-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+
+.c0 li:nth-child(3) {
+  -webkit-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+.c0 li:nth-child(4) {
+  -webkit-transform: rotate(55deg);
+  -ms-transform: rotate(55deg);
+  transform: rotate(55deg);
+}
+
+.c0 li:nth-child(5) {
+  -webkit-transform: rotate(75deg);
+  -ms-transform: rotate(75deg);
+  transform: rotate(75deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(7) {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.c0 li:nth-child(8) {
+  -webkit-transform: rotate(140deg);
+  -ms-transform: rotate(140deg);
+  transform: rotate(140deg);
+}
+
+.c0 li:nth-child(9) {
+  -webkit-transform: rotate(160deg);
+  -ms-transform: rotate(160deg);
+  transform: rotate(160deg);
+}
+
+.c1 {
+  position: absolute;
+  font-size: 1.5em;
+  width: 4vw;
+  height: 100%;
+  left: 50%;
+  margin-left: -2vw;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  list-style: none;
+  cursor: pointer;
+}
+
+.c1 a {
+  text-align: center;
+  line-height: 3vw;
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.05vw rgb(0,0,0,0.8);
+}
+
+.c1 a:hover,
+.c1 button:hover {
+  box-shadow: 0px 0px 0.2vw 0.05vw rgb(0 0 0 / 50%);
+}
+
+.c2 {
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.1vw rgb(0,0,0,0.8);
+  cursor: pointer;
+}
+
 <MenuNav>
   <styled.nav>
     <nav
-      className="sc-bdnxRM dCmWw"
+      className="c0"
     >
       <ul>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 tabIndex="-1"
               >
                 <i
@@ -27,7 +149,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               data-testid="toggleHeader"
@@ -35,7 +157,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 data-testid="toggleHeader"
                 onClick={[Function]}
                 tabIndex="-1"
@@ -49,7 +171,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchChat"
@@ -78,7 +200,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchUsers"
@@ -107,7 +229,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="requests"
@@ -136,7 +258,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="logout"
@@ -170,21 +292,143 @@ exports[`MenuNav snapshot tests should match snapshot when header is hidden 1`] 
 `;
 
 exports[`MenuNav snapshot tests should match snapshot when header is not hidden 1`] = `
+.c0 {
+  position: relative;
+  height: 32vw;
+  width: 32vw;
+}
+
+.c0 li:first-child {
+  -webkit-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+}
+
+.c0 li:nth-child(2) {
+  -webkit-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+
+.c0 li:nth-child(3) {
+  -webkit-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+.c0 li:nth-child(4) {
+  -webkit-transform: rotate(55deg);
+  -ms-transform: rotate(55deg);
+  transform: rotate(55deg);
+}
+
+.c0 li:nth-child(5) {
+  -webkit-transform: rotate(75deg);
+  -ms-transform: rotate(75deg);
+  transform: rotate(75deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(7) {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.c0 li:nth-child(8) {
+  -webkit-transform: rotate(140deg);
+  -ms-transform: rotate(140deg);
+  transform: rotate(140deg);
+}
+
+.c0 li:nth-child(9) {
+  -webkit-transform: rotate(160deg);
+  -ms-transform: rotate(160deg);
+  transform: rotate(160deg);
+}
+
+.c1 {
+  position: absolute;
+  font-size: 1.5em;
+  width: 4vw;
+  height: 100%;
+  left: 50%;
+  margin-left: -2vw;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  list-style: none;
+  cursor: pointer;
+}
+
+.c1 a {
+  text-align: center;
+  line-height: 3vw;
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.05vw rgb(0,0,0,0.8);
+}
+
+.c1 a:hover,
+.c1 button:hover {
+  box-shadow: 0px 0px 0.2vw 0.05vw rgb(0 0 0 / 50%);
+}
+
+.c2 {
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.1vw rgb(0,0,0,0.8);
+  cursor: pointer;
+}
+
 <MenuNav>
   <styled.nav>
     <nav
-      className="sc-bdnxRM dCmWw"
+      className="c0"
     >
       <ul>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 tabIndex="-1"
               >
                 <i
@@ -196,7 +440,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               data-testid="toggleHeader"
@@ -204,7 +448,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 data-testid="toggleHeader"
                 onClick={[Function]}
                 tabIndex="-1"
@@ -218,7 +462,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchChat"
@@ -247,7 +491,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchUsers"
@@ -276,7 +520,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="requests"
@@ -305,7 +549,7 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="logout"
@@ -339,21 +583,143 @@ exports[`MenuNav snapshot tests should match snapshot when header is not hidden 
 `;
 
 exports[`MenuNav snapshot tests should match snapshot when search is hidden and path is /searchChat 1`] = `
+.c0 {
+  position: relative;
+  height: 32vw;
+  width: 32vw;
+}
+
+.c0 li:first-child {
+  -webkit-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+}
+
+.c0 li:nth-child(2) {
+  -webkit-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+
+.c0 li:nth-child(3) {
+  -webkit-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+.c0 li:nth-child(4) {
+  -webkit-transform: rotate(55deg);
+  -ms-transform: rotate(55deg);
+  transform: rotate(55deg);
+}
+
+.c0 li:nth-child(5) {
+  -webkit-transform: rotate(75deg);
+  -ms-transform: rotate(75deg);
+  transform: rotate(75deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(7) {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.c0 li:nth-child(8) {
+  -webkit-transform: rotate(140deg);
+  -ms-transform: rotate(140deg);
+  transform: rotate(140deg);
+}
+
+.c0 li:nth-child(9) {
+  -webkit-transform: rotate(160deg);
+  -ms-transform: rotate(160deg);
+  transform: rotate(160deg);
+}
+
+.c1 {
+  position: absolute;
+  font-size: 1.5em;
+  width: 4vw;
+  height: 100%;
+  left: 50%;
+  margin-left: -2vw;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  list-style: none;
+  cursor: pointer;
+}
+
+.c1 a {
+  text-align: center;
+  line-height: 3vw;
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.05vw rgb(0,0,0,0.8);
+}
+
+.c1 a:hover,
+.c1 button:hover {
+  box-shadow: 0px 0px 0.2vw 0.05vw rgb(0 0 0 / 50%);
+}
+
+.c2 {
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.1vw rgb(0,0,0,0.8);
+  cursor: pointer;
+}
+
 <MenuNav>
   <styled.nav>
     <nav
-      className="sc-bdnxRM dCmWw"
+      className="c0"
     >
       <ul>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 tabIndex="-1"
               >
                 <i
@@ -365,7 +731,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               data-testid="toggleHeader"
@@ -373,7 +739,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 data-testid="toggleHeader"
                 onClick={[Function]}
                 tabIndex="-1"
@@ -387,7 +753,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchChat"
@@ -416,7 +782,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchUsers"
@@ -445,7 +811,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="requests"
@@ -474,14 +840,14 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               data-testid="toggleSearch"
               onClick={[Function]}
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 data-testid="toggleSearch"
                 onClick={[Function]}
               >
@@ -494,7 +860,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="logout"
@@ -528,21 +894,143 @@ exports[`MenuNav snapshot tests should match snapshot when search is hidden and 
 `;
 
 exports[`MenuNav snapshot tests should match snapshot when search is not hidden and path is /searchChat 1`] = `
+.c0 {
+  position: relative;
+  height: 32vw;
+  width: 32vw;
+}
+
+.c0 li:first-child {
+  -webkit-transform: rotate(-5deg);
+  -ms-transform: rotate(-5deg);
+  transform: rotate(-5deg);
+}
+
+.c0 li:nth-child(2) {
+  -webkit-transform: rotate(15deg);
+  -ms-transform: rotate(15deg);
+  transform: rotate(15deg);
+}
+
+.c0 li:nth-child(3) {
+  -webkit-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  transform: rotate(35deg);
+}
+
+.c0 li:nth-child(4) {
+  -webkit-transform: rotate(55deg);
+  -ms-transform: rotate(55deg);
+  transform: rotate(55deg);
+}
+
+.c0 li:nth-child(5) {
+  -webkit-transform: rotate(75deg);
+  -ms-transform: rotate(75deg);
+  transform: rotate(75deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(6) {
+  -webkit-transform: rotate(95deg);
+  -ms-transform: rotate(95deg);
+  transform: rotate(95deg);
+}
+
+.c0 li:nth-child(7) {
+  -webkit-transform: rotate(120deg);
+  -ms-transform: rotate(120deg);
+  transform: rotate(120deg);
+}
+
+.c0 li:nth-child(8) {
+  -webkit-transform: rotate(140deg);
+  -ms-transform: rotate(140deg);
+  transform: rotate(140deg);
+}
+
+.c0 li:nth-child(9) {
+  -webkit-transform: rotate(160deg);
+  -ms-transform: rotate(160deg);
+  transform: rotate(160deg);
+}
+
+.c1 {
+  position: absolute;
+  font-size: 1.5em;
+  width: 4vw;
+  height: 100%;
+  left: 50%;
+  margin-left: -2vw;
+  -webkit-transform-origin: center;
+  -ms-transform-origin: center;
+  transform-origin: center;
+  list-style: none;
+  cursor: pointer;
+}
+
+.c1 a {
+  text-align: center;
+  line-height: 3vw;
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.05vw rgb(0,0,0,0.8);
+}
+
+.c1 a:hover,
+.c1 button:hover {
+  box-shadow: 0px 0px 0.2vw 0.05vw rgb(0 0 0 / 50%);
+}
+
+.c2 {
+  position: absolute;
+  top: 1vw;
+  border-radius: 50%;
+  font-size: 0.95vw;
+  color: white;
+  height: 3vw;
+  width: 3vw;
+  background: rgb(24,27,33);
+  padding: 0;
+  border: 0;
+  box-shadow: 0px 0px 0.5vw 0.1vw rgb(0,0,0,0.8);
+  cursor: pointer;
+}
+
 <MenuNav>
   <styled.nav>
     <nav
-      className="sc-bdnxRM dCmWw"
+      className="c0"
     >
       <ul>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 tabIndex="-1"
               >
                 <i
@@ -554,7 +1042,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               data-testid="toggleHeader"
@@ -562,7 +1050,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
               tabIndex="-1"
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 data-testid="toggleHeader"
                 onClick={[Function]}
                 tabIndex="-1"
@@ -576,7 +1064,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchChat"
@@ -605,7 +1093,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="searchUsers"
@@ -634,7 +1122,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="requests"
@@ -663,14 +1151,14 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <styled.button
               data-testid="toggleSearch"
               onClick={[Function]}
             >
               <button
-                className="sc-dlnjwi hodYHm"
+                className="c2"
                 data-testid="toggleSearch"
                 onClick={[Function]}
               >
@@ -683,7 +1171,7 @@ exports[`MenuNav snapshot tests should match snapshot when search is not hidden 
         </styled.li>
         <styled.li>
           <li
-            className="sc-gtsrHT cBCFnl"
+            className="c1"
           >
             <Link
               data-testid="logout"

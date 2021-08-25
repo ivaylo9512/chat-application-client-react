@@ -101,7 +101,7 @@ describe('Pagination integration tests', () => {
         wrapper.update();
         await act(async() => wrapper.findByTestid(6).at(0).simulate('click'));
 
-        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChatsByName/2//test test/9`, {
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChatsByName/2/test test/9`, {
             headers: {
                 Authorization: null
             },

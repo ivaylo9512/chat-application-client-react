@@ -18,6 +18,7 @@ export const Button = styled.button`
     color: #c2001b;
     outline: none;
     font-size: 1vw;
+    cursor: pointer;
 `
 
 export const FormNode = styled.form`

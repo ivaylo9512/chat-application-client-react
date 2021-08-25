@@ -19,7 +19,7 @@ function* getChats({payload: query}){
     if(response.ok){
         const pageable = yield response.json(); 
         pageable.lastChat = pageable.data[pageable.data.length - 1]; 
-        pageable.isLastPage = pageable.pages < 2;
+        pageable.isLastPage = pageable.count < 2;
 
         yield put(onChatsComplete({
             pageable,

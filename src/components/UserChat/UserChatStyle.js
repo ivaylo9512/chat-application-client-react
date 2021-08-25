@@ -63,6 +63,7 @@ export const Button = styled.button`
     color: white;
     border-radius: 50%;
     box-shadow: 0px 0px 0.15vw 0.15vw rgb(0 0 0);
+    cursor: pointer;
 
     :hover{
         transform: scale(1.1);

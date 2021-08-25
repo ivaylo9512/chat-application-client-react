@@ -2,6 +2,7 @@ import MenuNav from 'components/MenuNav/MenuNav';
 import { mount } from 'enzyme';
 import * as Redux from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import 'jest-styled-components'
 
 describe('MenuNav snapshot tests', () => {
     let selectorSpy;
@@ -20,7 +21,6 @@ describe('MenuNav snapshot tests', () => {
             <MemoryRouter initialEntries={[path]}>
                 <MenuNav />
             </MemoryRouter>
-            
         )
     }
 

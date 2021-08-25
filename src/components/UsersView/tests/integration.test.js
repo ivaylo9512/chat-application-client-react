@@ -2,7 +2,7 @@ import createSaga from 'redux-saga';
 import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import users from 'app/slices/usersSlice';
 import usersWatcher from 'app/sagas/users';
-import requestsWatcher from 'app/sagas/requests';
+import requestsWatcher from 'app/sagas/sendRequests';
 import styles from 'app/slices/stylesSlice';
 import requests from 'app/slices/requestsSlice';
 import UsersView from 'components/UsersView/UsersView';
