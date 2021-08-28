@@ -1,12 +1,12 @@
 import { BASE_URL } from "appConstants"
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest, call } from "redux-saga/effects";
 import history from 'utils/history';
 import { onRegisterComplete, onRegisterError } from "app/slices/authenticateSlice";
 
 export default takeLatest('authenticate/registerRequest', register)
 
 export function* register({payload}){
-    const response = yield fetch(`${BASE_URL}/api/users/register`,{
+    const response = yield call(fetch, `${BASE_URL}/api/users/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'Application/json'

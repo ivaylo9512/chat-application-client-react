@@ -34,7 +34,7 @@ const usersSlice = createSlice({
             state.dataInfo.lastData = pageable.lastUser;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
             state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
-            state.dataInfo.isLoading = false;
+            state.isLoading = false;
             state.error = null;
         },
         onUsersError: (state, {payload}) => {
@@ -54,7 +54,7 @@ const usersSlice = createSlice({
     }
 });
 
-export const {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
+export const  {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
 export default usersSlice.reducer;
 
 export const getUsers = state => state.users.dataInfo.data;

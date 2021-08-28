@@ -6,7 +6,7 @@ import acceptRequestWatcher from './acceptRequest';
 import denyRequestWatcher from './denyRequest';
 import chatsWatcher from './chats';
 import getUserChats from './userChats';
-import sendRequestsWatcher from './sendRequests';
+import sendRequestsWatcher from './sendRequest';
 import allRequestsWatcher from './allRequests';
 import { onLogout } from 'app/slices/authenticateSlice';
 

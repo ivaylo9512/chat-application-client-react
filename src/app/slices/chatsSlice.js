@@ -36,7 +36,7 @@ const chatsSlice = createSlice({
             state.isLoading = false;
         },
         setCurrentChat: (state, { payload }) => {
-            state.currentChat = payload;
+            state.data.currentChat = payload;
         },
         addChat: (state, { payload }) => {
             state.data.chats = [payload, ...state.data.chats]

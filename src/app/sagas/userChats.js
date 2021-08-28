@@ -1,5 +1,5 @@
 import { onUserChatsComplete, onUserChatsError, getUserChatsData } from "app/slices/userChatsSlice";
-import { select, takeLatest, put } from "redux-saga/effects";
+import { select, takeLatest, put, call } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import UnauthorizedException from "exceptions/unauthorizedException";
 import splitArray from "utils/splitArray";
@@ -7,12 +7,12 @@ import { wrapper } from ".";
 
 export default takeLatest('userChats/userChatsRequest', wrapper(getUserChats));
 
-function* getUserChats({payload: query}){
+export function* getUserChats({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUserChatsData));
     const lastPath = lastName ? `/${lastName}/${lastId}` : '';
     const namePath = name ? `/${name.replace(/[\\?%#/'"]/g, '')}` : '';
     
-    const response = yield fetch(`${BASE_URL}/api/chats/auth/findChatsByName/${takeAmount}${namePath}${lastPath}`,{
+    const response = yield call(fetch, `${BASE_URL}/api/chats/auth/findChatsByName/${takeAmount}${namePath}${lastPath}`,{
         headers:{
             Authorization: localStorage.getItem('Authorization')
         }

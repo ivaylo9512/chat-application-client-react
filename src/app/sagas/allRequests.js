@@ -1,5 +1,5 @@
 import { wrapper } from ".";
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeLatest, put, select, call } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import UnauthorizedException from "exceptions/unauthorizedException";
 import { getAllRequestsData, onGetRequestsComplete, onGetRequestsError } from 'app/slices/allRequestsSlice';
@@ -11,7 +11,7 @@ function* getRequests({payload: query}){
     const { lastCreatedAt, lastId, takeAmount } =  getData(query, yield select(getAllRequestsData));
     const lastPath = lastCreatedAt ? `${lastCreatedAt}/${lastId}` : '';
 
-    const response = yield fetch(`${BASE_URL}/api/requests/auth/findAll/${takeAmount}/${lastPath}`, {
+    const response = yield call(fetch, `${BASE_URL}/api/requests/auth/findAll/${takeAmount}/${lastPath}`, {
         headers:{
             Authorization: localStorage.getItem('Authorization')
         }

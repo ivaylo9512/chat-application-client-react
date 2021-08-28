@@ -1,18 +1,18 @@
 import { BASE_URL } from 'appConstants';
 import { getUsersData, onUsersComplete, onUsersError} from 'app/slices/usersSlice';
-import { takeLatest, select, put } from 'redux-saga/effects';
+import { takeLatest, select, put, call } from 'redux-saga/effects';
 import splitArray from 'utils/splitArray';
 import UnauthorizedException from 'exceptions/unauthorizedException';
 import { wrapper } from '.';
 
 export default takeLatest('users/usersRequest', wrapper(getUsers));
 
-function* getUsers({payload: query}){
+export function* getUsers({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUsersData));
     const lastPath = lastName ? `/${lastName}/${lastId}` : '';
     const namePath = name ? `/${name.replace(/[\\?%#/'"]/g, '')}` : '';
 
-    const response = yield fetch(`${BASE_URL}/api/users/auth/searchForUsers/${takeAmount}${namePath}${lastPath}`,{
+    const response = yield call(fetch, `${BASE_URL}/api/users/auth/searchForUsers/${takeAmount}${namePath}${lastPath}`,{
         headers:{
             Authorization: localStorage.getItem('Authorization')
         }

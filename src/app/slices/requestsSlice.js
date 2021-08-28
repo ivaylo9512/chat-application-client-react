@@ -34,9 +34,10 @@ const requestsSlice = createSlice({
             request.chatWithUser = chatWithUser;
             request.state = requestState;
         },
-        onRequestError: (state, { payload: { userId, message, requestState }}) => {
+        onRequestError: (state, { payload: { userId, message, requestState, id }}) => {
             const request = state.data[userId];
 
+            request.id = id;
             request.state = requestState;
             request.isLoading = false;
             request.error = message;

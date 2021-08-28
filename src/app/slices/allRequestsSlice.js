@@ -33,7 +33,7 @@ const allRequestsSlice = createSlice({
             state.dataInfo.lastData = pageable.lastRequest;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
             state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
-            state.dataInfo.isLoading = false;
+            state.isLoading = false;
             state.error = null;
         },
         onGetRequestsError: (state, {payload}) => {

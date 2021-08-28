@@ -34,7 +34,7 @@ const userChatsSlice = createSlice({
             state.dataInfo.lastData = pageable.lastUserChat;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
             state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
-            state.dataInfo.isLoading = false;
+            state.isLoading = false;
             state.error = null;
         },
         onUserChatsError: (state, {payload}) => {
@@ -54,7 +54,7 @@ const userChatsSlice = createSlice({
     }
 });
 
-export const {userChatsRequest, resetUserChatsState, onUserChatsComplete, onUserChatsError,  setCurrentUserChats } = userChatsSlice.actions 
+export const { userChatsRequest, resetUserChatsState, onUserChatsComplete, onUserChatsError,  setCurrentUserChats } = userChatsSlice.actions 
 export default userChatsSlice.reducer;
 
 export const getUserChats = state => state.userChats.dataInfo.data;
