@@ -9,7 +9,7 @@ exports[`Chat snapshot tests should rednder with snapshot 1`] = `
       <styled.button>
         <img
           alt="profile image"
-          src="http://localhost:8080/images/download/image1.png"
+          src="http://192.168.0.105:8080/images/download/image1.png"
         />
       </styled.button>
       <styled.div

@@ -6,7 +6,7 @@ exports[`UserChat snapshot tests should match snapshot 1`] = `
     className="image-container"
   >
     <img
-      src="http://localhost:8080/images/download/image.png"
+      src="http://192.168.0.105:8080/images/download/image.png"
     />
   </Styled(styled.button)>
   <styled.div
@@ -115,7 +115,7 @@ exports[`UserChat snapshot tests should match snapshot with toggled info 1`] = `
     className="image-container"
   >
     <img
-      src="http://localhost:8080/images/download/image.png"
+      src="http://192.168.0.105:8080/images/download/image.png"
     />
   </Styled(styled.button)>
   <styled.div
