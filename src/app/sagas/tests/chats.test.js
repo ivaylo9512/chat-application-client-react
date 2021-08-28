@@ -108,4 +108,97 @@ describe('chats saga tests', () => {
             })
             .run()
     })
+
+    
+    it('should set state on chats request with initial state', () => {
+        const query = {
+            take: 3,
+            direction: 'ASC',
+            pages: 1
+        }
+
+        const pageable = {
+            data: [{ id: 4, updatedAt: '2021-09-06' }, { id: 5, updatedAt: '2021-09-05' }, { id: 6, updatedAt: '2021-09-04' }],
+            count: 1
+        }
+
+        return expectSaga(getChats, { payload: query })
+            .withReducer(chatsReducer)
+            .provide([
+                [call(fetch, `${BASE_URL}/api/chats/auth/findChats/${query.take}`, {
+                    headers:{
+                        Authorization: null
+                    }}), 
+                    new Response(JSON.stringify(pageable), { status: 200 })
+                ],
+                [select(getChatsData), { data: { lastChat: null } }]
+            ])
+            .put(onChatsComplete({
+                pageable: {
+                    data: pageable.data,
+                    isLastPage: true,
+                    lastChat: pageable.data[2],
+                    count: 1
+                },
+                query
+            }))
+            .hasFinalState({
+                data: {
+                    chats: pageable.data,
+                    lastChat: pageable.data[2],
+                    isLastPage: true,
+                    currentChat: null
+                },
+                error: null,
+                isLoading: false,
+                query
+            })
+            .run();
+    })
+
+    it('should set state on chats request with initial state and more then 1 pages count', () => {
+        const query = {
+            take: 3,
+            direction: 'ASC',
+            pages: 1
+        }
+
+        const pageable = {
+            data: [{ id: 4, updatedAt: '2021-09-06' }, { id: 5, updatedAt: '2021-09-05' }, { id: 6, updatedAt: '2021-09-04' }],
+            count: 2
+        }
+
+        return expectSaga(getChats, { payload: query })
+            .withReducer(chatsReducer)
+            .provide([
+                [call(fetch, `${BASE_URL}/api/chats/auth/findChats/${query.take}`, {
+                    headers:{
+                        Authorization: null
+                    }}), 
+                    new Response(JSON.stringify(pageable), { status: 200 })
+                ],
+                [select(getChatsData), { data: { lastChat: null } }]
+            ])
+            .put(onChatsComplete({
+                pageable: {
+                    data: pageable.data,
+                    isLastPage: false,
+                    lastChat: pageable.data[2],
+                    count: 2
+                },
+                query
+            }))
+            .hasFinalState({
+                data: {
+                    chats: pageable.data,
+                    lastChat: pageable.data[2],
+                    isLastPage: false,
+                    currentChat: null
+                },
+                error: null,
+                isLoading: false,
+                query
+            })
+            .run();
+    })
 })

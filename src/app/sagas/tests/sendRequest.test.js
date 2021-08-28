@@ -86,4 +86,48 @@ describe('send request saga tests', () => {
             })
             .run()
     })
+
+    it('should update request on send request without chatWithUser', () => {
+        const userId = 5;
+        const response = { 
+            requestState: 'pending', 
+            requestId: 2 
+        }
+
+        return expectSaga(sendRequest, { payload: userId })
+            .withReducer(requestReducer)
+            .withState({
+                data: {
+                    5: {
+                        isLoading: true
+                    }
+                }
+            })
+            .provide([
+                [call(fetch, `${BASE_URL}/api/requests/auth/add/5`, {
+                    method: 'POST',
+                    headers:{
+                        Authorization: null
+                    }
+                }), new Response(JSON.stringify(response), { status: 200 })]
+            ])
+            .put(onRequestComplete({
+                id: response.requestId,
+                requestState: 'pending',
+                userId,
+                chatWithUser: undefined
+            }))
+            .hasFinalState({
+                data: {
+                    5: {
+                        id: response.requestId,
+                        isLoading: false,
+                        chatWithUser: undefined,
+                        state: response.requestState
+                    }
+                }
+            })
+            .run()
+    })
+    
 })
