@@ -7,7 +7,7 @@ describe('User snapshot tests', () => {
         jest.spyOn(redux, 'useSelector').mockReturnValue(state);
         
         return shallow(
-            <User user={{ firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, requestState: 'send', requestId: 4, chatWithUser:{ id: 5 } }}/> 
+            <User user={{ firstName: 'First', lastName: 'Last', profilePicture: 'image.png', chatWithUser: false, image: 'image.png', requestState: 'send', requestId: 4, chatWithUser:{ id: 5 } }}/> 
         )
     }
 

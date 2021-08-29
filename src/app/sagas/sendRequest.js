@@ -1,14 +1,14 @@
 import { wrapper } from ".";
-import { takeLatest, put, takeEvery } from "redux-saga/effects";
+import { put, takeEvery, call } from "redux-saga/effects";
 import { BASE_URL } from "appConstants";
 import {onRequestComplete, onRequestError} from 'app/slices/requestsSlice';
 import UnauthorizedException from "exceptions/unauthorizedException";
 import { addChat } from "app/slices/chatsSlice";
 
-export default takeEvery('requests/sendRequest', wrapper(sendRequests));
+export default takeEvery('requests/sendRequest', wrapper(sendRequest));
 
-function* sendRequests({payload: id}){
-    const response = yield fetch(`${BASE_URL}/api/requests/auth/addRequest/${id}`, {
+export function* sendRequest({payload: id}){
+    const response = yield call(fetch, `${BASE_URL}/api/requests/auth/add/${id}`, {
         method: 'POST',
         headers:{
             Authorization: localStorage.getItem('Authorization')

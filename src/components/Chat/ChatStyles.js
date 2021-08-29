@@ -77,5 +77,6 @@ export const InfoButton = styled.button`
     width: 2.5vh;
     font-size: 1.2vh;
     border-radius: 50%;
+    background: white;
     cursor: pointer;
 `

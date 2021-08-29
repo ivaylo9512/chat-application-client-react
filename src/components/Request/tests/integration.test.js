@@ -2,7 +2,7 @@ import createSaga from 'redux-saga';
 import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import chats from 'app/slices/chatsSlice';
 import requests from 'app/slices/requestsSlice';
-import requestsWatcher from 'app/sagas/sendRequests';
+import requestsWatcher from 'app/sagas/sendRequest';
 import acceptRequestWatcher from 'app/sagas/acceptRequest';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
@@ -30,20 +30,20 @@ saga.run(function*(){
 global.fetch = jest.fn();
 
 const chatWithUser = {id: 1, lastMessage: 'last message', secondUser: { firstName: 'first', lastName: 'last', profileImage: 'image1.png'} };
-describe('Reqeust integration tests', () => {
+describe('Request integration tests', () => {
     const createWrapper = (request) => mount(
         <Provider store={store}>
             <MemoryRouter>
-                <Request request={{ ...request, createdAt: '2021-08-23', sender: { firstName: 'firstname', lastName: 'lastName', profileImage: 'image.png' }}}/>
+                <Request request={{ ...request, createdAt: '2021-08-23', sender: { id: 5, firstName: 'firstname', lastName: 'lastName', profileImage: 'image.png' }}}/>
             </MemoryRouter>
         </Provider>
     )
 
-    it('should call fetch with data', async() => {
+    it('should pass requestId and action prop and call fetch', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(chatWithUser), { status: 200 }));
         
         const wrapper = createWrapper({ id: 5 });
-        await act(async () => wrapper.findByTestid('action').at(0).simulate('click'));
+        await act(async () => wrapper.findByTestid('accept').at(0).simulate('click'));
 
         expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/accept/5`, {
             method: 'POST',
@@ -53,13 +53,13 @@ describe('Reqeust integration tests', () => {
         })
     })
 
-    it('should update store with request', async() => {
+    it('should pass userId prop and update store with request', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(chatWithUser), { status: 200 }));
         
         const wrapper = createWrapper({ id: 6 });
         await act(async () => wrapper.findByTestid('action').at(0).simulate('click'));
 
-        expect(store.getState().requests.data[6]).toStrictEqual({ isLoading: false, chatWithUser, state: 'complete', error: null });
+        expect(store.getState().requests.data[5]).toEqual({ isLoading: false, chatWithUser, state: 'completed', error: null });
     })
 
     it('should update store with current chat', async() => {

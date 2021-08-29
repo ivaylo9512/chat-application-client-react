@@ -51,7 +51,7 @@ const RequestButtons = memo(({requestId, userId, initialMessage, chatWithUser}) 
                 action = () => dispatch(sendRequest(userId));
                 icon = <FontAwesomeIcon icon={faShare}/>;
                 break;
-            case 'complete':
+            case 'completed':
                 action = setChat;
                 icon = <FontAwesomeIcon icon={faForward}/>;
                 break;

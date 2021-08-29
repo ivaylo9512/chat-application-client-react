@@ -34,7 +34,7 @@ describe('RequestButtons snapshot tests', () => {
     })
 
     it('should match snapshot with complete state', () => {
-        const wrapper = createWrapper(undefined, { requestId: 1, userId: 2, initialMessage: 'complete', chatWithUser: null})
+        const wrapper = createWrapper(undefined, { requestId: 1, userId: 2, initialMessage: 'completed', chatWithUser: null})
 
         expect(wrapper).toMatchSnapshot();
     })
