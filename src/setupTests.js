@@ -12,4 +12,5 @@ function findByTestid(testid) {
 ReactWrapper.prototype.findByTestid = findByTestid;
 ShallowWrapper.prototype.findByTestid = findByTestid;
 
+jest.setTimeout(15000);
 
