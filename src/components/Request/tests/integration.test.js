@@ -59,7 +59,7 @@ describe('Request integration tests', () => {
         const wrapper = createWrapper({ id: 6 });
         await act(async () => wrapper.findByTestid('action').at(0).simulate('click'));
 
-        expect(store.getState().requests.data[5]).toEqual({ isLoading: false, chatWithUser, state: 'completed', error: null });
+        expect(store.getState().requests.data[5]).toEqual({ isLoading: false, chatWithUser, id: 5, state: 'completed', error: null });
     })
 
     it('should update store with current chat', async() => {

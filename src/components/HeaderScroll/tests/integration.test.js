@@ -47,7 +47,7 @@ global.fetch = jest.fn();
 let id = 5;
 const createData = () => [{ id: id++, secondUser: { firstName: `${id}firstName`, lastName: `${id}lastName` }}, { id: id++, secondUser: { firstName: `${id}firstName`, lastName: `${id}lastName` }}];
 
-describe('HeaderScroll unit tests', () => {
+describe('HeaderScroll integration tests', () => {
     const createWrapper = () => mount(
         <Provider store={store}>
             <HeaderScroll />
@@ -61,7 +61,7 @@ describe('HeaderScroll unit tests', () => {
         await act(async() => wrapper.find(Container).props()
             .onWheel({currentTarget: { scrollLeft: 20, scrollTop: 10, clientWidth: 10, scrollWidth: 30, scroll: jest.fn() }, deltaY: 10}));
 
-        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChats/2/`, {
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChats/2`, {
             headers: {
                 Authorization: null
             }

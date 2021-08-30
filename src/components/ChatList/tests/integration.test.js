@@ -63,7 +63,7 @@ describe('ChatList integration tests', () => {
 
         createWrapper();
 
-        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChats/2/`, {
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChats/2`, {
             'headers': {
                 'Authorization': null
             }
