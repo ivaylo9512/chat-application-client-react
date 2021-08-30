@@ -55,7 +55,7 @@ describe('App integration tests', () => {
 
         const state = store.getState();
         expect(state.authenticate.isAuth).toBe(false);
-        expect(state.authenticate.user).toBe(undefined);
+        expect(state.authenticate.user).toBe(null);
         expect(wrapper.find(Login).length).toBe(1);
     })
 

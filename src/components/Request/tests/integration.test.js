@@ -66,6 +66,6 @@ describe('Request integration tests', () => {
         const wrapper = createWrapper({ id: 6 });
         await act(async () => wrapper.findByTestid('action').at(0).simulate('click'));
 
-        expect(store.getState().chats.currentChat).toStrictEqual(chatWithUser);
+        expect(store.getState().chats.data.currentChat).toStrictEqual(chatWithUser);
     })
 })

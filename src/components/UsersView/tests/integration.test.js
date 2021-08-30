@@ -190,8 +190,9 @@ describe('UsersView integration tests', () => {
 
     it('should reset requests on currentData change', async () => {
         const data = createPair(); 
+        data[0].requestState = 'send';
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), {status: 200}));
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ requestState: 'pending' }), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ requestState: 'pending', requestId: 3}), {status: 200}));
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), {status: 200}));
         
         const wrapper = createWrapper();
@@ -199,10 +200,10 @@ describe('UsersView integration tests', () => {
         wrapper.update();
 
         const users =  wrapper.find(User)
-        await act(async() => users.at(0).find('button').simulate('click'));
+        await act(async() => users.at(0).findByTestid('action').at(0).simulate('click'));
 
         let requests = store.getState().requests.data;
-        expect(requests[data[0].id]).toStrictEqual({ isLoading: false, state: 'pending', chatWithUser: undefined, error: null });
+        expect(requests[data[0].id]).toStrictEqual({ isLoading: false, state: 'pending', chatWithUser: undefined, id: 3, error: null });
 
         await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
 

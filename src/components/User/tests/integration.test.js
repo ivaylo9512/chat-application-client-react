@@ -71,6 +71,6 @@ describe('User integration tests', () => {
         const wrapper = createWrapper({ id: 7, chatWithUser, requestState: 'completed' });
         await act(async() => wrapper.findByTestid('action').at(0).simulate('click'));
 
-        expect(store.getState().chats.currentChat).toBe(chatWithUser);
+        expect(store.getState().chats.data.currentChat).toBe(chatWithUser);
     })
 })

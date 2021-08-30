@@ -46,7 +46,7 @@ describe('Logout integration tests', () => {
 
         const state = store.getState().authenticate;
         expect(state.isAuth).toBe(false);
-        expect(state.user).toBe(undefined);
+        expect(state.user).toBe(null);
     })
 
 })

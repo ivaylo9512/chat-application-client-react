@@ -5,6 +5,7 @@ import chats from 'app/slices/chatsSlice';
 import chatsWatcher from 'app/sagas/chats';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
+import { act } from 'react-dom/test-utils';
 
 const saga = createSaga();
 const middleware = [...getDefaultMiddleware(), saga];
@@ -32,9 +33,9 @@ describe('UserChat integration tests', () => {
         )
     })
 
-    it('should set current chat', () => {
-        wrapper.findByTestid('setChat').at(0).simulate('click');
+    it('should set current chat', async() => {
+        await act(async() => wrapper.findByTestid('setChat').at(0).simulate('click'));
 
-        expect(store.getState().chats.currentChat).toBe(userChat);
+        expect(store.getState().chats.data.currentChat).toBe(userChat);
     })
 })
