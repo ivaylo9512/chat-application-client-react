@@ -8,6 +8,7 @@ import allRequests from 'app/slices/allRequestsSlice';
 import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from 'app/sagas/index';
+import { all } from 'redux-saga/effects';
 
 const sagaMiddleware = createSaga();
 const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];
@@ -41,3 +42,29 @@ const store = configureStore({
 sagaMiddleware.run(IndexSaga);
 
 export default store
+
+export const createTestStore = ({ reducers, watchers, preloadedState}) => {
+    const sagaMiddleware = createSaga();
+    const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
+   
+    const combinedReducer = combineReducers(reducers);
+    const rootReducer = (state, action) => {
+        if(action.type == 'reset'){
+            return combinedReducer(undefined, action);
+        }
+
+        return combinedReducer(state, action);
+    }
+
+    const store = configureStore({
+        reducer: rootReducer,
+        middleware,
+        preloadedState
+    })
+
+    sagaMiddleware.run(function*(){
+        yield all(watchers);
+    })
+
+    return store;
+}

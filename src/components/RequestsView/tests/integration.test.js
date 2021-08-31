@@ -1,11 +1,5 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
-import userChats from 'app/slices/userChatsSlice';
-import userChatsWatcher from 'app/sagas/userChats';
-import styles from 'app/slices/stylesSlice';
 import RequestsView from 'components/RequestsView/RequestsView';
 import { Provider } from 'react-redux';
-import UserChat from 'components/UserChat/UserChat';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import { Li } from 'components/Pagination/PaginationStyle';
@@ -13,16 +7,11 @@ import Request from "components/Request/Request";
 import allRequestsWatcher from 'app/sagas/allRequests';
 import allRequests from 'app/slices/allRequestsSlice';
 import requests from 'app/slices/requestsSlice';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
-
-const store = configureStore({
-    reducer: {
-        allRequests,
-        requests,
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { allRequests, requests }, 
+    watchers: [ allRequestsWatcher ],
     preloadedState: {
         allRequests: {
             dataInfo: {
@@ -41,11 +30,7 @@ const store = configureStore({
             error: null,
         }
     }
-})
-
-saga.run(function*(){
-    yield allRequestsWatcher
-})
+});
 
 global.fetch = jest.fn();
 
@@ -61,6 +46,10 @@ describe('RequestsView integration tests', () => {
             <RequestsView />
         </Provider>
     ))
+
+    beforeEach(() => {
+        store.dispatch(({ type: 'reset' }));
+    })
 
     it('should update requests on mount', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: initialData}), { status: 200 }));
@@ -80,9 +69,7 @@ describe('RequestsView integration tests', () => {
         expect(li.at(0).prop('isSelected')).toBe(true);
         expect(li.at(0).prop('data-testid')).toBe('1');
         expect(li.at(1).prop('data-testid')).toBe('2');
-        
-        wrapper.unmount();
-    })
+   })
 
     it('should update requests on pagination page click', async() => {
         const data = [createPair(), createPair(), createPair(), createPair()];
@@ -107,8 +94,6 @@ describe('RequestsView integration tests', () => {
         expect(li.at(0).prop('isSelected')).toBe(true);
         expect(li.at(0).prop('data-testid')).toBe('5');
         expect(li.at(1).prop('data-testid')).toBe('6');
-    
-        wrapper.unmount();
     })
 
     it('should update requests when back button is clicked', async() => {
@@ -138,8 +123,6 @@ describe('RequestsView integration tests', () => {
         expect(li.at(3).prop('isSelected')).toBe(true);
         expect(li.at(0).prop('data-testid')).toBe('1');
         expect(li.at(1).prop('data-testid')).toBe('2');
-    
-        wrapper.unmount();
     })
 
     it('should update requests when next button is clicked', async() => {
@@ -153,6 +136,7 @@ describe('RequestsView integration tests', () => {
         await act(async() => wrapper.findByTestid('next').simulate('click'));
         wrapper.update();
 
+        console.log(store.getState().allRequests.dataInfo)
         const requests = wrapper.find(Request)
         const li = wrapper.find(Li);
         const requestsData = store.getState().allRequests.dataInfo.data[1];
