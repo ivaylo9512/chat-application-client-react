@@ -88,15 +88,15 @@ describe('all requests slice unit tests', () => {
 
     it('should set current requests', () => {
         const payload = {
-            data: [2, 3],
+            currentData: [2, 3],
             currentPage: 5
         }
         expect(reducer(initialState, setCurrentRequests(payload))).toEqual({
             ...initialState,
             dataInfo: {
                 ...initialState.dataInfo,
-                currentData: payload.data,
-                currentPage: payload.page
+                currentData: payload.currentData,
+                currentPage: payload.currentPage
             }
         })
     })

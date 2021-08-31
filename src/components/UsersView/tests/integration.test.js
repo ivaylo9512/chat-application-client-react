@@ -30,7 +30,8 @@ const store = configureStore({
                 maxPages: 0,
                 data: [],
                 lastData: null,
-                currentData: null
+                currentData: null,
+                currentPage: 0
             },
             query: {
                 take: 2,
@@ -137,18 +138,18 @@ describe('UsersView integration tests', () => {
 
         const users = wrapper.find(User)
         const li = wrapper.find(Li);
-        const data = store.getState().users.dataInfo.data[1];
+        const data = store.getState().users.dataInfo.data[4];
 
-        expect(li.length).toBe(5);
+        expect(li.length).toBe(4);
         expect(users.length).toBe(2);
 
 
         expect(users.at(0).prop('user')).toStrictEqual(data[0]);
         expect(users.at(1).prop('user')).toStrictEqual(data[1]);
     
-        expect(li.at(1).prop('isSelected')).toBe(true);
-        expect(li.at(0).prop('data-testid')).toBe('1');
-        expect(li.at(1).prop('data-testid')).toBe('2');
+        expect(li.at(0).prop('isSelected')).toBe(true);
+        expect(li.at(0).prop('data-testid')).toBe('5');
+        expect(li.at(1).prop('data-testid')).toBe('6');
     })
 
     it('should reset state when new search is submit', async() => {

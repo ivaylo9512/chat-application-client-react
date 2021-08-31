@@ -7,7 +7,7 @@ const initialState = {
         data: [],
         lastData: null,
         currentData: null,
-        currentPage: 1
+        currentPage: 0
     },
     query: {
         take: 2,
@@ -41,9 +41,9 @@ const usersSlice = createSlice({
             state.error = payload;
             state.isLoading = false;
         },
-        setCurrentUsers: (state, {payload}) => {
-            state.dataInfo.currentData = payload.data;
-            state.dataInfo.currentPage = payload.page;
+        setCurrentUsers: (state, {payload: { currentData, currentPage }}) => {
+            state.dataInfo.currentData = currentData;
+            state.dataInfo.currentPage = currentPage;
         },
         resetUsersState: (state) => {
             state.dataInfo = initialState.dataInfo;

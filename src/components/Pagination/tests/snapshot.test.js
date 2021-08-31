@@ -17,34 +17,31 @@ describe('Pagination snapshot tests', () => {
     }
 
     it('renders correctly with pages', () => {
-        const wrapper = createWrapper({ dataInfo: { maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
+        const wrapper = createWrapper({ dataInfo: { maxPages: 5, currentPage: 1, isLoading: false}, query: { name: '', take: '10'}});
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly without pages', () => {
-        const wrapper = createWrapper({ dataInfo: { maxPages: 0, isLoading: false}, query: { name: '', take: '10'}});
+        const wrapper = createWrapper({ dataInfo: { maxPages: 0, currentPage: 0, isLoading: false}, query: { name: '', take: '10'}});
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly with pages at page 2 and back button', () => {
-        const wrapper = createWrapper({ dataInfo: { data: [], maxPages: 5, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(2).simulate('click');
+        const wrapper = createWrapper({ dataInfo: { data: [], maxPages: 5, currentPage: 2, isLoading: false}, query: { name: '', take: '10'}});
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly with page that is last page of slide should render next slide', () => {
-        const wrapper = createWrapper({ dataInfo: { data: [], maxPages: 10, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(5).simulate('click');
+        const wrapper = createWrapper({ dataInfo: { data: [], maxPages: 10, currentPage: 5, isLoading: false}, query: { name: '', take: '10'}});
 
         expect(wrapper).toMatchSnapshot();
     })
 
     it('renders correctly with pages at last page', () => {
-        const wrapper = createWrapper({ dataInfo: { data: [], properties: [], maxPages: 4, isLoading: false}, query: { name: '', take: '10'}});
-        wrapper.findByTestid(4).simulate('click');
+        const wrapper = createWrapper({ dataInfo: { data: [], properties: [], maxPages: 4, currentPage: 4, isLoading: false}, query: { name: '', take: '10'}});
 
         expect(wrapper).toMatchSnapshot();
     })

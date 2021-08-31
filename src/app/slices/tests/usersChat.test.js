@@ -90,15 +90,15 @@ describe('user chats slice unit tests', () => {
 
     it('should set current users', () => {
         const payload = {
-            data: [2, 3],
+            currentData: [2, 3],
             currentPage: 5
         }
         expect(reducer(initialState, setCurrentUserChats(payload))).toEqual({
             ...initialState,
             dataInfo: {
                 ...initialState.dataInfo,
-                currentData: payload.data,
-                currentPage: payload.page
+                currentData: payload.currentData,
+                currentPage: payload.currentPage
             }
         })
     })

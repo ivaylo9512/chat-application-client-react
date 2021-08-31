@@ -26,7 +26,8 @@ const store = configureStore({
                 maxPages: 0,
                 data: [],
                 lastData: null,
-                currentData: null
+                currentData: null,
+                currentPage: 0
             },
             query: {
                 take: 2,
@@ -43,7 +44,7 @@ global.fetch = jest.fn();
 
 let id = 0;
 let createPair = () => [{ id: id++, secondUser: { firstName: `${id}name`, lastName: `${id}name` }}, { id: id++, secondUser: { firstName: `${id}name`, lastName: `${id}name` }}]
-describe('UserChatsView snapshot tests', () => {
+describe('UserChatsView integration tests', () => {
     const createWrapper = () => mount(
         <Provider store={store}>
             <UserChatsView />
@@ -127,18 +128,18 @@ describe('UserChatsView snapshot tests', () => {
 
         const userChats = wrapper.find(UserChat)
         const li = wrapper.find(Li);
-        const chats = store.getState().userChats.dataInfo.data[1];
+        const chats = store.getState().userChats.dataInfo.data[4];
 
-        expect(li.length).toBe(5);
+        expect(li.length).toBe(4);
         expect(userChats.length).toBe(2);
 
-
+        console.log(userChats.at(0).prop('userChat'));
         expect(userChats.at(0).prop('userChat')).toStrictEqual(chats[0]);
         expect(userChats.at(1).prop('userChat')).toStrictEqual(chats[1]);
     
-        expect(li.at(1).prop('isSelected')).toBe(true);
-        expect(li.at(0).prop('data-testid')).toBe('1');
-        expect(li.at(1).prop('data-testid')).toBe('2');
+        expect(li.at(0).prop('isSelected')).toBe(true);
+        expect(li.at(0).prop('data-testid')).toBe('5');
+        expect(li.at(1).prop('data-testid')).toBe('6');
     })
 
     it('should reset state when new search is submit', async() => {

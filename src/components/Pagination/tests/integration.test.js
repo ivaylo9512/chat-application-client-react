@@ -27,7 +27,8 @@ const store = configureStore({
                 maxPages: 5,
                 data: [initialData],
                 lastData: initialData[1],
-                currentData: initialData
+                currentData: initialData,
+                currentPage: 1
             },
             query: {
                 take: 2,
@@ -70,10 +71,10 @@ describe('Pagination integration tests', () => {
     it('should call dispatch with setData when page is already fetched', async() => {
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(1).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(2).at(0).simulate('click'));
         const state = store.getState().userChats;
 
-        expect(state.dataInfo.currentData).toBe(state.dataInfo.data[0]);
+        expect(state.dataInfo.currentData).toBe(state.dataInfo.data[1]);
         expect(state.dataInfo.maxPages).toBe(5);
         expect(state.dataInfo.pages).toBe(2);
     })

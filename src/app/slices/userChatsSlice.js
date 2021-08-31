@@ -26,7 +26,7 @@ const userChatsSlice = createSlice({
             state.isLoading = true;
             state.error = null;
         },
-        onUserChatsComplete: (state, {payload: {pageable, query}}) => {
+        onUserChatsComplete: (state, {payload: { pageable, query }}) => {
             state.query = query;
             state.dataInfo.maxPages = state.dataInfo.pages + pageable.pages;
             state.dataInfo.pages = state.dataInfo.pages + pageable.data.length;
@@ -37,13 +37,13 @@ const userChatsSlice = createSlice({
             state.isLoading = false;
             state.error = null;
         },
-        onUserChatsError: (state, {payload}) => {
+        onUserChatsError: (state, { payload }) => {
             state.error = payload;
             state.isLoading = false;
         },
-        setCurrentUserChats: (state, {payload}) => {
-            state.dataInfo.currentData = payload.data;
-            state.dataInfo.currentPage = payload.page
+        setCurrentUserChats: (state, { payload: { currentData, currentPage } }) => {
+            state.dataInfo.currentData = currentData;
+            state.dataInfo.currentPage = currentPage
         },
         resetUserChatsState: (state) => {
             state.dataInfo = initialState.dataInfo;

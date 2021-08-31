@@ -7,7 +7,7 @@ const initialState = {
         data: [],
         lastData: null,
         currentData: null,
-        currentPage: 1
+        currentPage: 0
     },
     query: {
         take: 2,
@@ -90,15 +90,15 @@ describe('users slice unit tests', () => {
 
     it('should set current users', () => {
         const payload = {
-            data: [2, 3],
+            currentData: [2, 3],
             currentPage: 5
         }
         expect(reducer(initialState, setCurrentUsers(payload))).toEqual({
             ...initialState,
             dataInfo: {
                 ...initialState.dataInfo,
-                currentData: payload.data,
-                currentPage: payload.page
+                currentData: payload.currentData,
+                currentPage: payload.currentPage
             }
         })
     })

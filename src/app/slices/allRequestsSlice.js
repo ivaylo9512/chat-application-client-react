@@ -40,9 +40,9 @@ const allRequestsSlice = createSlice({
             state.error = payload;
             state.isLoading = false;
         },
-        setCurrentRequests: (state, {payload}) => {
-            state.dataInfo.currentData = payload.data;
-            state.dataInfo.currentPage = payload.page
+        setCurrentRequests: (state, { payload: {currentData, currentPage}}) => {
+            state.dataInfo.currentData = currentData;
+            state.dataInfo.currentPage = currentPage;
         },
         resetRequestsState: (state) => {
             state.dataInfo = initialState.dataInfo;
