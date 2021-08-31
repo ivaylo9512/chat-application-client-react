@@ -1,5 +1,3 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import userChats from 'app/slices/userChatsSlice';
 import styles from 'app/slices/stylesSlice';
 import userChatsWatcher from 'app/sagas/userChats';
@@ -8,16 +6,11 @@ import { Provider } from 'react-redux';
 import Form from 'components/Form/Form';
 import { resetUserChatsState, getUserChatsQuery, userChatsRequest } from 'app/slices/userChatsSlice';
 import { act } from 'react-dom/test-utils';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
-
-const store = configureStore({
-    reducer: {
-        userChats,
-        styles
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { userChats, styles }, 
+    watchers: [ userChatsWatcher ],
     preloadedState: {
         userChats: {
             query: {
@@ -25,21 +18,21 @@ const store = configureStore({
             }
         }
     }
-})
-
-saga.run(function*(){
-    yield userChatsWatcher;
-})
+});
 
 global.fetch = jest.fn();
 
-const createWrapper = (state) => mount(
+const createWrapper = () => mount(
     <Provider store={store}>
         <Form action={userChatsRequest} resetState={resetUserChatsState} selector={getUserChatsQuery} placeholder={'search chat'}/>
     </Provider>
 );
 
 describe('Form integration tests', () => {
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' })
+    })
+
     it('should update state on form submit', async() => {
         const chats = [['data1', 'data'], ['data3', 'data4']];
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...chats[0], ...chats[1]]}), {status: 200}));

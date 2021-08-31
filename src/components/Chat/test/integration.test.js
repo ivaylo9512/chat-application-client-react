@@ -1,5 +1,3 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import Chat from 'components/Chat/Chat';
@@ -8,25 +6,22 @@ import { ChatNode } from 'components/Chat/ChatStyles';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import chatsWatcher from 'app/sagas/chats';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
-
-const store = configureStore({
-    reducer: {
-        chats
-    },
-    middleware
-})
-
-saga.run(function*(){
-    yield chatsWatcher;
-})
+const store = createTestStore({ reducers: { chats }, watchers: [ chatsWatcher ]});
 
 global.fetch = jest.fn();
 
+const chat = { 
+    id: 1, 
+    lastMessage: 'last message', 
+    secondUser: { 
+        firstName: 'first', 
+        lastName: 'last', 
+        profileImage: 'image1.png'
+    } 
+};
 
-const chat = {id: 1, lastMessage: 'last message', secondUser: { firstName: 'first', lastName: 'last', profileImage: 'image1.png'} };
 describe('Chat integration tests', () => {
     let wrapper;
 
@@ -38,6 +33,10 @@ describe('Chat integration tests', () => {
                 </Router>
             </Provider>
         )
+    })
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' })
     })
 
     it('should set current chat', () => {

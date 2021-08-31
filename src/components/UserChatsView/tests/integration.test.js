@@ -111,7 +111,6 @@ describe('UserChatsView integration tests', () => {
         expect(li.length).toBe(5);
         expect(userChats.length).toBe(2);
 
-
         expect(userChats.at(0).prop('userChat')).toStrictEqual(chats[0]);
         expect(userChats.at(1).prop('userChat')).toStrictEqual(chats[1]);
     

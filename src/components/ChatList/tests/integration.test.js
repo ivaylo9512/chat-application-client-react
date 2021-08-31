@@ -1,5 +1,3 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import chats from 'app/slices/chatsSlice';
 import chatsWatcher from 'app/sagas/chats';
 import { mount } from 'enzyme';
@@ -8,25 +6,26 @@ import ChatList from 'components/ChatList/ChatList';
 import Chat from 'components/Chat/Chat';
 import { BASE_URL } from 'appConstants';
 import { act } from 'react-dom/test-utils';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
-
-const store = configureStore({
-    reducer: {
-        chats
-    },
-    middleware
-})
-
-saga.run(function*(){
-    yield chatsWatcher;
-})
+const store = createTestStore({ reducers: { chats }, watchers: [ chatsWatcher ]})
 
 global.fetch = jest.fn();
 
 let id = 5;
-const createData = () => [{ id: id++, secondUser: { firstName: `${id}firstName`, lastName: `${id}lastName` }}, { id: id++, secondUser: { firstName: `${id}firstName`, lastName: `${id}lastName` }}];
+const createData = () => [{ 
+    id: id++, 
+    secondUser: { 
+        firstName: `${id}firstName`, 
+        lastName: `${id}lastName` 
+    }
+}, { 
+    id: id++, 
+    secondUser: { 
+        firstName: `${id}firstName`, 
+        lastName: `${id}lastName` 
+    }
+}];
 
 describe('ChatList integration tests', () => {
     const createWrapper = () => mount(
@@ -34,6 +33,10 @@ describe('ChatList integration tests', () => {
             <ChatList />
         </Provider>
     );
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
 
     it('should fetch chats on mount', async() => {
         const chatsData = createData();
@@ -76,14 +79,17 @@ describe('ChatList integration tests', () => {
         let wrapper;
         await act(async () => wrapper = createWrapper());
         wrapper.update();
-        const foundChats = wrapper.find(Chat);
 
-        expect(foundChats.length).toBe(6);
+        let foundChats = wrapper.find(Chat);
+        expect(foundChats.length).toBe(2);
 
         await act(async() => wrapper.unmount());
+        wrapper.update();
 
         const { chats, lastChat, isLastPage } = store.getState().chats.data;
-
+        foundChats = wrapper.find(Chat);
+        
+        expect(foundChats.length).toBe(0);
         expect(chats).toStrictEqual([]);
         expect(isLastPage).toBe(false);
         expect(lastChat).toBe(null);
