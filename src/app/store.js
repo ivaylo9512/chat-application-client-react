@@ -50,7 +50,7 @@ export const createTestStore = ({ reducers, watchers, preloadedState}) => {
     const combinedReducer = combineReducers(reducers);
     const rootReducer = (state, action) => {
         if(action.type == 'reset'){
-            return combinedReducer(undefined, action);
+            return combinedReducer(preloadedState, action, preloadedState);
         }
 
         return combinedReducer(state, action);

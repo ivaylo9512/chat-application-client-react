@@ -1,5 +1,3 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import users from 'app/slices/usersSlice';
 import usersWatcher from 'app/sagas/users';
 import requestsWatcher from 'app/sagas/sendRequest';
@@ -11,18 +9,11 @@ import User from 'components/User/User';
 import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import { Li } from 'components/Pagination/PaginationStyle';
-import { all } from 'redux-saga/effects';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
-
-const store = configureStore({
-    reducer: {
-        users,
-        styles,
-        requests
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { users, styles, requests }, 
+    watchers: [ usersWatcher, requestsWatcher ],
     preloadedState: {
         users: {
             dataInfo: {
@@ -44,30 +35,57 @@ const store = configureStore({
             }
         }
     }
-})
-
-saga.run(function*(){
-    yield all([usersWatcher, requestsWatcher])
-})
+});
 
 global.fetch = jest.fn();
 
-let id = 0;
-let createPair = () => [{ id: id++, firstName: `${id}name`, lastName: `${id}name` }, { id: id++, firstName: `${id}name`, lastName: `${id}name` }]
+let createPairs = (length = 1) => Array.from({ length }).map((_, i) => [{ 
+    id: i * 2 + 1, 
+    firstName: `${i * 2 + 1}name`, 
+    lastName: `${i * 2 + 1}name`,
+    requestState: 'send'
+}, { 
+    id: i * 2 + 2, 
+    firstName: `${i * 2 + 2}name`, 
+    lastName: `${i * 2 + 2}name`,
+    requestState: 'pending'
+}])
+
 describe('UsersView integration tests', () => {
-    const createWrapper = () => mount(
-        <Provider store={store}>
-            <UsersView />
-        </Provider>
-    )
+    let wrapper;
+    let data;
+    let formSearch
+    
+    const createWrapper = async(pages) => {
+        formSearch = createPairs()[0];
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 10, data: formSearch }), { status: 200 }));
+
+        if(pages){
+            data = createPairs(pages);
+            fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 14, data: data.flat() }), { status: 200 }));   
+        }
+        
+        wrapper = mount(
+            <Provider store={store}>
+                <UsersView />
+            </Provider>
+        )
+
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        wrapper.update();
+        
+        if(pages){
+            await act(async() => wrapper.findByTestid(pages + 1).at(0).simulate('click'));
+            wrapper.update();
+        }
+    }
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' })
+    })
 
     it('should update users on search submit', async() => {
-        const data = createPair();
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: data}), {status: 200}));
-        
-        const wrapper = createWrapper();
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
-        wrapper.update();
+        await createWrapper();
 
         const users =  wrapper.find(User)
         const li = wrapper.find(Li);
@@ -75,8 +93,8 @@ describe('UsersView integration tests', () => {
         expect(li.length).toBe(5);
         expect(users.length).toBe(2);
 
-        expect(users.at(0).prop('user')).toStrictEqual(data[0]);
-        expect(users.at(1).prop('user')).toStrictEqual(data[1]);
+        expect(users.at(0).prop('user')).toStrictEqual(formSearch[0]);
+        expect(users.at(1).prop('user')).toStrictEqual(formSearch[1]);
     
         expect(li.at(0).prop('isSelected')).toBe(true);
         expect(li.at(0).prop('data-testid')).toBe('1');
@@ -84,12 +102,7 @@ describe('UsersView integration tests', () => {
     })
 
     it('should update users on pagination page click', async() => {
-        const data = [createPair(), createPair(), createPair(), createPair()];
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 14, data: data.flat()}), {status: 200}));
-        
-        const wrapper = createWrapper();
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
-        wrapper.update();
+        await createWrapper(4);
 
         const users = wrapper.find(User)
         const li = wrapper.find(Li);
@@ -106,24 +119,21 @@ describe('UsersView integration tests', () => {
     })
 
     it('should update currentUsers when back button is clicked', async() => {
-        const wrapper = createWrapper();
-      
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
-        wrapper.update();
+        await createWrapper(4);
        
         await act(async() => wrapper.findByTestid('back').simulate('click'));
         wrapper.update();
 
         const users = wrapper.find(User)
         const li = wrapper.find(Li);
-        const data = store.getState().users.dataInfo.data[3];
+        const storeData = store.getState().users.dataInfo.data[3];
 
         expect(li.length).toBe(5);
         expect(users.length).toBe(2);
 
 
-        expect(users.at(0).prop('user')).toStrictEqual(data[0]);
-        expect(users.at(1).prop('user')).toStrictEqual(data[1]);
+        expect(users.at(0).prop('user')).toStrictEqual(storeData[0]);
+        expect(users.at(1).prop('user')).toStrictEqual(storeData[1]);
     
         expect(li.at(3).prop('isSelected')).toBe(true);
         expect(li.at(0).prop('data-testid')).toBe('1');
@@ -131,11 +141,14 @@ describe('UsersView integration tests', () => {
     })
 
     it('should update currentUsers when next button is clicked', async() => {
-        const wrapper = createWrapper();
-      
-        await act(async() => wrapper.findByTestid('next').simulate('click'));
+        await createWrapper(4);
+       
+        await act(async() => wrapper.findByTestid('back').simulate('click'));
         wrapper.update();
 
+        await act(async() => wrapper.findByTestid('next').simulate('click'));
+        wrapper.update();
+        
         const users = wrapper.find(User)
         const li = wrapper.find(Li);
         const data = store.getState().users.dataInfo.data[4];
@@ -153,10 +166,10 @@ describe('UsersView integration tests', () => {
     })
 
     it('should reset state when new search is submit', async() => {
-        const wrapper = createWrapper();
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 0, data: []}), {status: 200}));
+        await createWrapper(4);
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 0, data: [] }), { status: 200 }));
       
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
         wrapper.update();
 
         const users = wrapper.find(User)
@@ -167,11 +180,7 @@ describe('UsersView integration tests', () => {
     })
 
     it('should reset state on unmount', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: createPair()}), {status: 200}));
-        
-        const wrapper = createWrapper();
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
-        wrapper.update();
+        await createWrapper();
 
         const users =  wrapper.find(User)
         const li = wrapper.find(Li);
@@ -190,25 +199,20 @@ describe('UsersView integration tests', () => {
     })
 
     it('should reset requests on currentData change', async () => {
-        const data = createPair(); 
-        data[0].requestState = 'send';
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), {status: 200}));
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ requestState: 'pending', requestId: 3}), {status: 200}));
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), {status: 200}));
-        
-        const wrapper = createWrapper();
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
-        wrapper.update();
+        await createWrapper();
 
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ requestState: 'pending', requestId: 3 }), { status: 200 }));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 10, data: formSearch }), { status: 200 }));
+        
         const users =  wrapper.find(User)
         await act(async() => users.at(0).findByTestid('action').at(0).simulate('click'));
 
         let requests = store.getState().requests.data;
-        expect(requests[data[0].id]).toStrictEqual({ isLoading: false, state: 'pending', chatWithUser: undefined, id: 3, error: null });
+        expect(requests[formSearch[0].id]).toStrictEqual({ isLoading: false, state: 'pending', chatWithUser: undefined, id: 3, error: null });
 
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
 
         requests = store.getState().requests.data;
-        expect(requests[data[0].id]).toBe(undefined)
+        expect(requests[formSearch[0].id]).toBe(undefined)
     })
 })
