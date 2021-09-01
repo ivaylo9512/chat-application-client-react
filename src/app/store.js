@@ -50,7 +50,7 @@ export const createTestStore = ({ reducers, watchers, preloadedState}) => {
     const combinedReducer = combineReducers(reducers);
     const rootReducer = (state, action) => {
         if(action.type == 'reset'){
-            return combinedReducer(preloadedState, action, preloadedState);
+            return combinedReducer(preloadedState, action);
         }
 
         return combinedReducer(state, action);
@@ -62,9 +62,11 @@ export const createTestStore = ({ reducers, watchers, preloadedState}) => {
         preloadedState
     })
 
-    sagaMiddleware.run(function*(){
-        yield all(watchers);
-    })
+    if(watchers){
+        sagaMiddleware.run(function*(){
+            yield all(watchers);
+        })
+    }
 
     return store;
 }

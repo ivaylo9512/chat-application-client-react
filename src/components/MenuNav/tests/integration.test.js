@@ -1,15 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
 import styles from 'app/slices/stylesSlice';
 import MenuNav from 'components/MenuNav/MenuNav';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { createTestStore } from 'app/store';
 
-const store = configureStore({
-    reducer: {
-        styles
-    }
-})
+const store = createTestStore({ reducers: { styles } })
+
 
 describe('MenuNav integration tests', () => {
     const createWrapper = (route) => mount(
@@ -19,6 +16,10 @@ describe('MenuNav integration tests', () => {
             </MemoryRouter>
         </Provider>
     ) 
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
     
     it('should update store on toggleSearch', () => {
         const wrapper = createWrapper('/searchChat')

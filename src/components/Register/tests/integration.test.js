@@ -4,26 +4,13 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import authenticate, { registerRequest } from 'app/slices/authenticateSlice';
 import * as Redux from 'react-redux';
 import registerWatcher from 'app/sagas/register'
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import createSaga from 'redux-saga';
 import { act } from 'react-dom/test-utils';
 import { BASE_URL } from 'appConstants';
+import { createTestStore } from 'app/store';
 
 const { Provider } = Redux;
 
-const sagaMiddleware = createSaga();
-const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];
-
-const store = configureStore({
-    reducer: {
-        authenticate,
-    },
-    middleware
-});
-
-sagaMiddleware.run(function*(){
-    yield registerWatcher
-});
+const store = createTestStore({ reducers: { authenticate }, watchers: [ registerWatcher ]})
 
 global.fetch = jest.fn();
 
@@ -37,7 +24,15 @@ const createWrapper = () => {
     )
 }
 
-const user = { username: 'username', email: 'email@gmail.com', password: 'password', firstName: 'firstName', lastName: 'lastName', country: 'Bulgaria', age: '25' };
+const user = { 
+    username: 'username', 
+    email: 'email@gmail.com', 
+    password: 'password', 
+    firstName: 'firstName', 
+    lastName: 'lastName', 
+    country: 'Bulgaria', 
+    age: '25' 
+};
 
 const changeFirstPageInputs = (wrapper) => {
     let inputs = wrapper.find('input');
@@ -62,7 +57,10 @@ const changeSecondPageInputs = (wrapper) => {
 }
 
 describe('Register integration tests', () => {
-    it('should dispatch register return error change to page 0 and display errors', async() => {
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
+    it('should return errors and change to page 0', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(
             { username: 'Username is taken.', email: 'Email is taken.', password: 'Password must be atleast 10 characters.'}), { status: 422 }))
 
@@ -77,7 +75,7 @@ describe('Register integration tests', () => {
         expect(wrapper.findByTestid('passwordError').text()).toBe('Password must be atleast 10 characters.')
     })
 
-    it('should dispatch register return errors with page 1', async() => {
+    it('should return errors with page 1', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(
             { firstName: 'You must provide first name.', lastName: 'You must provide last name.', country: 'You must provide country.', age: 'You must provide age.'}), { status: 422 }))
 
@@ -91,29 +89,6 @@ describe('Register integration tests', () => {
         expect(wrapper.findByTestid('lastNameError').text()).toBe('You must provide last name.')
         expect(wrapper.findByTestid('countryError').text()).toBe('You must provide country.')
         expect(wrapper.findByTestid('ageError').text()).toBe('You must provide age.')
-    })
-
-    it('should change inputs values page 0', () => {
-        const wrapper = createWrapper();
-
-        const inputs = changeFirstPageInputs(wrapper);
-
-        expect(inputs.findByTestid('username').prop('value')).toBe(user.username);
-        expect(inputs.findByTestid('email').prop('value')).toBe(user.email);
-        expect(inputs.findByTestid('password').prop('value')).toBe(user.password);
-        expect(inputs.findByTestid('repeatPassword').prop('value')).toBe(user.password);
-    })
-
-    it('should change inputs values page 1', () => {
-        const wrapper = createWrapper();
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-
-        const inputs = changeSecondPageInputs(wrapper);
-
-        expect(inputs.findByTestid('firstName').prop('value')).toBe(user.firstName);
-        expect(inputs.findByTestid('lastName').prop('value')).toBe(user.lastName);
-        expect(inputs.findByTestid('country').prop('value')).toBe(user.country);
-        expect(inputs.findByTestid('age').prop('value')).toBe(user.age);
     })
 
     it('should call fetch with data', async() => {
@@ -134,21 +109,5 @@ describe('Register integration tests', () => {
             }, 
             method: 'POST'
         })
-    })
-
-    it('should call dispatch with user object with input values', () => {
-        const useDispatchSpy = jest.spyOn(Redux, 'useDispatch'); 
-        const mockedDispatch = jest.fn()
-        useDispatchSpy.mockReturnValue(mockedDispatch);
-
-        const wrapper = createWrapper();
-        
-        changeFirstPageInputs(wrapper);
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-        
-        changeSecondPageInputs(wrapper);
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-
-        expect(mockedDispatch).toHaveBeenCalledWith(registerRequest(user))
     })
 });

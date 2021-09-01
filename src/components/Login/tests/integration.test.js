@@ -1,5 +1,3 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import createSaga from 'redux-saga';
 import LoginWatcher from 'app/sagas/login'
 import { Provider } from 'react-redux'
 import { mount } from 'enzyme';
@@ -8,20 +6,9 @@ import authenticate from 'app/slices/authenticateSlice'
 import Login from '../Login';
 import { act } from 'react-dom/test-utils';
 import { BASE_URL } from 'appConstants';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware({ thunk: false }), saga]
-
-const store = configureStore({
-    reducer: {
-        authenticate
-    },
-    middleware
-})
-
-saga.run(function*(){
-    yield LoginWatcher
-})
+const store = createTestStore({ reducers: { authenticate }, watchers: [ LoginWatcher ]});
 
 global.fetch = jest.fn();
 
@@ -36,6 +23,10 @@ const createWrapper = () => {
 }
 
 describe('Login integration tests', () => {
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
+
     it('should render error', async () => {
         fetch.mockImplementationOnce(() => new Response('Bad credentials.', { status: 401 }));
 

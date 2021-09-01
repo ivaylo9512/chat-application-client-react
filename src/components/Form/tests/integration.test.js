@@ -30,7 +30,7 @@ const createWrapper = () => mount(
 
 describe('Form integration tests', () => {
     beforeEach(() => {
-        store.dispatch({ type: 'reset' })
+        store.dispatch({ type: 'reset' });
     })
 
     it('should update state on form submit', async() => {

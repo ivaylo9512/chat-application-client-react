@@ -1,26 +1,18 @@
-import * as redux from 'react-redux';
 import HeaderScroll from 'components/HeaderScroll/HeaderScroll';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import chatsWatcher from 'app/sagas/chats';
 import chats from 'app/slices/chatsSlice';
 import styles from 'app/slices/stylesSlice';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { Container } from 'components/HeaderScroll/HeaderScrollStyle';
-import createSaga from 'redux-saga';
 import { BASE_URL } from 'appConstants';
 import { act } from 'react-dom/test-utils';
 import Chat from 'components/Chat/Chat';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
-
-const store = configureStore({
-    reducer: {
-        chats,
-        styles
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { chats, styles }, 
+    watchers: [ chatsWatcher ],
     preloadedState: {
         chats:{
             data: {
@@ -33,19 +25,26 @@ const store = configureStore({
             },
             isLoading: false
         }
-
     }
-})
-
-saga.run(function*(){
-    yield chatsWatcher
 })
 
 global.fetch = jest.fn();
 
-
 let id = 5;
-const createData = () => [{ id: id++, secondUser: { firstName: `${id}firstName`, lastName: `${id}lastName` }}, { id: id++, secondUser: { firstName: `${id}firstName`, lastName: `${id}lastName` }}];
+const createData = () => [{ 
+    id: ++id, 
+    secondUser: { 
+        firstName: 
+        `${id}firstName`, 
+        lastName: `${id}lastName` 
+    }
+}, { 
+    id: ++id, 
+    secondUser: { 
+        firstName: `${id}firstName`, 
+        lastName: `${id}lastName` 
+    }
+}];
 
 describe('HeaderScroll integration tests', () => {
     const createWrapper = () => mount(
@@ -53,6 +52,10 @@ describe('HeaderScroll integration tests', () => {
             <HeaderScroll />
         </Provider>
     )
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
 
     it('should call fetch with data', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4,  data: createData()}), { status: 200 }));

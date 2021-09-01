@@ -36,7 +36,7 @@ describe('Chat integration tests', () => {
     })
 
     beforeEach(() => {
-        store.dispatch({ type: 'reset' })
+        store.dispatch({ type: 'reset' });
     })
 
     it('should set current chat', () => {
