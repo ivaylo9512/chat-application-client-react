@@ -7,11 +7,11 @@ import splitArray from "utils/splitArray";
 
 export default takeLatest('allRequests/getRequests', wrapper(getRequests));
 
-function* getRequests({payload: query}){
-    const { lastCreatedAt, lastId, takeAmount } =  getData(query, yield select(getAllRequestsData));
-    const lastPath = lastCreatedAt ? `${lastCreatedAt}/${lastId}` : '';
+export function* getRequests({payload: query}){
+    const { lastCreatedAt, lastId, takeAmount } = getData(query, yield select(getAllRequestsData));
+    const lastPath = lastCreatedAt ? `/${lastCreatedAt}/${lastId}` : '';
 
-    const response = yield call(fetch, `${BASE_URL}/api/requests/auth/findAll/${takeAmount}/${lastPath}`, {
+    const response = yield call(fetch, `${BASE_URL}/api/requests/auth/findAll/${takeAmount}${lastPath}`, {
         headers:{
             Authorization: localStorage.getItem('Authorization')
         }

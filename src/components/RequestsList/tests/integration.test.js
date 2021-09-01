@@ -71,7 +71,7 @@ describe('RequestsList integration tests', () => {
 
         await createWrapper();
 
-        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/findAll/2/`, {
+        expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/findAll/2`, {
             headers: {
                 Authorization: null
         }})
