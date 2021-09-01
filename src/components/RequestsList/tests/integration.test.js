@@ -1,5 +1,3 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import allRequestsWatcher from 'app/sagas/allRequests';
 import allRequests from 'app/slices/allRequestsSlice';
 import requests from 'app/slices/requestsSlice';
@@ -8,16 +6,12 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { BASE_URL } from 'appConstants';
 import Request from "components/Request/Request";
+import { createTestStore } from 'app/store';
+import { act } from 'react-dom/test-utils';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware({ thunk: false }), saga];
-
-const store = configureStore({
-    reducer: {
-        allRequests,
-        requests,
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { allRequests, requests }, 
+    watchers: [ allRequestsWatcher ],
     preloadedState: {
         allRequests: {
             dataInfo: {
@@ -38,26 +32,44 @@ const store = configureStore({
     }
 })
 
-saga.run(function*(){
-    yield allRequestsWatcher
-})
-
 global.fetch = jest.fn();
 
-const data = [{ id: 5, createdAt: '2021-08-23', sender: { firstName: 'firstname', lastName: 'lastName', profileImage: 'image.png' }}, 
-    { id: 6, createdAt: '2021-08-23', sender: { firstName: 'firstname2', lastName: 'lastName2', profileImage: 'image2.png' }}]
+const data = [{ 
+    id: 5, 
+    createdAt: '2021-08-23', 
+    sender: { 
+        firstName: 'firstname', 
+        lastName: 'lastName', 
+        profileImage: 'image.png' 
+    }}, 
+    { 
+        id: 6, 
+        createdAt: '2021-08-23', 
+        sender: { 
+            firstName: 'firstname2', 
+            lastName: 'lastName2', 
+            profileImage: 'image2.png' 
+        }
+    }
+]
 
 describe('RequestsList integration tests', () => {
-    const createWrapper = () => mount(
+    let wrapper;
+
+    const createWrapper = async() => await act(async() => wrapper = mount(
         <Provider store={store}>
             <RequestsList />
         </Provider>
-    )
+    ))
 
-    it('should call fetch with qu', () => {
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
+
+    it('should call fetch', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), { status: 200 }));
 
-        createWrapper();
+        await createWrapper();
 
         expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/findAll/2/`, {
             headers: {
@@ -65,10 +77,12 @@ describe('RequestsList integration tests', () => {
         }})
     })
 
-    it('should call fetch with data', async() => {
+    it('should update state with data', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), { status: 200 }));
 
-        const wrapper = createWrapper();
+        await createWrapper();
+        wrapper.update();
+
         const state = store.getState().allRequests.dataInfo;
 
         expect(wrapper.find(Request).length).toBe(2);
@@ -79,10 +93,11 @@ describe('RequestsList integration tests', () => {
         expect(state.data).toStrictEqual([data]);
     })
 
-    it('should resetState on unmount', () => {
+    it('should resetState on unmount', async() => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), { status: 200 }));
 
-        const wrapper = createWrapper();
+        await createWrapper();
+        wrapper.update();
         wrapper.unmount();
 
         const state = store.getState().allRequests.dataInfo;

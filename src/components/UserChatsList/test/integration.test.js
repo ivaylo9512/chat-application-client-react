@@ -1,20 +1,26 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import userChats from 'app/slices/userChatsSlice';
 import UserChatsList from 'components/UserChatsList/UserChatsList';
 import { Provider } from 'react-redux';
 import UserChat from 'components/UserChat/UserChat';
 import { mount } from 'enzyme';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
+const data = [{ 
+    id: 1, 
+    secondUser: { 
+        firstName: 'first', 
+        lastName: 'first' 
+    }}, { 
+        id: 2, 
+        secondUser: { 
+            firstName: 'second', 
+            lastName: 'second' 
+        }
+    }
+];
 
-const data = [{ id: 1, secondUser: { firstName: 'first', lastName: 'first' }}, { id: 2, secondUser: { firstName: 'second', lastName: 'second' }}];
-const store = configureStore({
-    reducer: {
-        userChats
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { userChats },
     preloadedState: {
         userChats: {
             dataInfo: {
@@ -33,7 +39,8 @@ const store = configureStore({
             error: null,    
         }
     }
-})
+});
+
 
 describe('UserChatsList integration tests', () => {
     const createWrapper = () => mount(
@@ -42,6 +49,10 @@ describe('UserChatsList integration tests', () => {
         </Provider>
     )
 
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
+    
     it('should render users', () => {
         const wrapper = createWrapper();
 
