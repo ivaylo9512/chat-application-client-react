@@ -11,7 +11,7 @@ export function* getUserChats({payload: query}){
     const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUserChatsData));
     const lastPath = lastName ? `/${lastName}/${lastId}` : '';
     const namePath = name ? `/${name.replace(/[\\?%#/'"]/g, '')}` : '';
-    
+
     const response = yield call(fetch, `${BASE_URL}/api/chats/auth/findChatsByName/${takeAmount}${namePath}${lastPath}`,{
         headers:{
             Authorization: localStorage.getItem('Authorization')
@@ -30,12 +30,12 @@ export function* getUserChats({payload: query}){
             query
         }))
     }else{
-        const message = yield response.text(); 
-        yield put(onUserChatsError(message));
-
+        const message = yield response.text()
         if(response.status == 401){
             throw new UnauthorizedException(message);            
         } 
+
+        yield put(onUserChatsError(message));
     }
 }
 

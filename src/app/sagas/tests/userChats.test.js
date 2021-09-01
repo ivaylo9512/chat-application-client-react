@@ -1,17 +1,19 @@
 import { expectSaga } from 'redux-saga-test-plan';
 import { call, select } from 'redux-saga/effects';
 import { BASE_URL } from 'appConstants';
-import requestsReducer, { getAllRequestsData, onGetRequestsComplete, onGetRequestsError } from 'app/slices/allRequestsSlice';
-import { getRequests } from 'app/sagas/allRequests';
+import userChatsReducer, { onUserChatsComplete, onUserChatsError, getUserChatsData } from 'app/slices/userChatsSlice';
+import { getUserChats } from 'app/sagas/userChats';
 
-describe('all requests saga tests', () => {
-    it('should set state on chats request with split array on take count in state', () => {
+describe('user chats requests saga tests', () => {
+    it('should set state on user chats request with split array on take count in state', () => {
         const lastData = {
             id: 3, 
-            createdAt: '2021-09-07'
+            secondUser: { 
+                firstName: 'c', lastName: 'c' 
+            }
         }
 
-        const currentData = [ { id: 1, createdAt: '2021-09-09' }, { id: 2, createdAt: '2021-09-08' }, lastData ];
+        const currentData = [ { id: 1, secondUser: { firstName: 'a', lastName: 'a' } }, { id: 2, secondUser: { firstName: 'b', lastName: 'b' }}, lastData ];
 
         const state = {
             dataInfo: {
@@ -34,12 +36,13 @@ describe('all requests saga tests', () => {
         const query = {
             take: 3,
             direction: 'ASC',
-            pages: 2
+            pages: 2,
+            name: ''
         }
 
         const pageable = {
-            data: [{ id: 4, createdAt: '2021-09-06' }, { id: 5, createdAt: '2021-09-05' }, { id: 6, createdAt: '2021-09-04' }, 
-                { id: 7, createdAt: '2021-09-06' }, { id: 8, createdAt: '2021-09-05' }, { id: 9, createdAt: '2021-09-04' }],
+            data: [{ id: 4, secondUser: { firstName: 'd', lastName: 'd' }}, { id: 5, secondUser: { firstName: 'e', lastName: 'e' }}, { id: 6, secondUser: { firstName: 'f', lastName: 'f' }}, 
+                { id: 7, secondUser: { firstName: 'g', lastName: 'g' }}, { id: 8, secondUser: { firstName: 'h', lastName: 'h' }}, { id: 9, secondUser: { firstName: 'j', lastName: 'j' }}],
             count: 12
         }
 
@@ -47,25 +50,25 @@ describe('all requests saga tests', () => {
             pageable: {
                 data: [[ pageable.data[0], pageable.data[1], pageable.data[2] ], 
                     [ pageable.data[3], pageable.data[4], pageable.data[5] ]],
-                lastRequest: pageable.data[5],
+                lastUserChat: pageable.data[5],
                 pages: 4,
                 count: 12
             },
             query
         }
-        return expectSaga(getRequests, { payload: query })
-            .withReducer(requestsReducer)
+        return expectSaga(getUserChats, { payload: query })
+            .withReducer(userChatsReducer)
             .withState(state)
             .provide([
-                [call(fetch, `${BASE_URL}/api/requests/auth/findAll/${query.take * query.pages}/${lastData.createdAt}/${lastData.id}`, {
+                [call(fetch, `${BASE_URL}/api/chats/auth/findChatsByName/${query.take * query.pages}/${lastData.secondUser.firstName} ${lastData.secondUser.lastName}/${lastData.id}`, {
                     headers:{
                         Authorization: null
                     }}), 
                     new Response(JSON.stringify(pageable), { status: 200 })
                 ],
-                [select(getAllRequestsData), state.dataInfo]
+                [select(getUserChatsData), state.dataInfo]
             ])
-            .put(onGetRequestsComplete(completePayload))
+            .put(onUserChatsComplete(completePayload))
             .hasFinalState({
                 dataInfo: {
                     pages: 3,
@@ -83,7 +86,7 @@ describe('all requests saga tests', () => {
             .run();
     })
 
-    it('should set error on request error', () => {
+    it('should set error on user chats request error', () => {
         const error = '0 is not a valid take value';
 
         const query = {
@@ -92,18 +95,19 @@ describe('all requests saga tests', () => {
             pages: 1
         }
 
-        return expectSaga(getRequests, { payload: query })
-            .withReducer(requestsReducer)
+        return expectSaga(getUserChats, { payload: query })
+            .withReducer(userChatsReducer)
             .provide([
-                [call(fetch, `${BASE_URL}/api/requests/auth/findAll/0`, {
+                [call(fetch, `${BASE_URL}/api/chats/auth/findChatsByName/0`, {
                     headers:{
                         Authorization: null
                     }
                     }), 
                     new Response(error, { status: 422 })
                 ],
-                [select(getAllRequestsData), { data: { lastData: null } }]])
-            .put(onGetRequestsError(error))
+                [select(getUserChatsData), { data: { lastData: null } }]
+            ])
+            .put(onUserChatsError(error))
             .hasFinalState({
                 dataInfo: {
                     pages: 0,
@@ -114,8 +118,9 @@ describe('all requests saga tests', () => {
                     currentPage: 0
                 },
                 query: {
-                    take: 2,
+                    take: 4,
                     direction: 'ASC',
+                    name: ''
                 },
                 isLoading: false,
                 error,
