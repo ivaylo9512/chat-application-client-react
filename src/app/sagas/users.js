@@ -31,11 +31,11 @@ export function* getUsers({payload: query}){
         }))
     }else{
         const message = yield response.text(); 
-        yield put(onUsersError(message));
-
         if(response.status == 401){
             throw new UnauthorizedException(message);            
         } 
+
+        yield put(onUsersError(message));
     }
 
 }

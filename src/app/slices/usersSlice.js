@@ -54,7 +54,7 @@ const usersSlice = createSlice({
     }
 });
 
-export const  {usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
+export const  { usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
 export default usersSlice.reducer;
 
 export const getUsers = state => state.users.dataInfo.data;
