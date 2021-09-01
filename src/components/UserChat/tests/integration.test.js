@@ -1,27 +1,23 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import UserChat from 'components/UserChat/UserChat';
 import chats from 'app/slices/chatsSlice';
 import chatsWatcher from 'app/sagas/chats';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
+const store = createTestStore({ reducers: { chats }, watchers: [ chatsWatcher ]})
 
-const store = configureStore({
-    reducer: {
-        chats
-    },
-    middleware
-})
+const userChat = {
+    id: 1, 
+    createdAt:'2021-08-22', 
+    secondUser: { 
+        profileImage: 'image.png', 
+        firstName: 'firstname', 
+        lastName: 'lastName' 
+    }
+};
 
-saga.run(function*(){
-    yield chatsWatcher;
-})
-
-const userChat = {id: 1, createdAt:'2021-08-22', secondUser: { profileImage: 'image.png', firstName: 'firstname', lastName: 'lastName' }};
 describe('UserChat integration tests', () => {
     let wrapper;
 
@@ -31,6 +27,10 @@ describe('UserChat integration tests', () => {
                 <UserChat userChat={userChat}/>
             </Provider>
         )
+    })
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
     })
 
     it('should set current chat', async() => {
