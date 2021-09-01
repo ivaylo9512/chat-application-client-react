@@ -6,6 +6,7 @@ import Logout from 'components/Logout/Logout'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { useSelector } from 'react-redux';
 import { getIsAuth } from 'app/slices/authenticateSlice';
+import 'codecov'
 
 const App = () => {
     const isAuth = useSelector(getIsAuth);
