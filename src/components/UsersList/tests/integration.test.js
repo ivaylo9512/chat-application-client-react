@@ -1,22 +1,23 @@
-import createSaga from 'redux-saga';
-import { getDefaultMiddleware, configureStore } from '@reduxjs/toolkit';
 import users from 'app/slices/usersSlice';
 import requests from 'app/slices/requestsSlice';
 import UsersList from 'components/UsersList/UsersList';
 import { Provider } from 'react-redux';
 import User from 'components/User/User';
 import { mount } from 'enzyme';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware(), saga];
+const data = [{ 
+    id: 1, 
+    firstName: 'first', 
+    lastName: 'first' 
+}, { 
+    id: 2, 
+    firstName: 'second', 
+    lastName: 'second' 
+}];
 
-const data = [{ id: 1, firstName: 'first', lastName: 'first' }, { id: 2, firstName: 'second', lastName: 'second' }];
-const store = configureStore({
-    reducer: {
-        users,
-        requests
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { users, requests },
     preloadedState: {
         users: {
             dataInfo: {
@@ -44,6 +45,10 @@ describe('UsersList integration tests', () => {
             <UsersList />
         </Provider>
     )
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
 
     it('should render users', () => {
         const wrapper = createWrapper();

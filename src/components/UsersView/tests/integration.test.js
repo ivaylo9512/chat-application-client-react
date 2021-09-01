@@ -39,17 +39,22 @@ const store = createTestStore({
 
 global.fetch = jest.fn();
 
-let createPairs = (length = 1) => Array.from({ length }).map((_, i) => [{ 
-    id: i * 2 + 1, 
-    firstName: `${i * 2 + 1}name`, 
-    lastName: `${i * 2 + 1}name`,
-    requestState: 'send'
-}, { 
-    id: i * 2 + 2, 
-    firstName: `${i * 2 + 2}name`, 
-    lastName: `${i * 2 + 2}name`,
-    requestState: 'pending'
-}])
+let createPairs = (length = 1) => Array.from({ length }).map((_, i) => {
+    const firstId = i * 2 + 1;
+    const secondId = i * 2 + 2;
+
+    return [{ 
+        id: firstId, 
+        firstName: `${firstId}name`, 
+        lastName: `${firstId}name`,
+        requestState: 'send'
+    }, { 
+        id: secondId, 
+        firstName: `${secondId}name`, 
+        lastName: `${secondId}name`,
+        requestState: 'pending'
+    }]
+})
 
 describe('UsersView integration tests', () => {
     let wrapper;

@@ -1,25 +1,18 @@
 import User from 'components/User/User';
 import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
 import { mount } from 'enzyme';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import requests from 'app/slices/requestsSlice'
 import chats from 'app/slices/chatsSlice'
 import acceptWatcher from 'app/sagas/acceptRequest'
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import createSaga from 'redux-saga';
 import { act } from 'react-dom/test-utils'
 import { BASE_URL } from 'appConstants';
+import { createTestStore } from 'app/store';
 
-const saga = createSaga();
-const middleware = [...getDefaultMiddleware({ thunk: false }), saga];
-
-const store = configureStore({
-    reducer: {
-        requests,
-        chats
-    },
-    middleware,
+const store = createTestStore({ 
+    reducers: { requests, chats }, 
+    watchers: [ acceptWatcher ],
     preloadedState: {
         requests: {
             data: {
@@ -33,9 +26,6 @@ const store = configureStore({
 
 global.fetch = jest.fn();
 
-saga.run(function*(){
-    yield acceptWatcher
-})
 
 describe('User integration tests', () => {
     const createWrapper = (user) => mount(
@@ -46,9 +36,14 @@ describe('User integration tests', () => {
         </Provider>
     )
 
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
+
     it('should pass requestId prop and call fetch with acceptRequest', async() => {
         const chatWithUser = { id: 1, secondUser: { firstName: 'firstname', lastName: 'lastname' }};
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(chatWithUser), { status: 200 }))
+        
         const wrapper = createWrapper({ id: 5, chatWithUser: false, requestState: 'accept', requestId: 8 });
         await act(async() => wrapper.findByTestid('accept').at(0).simulate('click'));
 

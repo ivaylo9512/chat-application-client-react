@@ -34,10 +34,27 @@ const store = createTestStore({
 
 global.fetch = jest.fn();
 
-let id = 0;
-let createPair = () => [{ id: id++, createdAt: '2021-08-23', sender: { firstName: `firstname${id}`, lastName: `lastName${id}`, profileImage: `image${id}.png` }}, 
-    { id: id++, createdAt: '2021-08-23', sender: { firstName: `firstname${id}`, lastName: `lastName${id}`, profileImage: `image${id}.png` }}]
-const initialData = createPair();
+let createPairs = (length = 1) => Array.from({ length }).map((_, i) => {
+    const firstId = i * 2 + 1;
+    const secondId = i * 2 + 2;  
+    return [{ 
+        id: firstId, 
+        createdAt: '2021-08-23', 
+        sender: { 
+            firstName: `firstname${firstId}`, 
+            lastName: `lastName${firstId}`, 
+            profileImage: `image${firstId}.png` 
+        }
+    }, { 
+        id: secondId, 
+        createdAt: '2021-08-23', 
+        sender: { 
+            firstName: `firstname${secondId}`, 
+            lastName: `lastName${secondId}`, 
+            profileImage: `image${secondId}.png` 
+        }
+    }]
+})
 
 describe('RequestsView integration tests', () => {
     let wrapper;
@@ -52,7 +69,8 @@ describe('RequestsView integration tests', () => {
     })
 
     it('should update requests on mount', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: initialData}), { status: 200 }));
+        const data = createPairs()[0];
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data}), { status: 200 }));
         
         await createWrapper();  
         wrapper.update();
@@ -63,8 +81,8 @@ describe('RequestsView integration tests', () => {
         expect(li.length).toBe(5);
         expect(requests.length).toBe(2);
 
-        expect(requests.at(0).prop('request')).toStrictEqual(initialData[0]);
-        expect(requests.at(1).prop('request')).toStrictEqual(initialData[1]);
+        expect(requests.at(0).prop('request')).toStrictEqual(data[0]);
+        expect(requests.at(1).prop('request')).toStrictEqual(data[1]);
     
         expect(li.at(0).prop('isSelected')).toBe(true);
         expect(li.at(0).prop('data-testid')).toBe('1');
@@ -72,9 +90,11 @@ describe('RequestsView integration tests', () => {
    })
 
     it('should update requests on pagination page click', async() => {
-        const data = [createPair(), createPair(), createPair(), createPair()];
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: initialData}), { status: 200 }));
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 14, data: data.flat()}), {status: 200}));
+        const initialData = createPairs()[0];
+        const data = createPairs(4);
+
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 10, data: initialData }), { status: 200 }));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 14, data: data.flat() }), { status: 200 }));
         
         await createWrapper();  
         wrapper.update();
@@ -97,9 +117,8 @@ describe('RequestsView integration tests', () => {
     })
 
     it('should update requests when back button is clicked', async() => {
-        const data = [createPair(), createPair(), createPair(), createPair()];
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: initialData}), { status: 200 }));
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 14, data: data.flat()}), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 10, data: createPairs()[0] }), { status: 200 }));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 14, data: createPairs(4).flat() }), { status: 200 }));
         
         await createWrapper();
         wrapper.update();
@@ -126,9 +145,8 @@ describe('RequestsView integration tests', () => {
     })
 
     it('should update requests when next button is clicked', async() => {
-        const data = createPair();
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: initialData}), { status: 200 }));
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data}), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: createPairs()[0]}), { status: 200 }));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: createPairs().flat()}), {status: 200}));
 
         await createWrapper();
         wrapper.update();
@@ -136,7 +154,6 @@ describe('RequestsView integration tests', () => {
         await act(async() => wrapper.findByTestid('next').simulate('click'));
         wrapper.update();
 
-        console.log(store.getState().allRequests.dataInfo)
         const requests = wrapper.find(Request)
         const li = wrapper.find(Li);
         const requestsData = store.getState().allRequests.dataInfo.data[1];
@@ -154,7 +171,7 @@ describe('RequestsView integration tests', () => {
     })
 
     it('should reset state on unmount', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: initialData}), { status: 200 }));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 10, data: createPairs()[0]}), { status: 200 }));
         
         await createWrapper();  
         wrapper.update();

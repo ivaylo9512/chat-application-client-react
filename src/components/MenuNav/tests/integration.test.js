@@ -7,7 +7,6 @@ import { createTestStore } from 'app/store';
 
 const store = createTestStore({ reducers: { styles } })
 
-
 describe('MenuNav integration tests', () => {
     const createWrapper = (route) => mount(
         <Provider store={store}>

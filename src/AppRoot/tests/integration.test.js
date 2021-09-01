@@ -4,14 +4,14 @@ import Register from 'components/Register/Register';
 import Logged from 'components/Logged/Logged';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import authenticate from 'app/slices/authenticateSlice'
+import authenticate, { onLogout } from 'app/slices/authenticateSlice'
 import { Provider } from 'react-redux';
+import { createTestStore } from 'app/store';
+import { act } from 'react-dom/test-utils';
 
-const store = configureStore({
-    reducer: {
-        authenticate
-    },
+
+const store = createTestStore({ 
+    reducers: { authenticate },
     preloadedState: {
         authenticate: {
             isAuth: true,
@@ -43,6 +43,10 @@ describe('App integration tests', () => {
             </MemoryRouter>
         </Provider>
     )
+
+    beforeEach(() => {
+        store.dispatch({ type: 'reset' });
+    })
     
     it('should render Logged', () => {
         const wrapper = createWrapper('/');
@@ -61,12 +65,18 @@ describe('App integration tests', () => {
 
     it('should render Login', async() => {
         let wrapper = createWrapper('/login'); 
+        
+        await act(async() => store.dispatch(onLogout()));
+        wrapper.update();
 
         expect(wrapper.find(Login).length).toBe(1);
     })
 
     it('should render Register', async() => {
         let wrapper = createWrapper('/register'); 
+
+        await act(async() => store.dispatch(onLogout()));
+        wrapper.update();
 
         expect(wrapper.find(Register).length).toBe(1);
     })
