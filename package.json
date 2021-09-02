@@ -27,7 +27,6 @@
   },
   "devDependencies": {
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.3",
-    "codecov": "^3.8.3",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
     "history": "^5.0.1",
@@ -38,7 +37,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "test-jenkins": "react-scripts test --coverage --coverageDirectory=output/coverage/jest",
+    "test-jenkins": "react-scripts test --coverage --coverageDirectory=coverage/jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
