@@ -3,6 +3,8 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { denyRequest } from 'app/sagas/denyRequest';
 import { BASE_URL } from 'appConstants';
 import requestReducer, { onRequestComplete, onRequestError } from 'app/slices/requestsSlice';
+import { onLogout } from 'app/slices/authenticateSlice';
+import { wrapper } from 'app/sagas/index.js';
 
 describe('deny request saga tests', () => {
     it('should update request on deny request', () => {
@@ -84,6 +86,31 @@ describe('deny request saga tests', () => {
                     }
                 }
             })
+            .run()
+    })
+
+    it('should call onLogout on deny request error with 401', () => {
+        const userId = 5;
+        const id = 2;
+
+        return expectSaga(wrapper(denyRequest), { payload: { userId, id} })
+            .withReducer(requestReducer)
+            .withState({
+                data: {
+                    5: {
+                        isLoading: true
+                    }
+                }
+            })
+            .provide([
+                [call(fetch, `${BASE_URL}/api/requests/auth/deny/2`, {
+                    method: 'POST',
+                    headers:{
+                        Authorization: null
+                    }
+                }), new Response('Jwt token has expired.', { status: 401 })]
+            ])
+            .put(onLogout('Session has expired.'))
             .run()
     })
 })
