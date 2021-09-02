@@ -3,6 +3,23 @@ import { getChats } from 'app/sagas/chats'
 import { expectSaga } from 'redux-saga-test-plan';
 import { call, select } from 'redux-saga/effects';
 import { BASE_URL } from 'appConstants';
+import { onLogout } from 'app/slices/authenticateSlice';
+import { wrapper } from 'app/sagas/index.js';
+
+const initialState = {
+    data: {
+        chats: [],
+        lastChat: null,
+        isLastPage: false,
+        currentChat: null
+    },
+    query: {
+        take: 2,
+        direction: 'ASC',
+    },
+    isLoading: false,
+    error: null,
+}
 
 describe('chats saga tests', () => {
     it('should set state on chats request with chats in state', () => {
@@ -82,6 +99,7 @@ describe('chats saga tests', () => {
 
         return expectSaga(getChats, { payload: query })
             .withReducer(chatsReducer)
+            .withState(initialState)
             .provide([
                 [call(fetch, `${BASE_URL}/api/chats/auth/findChats/0`, {
                     headers:{
@@ -109,7 +127,6 @@ describe('chats saga tests', () => {
             .run()
     })
 
-    
     it('should set state on chats request with initial state', () => {
         const query = {
             take: 3,
@@ -124,6 +141,7 @@ describe('chats saga tests', () => {
 
         return expectSaga(getChats, { payload: query })
             .withReducer(chatsReducer)
+            .withState(initialState)
             .provide([
                 [call(fetch, `${BASE_URL}/api/chats/auth/findChats/${query.take}`, {
                     headers:{
@@ -169,7 +187,8 @@ describe('chats saga tests', () => {
         }
 
         return expectSaga(getChats, { payload: query })
-            .withReducer(chatsReducer)
+            .withReducer(chatsReducer, initialState)
+            .withState(initialState)
             .provide([
                 [call(fetch, `${BASE_URL}/api/chats/auth/findChats/${query.take}`, {
                     headers:{
@@ -200,5 +219,27 @@ describe('chats saga tests', () => {
                 query
             })
             .run();
+    })
+
+    it('should call onLogout error with 401', () => {
+        const query = {
+            take: 3,
+            direction: 'ASC',
+            pages: 1
+        }
+
+        return expectSaga(wrapper(getChats), { payload: query })
+            .withReducer(chatsReducer)
+            .withState(initialState)
+            .provide([
+                [call(fetch, `${BASE_URL}/api/chats/auth/findChats/${query.take}`, {
+                    headers:{
+                        Authorization: null
+                    }
+                }), new Response('Jwt token has expired.', { status: 401 })],
+                [select(getChatsData), { data: { lastChat: null } }]
+            ])
+            .put(onLogout('Session has expired.'))
+            .run()
     })
 })
