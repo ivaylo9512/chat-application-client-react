@@ -3,6 +3,8 @@ import { call, select } from 'redux-saga/effects';
 import { BASE_URL } from 'appConstants';
 import userChatsReducer, { onUserChatsComplete, onUserChatsError, getUserChatsData } from 'app/slices/userChatsSlice';
 import { getUserChats } from 'app/sagas/userChats';
+import { onLogout } from 'app/slices/authenticateSlice';
+import { wrapper } from 'app/sagas/index.js';
 
 describe('user chats saga tests', () => {
     it('should set state on user chats request with split array on take count in state', () => {
@@ -21,7 +23,6 @@ describe('user chats saga tests', () => {
                 maxPages: 2,
                 data: [ currentData ],
                 lastData,
-                currentChat: null,
                 currentData,
                 currentPage: 1
             },
@@ -63,9 +64,7 @@ describe('user chats saga tests', () => {
                 [call(fetch, `${BASE_URL}/api/chats/auth/findChatsByName/${query.take * query.pages}/${lastData.secondUser.firstName} ${lastData.secondUser.lastName}/${lastData.id}`, {
                     headers:{
                         Authorization: null
-                    }}), 
-                    new Response(JSON.stringify(pageable), { status: 200 })
-                ],
+                }}), new Response(JSON.stringify(pageable), { status: 200 })],
                 [select(getUserChatsData), state.dataInfo]
             ])
             .put(onUserChatsComplete(completePayload))
@@ -77,7 +76,6 @@ describe('user chats saga tests', () => {
                     data: [...state.dataInfo.data, ...completePayload.pageable.data],
                     currentData: completePayload.pageable.data[1],
                     lastData: completePayload.pageable.data[1][2],
-                    currentChat: null
                 },
                 error: null,
                 isLoading: false,
@@ -102,9 +100,7 @@ describe('user chats saga tests', () => {
                     headers:{
                         Authorization: null
                     }
-                    }), 
-                    new Response(error, { status: 422 })
-                ],
+                }), new Response(error, { status: 422 })],
                 [select(getUserChatsData), { data: { lastData: null } }]
             ])
             .put(onUserChatsError(error))
@@ -128,4 +124,74 @@ describe('user chats saga tests', () => {
             .run()
     })
 
+    it('should set state on user chats with initial state', () => {
+        const query = {
+            take: 3,
+            direction: 'ASC',
+            pages: 2,
+            name: ''
+        }
+
+        const pageable = {
+            data: [{ id: 4, secondUser: { firstName: 'd', lastName: 'd' }}, { id: 5, secondUser: { firstName: 'e', lastName: 'e' }}, { id: 6, secondUser: { firstName: 'f', lastName: 'f' }}, 
+                { id: 7, secondUser: { firstName: 'g', lastName: 'g' }}, { id: 8, secondUser: { firstName: 'h', lastName: 'h' }}, { id: 9, secondUser: { firstName: 'j', lastName: 'j' }}],
+            count: 12
+        }
+
+        const completePayload = {
+            pageable: {
+                data: [[ pageable.data[0], pageable.data[1], pageable.data[2] ], 
+                    [ pageable.data[3], pageable.data[4], pageable.data[5] ]],
+                lastUserChat: pageable.data[5],
+                pages: 4,
+                count: 12
+            },
+            query
+        }
+        return expectSaga(getUserChats, { payload: query })
+            .withReducer(userChatsReducer)
+            .provide([
+                [call(fetch, `${BASE_URL}/api/chats/auth/findChatsByName/${query.take * query.pages}`, {
+                    headers:{
+                        Authorization: null
+                }}), new Response(JSON.stringify(pageable), { status: 200 })],
+                [select(getUserChatsData), { lastData: null }]
+            ])
+            .put(onUserChatsComplete(completePayload))
+            .hasFinalState({
+                dataInfo: {
+                    pages: 2,
+                    maxPages: 4,
+                    currentPage: 2,
+                    data: completePayload.pageable.data,
+                    currentData: completePayload.pageable.data[1],
+                    lastData: completePayload.pageable.data[1][2],
+                },
+                error: null,
+                isLoading: false,
+                query
+            })
+            .run();
+    })
+
+    it('should call onLogout on user chats request error with 401', () => {
+        const query = {
+            take: 2,
+            direction: 'ASC',
+            pages: 1
+        }
+
+        return expectSaga(wrapper(getUserChats), { payload: query })
+            .withReducer(userChatsReducer)
+            .provide([
+                [call(fetch, `${BASE_URL}/api/chats/auth/findChatsByName/2`, {
+                    headers:{
+                        Authorization: null
+                    }
+                }), new Response('Jwt token has expired.', { status: 401 })],
+                [select(getUserChatsData), { data: { lastData: null } }]
+            ])
+            .put(onLogout('Session has expired.'))
+            .run()
+    })
 })

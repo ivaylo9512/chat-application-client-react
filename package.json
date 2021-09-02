@@ -37,7 +37,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage --coverageDirectory=output/coverage/jest",
+    "test": "react-scripts test",
+    "test-jenkins": "react-scripts test --coverage --coverageDirectory=output/coverage/jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -60,6 +61,12 @@
     "coverageReporters": [
       "text",
       "cobertura"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js, jsx}",
+      "!**/node_modules/**",
+      "!src/reportWebVitals.js",
+      "!src/serviceWorker.js"
     ]
   }
 }
