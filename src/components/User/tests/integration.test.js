@@ -45,7 +45,7 @@ describe('User integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(chatWithUser), { status: 200 }))
         
         const wrapper = createWrapper({ id: 5, chatWithUser: false, requestState: 'accept', requestId: 8 });
-        await act(async() => wrapper.findByTestid('accept').at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid('accept').at(0).props().onClick());
 
         expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/accept/8`,{
             method: 'POST',
@@ -64,7 +64,7 @@ describe('User integration tests', () => {
     it('should pass userId and intitalMessage prop and set current chat', async() => {
         const chatWithUser = { id: 2, secondUser: { firstName: 'firstname', lastName: 'lastname' }};
         const wrapper = createWrapper({ id: 7, chatWithUser, requestState: 'completed' });
-        await act(async() => wrapper.findByTestid('action').at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid('action').at(0).props().onClick());
 
         expect(store.getState().chats.data.currentChat).toBe(chatWithUser);
     })

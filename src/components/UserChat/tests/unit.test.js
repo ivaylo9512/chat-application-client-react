@@ -17,7 +17,7 @@ describe('UserChat unit tests', () => {
     })
 
     it('should call dispatch with setCurrentChat', () => {
-        wrapper.findByTestid('setChat').simulate('click');
+        wrapper.findByTestid('setChat').props().onClick();
 
         expect(mockDispatch).toHaveBeenCalledWith(setCurrentChat(userChat));
     })
@@ -27,7 +27,7 @@ describe('UserChat unit tests', () => {
     })
 
     it('should render Info with isInfoVisible to true', () => {
-        wrapper.findByTestid('toggleInfo').simulate('click');
+        wrapper.findByTestid('toggleInfo').props().onClick();
         expect(wrapper.find(Info)).toHaveStyleRule('display', 'flex');
     })
 })

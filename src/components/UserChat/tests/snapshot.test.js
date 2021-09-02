@@ -16,7 +16,7 @@ describe('UserChat snapshot tests', () => {
     })
 
     it('should match snapshot with toggled info', () => {
-        wrapper.findByTestid('toggleInfo').simulate('click');
+        wrapper.findByTestid('toggleInfo').props().onClick();
         expect(wrapper).toMatchSnapshot();
     })
 })

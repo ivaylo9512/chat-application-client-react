@@ -38,7 +38,7 @@ describe('Form integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...chats[0], ...chats[1]]}), {status: 200}));
         
         const wrapper = createWrapper();
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         
         const { data, lastData, currentData} = store.getState().userChats.dataInfo
         expect(data).toStrictEqual(chats);
@@ -61,10 +61,10 @@ describe('Form integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: [...chats[0], ...chats[1]]}), {status: 200}));
         
         const wrapper = createWrapper();
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 0, data: []}), {status: 200}));
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         
         const { data, lastData, currentData } = store.getState().userChats.dataInfo
         expect(data).toStrictEqual([]);

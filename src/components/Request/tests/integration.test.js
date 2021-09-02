@@ -55,7 +55,7 @@ describe('Request integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(chatWithUser), { status: 200 }));
         
         const wrapper = createWrapper({ id: 1 });
-        await act(async () => wrapper.findByTestid('accept').at(0).simulate('click'));
+        await act(async () => wrapper.findByTestid('accept').at(0).props().onClick());
 
         expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/requests/auth/accept/1`, {
             method: 'POST',
@@ -69,7 +69,7 @@ describe('Request integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(chatWithUser), { status: 200 }));
         
         const wrapper = createWrapper({ id: 2 });
-        await act(async () => wrapper.findByTestid('accept').at(0).simulate('click'));
+        await act(async () => wrapper.findByTestid('accept').at(0).props().onClick());
 
         expect(store.getState().requests.data[5]).toEqual({ 
             isLoading: false, 
@@ -83,7 +83,7 @@ describe('Request integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify(chatWithUser), { status: 200 }));
        
         const wrapper = createWrapper({ id: 3 });
-        await act(async () => wrapper.findByTestid('accept').at(0).simulate('click'));
+        await act(async () => wrapper.findByTestid('accept').at(0).props().onClick());
 
         expect(store.getState().chats.data.chats[0]).toStrictEqual(chatWithUser);
     })

@@ -31,7 +31,7 @@ describe('Form unit tests', () => {
     it('should dispatch resetState with changed input value', async() => {
         const wrapper = createWrapper(true);
 
-        wrapper.find(FormNode).simulate('submit', { preventDefault: jest.fn() });
+        wrapper.find(FormNode).props().onSubmit({ preventDefault: jest.fn() });
         expect(dispatchMock).toHaveBeenNthCalledWith(1, resetUserChatsState());
         expect(dispatchMock).toHaveBeenNthCalledWith(2, userChatsRequest({name: '', pages: 1}));
     })
@@ -41,7 +41,7 @@ describe('Form unit tests', () => {
 
 
         wrapper.find('input').simulate('change', { target: { value: 'change' }});
-        wrapper.find(FormNode).simulate('submit', { preventDefault: jest.fn() });
+        wrapper.find(FormNode).props().onSubmit({ preventDefault: jest.fn() });
 
         expect(dispatchMock).toHaveBeenNthCalledWith(2, userChatsRequest({name: 'change', pages: 1}));
     })

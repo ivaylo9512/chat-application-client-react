@@ -46,7 +46,7 @@ describe('Pagination unit tests', () => {
 
     it('should not render next button at last page', () => {
         const wrapper = createWrapper({dataInfo: { data:[], pages: 5, currentPage: 5, maxPages: 5}, query: { take: 2, name: '' }});
-        wrapper.findByTestid(5).simulate('click');
+        wrapper.findByTestid(5).props().onClick();
 
         expect(wrapper.find(Li).length).toBe(1);
         expect(wrapper.findByTestid(5).prop('isSelected')).toBe(true);
@@ -65,7 +65,7 @@ describe('Pagination unit tests', () => {
     it('should dispatch getChats', () => {
         const wrapper = createWrapper({dataInfo: { data:[], pages: 1, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
 
-        wrapper.findByTestid(2).at(0).simulate('click');
+        wrapper.findByTestid(2).at(0).props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 1}));
     })
@@ -73,7 +73,7 @@ describe('Pagination unit tests', () => {
     it('should dispatch setChats', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1'], ['data2']], pages: 1, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
 
-        wrapper.findByTestid(2).at(0).simulate('click');
+        wrapper.findByTestid(2).at(0).props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats({ currentData: ['data2'], currentPage: 2 }));
     })
@@ -81,7 +81,7 @@ describe('Pagination unit tests', () => {
     it('should dispatch getChats with next button', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1']], pages: 1, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
 
-        wrapper.findByTestid('next').simulate('click');
+        wrapper.findByTestid('next').props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 1}));
     })
@@ -89,7 +89,7 @@ describe('Pagination unit tests', () => {
     it('should dispatch setChats with back button', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1'], ['data2']], pages: 2, currentPage: 2, maxPages: 5}, query: { take: 2, name: '' }});
 
-        wrapper.findByTestid('back').simulate('click');
+        wrapper.findByTestid('back').props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(setCurrentUserChats({ currentData: ['data1'], currentPage: 1}));
     })
@@ -97,7 +97,7 @@ describe('Pagination unit tests', () => {
     it('should dispatch getChats with 4 pages when at 1st page and requesting 5th page', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1']], pages: 1, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
 
-        wrapper.findByTestid(5).at(0).simulate('click');
+        wrapper.findByTestid(5).at(0).props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 4}));
     })
@@ -105,7 +105,7 @@ describe('Pagination unit tests', () => {
     it('should dispatch getChats with 3 pages when requesting 5th at 1st page and first 2 pages are already present', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1'], ['data2']], pages: 2, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
 
-        wrapper.findByTestid(5).at(0).simulate('click');
+        wrapper.findByTestid(5).at(0).props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 3}));
     })
@@ -113,7 +113,7 @@ describe('Pagination unit tests', () => {
     it('should dispatch getChats with 2 pages when requesting 5th at 1st page and first 3 pages are already present', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1'], ['data2'], ['data3']], pages: 3, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
 
-        wrapper.findByTestid(5).at(0).simulate('click');
+        wrapper.findByTestid(5).at(0).props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 2}));
     })

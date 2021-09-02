@@ -76,11 +76,11 @@ describe('UsersView integration tests', () => {
             </Provider>
         )
 
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
         
         if(pages){
-            await act(async() => wrapper.findByTestid(pages + 1).at(0).simulate('click'));
+            await act(async() => wrapper.findByTestid(pages + 1).at(0).props().onClick());
             wrapper.update();
         }
     }
@@ -126,7 +126,7 @@ describe('UsersView integration tests', () => {
     it('should update currentUsers when back button is clicked', async() => {
         await createWrapper(4);
        
-        await act(async() => wrapper.findByTestid('back').simulate('click'));
+        await act(async() => wrapper.findByTestid('back').props().onClick());
         wrapper.update();
 
         const users = wrapper.find(User)
@@ -148,10 +148,10 @@ describe('UsersView integration tests', () => {
     it('should update currentUsers when next button is clicked', async() => {
         await createWrapper(4);
        
-        await act(async() => wrapper.findByTestid('back').simulate('click'));
+        await act(async() => wrapper.findByTestid('back').props().onClick());
         wrapper.update();
 
-        await act(async() => wrapper.findByTestid('next').simulate('click'));
+        await act(async() => wrapper.findByTestid('next').props().onClick());
         wrapper.update();
         
         const users = wrapper.find(User)
@@ -174,7 +174,7 @@ describe('UsersView integration tests', () => {
         await createWrapper(4);
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 0, data: [] }), { status: 200 }));
       
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
 
         const users = wrapper.find(User)
@@ -210,12 +210,12 @@ describe('UsersView integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 10, data: formSearch }), { status: 200 }));
         
         const users =  wrapper.find(User)
-        await act(async() => users.at(0).findByTestid('action').at(0).simulate('click'));
+        await act(async() => users.at(0).findByTestid('action').at(0).props().onClick());
 
         let requests = store.getState().requests.data;
         expect(requests[formSearch[0].id]).toStrictEqual({ isLoading: false, state: 'pending', chatWithUser: undefined, id: 3, error: null });
 
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
 
         requests = store.getState().requests.data;
         expect(requests[formSearch[0].id]).toBe(undefined)

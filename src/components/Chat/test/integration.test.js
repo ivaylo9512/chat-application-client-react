@@ -40,7 +40,7 @@ describe('Chat integration tests', () => {
     })
 
     it('should set current chat', () => {
-        wrapper.find(ChatNode).simulate('click');
+        wrapper.find(ChatNode).props().onClick();
 
         expect(store.getState().chats.data.currentChat).toBe(chat);
     })

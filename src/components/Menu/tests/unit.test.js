@@ -19,7 +19,7 @@ describe('Menu unit tests', () => {
     })
 
     it('should translate with isMenuHidden to false', () => {
-        wrapper.find(MenuCircle).simulate('click');
+        wrapper.find(MenuCircle).props().onClick();
 
         expect(wrapper.find(MenuContainer)).toHaveStyleRule('width', '27%');
         expect(wrapper.find(MenuCircle)).toHaveStyleRule('transition', 'transform 2s');

@@ -35,7 +35,7 @@ describe('unit tests for Register', () => {
 
     it('should render inputs with page 1', () => {
         const wrapper = createWrapper({ isLoading: false, error: { firstName: 'First name is required.', lastName: 'Last name is required.', birth: 'Birth is required.' }});
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn()});
+        wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() });
 
         expect(wrapper.find(InputWithError).length).toEqual(4);
         expect(wrapper.findByTestid('firstNameContainer').length).toBe(1);
@@ -48,7 +48,7 @@ describe('unit tests for Register', () => {
     it('should render inputs with page 0 when back button is clicked', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
         
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
+        wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() })
         wrapper.findByTestid('back').simulate('click', { preventDefault: jest.fn() });
 
         expect(wrapper.findByTestid('usernameContainer').length).toBe(1);
@@ -67,7 +67,7 @@ describe('unit tests for Register', () => {
 
     it('should render with passed error props with page 1', () => {
         const wrapper = createWrapper({ isLoading: false, error: { firstName: 'First name is required.', lastName: 'Last name is required.', country: 'Country is invalid.', age: 'Age is required.' }});
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
+        wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() })
       
         expect(wrapper.findByTestid('firstNameContainer').prop('error')).toBe('First name is required.');
         expect(wrapper.findByTestid('lastNameContainer').prop('error')).toBe('Last name is required.');
@@ -84,7 +84,7 @@ describe('unit tests for Register', () => {
 
     it('should render buttons with page 1', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() });
 
         expect(wrapper.findByTestid('back').length).toBe(1);
         expect(wrapper.findByTestid('register').length).toBe(1);

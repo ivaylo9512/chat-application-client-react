@@ -6,6 +6,7 @@ import Chat from 'components/Chat/Chat';
 import 'jest-styled-components';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { act } from 'react-dom/test-utils';
 
 const chat = {id: 1, lastMessage: 'last message', secondUser: { firstName: 'first', lastName: 'last', profileImage: 'image1.png'} };
 describe('Chat unit tests', () => {
@@ -24,13 +25,14 @@ describe('Chat unit tests', () => {
     })
 
     it('should call dispatch with setCurrentChat', () => {
-        wrapper.find(ChatNode).simulate('click');
+        wrapper.find(ChatNode).props().onClick();
 
         expect(dispatchMock).toHaveBeenCalledWith(setCurrentChat(chat));
     })
 
-    it('should change displayInfo', () => {
-        wrapper.find(InfoButton).simulate('click');
+    it('should change displayInfo', async() => {
+        await act(async() => wrapper.find(InfoButton).props().onClick({ stopPropagation: jest.fn() }));
+        wrapper.update();
 
         const info = wrapper.find(Info)
         expect(info.prop('displayInfo')).toBe(true);
@@ -38,7 +40,7 @@ describe('Chat unit tests', () => {
     })
 
     it('should push /chat to history', () => {
-        wrapper.find(ChatNode).simulate('click');
+        wrapper.find(ChatNode).props().onClick();
 
         expect(history.location.pathname).toBe('/chat');
     })

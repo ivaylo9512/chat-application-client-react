@@ -70,11 +70,11 @@ describe('UserChatsView integration tests', () => {
             </Provider>
         )
 
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
         
         if(pages){
-            await act(async() => wrapper.findByTestid(pages + 1).at(0).simulate('click'));
+            await act(async() => wrapper.findByTestid(pages + 1).at(0).props().onClick());
             wrapper.update();
         }
     }
@@ -120,7 +120,7 @@ describe('UserChatsView integration tests', () => {
     it('should update currentChats when back button is clicked', async() => {
         await createWrapper(4);
 
-        await act(async() => wrapper.findByTestid('back').simulate('click'));
+        await act(async() => wrapper.findByTestid('back').props().onClick());
         wrapper.update();
 
         const userChats = wrapper.find(UserChat)
@@ -141,10 +141,10 @@ describe('UserChatsView integration tests', () => {
     it('should update currentChats when next button is clicked', async() => {
         await createWrapper(4);
       
-        wrapper.findByTestid('back').simulate('click');
+        wrapper.findByTestid('back').props().onClick();
         wrapper.update();
 
-        await act(async() => wrapper.findByTestid('next').simulate('click'));
+        await act(async() => wrapper.findByTestid('next').props().onClick());
         wrapper.update();
 
         const userChats = wrapper.find(UserChat)
@@ -172,7 +172,7 @@ describe('UserChatsView integration tests', () => {
         expect(userChats.length).toBe(2);
 
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 0, data: [] }), { status: 200 }));
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn() }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
 
         userChats = wrapper.find(UserChat)

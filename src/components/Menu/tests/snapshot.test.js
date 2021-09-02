@@ -16,7 +16,7 @@ describe('Menu snapshot tests', () => {
     })
 
     it('should match snapshot with isMenuHidden to false', () => {
-        wrapper.find(MenuCircle).simulate('click');
+        wrapper.find(MenuCircle).props().onClick();
         expect(wrapper).toMatchSnapshot();
     })
 

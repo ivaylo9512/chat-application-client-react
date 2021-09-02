@@ -27,7 +27,7 @@ describe('MenuNav snapshot tests', () => {
     it('should call dispatch with toggleHeaderVisibility', () => {
         const wrapper = createWrapper({isHeaderHidden: false, isSearchHidden: false}, '/searchChat');
 
-        wrapper.findByTestid('toggleHeader').at(0).simulate('click');
+        wrapper.findByTestid('toggleHeader').at(0).props().onClick();
         expect(dispatchMock).toHaveBeenCalledWith(toggleHeaderVisibility());
     })
 
@@ -60,7 +60,7 @@ describe('MenuNav snapshot tests', () => {
     it('should call dispatch with toggleSearchVisibility', () => {
         const wrapper = createWrapper({isHeaderHidden: false, isSearchHidden: false}, '/searchChat');
 
-        wrapper.findByTestid('toggleSearch').at(0).simulate('click');
+        wrapper.findByTestid('toggleSearch').at(0).props().onClick();
         expect(dispatchMock).toHaveBeenCalledWith(toggleSearchVisibility());
     })
     

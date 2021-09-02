@@ -65,9 +65,11 @@ describe('Register integration tests', () => {
             { username: 'Username is taken.', email: 'Email is taken.', password: 'Password must be atleast 10 characters.'}), { status: 422 }))
 
         const wrapper = createWrapper({ isLoading: false, error: null });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
-        
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
+
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
 
         expect(wrapper.findByTestid('usernameError').text()).toBe('Username is taken.')
@@ -80,9 +82,11 @@ describe('Register integration tests', () => {
             { firstName: 'You must provide first name.', lastName: 'You must provide last name.', country: 'You must provide country.', age: 'You must provide age.'}), { status: 422 }))
 
         const wrapper = createWrapper({ isLoading: false, error: null });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
         
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
+        
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
 
         expect(wrapper.findByTestid('firstNameError').text()).toBe('You must provide first name.')
@@ -97,10 +101,12 @@ describe('Register integration tests', () => {
         const wrapper = createWrapper({ isLoading: false, error: null });
         
         changeFirstPageInputs(wrapper);
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
         
         changeSecondPageInputs(wrapper);
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
 
         expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/users/register`, {
             body: JSON.stringify(user), 

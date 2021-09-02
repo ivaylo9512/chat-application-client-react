@@ -67,7 +67,7 @@ describe('Pagination integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 8, data: getChatPairs()[0] }), { status: 200 }));
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(2).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(2).at(0).props().onClick());
         const state = store.getState().userChats;
         wrapper.update();
 
@@ -81,9 +81,10 @@ describe('Pagination integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 8, data: getChatPairs(3).flat() }), { status: 200 }));
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(4).at(0).simulate('click'));
-
-        await act(async() => wrapper.findByTestid(2).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(4).at(0).props().onClick());
+        wrapper.update();
+        
+        await act(async() => wrapper.findByTestid(2).at(0).props().onClick());
         const state = store.getState().userChats;
 
         expect(state.dataInfo.currentData).toBe(state.dataInfo.data[1]);
@@ -97,10 +98,10 @@ describe('Pagination integration tests', () => {
 
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(2).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(2).at(0).props().onClick());
         wrapper.update();
 
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(5).at(0).props().onClick());
         wrapper.update();
 
         const state = store.getState().userChats;
@@ -117,9 +118,9 @@ describe('Pagination integration tests', () => {
         fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 6, data: getChatPairs()[0] }), { status: 200 }));
         const wrapper = createWrapper();  
 
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(5).at(0).props().onClick());
         wrapper.update();
-        await act(async() => wrapper.findByTestid(6).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(6).at(0).props().onClick());
 
         expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/chats/auth/findChatsByName/2/10firstName 10lastName/10`, {
             headers: {

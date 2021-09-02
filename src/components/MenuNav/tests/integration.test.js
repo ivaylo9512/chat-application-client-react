@@ -24,7 +24,7 @@ describe('MenuNav integration tests', () => {
         const wrapper = createWrapper('/searchChat')
         expect(store.getState().styles.isSearchHidden).toBe(false);
    
-        wrapper.findByTestid('toggleSearch').at(0).simulate('click');
+        wrapper.findByTestid('toggleSearch').at(0).props().onClick();
 
         expect(store.getState().styles.isSearchHidden).toBe(true);
     })
@@ -33,7 +33,7 @@ describe('MenuNav integration tests', () => {
         const wrapper = createWrapper('/')
         expect(store.getState().styles.isHeaderHidden).toBe(true);
       
-        wrapper.findByTestid('toggleHeader').at(0).simulate('click');
+        wrapper.findByTestid('toggleHeader').at(0).props().onClick();
 
         expect(store.getState().styles.isHeaderHidden).toBe(false);
     })

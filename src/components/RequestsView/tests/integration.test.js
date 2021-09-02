@@ -99,7 +99,7 @@ describe('RequestsView integration tests', () => {
         await createWrapper();  
         wrapper.update();
 
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(5).at(0).props().onClick());
         wrapper.update();
 
         const requests = wrapper.find(Request)
@@ -123,10 +123,10 @@ describe('RequestsView integration tests', () => {
         await createWrapper();
         wrapper.update();
       
-        await act(async() => wrapper.findByTestid(5).at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid(5).at(0).props().onClick());
         wrapper.update();
        
-        await act(async() => wrapper.findByTestid('back').simulate('click'));
+        await act(async() => wrapper.findByTestid('back').props().onClick());
         wrapper.update();
 
         const requests = wrapper.find(Request)
@@ -151,7 +151,7 @@ describe('RequestsView integration tests', () => {
         await createWrapper();
         wrapper.update();
 
-        await act(async() => wrapper.findByTestid('next').simulate('click'));
+        await act(async() => wrapper.findByTestid('next').props().onClick());
         wrapper.update();
 
         const requests = wrapper.find(Request)

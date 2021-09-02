@@ -34,7 +34,7 @@ describe('UserChat integration tests', () => {
     })
 
     it('should set current chat', async() => {
-        await act(async() => wrapper.findByTestid('setChat').at(0).simulate('click'));
+        await act(async() => wrapper.findByTestid('setChat').at(0).props().onClick());
 
         expect(store.getState().chats.data.currentChat).toBe(userChat);
     })

@@ -35,7 +35,7 @@ describe('Login unit tests', () => {
 
         wrapper.findByTestid('username').simulate('change', { target: { value: 'username'} });
         wrapper.findByTestid('password').simulate('change', { target: { value: 'password'} });
-        wrapper.find('form').simulate('submit', { preventDefault: jest.fn() });
+        wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() });
 
         expect(dispatchMock).toHaveBeenCalledWith(loginRequest({ username: 'username', password: 'password'}));
     })

@@ -35,7 +35,7 @@ describe('Login integration tests', () => {
         wrapper.findByTestid('username').simulate('change', { target: { value: 'username' }});
         wrapper.findByTestid('password').simulate('change', { target: { value: 'password' }});
         
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
         wrapper.update();
 
         expect(wrapper.findByTestid('error').text()).toBe('Bad credentials.');
@@ -49,7 +49,7 @@ describe('Login integration tests', () => {
         wrapper.findByTestid('username').simulate('change', { target: { value: 'username' }});
         wrapper.findByTestid('password').simulate('change', { target: { value: 'password' }});
         
-        await act(async() => wrapper.find('form').simulate('submit', { preventDefault: jest.fn()}));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
 
         expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/users/login`, {
             body: JSON.stringify({username: 'username', password: 'password'}), 
