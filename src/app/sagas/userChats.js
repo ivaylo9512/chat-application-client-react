@@ -8,7 +8,7 @@ import { wrapper } from ".";
 export default takeLatest('userChats/userChatsRequest', wrapper(getUserChats));
 
 export function* getUserChats({payload: query}){
-    const { name, lastName, lastId, takeAmount } =  getData(query, yield select(getUserChatsData));
+    const { name, lastName, lastId, takeAmount, lastUserChat } =  getData(query, yield select(getUserChatsData));
     const lastPath = lastName ? `/${lastName}/${lastId}` : '';
     const namePath = name ? `/${name.replace(/[\\?%#/'"]/g, '')}` : '';
 
@@ -21,7 +21,7 @@ export function* getUserChats({payload: query}){
     if(response.ok){
         const pageable = yield response.json();
         
-        pageable.lastUserChat = pageable.data[pageable.data.length - 1];
+        pageable.lastUserChat = pageable.count == 0 ? lastUserChat : pageable.data[pageable.data.length - 1];
         pageable.pages = Math.ceil(pageable.count / query.take);
         pageable.data = splitArray(pageable.data, query.take);
 
@@ -50,5 +50,5 @@ const getData = (query, dataInfo) => {
         lastName = `${lastUserChat.secondUser.firstName} ${lastUserChat.secondUser.lastName}`;
     }
 
-    return {...query, takeAmount, lastName, lastId}
+    return {...query, takeAmount, lastName, lastId, lastUserChat}
 }

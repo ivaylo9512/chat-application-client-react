@@ -68,7 +68,7 @@ describe('Form integration tests', () => {
         
         const { data, lastData, currentData } = store.getState().userChats.dataInfo
         expect(data).toStrictEqual([]);
-        expect(lastData).toStrictEqual(undefined);
-        expect(currentData).toStrictEqual([]);
+        expect(lastData).toStrictEqual(null);
+        expect(currentData).toStrictEqual(null);
     })
 })
