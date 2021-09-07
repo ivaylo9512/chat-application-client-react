@@ -23,7 +23,7 @@ const combinedReducer = combineReducers({
     allRequests
 })
 
-const rootReducer = (state, action) => {
+export const rootReducer = (state, action) => {
     if (action.type === 'authenticate/onLogout') { 
         localStorage.removeItem('Authorization');
         localStorage.removeItem('user');

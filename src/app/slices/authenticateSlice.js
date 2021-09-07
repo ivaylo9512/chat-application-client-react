@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const user = localStorage.getItem('user') 
-    ? JSON.parse(localStorage.getItem('user'))
+export const getLoggedUser = () => localStorage.getItem('user') 
+    ? JSON.parse(localStorage.getItem('user')) 
     : null;
+    
+const user = getLoggedUser();
 
 const initialState = {
     user,
@@ -29,28 +31,32 @@ const authenticateSlice = createSlice({
             state.registerRequest.isLoading = true;
             state.registerRequest.error = null;
         },
-        onLoginComplete: (state, {payload}) => {
+        onLoginComplete: (state, { payload }) => {
             state.user = payload
             state.isAuth = true;
             state.loginRequest.isLoading = false;
             state.loginRequest.error = null;
         },
-        onLoginError: (state, {payload}) => {
+        onLoginError: (state, { payload }) => {
             state.loginRequest.isLoading = false;
             state.loginRequest.error = payload;
         },
-        onRegisterComplete: (state, {payload}) => {
+        onRegisterComplete: (state, { payload }) => {
             state.user = payload
             state.isAuth = true;
             state.registerRequest.isLoading = false;
             state.registerRequest.error = null;
         },
-        onRegisterError: (state, {payload}) => {
+        onRegisterError: (state, { payload }) => {
             state.registerRequest.isLoading = false;
             state.registerRequest.error = payload;
         },
-        onLogout: (state, {payload}) => {
-            state.loginRequest.error = payload
+        onLogout: (state, { payload }) => {
+            state.registerRequest = initialState.registerRequest;
+            state.loginRequest = {
+                ...initialState.loginRequest,
+                error: payload
+            };
             state.user = null;
             state.isAuth = false;
         },
@@ -62,5 +68,4 @@ export default authenticateSlice.reducer
 
 export const getLoginRequest = state => state.authenticate.loginRequest;
 export const getRegisterRequest = state => state.authenticate.registerRequest;
-export const getUser = state => state.authenticate.user;
 export const getIsAuth = state => state.authenticate.isAuth;
