@@ -38,6 +38,7 @@ const RequestButtons = memo(({requestId, userId, initialMessage, chatWithUser}) 
     const getActionButton = () => {
         let action;
         let icon;
+        
         switch(message){
             case 'accept':
                 action = () => dispatch(denyRequest({ id, requestState: 'accept', userId }));
