@@ -8,7 +8,7 @@ import splitArray from "utils/splitArray";
 export default takeLatest('allRequests/getRequests', wrapper(getRequests));
 
 export function* getRequests({payload: query}){
-    const { lastCreatedAt, lastId, takeAmount } = getData(query, yield select(getAllRequestsData));
+    const { lastCreatedAt, lastId, takeAmount, lastRequest } = getData(query, yield select(getAllRequestsData));
     const lastPath = lastCreatedAt ? `/${lastCreatedAt}/${lastId}` : '';
 
     const response = yield call(fetch, `${BASE_URL}/api/requests/auth/findAll/${takeAmount}${lastPath}`, {
@@ -20,7 +20,7 @@ export function* getRequests({payload: query}){
     if(response.ok){
         const pageable = yield response.json();
         
-        pageable.lastRequest = pageable.data[pageable.data.length - 1];
+        pageable.lastRequest = pageable.data.length == 0 ? lastRequest : pageable.data[pageable.data.length - 1];
         pageable.pages = Math.ceil(pageable.count / query.take);
         pageable.data = splitArray(pageable.data, query.take);
 
@@ -49,5 +49,5 @@ const getData = (query, dataInfo) => {
         lastCreatedAt = lastRequest.createdAt
     }
 
-    return {...query, takeAmount, lastCreatedAt, lastId}
+    return { ...query, takeAmount, lastCreatedAt, lastId, lastRequest }
 }

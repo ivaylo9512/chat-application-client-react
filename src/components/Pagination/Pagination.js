@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Container, Ul, Li } from './PaginationStyle';
 
 const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
-    const {dataInfo: { data, maxPages, currentPage, pages, isLoading }, query } = useSelector(selector);
+    const { isLoading, dataInfo: { data, maxPages, currentPage, pages }, query } = useSelector(selector);
     const dispatch = useDispatch();
 
     const changePage = (page) => {

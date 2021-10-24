@@ -33,7 +33,7 @@ const usersSlice = createSlice({
             state.dataInfo.currentPage = state.dataInfo.pages;
             state.dataInfo.lastData = pageable.lastUser;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
-            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
+            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || state.dataInfo.currentData;
             state.isLoading = false;
             state.error = null;
         },
@@ -57,9 +57,7 @@ const usersSlice = createSlice({
 export const  { usersRequest, resetUsersState, onUsersComplete, onUsersError,  setCurrentUsers } = usersSlice.actions 
 export default usersSlice.reducer;
 
-export const getUsers = state => state.users.dataInfo.data;
 export const getUsersState = state => state.users;
 export const getUsersQuery = state => state.users.query;
 export const getUsersData = state => state.users.dataInfo;
 export const getCurrentUsers = state => state.users.dataInfo.currentData;
-export const getCurrentPage = state => state.users.dataInfo.currentPage;

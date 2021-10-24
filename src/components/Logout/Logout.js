@@ -3,6 +3,7 @@ import { onLogout } from 'app/slices/authenticateSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { Redirect } from "react-router-dom";
+
 const Logout = () => {
     const dispatch = useDispatch();
 

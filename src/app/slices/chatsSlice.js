@@ -57,4 +57,3 @@ export const getChatsState = state => state.chats;
 export const getCurrentChat = state => state.chats.currentChat;
 export const getChatsQuery = state => state.chats.query;
 export const getChatsData = state => state.chats.data;
-export const getIsLastChatPage = state => state.chats.data.isLastPage;

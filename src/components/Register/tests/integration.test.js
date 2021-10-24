@@ -1,14 +1,12 @@
 import { mount } from 'enzyme';
 import Register from '../Register';
 import { BrowserRouter as Router } from 'react-router-dom';
-import authenticate, { registerRequest } from 'app/slices/authenticateSlice';
-import * as Redux from 'react-redux';
+import authenticate from 'app/slices/authenticateSlice';
 import registerWatcher from 'app/sagas/register'
 import { act } from 'react-dom/test-utils';
 import { BASE_URL } from 'appConstants';
 import { createTestStore } from 'app/store';
-
-const { Provider } = Redux;
+import { Provider } from 'react-redux';
 
 const store = createTestStore({ reducers: { authenticate }, watchers: [ registerWatcher ]})
 
@@ -115,5 +113,25 @@ describe('Register integration tests', () => {
             }, 
             method: 'POST'
         })
+    })
+
+    it('should toggle password input type on password button', async() => {
+        const wrapper = createWrapper({ isLoading: false, error: null });
+        
+        let passwordContainer = wrapper.findByTestid('passwordContainer'); 
+      
+        expect(passwordContainer.find('input').prop('type')).toBe('password');
+
+        await act(async() => passwordContainer.find('button').props().onClick());
+        wrapper.update();
+
+        passwordContainer = wrapper.findByTestid('passwordContainer'); 
+        expect(passwordContainer.find('input').prop('type')).toBe('text');
+    
+        await act(async() => passwordContainer.find('button').props().onClick());
+        wrapper.update();
+        
+        passwordContainer = wrapper.findByTestid('passwordContainer'); 
+        expect(passwordContainer.find('input').prop('type')).toBe('password');
     })
 });

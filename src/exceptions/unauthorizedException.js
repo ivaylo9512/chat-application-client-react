@@ -6,9 +6,5 @@ class UnauthorizedException extends Error{
         this.name = this.constructor.name;
         this.status = 401;
     }
-
-    statusCode(){
-        return this.status;
-    }
 }
 export default UnauthorizedException

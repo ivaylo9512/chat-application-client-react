@@ -110,6 +110,14 @@ describe('Pagination unit tests', () => {
         expect(dispatchMock).toHaveBeenCalledWith(userChatsRequest({take: 2, name: '', pages: 3}));
     })
 
+    it('should not dispatch setCurrentUsersChats when request is loading', () => {
+        const wrapper = createWrapper({isLoading: true, dataInfo: { data:[['data1'], ['data2']], pages: 1, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
+
+        wrapper.findByTestid(2).at(0).props().onClick();
+
+        expect(dispatchMock).not.toHaveBeenCalledWith();
+    })
+
     it('should dispatch getChats with 2 pages when requesting 5th at 1st page and first 3 pages are already present', () => {
         const wrapper = createWrapper({dataInfo: { data:[['data1'], ['data2'], ['data3']], pages: 3, currentPage: 1, maxPages: 5}, query: { take: 2, name: '' }});
 

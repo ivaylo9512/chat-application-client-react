@@ -32,7 +32,7 @@ const allRequestsSlice = createSlice({
             state.dataInfo.currentPage = state.dataInfo.pages;
             state.dataInfo.lastData = pageable.lastRequest;
             state.dataInfo.data = [...state.dataInfo.data, ...pageable.data];
-            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || [];
+            state.dataInfo.currentData = pageable.data[pageable.data.length - 1] || state.dataInfo.currentData;
             state.isLoading = false;
             state.error = null;
         },
@@ -56,7 +56,6 @@ const allRequestsSlice = createSlice({
 export const { getRequests, resetRequestsState, onGetRequestsComplete, onGetRequestsError,  setCurrentRequests } = allRequestsSlice.actions 
 export default allRequestsSlice.reducer;
 
-export const getAllRequests = state => state.allRequests.dataInfo.data;
 export const getAllRequestsState = state => state.allRequests;
 export const getAllRequestsQuery = state => state.allRequests.query;
 export const getAllRequestsData = state => state.allRequests.dataInfo;

@@ -33,7 +33,7 @@ describe('ChatList unit tests', () => {
         expect(foundChats.at(1).key()).toBe('6')
     })
 
-    it('should render LoadingContainer when loading adn empty array', () => {
+    it('should render LoadingContainer when loading with an empty array', () => {
         const wrapper = createWrapper({ isLoading: true, data: { chats: [], isLastPage: false }});
 
         expect(wrapper.find(LoadingContainer).length).toBe(1);
