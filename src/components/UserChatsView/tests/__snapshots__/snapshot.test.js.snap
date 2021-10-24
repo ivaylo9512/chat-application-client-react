@@ -19,3 +19,43 @@ exports[`UserChatsView snapshot tests should match snapshot 1`] = `
   />
 </Fragment>
 `;
+
+exports[`UserChatsView snapshot tests should match snapshot with error 1`] = `
+<Fragment>
+  <styled.div>
+    <UserChatsList />
+    <div
+      data-testid="error"
+    >
+      Unavailable
+    </div>
+    <Pagination
+      getData={[Function]}
+      pagesPerSlide={5}
+      selector={[Function]}
+      setData={[Function]}
+    />
+  </styled.div>
+  <Form
+    action={[Function]}
+    placeholder="search chat"
+    resetState={[Function]}
+    selector={[Function]}
+  />
+</Fragment>
+`;
+
+exports[`UserChatsView snapshot tests should match snapshot with loading request 1`] = `
+<Fragment>
+  <styled.div>
+    <UserChatsList />
+    <LoadingIndicator />
+  </styled.div>
+  <Form
+    action={[Function]}
+    placeholder="search chat"
+    resetState={[Function]}
+    selector={[Function]}
+  />
+</Fragment>
+`;

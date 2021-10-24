@@ -180,7 +180,15 @@ describe('UserChatsView integration tests', () => {
 
         expect(li.length).toBe(0);
         expect(userChats.length).toBe(0);
+    })
 
+    it('should render error', async() => {
+        fetch.mockImplementationOnce(() => new Response('Unavailable', { status: 410 }));
+
+        await createWrapper();
+        wrapper.update();
+        
+        expect(wrapper.findByTestid('error').text()).toBe('Unavailable');
     })
 
     it('should reset state on unmount', async() => {
