@@ -19,3 +19,43 @@ exports[`UserView snapshot tests should match snapshot 1`] = `
   />
 </Fragment>
 `;
+
+exports[`UserView snapshot tests should match snapshot with error 1`] = `
+<Fragment>
+  <styled.div>
+    <UsersList />
+    <div
+      data-testid="error"
+    >
+      Unavailable
+    </div>
+    <Pagination
+      getData={[Function]}
+      pagesPerSlide={5}
+      selector={[Function]}
+      setData={[Function]}
+    />
+  </styled.div>
+  <Form
+    action={[Function]}
+    placeholder="search users"
+    resetState={[Function]}
+    selector={[Function]}
+  />
+</Fragment>
+`;
+
+exports[`UserView snapshot tests should match snapshot with loading request 1`] = `
+<Fragment>
+  <styled.div>
+    <UsersList />
+    <LoadingIndicator />
+  </styled.div>
+  <Form
+    action={[Function]}
+    placeholder="search users"
+    resetState={[Function]}
+    selector={[Function]}
+  />
+</Fragment>
+`;

@@ -184,6 +184,16 @@ describe('UsersView integration tests', () => {
         expect(users.length).toBe(0);
     })
 
+    it('should render error', async() => {
+        await createWrapper();
+
+        fetch.mockImplementationOnce(() => new Response('Unavailable', { status: 410 }));
+        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
+        wrapper.update();
+        
+        expect(wrapper.findByTestid('error').text()).toBe('Unavailable');
+    })
+
     it('should reset state on unmount', async() => {
         await createWrapper();
 
