@@ -11,3 +11,27 @@ exports[`RequestView snapshot tests should match snapshot 1`] = `
   />
 </styled.div>
 `;
+
+exports[`RequestView snapshot tests should match snapshot with error 1`] = `
+<styled.div>
+  <RequestsList />
+  <div
+    data-testid="error"
+  >
+    Unavailable
+  </div>
+  <Pagination
+    getData={[Function]}
+    pagesPerSlide={5}
+    selector={[Function]}
+    setData={[Function]}
+  />
+</styled.div>
+`;
+
+exports[`RequestView snapshot tests should match snapshot with loading request 1`] = `
+<styled.div>
+  <RequestsList />
+  <LoadingIndicator />
+</styled.div>
+`;

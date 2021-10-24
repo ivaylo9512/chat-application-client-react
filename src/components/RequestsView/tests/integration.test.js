@@ -145,8 +145,8 @@ describe('RequestsView integration tests', () => {
     })
 
     it('should update requests when next button is clicked', async() => {
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 4, data: createPairs()[0]}), { status: 200 }));
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({count: 2, data: createPairs().flat()}), {status: 200}));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 4, data: createPairs()[0] }), { status: 200 }));
+        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 2, data: createPairs().flat() }), {status: 200}));
 
         await createWrapper();
         wrapper.update();
@@ -168,6 +168,15 @@ describe('RequestsView integration tests', () => {
         expect(li.at(1).prop('isSelected')).toBe(true);
         expect(li.at(0).prop('data-testid')).toBe('1');
         expect(li.at(1).prop('data-testid')).toBe('2');
+    })
+
+    it('should render error', async() => {
+        fetch.mockImplementationOnce(() => new Response('Unavailable', { status: 410 }));
+
+        await createWrapper();
+        wrapper.update();
+        
+        expect(wrapper.findByTestid('error').text()).toBe('Unavailable');
     })
 
     it('should reset state on unmount', async() => {
