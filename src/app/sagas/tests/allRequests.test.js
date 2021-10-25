@@ -168,6 +168,78 @@ describe('all requests saga tests', () => {
             .run();
     })
 
+    it('should set state on chats request when response data is an empty array', () => {
+        const lastData = {
+            id: 3, 
+            createdAt: '2021-09-07'
+        }
+
+        const currentData = [ { id: 1, createdAt: '2021-09-09' }, { id: 2, createdAt: '2021-09-08' }, lastData ];
+
+        const state = {
+            dataInfo: {
+                pages: 1,
+                maxPages: 2,
+                data: [ currentData ],
+                lastData,
+                currentData,
+                currentPage: 1
+            },
+            query: {
+                take: 3,
+                direction: 'ASC',
+            },
+            isLoading: true,
+            error: null
+        }
+
+        const query = {
+            take: 3,
+            direction: 'ASC',
+            pages: 2
+        }
+
+        const pageable = {
+            data: [],
+            count: 0
+        }
+
+        const completePayload = {
+            pageable: {
+                data: [],
+                lastRequest: lastData,
+                pages: 0,
+                count: 0
+            },
+            query
+        }
+        return expectSaga(getRequests, { payload: query })
+            .withReducer(requestsReducer)
+            .withState(state)
+            .provide([
+                [call(fetch, `${BASE_URL}/api/requests/auth/findAll/${query.take * query.pages}/${lastData.createdAt}/${lastData.id}`, {
+                    headers:{
+                        Authorization: null
+                }}), new Response(JSON.stringify(pageable), { status: 200 })],
+                [select(getAllRequestsData), state.dataInfo]
+            ])
+            .put(onGetRequestsComplete(completePayload))
+            .hasFinalState({
+                dataInfo: {
+                    pages: 1,
+                    maxPages: 1,
+                    currentPage: 1,
+                    data: [ currentData ],
+                    currentData,
+                    lastData,
+                },
+                error: null,
+                isLoading: false,
+                query
+            })
+            .run();
+    })
+
     it('should call onLogout on get requests error with 401', () => {
         const query = {
             take: 2,
