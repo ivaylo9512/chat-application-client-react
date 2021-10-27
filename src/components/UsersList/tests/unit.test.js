@@ -3,18 +3,20 @@ import { shallow } from 'enzyme';
 import UsersList from 'components/UsersList/UsersList';
 import { Container } from 'components/UsersList/UsersListStyle';
 import User from 'components/User/User';
+import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
 
 describe('UsersList unit tests', () => {
-    const createWrapper = (users, page) => {
+    const createWrapper = (state, page) => {
         const selectorSpy = jest.spyOn(redux, 'useSelector');
-        selectorSpy.mockReturnValueOnce(users);
+        selectorSpy.mockReturnValueOnce(state);
         selectorSpy.mockReturnValueOnce(page);
 
         return shallow(<UsersList />)
     }
 
     it('should render users', () => {
-        const wrapper = createWrapper([{id: 1, firstName: 'first'}, {id: 2, firstName: 'second'}, {id: 3, firstName: 'test'}, {id: 4, firstName: 'test'}, {id: 5, firstName: 'test'}], 1)
+        const users = [{id: 1, firstName: 'first'}, {id: 2, firstName: 'second'}, {id: 3, firstName: 'test'}, {id: 4, firstName: 'test'}, {id: 5, firstName: 'test'}];
+        const wrapper = createWrapper({ dataInfo: { currentData : users }, isLoading : false }, 1);
     
         const user = wrapper.find(User);
         
@@ -26,15 +28,24 @@ describe('UsersList unit tests', () => {
     })
 
     it('should render info when empty array', () => {
-        const wrapper = createWrapper([])
+        const wrapper = createWrapper({ dataInfo: { currentData : [] }, isLoading : false})
     
         expect(wrapper.findByTestid('info').length).toBe(1);
         expect(wrapper.find(User).length).toBe(0);
     })
 
-    it('should not render container when users is undefined', () => {
-        const wrapper = createWrapper(undefined)
+    it('should render info when users is null', () => {
+        const wrapper = createWrapper({ dataInfo: { currentData : null }, isLoading : false})
     
-        expect(wrapper.find(Container).children().length).toBe(0);
+        expect(wrapper.findByTestid('info').length).toBe(1);
+        expect(wrapper.find(User).length).toBe(0);
+    })
+
+    it('should render loading indicator', () => {
+        const wrapper = createWrapper({ dataInfo: { currentData : null }, isLoading : true})
+    
+        expect(wrapper.find(LoadingIndicator).length).toBe(1);
+        expect(wrapper.findByTestid('info').length).toBe(0);
+        expect(wrapper.find(User).length).toBe(0);
     })
 })

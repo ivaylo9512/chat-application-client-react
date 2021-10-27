@@ -1,6 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UsersList snapshot tests should not render container with undefined state 1`] = `<styled.div />`;
+exports[`UsersList snapshot tests should not render container with undefined state 1`] = `
+<styled.div>
+  <span
+    data-testid="info"
+  >
+    <b>
+      No users found with this search.
+    </b>
+  </span>
+</styled.div>
+`;
 
 exports[`UsersList snapshot tests should render info message when empty users array 1`] = `
 <styled.div>
@@ -14,52 +24,20 @@ exports[`UsersList snapshot tests should render info message when empty users ar
 </styled.div>
 `;
 
+exports[`UsersList snapshot tests should render with loading true 1`] = `
+<styled.div>
+  <LoadingIndicator />
+</styled.div>
+`;
+
 exports[`UsersList snapshot tests should render with users 1`] = `
 <styled.div>
-  <Memo()
-    key="1"
-    user={
-      Object {
-        "firstName": "test",
-        "id": 1,
-      }
-    }
-  />
-  <Memo()
-    key="2"
-    user={
-      Object {
-        "firstName": "test",
-        "id": 2,
-      }
-    }
-  />
-  <Memo()
-    key="3"
-    user={
-      Object {
-        "firstName": "test",
-        "id": 3,
-      }
-    }
-  />
-  <Memo()
-    key="4"
-    user={
-      Object {
-        "firstName": "test",
-        "id": 4,
-      }
-    }
-  />
-  <Memo()
-    key="5"
-    user={
-      Object {
-        "firstName": "test",
-        "id": 5,
-      }
-    }
-  />
+  <span
+    data-testid="info"
+  >
+    <b>
+      No users found with this search.
+    </b>
+  </span>
 </styled.div>
 `;
