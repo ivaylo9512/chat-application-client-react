@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import Pagination from 'components/Pagination/Pagination';
 import { resetRequests } from 'app/slices/requestsSlice';
 import { useEffect } from 'react';
-import LoadingIndicator from 'components/LoadingIndicator/LoadingIndicator';
 
 const UsersView = () => {
     const dispatch = useDispatch();
@@ -22,13 +21,10 @@ const UsersView = () => {
         <>
             <Container>
                 <UsersList />
+                <Pagination selector={getUsersState} setData={setCurrentUsers} getData={usersRequest} pagesPerSlide={5}/>
                 {error && <div data-testid='error'>{error}</div>}
-                {isLoading 
-                    ? <LoadingIndicator />
-                    : <Pagination selector={getUsersState} setData={setCurrentUsers} getData={usersRequest} pagesPerSlide={5}/>
-                }
             </Container>
-            <Form action={usersRequest} resetState={resetUsersState} selector={getUsersQuery} placeholder={'search users'} />
+            <Form action={usersRequest} resetState={resetUsersState} selector={getUsersQuery} placeholder={'Search users'} />
 
         </>
     )

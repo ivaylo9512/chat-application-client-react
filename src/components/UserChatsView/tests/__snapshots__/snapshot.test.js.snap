@@ -13,7 +13,7 @@ exports[`UserChatsView snapshot tests should match snapshot 1`] = `
   </styled.div>
   <Form
     action={[Function]}
-    placeholder="search chat"
+    placeholder="Search chat"
     resetState={[Function]}
     selector={[Function]}
   />
@@ -38,7 +38,7 @@ exports[`UserChatsView snapshot tests should match snapshot with error 1`] = `
   </styled.div>
   <Form
     action={[Function]}
-    placeholder="search chat"
+    placeholder="Search chat"
     resetState={[Function]}
     selector={[Function]}
   />
@@ -53,7 +53,7 @@ exports[`UserChatsView snapshot tests should match snapshot with loading request
   </styled.div>
   <Form
     action={[Function]}
-    placeholder="search chat"
+    placeholder="Search chat"
     resetState={[Function]}
     selector={[Function]}
   />

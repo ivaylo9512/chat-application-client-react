@@ -30,13 +30,6 @@ describe('UsersView unit test', () => {
         expect(dispatchMock).toHaveBeenCalledWith(resetRequests());
     })
 
-    it('should render LoadingIndicator', () => {
-        createWrapper({ isLoading: true, dataInfo: { currentData: null }});
-        
-        expect(wrapper.find(LoadingIndicator).exists()).toBe(true)
-        expect(wrapper.find(Pagination).exists()).toBe(false)
-    })
-
     it('should render Pagination', () => {
         createWrapper({ isLoading: false, dataInfo: { currentData: null } });
         

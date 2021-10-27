@@ -13,7 +13,7 @@ exports[`UserView snapshot tests should match snapshot 1`] = `
   </styled.div>
   <Form
     action={[Function]}
-    placeholder="search users"
+    placeholder="Search users"
     resetState={[Function]}
     selector={[Function]}
   />
@@ -24,21 +24,21 @@ exports[`UserView snapshot tests should match snapshot with error 1`] = `
 <Fragment>
   <styled.div>
     <UsersList />
-    <div
-      data-testid="error"
-    >
-      Unavailable
-    </div>
     <Pagination
       getData={[Function]}
       pagesPerSlide={5}
       selector={[Function]}
       setData={[Function]}
     />
+    <div
+      data-testid="error"
+    >
+      Unavailable
+    </div>
   </styled.div>
   <Form
     action={[Function]}
-    placeholder="search users"
+    placeholder="Search users"
     resetState={[Function]}
     selector={[Function]}
   />
@@ -49,11 +49,16 @@ exports[`UserView snapshot tests should match snapshot with loading request 1`] 
 <Fragment>
   <styled.div>
     <UsersList />
-    <LoadingIndicator />
+    <Pagination
+      getData={[Function]}
+      pagesPerSlide={5}
+      selector={[Function]}
+      setData={[Function]}
+    />
   </styled.div>
   <Form
     action={[Function]}
-    placeholder="search users"
+    placeholder="Search users"
     resetState={[Function]}
     selector={[Function]}
   />
