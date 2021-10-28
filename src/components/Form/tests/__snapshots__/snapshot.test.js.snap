@@ -1,10 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Pagination snapshot tests should render snanpshot 1`] = `
+exports[`Form snapshot tests should render snanpshot 1`] = `
 <styled.div
   isHidden={true}
 >
   <styled.form
+    isHidden={true}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onSubmit={[Function]}
   >
     <input
@@ -12,7 +15,9 @@ exports[`Pagination snapshot tests should render snanpshot 1`] = `
       type="text"
       value=""
     />
-    <styled.button>
+    <styled.button
+      isHidden={true}
+    >
       <i
         className="fas fa-search"
       />
@@ -21,11 +26,14 @@ exports[`Pagination snapshot tests should render snanpshot 1`] = `
 </styled.div>
 `;
 
-exports[`Pagination snapshot tests should render snanpshot with false 1`] = `
+exports[`Form snapshot tests should render snanpshot with false 1`] = `
 <styled.div
   isHidden={false}
 >
   <styled.form
+    isHidden={false}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     onSubmit={[Function]}
   >
     <input
@@ -33,7 +41,9 @@ exports[`Pagination snapshot tests should render snanpshot with false 1`] = `
       type="text"
       value=""
     />
-    <styled.button>
+    <styled.button
+      isHidden={false}
+    >
       <i
         className="fas fa-search"
       />

@@ -2,7 +2,7 @@ import { shallow } from 'enzyme';
 import Form from 'components/Form/Form';
 import * as Redux from 'react-redux';
 
-describe('Pagination snapshot tests', () => {
+describe('Form snapshot tests', () => {
     beforeEach(() => {
         jest.spyOn(Redux, 'useDispatch').mockReturnValue(jest.fn());
     })
@@ -12,7 +12,6 @@ describe('Pagination snapshot tests', () => {
         return shallow(<Form />)   
     }
 
-    it('should call dispatch on submit', () => {})
     it('should render snanpshot', () => {
         const wrapper = createWrapper(true);
 

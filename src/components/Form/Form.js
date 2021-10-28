@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import useInput from 'hooks/useInput'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSearchVisibility } from 'app/slices/stylesSlice'
+import { getSearchVisibility, toggleSearchVisibility } from 'app/slices/stylesSlice'
 import { Container, FormNode, Button } from './FormStyle'
 
 const Form = ({action, resetState, selector,  placeholder}) => {
@@ -22,9 +22,9 @@ const Form = ({action, resetState, selector,  placeholder}) => {
 
     return (
         <Container isHidden={isSearchHidden}>
-            <FormNode onSubmit={submit}>
+            <FormNode isHidden={isSearchHidden} onMouseEnter={() => dispatch(toggleSearchVisibility())} onMouseLeave={() => dispatch(toggleSearchVisibility())} onSubmit={submit}>
                 {input}
-                <Button><i className='fas fa-search'></i></Button>
+                <Button isHidden={isSearchHidden}><i className='fas fa-search'></i></Button>
             </FormNode>
         </Container>
     )

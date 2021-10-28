@@ -18,16 +18,6 @@ describe('Form unit tests', () => {
         return shallow(<Form action={userChatsRequest} resetState={resetUserChatsState} selector={getUserChatsQuery} placeholder={'search chat'}/>);
     }
 
-    it('should render snanpshot with true', () => {
-        const wrapper = createWrapper(false);
-        expect(wrapper).toHaveStyleRule('margin-bottom', '0')
-    })
-
-    it('should render snanpshot with false', () => {
-        const wrapper = createWrapper(true);
-        expect(wrapper).toHaveStyleRule('margin-bottom', '-26vh')
-    })
-
     it('should dispatch resetState with changed input value', async() => {
         const wrapper = createWrapper(true);
 
