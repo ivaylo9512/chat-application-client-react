@@ -5,7 +5,7 @@ exports[`Request snapshot tests should match snapshot 1`] = `
   <styled.div>
     <Styled(styled.button)>
       <img
-        src="http://192.168.0.105:8080/images/download/image.png"
+        src="http://192.168.0.105:8083/api/files/download/image.png"
       />
     </Styled(styled.button)>
     <styled.div
@@ -82,7 +82,7 @@ exports[`Request snapshot tests should match snapshot with toggled info 1`] = `
   <styled.div>
     <Styled(styled.button)>
       <img
-        src="http://192.168.0.105:8080/images/download/image.png"
+        src="http://192.168.0.105:8083/api/files/download/image.png"
       />
     </Styled(styled.button)>
     <styled.div

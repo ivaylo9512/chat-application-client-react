@@ -24,7 +24,7 @@ export const Li = styled.li`
     background: ${props => props.isSelected && props.pagesOnSlide > 0 ? 'transparent' : 'rgb(24,27,33)'};
     color: ${props => props.isSelected && props.pagesOnSlide > 0 ? 'rgb(24,27,33)' : 'white'};
     text-decoration: ${props => props.isSelected && props.pagesOnSlide > 0 ? 'underline' : 'none'};
-    box-shadow:  ${props => props.isSelected && props.pagesOnSlide > 0 ? 'none' : '0px 0px 0.3vw 0px rgb(0 0 0 / 75%)'};
+    box-shadow:  ${props => props.isSelected && props.pagesOnSlide > 0 ? 'none' : '0px 0px 0.15vw 0.15vw rgb(0 0 0)'};
     border-color ${props => props.isSelected && props.pagesOnSlide > 0 ? 'transparent' : 'rgb(24,27,33)'};
 
 

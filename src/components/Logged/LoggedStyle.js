@@ -6,4 +6,5 @@ export const Section = styled.section`
 export const Container = styled.div`
     flex: 1;
     display: flex;
+    height: 50%;
 `

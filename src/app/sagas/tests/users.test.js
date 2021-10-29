@@ -115,7 +115,7 @@ describe('users saga tests', () => {
                     currentPage: 0
                 },
                 query: {
-                    take: 2,
+                    take: 5,
                     direction: 'ASC',
                     name: ''
                 },

@@ -5,7 +5,7 @@ exports[`User snapshot tests should render snapshot 1`] = `
   <styled.div>
     <Styled(styled.button)>
       <img
-        src="http://192.168.0.105:8080/images/download/undefined"
+        src="http://192.168.0.105:8083/api/files/download/undefined"
       />
     </Styled(styled.button)>
     <styled.div
@@ -85,7 +85,7 @@ exports[`User snapshot tests should render snapshot with request error 1`] = `
   <styled.div>
     <Styled(styled.button)>
       <img
-        src="http://192.168.0.105:8080/images/download/undefined"
+        src="http://192.168.0.105:8083/api/files/download/undefined"
       />
     </Styled(styled.button)>
     <styled.div

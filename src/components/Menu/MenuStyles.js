@@ -44,16 +44,16 @@ export const MenuContainer = styled.div`
 export const CircleNav = styled.div`
     overflow: hidden;
     position: fixed;
-    bottom: -11.6vw;
-    border: 0.5px solid #c2001b;
+    bottom: -13.2vw;
+    margin-right: -19.8vw;
+    border: 0.1vw solid white;
     right: 100%;
     border-radius: 50%;
-    margin-right: -26.8vw;
     background: rgb(24,27, 33);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0px 0px 0.4vw 0.2vw rgb(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 0.3vw 0.1vw rgb(0 0 0 / 65%);
 
 
     ul{
@@ -64,7 +64,7 @@ export const CircleNav = styled.div`
 export const CircleBtn = styled.button`
     background: rgb(24,27, 33);
     border: 0px;
-    color: #c2001b;
+    color: white;
     font-size: 2.3vw;
     height: 22.5vw;
     width: 22.5vw;

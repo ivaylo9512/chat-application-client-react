@@ -10,7 +10,7 @@ const initialState = {
         currentPage: 0
     },
     query: {
-        take: 2,
+        take: 5,
         direction: 'ASC',
         name: ""
     },
@@ -106,7 +106,7 @@ describe('users slice unit tests', () => {
     it('should reset state', () => {
         const state = {
             query: {
-                take: 5,
+                take: 7,
                 direction: 'DESC',
                 name: "test"
             },
