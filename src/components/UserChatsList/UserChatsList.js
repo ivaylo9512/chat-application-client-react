@@ -15,6 +15,5 @@ const UserChatsList = () => {
             )}
         </Container>
     )
-
 }
 export default UserChatsList

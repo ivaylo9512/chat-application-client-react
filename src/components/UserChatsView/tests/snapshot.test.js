@@ -6,6 +6,8 @@ describe('UserChatsView snapshot tests', () => {
 
     const createWrapper = (state) => {
         jest.spyOn(redux, 'useSelector').mockReturnValue(state);
+        jest.spyOn(redux, 'useDispatch').mockReturnValue(jest.fn());
+     
         wrapper = shallow(
             <UserChatsView />
         )

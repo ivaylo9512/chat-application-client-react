@@ -1,4 +1,4 @@
-import userChats from 'app/slices/userChatsSlice';
+import userChats, { userChatsRequest } from 'app/slices/userChatsSlice';
 import userChatsWatcher from 'app/sagas/userChats';
 import styles from 'app/slices/stylesSlice';
 import UserChatsView from 'components/UserChatsView/UserChatsView';
@@ -8,6 +8,7 @@ import { mount } from 'enzyme';
 import { act } from 'react-dom/test-utils';
 import { Li } from 'components/Pagination/PaginationStyle';
 import { createTestStore } from 'app/store';
+import Pagination from 'components/Pagination/Pagination';
 
 const store = createTestStore({ 
     reducers: { userChats, styles }, 
@@ -64,15 +65,14 @@ describe('UserChatsView integration tests', () => {
             fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 14, data: chats.flat() }), { status: 200 }));   
         }
         
+        await act(async() => store.dispatch(userChatsRequest({...store.getState().userChats.query, name: 'name', pages: 1})));
+  
         wrapper = mount(
             <Provider store={store}>
                 <UserChatsView />
             </Provider>
         )
 
-        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
-        wrapper.update();
-        
         if(pages){
             await act(async() => wrapper.findByTestid(pages + 1).at(0).props().onClick());
             wrapper.update();
@@ -83,22 +83,6 @@ describe('UserChatsView integration tests', () => {
         store.dispatch({ type: 'reset' });
     })
 
-    it('should update chats on search submit', async() => {
-        await createWrapper();
-
-        const userChats =  wrapper.find(UserChat)
-        const li = wrapper.find(Li);
-
-        expect(li.length).toBe(5);
-        expect(userChats.length).toBe(2);
-
-        expect(userChats.at(0).prop('userChat')).toStrictEqual(formChats[0]);
-        expect(userChats.at(1).prop('userChat')).toStrictEqual(formChats[1]);
-    
-        expect(li.at(0).prop('isSelected')).toBe(true);
-        expect(li.at(0).prop('data-testid')).toBe('1');
-        expect(li.at(1).prop('data-testid')).toBe('2');
-    })
 
     it('should update chats on pagination page click', async() => {
         await createWrapper(4);
@@ -162,26 +146,6 @@ describe('UserChatsView integration tests', () => {
         expect(li.at(1).prop('data-testid')).toBe('6');
     })
 
-    it('should reset state when new search is submit', async() => {
-        await createWrapper();
-
-        let userChats = wrapper.find(UserChat)
-        let li = wrapper.find(Li);
-
-        expect(li.length).toBe(5);
-        expect(userChats.length).toBe(2);
-
-        fetch.mockImplementationOnce(() => new Response(JSON.stringify({ count: 0, data: [] }), { status: 200 }));
-        await act(async() => wrapper.find('form').props().onSubmit({ preventDefault: jest.fn() }));
-        wrapper.update();
-
-        userChats = wrapper.find(UserChat)
-        li = wrapper.find(Li);
-
-        expect(li.length).toBe(0);
-        expect(userChats.length).toBe(0);
-    })
-
     it('should render error', async() => {
         fetch.mockImplementationOnce(() => new Response('Unavailable', { status: 410 }));
 
@@ -195,6 +159,8 @@ describe('UserChatsView integration tests', () => {
         await createWrapper();
 
         const userChats =  wrapper.find(UserChat)
+        expect(wrapper.find(Pagination).length).toBe(1);
+        
         const li = wrapper.find(Li);
 
         expect(li.length).toBe(5);
@@ -202,7 +168,7 @@ describe('UserChatsView integration tests', () => {
 
         await act(async() => wrapper.unmount());
 
-        const {pages, maxPages, data, lastData, currentData} = store.getState().userChats.dataInfo;
+        const { pages, maxPages, data, lastData, currentData } = store.getState().userChats.dataInfo;
         expect(pages).toBe(0);
         expect(maxPages).toBe(0);
         expect(data).toStrictEqual([]);
