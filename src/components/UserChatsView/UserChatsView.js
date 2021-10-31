@@ -1,4 +1,4 @@
-import { resetUserChatsState, getUserChatsQuery, userChatsRequest, getUserChatsState, setCurrentUserChats } from 'app/slices/userChatsSlice';
+import { resetUserChatsState, userChatsRequest, getUserChatsState, setCurrentUserChats } from 'app/slices/userChatsSlice';
 import Pagination from 'components/Pagination/Pagination';
 import UserChatsList from 'components/UserChatsList/UserChatsList';
 import { Container } from './UserChatsViewStyle';

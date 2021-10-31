@@ -9,7 +9,7 @@ const Form = ({action, resetState, selector,  placeholder}) => {
     const isSearchHidden = useSelector(getSearchVisibility);
     const dispatch = useDispatch();
     const query = useSelector(selector);
-
+    
     const submit = (e) => {
         e.preventDefault()
         dispatch(resetState());
@@ -22,7 +22,7 @@ const Form = ({action, resetState, selector,  placeholder}) => {
 
     return (
         <Container isHidden={isSearchHidden}>
-            <FormNode isHidden={isSearchHidden} onMouseEnter={() => dispatch(toggleSearchVisibility())} onMouseLeave={() => dispatch(toggleSearchVisibility())} onSubmit={submit}>
+            <FormNode isHidden={isSearchHidden} className="second-style" onMouseEnter={() => dispatch(toggleSearchVisibility())} onMouseLeave={() => dispatch(toggleSearchVisibility())} onSubmit={submit}>
                 {input}
                 <Button isHidden={isSearchHidden}><i className='fas fa-search'></i></Button>
             </FormNode>

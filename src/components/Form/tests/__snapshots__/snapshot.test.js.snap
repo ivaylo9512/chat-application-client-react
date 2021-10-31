@@ -5,6 +5,7 @@ exports[`Form snapshot tests should render snanpshot 1`] = `
   isHidden={true}
 >
   <styled.form
+    className="second-style"
     isHidden={true}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -31,6 +32,7 @@ exports[`Form snapshot tests should render snanpshot with false 1`] = `
   isHidden={false}
 >
   <styled.form
+    className="second-style"
     isHidden={false}
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
