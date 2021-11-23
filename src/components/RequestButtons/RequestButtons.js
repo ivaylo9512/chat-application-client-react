@@ -70,7 +70,7 @@ const RequestButtons = memo(({requestId, userId, initialMessage, chatWithUser}) 
 
     return(
         <>
-            {message == 'accept' &&
+            {message === 'accept' &&
                 <Button data-testid='accept' onClick={accept}>
                     {request?.isLoading
                         ? <LoadingIndicator />

@@ -31,11 +31,11 @@ const Pagination = ({selector, setData, getData, pagesPerSlide = 4}) => {
                     {
                         Array.from({ length: currentPage / pagesPerSlide < 1 ? pagesPerSlide : pagesPerSlide + 1 }).map((el, i) => {
                             const slide = Math.floor(currentPage / pagesPerSlide);
-                            const start = slide * pagesPerSlide + (slide == 0 ? 1 : 0);
+                            const start = slide * pagesPerSlide + (slide === 0 ? 1 : 0);
                             const pageIndex = start + i;
 
                             if(pageIndex <= maxPages){
-                                return <Li data-testid={`${pageIndex}`} pagesOnSlide={maxPages - start} isSelected={pageIndex == currentPage} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
+                                return <Li data-testid={`${pageIndex}`} pagesOnSlide={maxPages - start} isSelected={pageIndex === currentPage} key={pageIndex} onClick={() => changePage(pageIndex)}>{pageIndex}</Li>}
                             }
                         )
                     }

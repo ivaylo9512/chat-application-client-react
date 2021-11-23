@@ -20,7 +20,7 @@ export function* getRequests({payload: query}){
     if(response.ok){
         const pageable = yield response.json();
         
-        pageable.lastRequest = pageable.data.length == 0 ? lastRequest : pageable.data[pageable.data.length - 1];
+        pageable.lastRequest = pageable.data.length === 0 ? lastRequest : pageable.data[pageable.data.length - 1];
         pageable.pages = Math.ceil(pageable.count / query.take);
         pageable.data = splitArray(pageable.data, query.take);
 
@@ -30,7 +30,7 @@ export function* getRequests({payload: query}){
         }))
     }else{
         const message = yield response.text()
-        if(response.status == 401){
+        if(response.status === 401){
             throw new UnauthorizedException(message);            
         } 
 

@@ -5,13 +5,12 @@ import users from 'app/slices/usersSlice'
 import userChats from 'app/slices/userChatsSlice';
 import requests from 'app/slices/requestsSlice';
 import allRequests from 'app/slices/allRequestsSlice';
-import { configureStore, getDefaultMiddleware, combineReducers } from '@reduxjs/toolkit';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import createSaga from 'redux-saga';
 import IndexSaga from 'app/sagas/index';
 import { all } from 'redux-saga/effects';
 
 const sagaMiddleware = createSaga();
-const middleware = [...getDefaultMiddleware({thunk: false}), sagaMiddleware];
 
 const combinedReducer = combineReducers({
     authenticate,
@@ -36,7 +35,7 @@ export const rootReducer = (state, action) => {
 
 const store = configureStore({
     reducer: rootReducer,
-    middleware
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
 });
 
 sagaMiddleware.run(IndexSaga);
@@ -45,11 +44,10 @@ export default store
 
 export const createTestStore = ({ reducers, watchers, preloadedState}) => {
     const sagaMiddleware = createSaga();
-    const middleware = [...getDefaultMiddleware({ thunk: false }), sagaMiddleware];
    
     const combinedReducer = combineReducers(reducers);
     const rootReducer = (state, action) => {
-        if(action.type == 'reset'){
+        if(action.type === 'reset'){
             return combinedReducer(preloadedState, action);
         }
 
@@ -58,7 +56,7 @@ export const createTestStore = ({ reducers, watchers, preloadedState}) => {
 
     const store = configureStore({
         reducer: rootReducer,
-        middleware,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
         preloadedState
     })
 

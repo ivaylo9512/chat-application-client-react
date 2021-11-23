@@ -18,7 +18,7 @@ export function* denyRequest({payload: { id, userId, requestState }}){
         yield put(onRequestComplete({ userId, chatWithUser: null, requestState: 'send', id }))
     }else{
         const message = yield response.text()
-        if(response.status == 401){
+        if(response.status === 401){
             throw new UnauthorizedException(message);            
         } 
 

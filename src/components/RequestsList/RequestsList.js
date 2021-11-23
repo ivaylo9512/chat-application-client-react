@@ -17,7 +17,7 @@ const RequestsList = () => {
 
     return(
         <Container>
-            {requests && (requests.length == 0
+            {requests && (requests.length === 0
                 ? <span data-testid='info'><b>No requests found.</b></span> 
                 : requests.map(request => 
                     <Request key={request.id} request={request} />)

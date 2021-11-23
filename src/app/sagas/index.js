@@ -19,16 +19,16 @@ export function wrapper(request){
         try{
             yield request(action);
         }catch(err){
-            if(err.message == 'Failed to fetch'){
+            if(err.message === 'Failed to fetch'){
                 yield new Promise(resolve => setTimeout(resolve, 5000));
                 return yield fetch(action);
             }
 
-            if(err.message == 'Jwt token has expired.'){
+            if(err.message === 'Jwt token has expired.'){
                 return yield put(onLogout('Session has expired.')); 
             }
 
-            if(err.message == 'Jwt token is incorrect' || err.message == 'Jwt token is missing'){
+            if(err.message === 'Jwt token is incorrect' || err.message === 'Jwt token is missing'){
                 return yield put(onLogout());
             }
 

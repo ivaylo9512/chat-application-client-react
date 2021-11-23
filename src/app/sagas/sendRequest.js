@@ -24,7 +24,7 @@ export function* sendRequest({payload: id}){
         yield put(onRequestComplete({ userId: id, chatWithUser, requestState, id: requestId }))
     }else{
         const message = yield response.text()
-        if(response.status == 401){
+        if(response.status === 401){
             throw new UnauthorizedException(message);            
         } 
 

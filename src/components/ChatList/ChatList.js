@@ -20,12 +20,12 @@ const ChatList = () => {
 
     return(
         <>
-            {isLoading && chats.length == 0 &&
+            {isLoading && chats.length === 0 &&
                 <LoadingContainer>
                     <LoadingIndicator />
                 </LoadingContainer>
             }
-            {chats.length == 0 
+            {chats.length === 0 
                 ? !isLoading && 
                     <ChatInfo data-testid ='info'>
                         <Span>You don't have any chats.</Span>

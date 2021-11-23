@@ -21,7 +21,7 @@ export function* getUserChats({payload: query}){
     if(response.ok){
         const pageable = yield response.json();
 
-        pageable.lastUserChat = pageable.count == 0 ? lastUserChat : pageable.data[pageable.data.length - 1];
+        pageable.lastUserChat = pageable.count === 0 ? lastUserChat : pageable.data[pageable.data.length - 1];
         pageable.pages = Math.ceil(pageable.count / query.take);
         pageable.data = splitArray(pageable.data, query.take);
 
@@ -31,7 +31,7 @@ export function* getUserChats({payload: query}){
         }))
     }else{
         const message = yield response.text()
-        if(response.status == 401){
+        if(response.status === 401){
             throw new UnauthorizedException(message);            
         } 
 

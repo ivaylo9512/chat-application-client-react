@@ -36,7 +36,7 @@ const Register = () => {
 
     return (
         <section>
-            {pageIndex == 0 ?
+            {pageIndex === 0 ?
                 <form onSubmit={(e) => setPage(e, 1)}>
                     <InputWithError data-testid={getContainerId(usernameInput)} input={usernameInput} error={error?.username}/>
                     <InputWithError data-testid={getContainerId(emailInput)} input={emailInput} error={error?.email}/>

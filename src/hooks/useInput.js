@@ -31,7 +31,7 @@ const useInput = ({ name, placeholder, initialValue = '', type = '', testid, aut
     ]
 }
 
-export const getId = (input) => input.type == 'input'
+export const getId = (input) => input.type === 'input'
     ? input.props['data-testid']
     : input.props.children[0].props['data-testid']
 

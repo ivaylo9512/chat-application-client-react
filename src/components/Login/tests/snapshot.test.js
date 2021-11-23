@@ -7,9 +7,7 @@ describe('Login snapshot tests', () => {
 
     beforeAll(() => {
         selectorSpy = jest.spyOn(Redux, 'useSelector');
-    
-        const spyOnUseDispatch = jest.spyOn(Redux, 'useDispatch');
-        spyOnUseDispatch.mockReturnValue(jest.fn());
+        jest.spyOn(Redux, 'useDispatch').mockReturnValue(jest.fn());
     });
 
     const createWrapper = (state) => {

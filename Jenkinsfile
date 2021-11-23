@@ -24,13 +24,5 @@ pipeline {
                 }
             }
         }
-        // stage('Production') {
-        //     steps {
-        //         withAWS(region:'Bulgaria', credentials:'1k2sea34') {
-        //             s3Delete(bucket: 'Chat app', path:'**/*')
-        //             s3Upload(bucket: 'Chat app', workingDir:'build', includePathPattern:'**/*');
-        //         }
-        //     }
-        // }
     }
 }

@@ -44,7 +44,7 @@ const MenuNav = ({rotate}) => {
                         <i className='fas fa-address-card'></i>
                     </Link>
                 </Li>
-                {(location.pathname == '/searchUsers' || location.pathname == '/searchChat') &&
+                {(location.pathname === '/searchUsers' || location.pathname === '/searchChat') &&
                     <Li>
                         <Button data-testid='toggleSearch' onClick={toggleSearch}>
                             <i className={isSearchHidden ? 'fas fa-caret-up' : 'fas fa-caret-down' }></i>

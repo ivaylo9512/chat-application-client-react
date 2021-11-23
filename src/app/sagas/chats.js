@@ -30,7 +30,7 @@ export function* getChats({payload: query}){
         const message = yield response.text();
         yield put(onChatsError(message));
 
-        if(response.status == 401){
+        if(response.status === 401){
             throw new UnauthorizedException(message);            
         } 
     }

@@ -29,14 +29,14 @@ const usePasswordInput = (options) => {
 
 
     const togglePassword = () => {
-        setType(type == 'password' 
+        setType(type === 'password' 
             ? 'text'
             : 'password'
         )
     }
     const container = <Container>
             {input}
-            {type == 'password' 
+            {type === 'password' 
                 ? <Button type='button' onClick={togglePassword}><FontAwesomeIcon icon={faEye}/></Button>
                 : <Button type='button' onClick={togglePassword}><FontAwesomeIcon icon={faEyeSlash}/></Button>
             }
